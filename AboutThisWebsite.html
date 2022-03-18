@@ -18,7 +18,7 @@
 
       article {
         position: absolute;
-        width: 45%;
+        width: 50%;
         height: 80%;
         left: 20%;
         top: 8%;
@@ -33,12 +33,26 @@
 
       header {
         position: absolute;
-        width: 1920px;
+        width: 130%;
         height: 8%;
         left: 0%;
         top: 0%;
         background: #e1f0db;
       }
+      @media screen and (max-width: 640px) {  /* page layout for phones */
+        aside {
+            display: None;
+            
+        }
+        article{
+          left:5%;
+          width: 90%;
+        }
+        .logo{
+            display: None;
+        }
+        
+    }
 
       nav {
         position:absolute;
@@ -89,13 +103,13 @@
 
     <main>
       <header>
-        <p
+        <p 
           style="
             position: absolute;
             width: 25%;
             height: 0%;
             left: 30%;
-            top: 0%;
+            top: -20%;
             
             font-family: 'Roboto';
             font-style: normal;
@@ -110,34 +124,32 @@
         </p>
         <div
           style="
-            position: absolute;
-            left: 91.15%;
-            right: 0.83%;
-            top: 0.83%;
-            bottom: 95.19%;
-
-            background: #8fbc88;
-            border-radius: 50px;""
+          position: absolute;
+          left: 91.15%;
+          right: 0.83%;
+          top: 0.83%;
+          bottom: 95.19%;
+          background: #8fbc88;
+          border-radius: 50px;"
           
-        ></div>
-        <button
-          style="
-            position: absolute;
-            width: 98px;
-            height: 23px;
-            left: 1778px;
-            top: 19px;
-
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 23px;
-
-            color: rgba(0, 0, 0, 0.5);
-          "
         >
-          Home</button>
+        <button
+        style="
+          width: 98px;
+        height: 23px;
+
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 23px;
+
+          color: rgba(0, 0, 0, 0.5);
+        "
+      >
+        Home</button>
+      </div>
+        
       </header>
 
       <article>
@@ -170,11 +182,12 @@
         </p>
 
       </article>
+      <div class ="logo">
       <svg style="
       position: absolute;
       width: 20%;
       height: 20%;
-      left: 70%;
+      left:75%;
       top: 40%;
       " width="213" height="155" viewBox="0 0 213 155" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="137.757" height="17.0959" transform="translate(0 86.7266) rotate(-39.0178)" fill="#E1F0DB"/>
@@ -189,7 +202,7 @@
       position: absolute;
       width: 30%;
       height: 20%;
-      left: 70%;
+      left: 75%;
       top: 55%;
       " 
        width="686" height="50" viewBox="0 0 686 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -199,7 +212,7 @@
       style = "
       position: absolute;
       width: 25%;
-      left: 70%;
+      left: 75%;
       top: 65%;
       font-family: 'Roboto';
       font-style: italic;
@@ -209,5 +222,6 @@
       >Today's care for better tomorrow</p>
           
     </main>
+  </div>
   </body>
 </html>
