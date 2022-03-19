@@ -10,7 +10,7 @@
       aside {
         position: absolute;
         width: 15%;
-        height: 1800px;
+        height: 100%;
         left: 0px;
         top: 8%;
         background: #cfe6bd;
@@ -23,53 +23,42 @@
         left: 20%;
         top: 8%;
 
-        font-family: "Roboto";
+        font-family: "Times New Roman", Times, serif;
         font-style: normal;
         font-weight: 700;
-        font-size: 24px;
+        font-size: 1rem;
         line-height: 28px;
         text-align: justify;
       }
 
       header {
         position: absolute;
-        width: 1920px;
+        text-align: center;
+        width: 100%;
         height: 8%;
         left: 0px;
         top: 0px;
         background: #e1f0db;
       }
-
-      nav {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0px;
-
-        position: absolute;
-        width: 370px;
-        height: 604px;
-        left: 13px;
-        top: 83px;
+      @media screen and (max-width: 640px) {
+        /* page layout for phones */
+        aside {
+          display: None;
+        }
+        .video {
+          display: None;
+        }
+        article {
+          left: 5%;
+          width: 90%;
+        }
       }
 
       li {
-        position: static;
-        width: 246px;
-        height: 55px;
-        left: 0px;
-        top: 130px;
-
-        font-family: "Roboto";
-        font-style: normal;
-        font-weight: 200;
-        font-size: 36px;
-        line-height: 42px;
-
+        width: 80%;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 1em;
         color: rgba(0, 0, 0, 0.5);
-        flex: none;
-        order: 1;
-        flex-grow: 0;
         margin: 75px 0px;
       }
     </style>
@@ -93,54 +82,18 @@
       <header>
         <p
           style="
-            position: absolute;
-            width: 315px;
-            height: 42px;
-            left: 737px;
-            top: 9px;
+            text-align: center;
 
-            font-family: 'Roboto';
+            font-family: 'Times New Roman', Times, serif;
             font-style: normal;
             font-weight: 700;
-            font-size: 36px;
-            line-height: 42px;
+            font-size: 1.5em;
 
             color: rgba(0, 0, 0, 0.7);
           "
         >
           About diabetes
         </p>
-        <div
-          style="
-            position: absolute;
-            left: 91.15%;
-            right: 0.83%;
-            top: 0.83%;
-            bottom: 95.19%;
-
-            background: #8fbc88;
-            border-radius: 50px;
-          "
-        ></div>
-        <button
-          style="
-            position: absolute;
-            width: 98px;
-            height: 23px;
-            left: 1778px;
-            top: 19px;
-
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 23px;
-
-            color: rgba(0, 0, 0, 0.5);
-          "
-        >
-          Home
-        </button>
       </header>
 
       <article>
@@ -196,17 +149,42 @@
           4. Avoid tobacco use – smoking increases the risk of diabetes and
           cardiovascular disease
         </p>
-
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/wZAjVQWbMlE"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
       </article>
+      <div class="video">
+        <p
+          style="
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            left: 68%;
+            top: 15%;
+          "
+        >
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/wZAjVQWbMlE"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen=""
+          ></iframe>
+        </p>
+      </div>
+      <div class="useful links">
+        <p
+          style="
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            left: 68%;
+            top: 60%;
+            background: #e1f0db;
+          "
+        >
+          Useful links
+        </p>
+      </div>
     </main>
   </body>
 </html>
