@@ -28,7 +28,20 @@
     height: 1080px;
     background-color: #CFE6BD;
     
+    /*
+    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-gap: 1rem;
+
+    grid-template-areas: 
+        "header header header"
+        "aside main nav"
+        "footer footer footer";
+    */
+    
   }
+
+
 
   .form-wrapper {
     
@@ -144,9 +157,58 @@
   
   .form-wrapper .action .btn:hover{
     background-color:#92c7a8;
-    ;
+
   }
   
+  /*
+  .About {
+    display: flex;
+    justify-content: space-between;
+  }
+*/
+  .About .website_text{
+    width: 90%;
+    float: left;
+    border: 2px solid #8FBC88;
+    background: #8FBC88;
+    
+    line-height: 50px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s;
+    text-align: center;
+    color: #00000080;
+  }
+
+  .About .website_text:hover {
+    background-color:#92c7a8;
+  }
+
+/*
+  .about_diabetes {
+    display: inline-block;
+    float:right;
+  }
+*/
+  .About .diabetes_text{
+    width: 90%;
+    float: right;
+    border: 2px solid #8FBC88;
+    background: #8FBC88;
+    
+    line-height: 50px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s;
+    text-align: center;
+    color: #00000080;
+  }
+
+  .About .diabetes_text:hover {
+    background-color:#92c7a8;
+  }
 /*
     <div class="icon-wrapper">
       <i class="iconfont phs-weixin"></i>
