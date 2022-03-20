@@ -160,15 +160,19 @@
 
   }
   
-  /*
+  
   .About {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    margin-inline: 15%;
+    position: absolute;
+    bottom: 6%;
+    width: 30%;
   }
-*/
-  .About .website_text{
-    width: 90%;
-    float: left;
+
+  .About .website_text{ 
+    width: 120%;
+
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
@@ -192,8 +196,8 @@
   }
 */
   .About .diabetes_text{
-    width: 90%;
-    float: right;
+    width: 120%;
+    margin-left: 20%;
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
