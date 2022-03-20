@@ -49,10 +49,11 @@
     */
     }
 
-.Decoration img {  
+.logo {  
+    vertical-align: middle;
     text-align: left;
-    height: 40rem;
-    width: 100rem;
+    height: 100rem;
+    width: 250rem;
 }    
   
   .form-wrapper .header {
