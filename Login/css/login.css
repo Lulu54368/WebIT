@@ -28,15 +28,28 @@
     height: 1080px;
     background-color: #CFE6BD;
     
+    /*
+    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    grid-gap: 1rem;
+
+    grid-template-areas: 
+        "header header header"
+        "aside main nav"
+        "footer footer footer";
+    */
+    
   }
+
+
 
   .form-wrapper {
     
     position: absolute;
-    width: 600px;
-    height: 520px;
-    left: 1240px;
-    top: 280px;
+    width: 30%;
+    height: 40%;
+    left: 60%;
+    top: 26%;
     background: #E1F0DB;
     border-radius: 53px;
     
@@ -49,17 +62,18 @@
     */
     }
 
-.Decoration img {  
+.logo {  
+    vertical-align: middle;
     text-align: left;
-    height: 40rem;
-    width: 100rem;
+    height: 100rem;
+    width: 250rem;
 }    
   
   .form-wrapper .header {
     text-align: center;
-    font-size: 35px;
+    font-size: 3em;
     text-transform: uppercase;
-    line-height: 100px;
+    line-height: 300%;
   }
   
   .form-wrapper .input-wrapper input {
@@ -77,9 +91,13 @@
     line-height: 42px;
 
     color: rgba(0, 0, 0, 0.5);*/
+    font-family: 'Roboto';
+    font-weight: 500;
+    /*top: 40%;*/
     background-color: white;
     border: 0;
-    width: 100%;
+    /*width: 80%;
+    height: 80%;*/
     text-align: center;
     font-size: 15px;
     color: #00000080;
@@ -91,14 +109,14 @@
   }
   
   .form-wrapper .input-wrapper .border-wrapper {
-    
-    background-image: white;
+    align-items: flex-start;
+    background: white;
     width: 100%;
     height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 8%;
     border-radius: 30px;
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     justify-content: center;
   }
   
@@ -139,9 +157,62 @@
   
   .form-wrapper .action .btn:hover{
     background-color:#92c7a8;
-    ;
+
   }
   
+  
+  .About {
+    display: flex;
+    /*justify-content: space-between;*/
+    margin-inline: 15%;
+    position: absolute;
+    bottom: 6%;
+    width: 30%;
+  }
+
+  .About .website_text{ 
+    width: 120%;
+
+    border: 2px solid #8FBC88;
+    background: #8FBC88;
+    
+    line-height: 50px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s;
+    text-align: center;
+    color: #00000080;
+  }
+
+  .About .website_text:hover {
+    background-color:#92c7a8;
+  }
+
+/*
+  .about_diabetes {
+    display: inline-block;
+    float:right;
+  }
+*/
+  .About .diabetes_text{
+    width: 120%;
+    margin-left: 20%;
+    border: 2px solid #8FBC88;
+    background: #8FBC88;
+    
+    line-height: 50px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s;
+    text-align: center;
+    color: #00000080;
+  }
+
+  .About .diabetes_text:hover {
+    background-color:#92c7a8;
+  }
 /*
     <div class="icon-wrapper">
       <i class="iconfont phs-weixin"></i>
