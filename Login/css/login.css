@@ -5,7 +5,11 @@
   }
   
   html {
-    height: 100%;
+    /*height: 100%;
+    width: 1920px;
+    height: 1080px;
+    */
+    position: relative;
   }
   
   body {
@@ -21,11 +25,9 @@
     /* Auto layout */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: baseline;
     padding: 0px;
-    position: relative;
-    width: 1920px;
-    height: 1080px;
+
     background-color: #CFE6BD;
     
     /*
@@ -41,15 +43,51 @@
     
   }
 
+/*  
+  .logo .HouseIcon {
+    position: absolute;
+    width: 28rem;
+    height: 18rem;
+    left: 12%;
+    top: 2rem;
+    max-width: 40%;
+  }
 
+  .logo .CompanyName {
+    width: 40%;
+    height: auto;
+    left: 9%;
+    top: 20rem;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 4em;
+   
+    text-align: center;
+    
+    color: rgba(0, 0, 0, 0.73);
+  }
 
+  .logo .Message {
+    position: absolute;
+    width: 60%;
+    left: 9%;
+    top: 30rem;
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.5em;
+    color: rgba(0, 0, 0, 0.46);
+  }
+*/
   .form-wrapper {
     
     position: absolute;
     width: 30%;
-    height: 40%;
-    left: 60%;
-    top: 26%;
+    height: 80vh;
+    right: 10vh;
+    top: 6rem;
     background: #E1F0DB;
     border-radius: 53px;
     
@@ -62,12 +100,7 @@
     */
     }
 
-.logo {  
-    vertical-align: middle;
-    text-align: left;
-    height: 100rem;
-    width: 250rem;
-}    
+  
   
   .form-wrapper .header {
     text-align: center;
@@ -164,20 +197,21 @@
   .About {
     display: flex;
     /*justify-content: space-between;*/
-    margin-inline: 15%;
+    margin-inline: 5%;
     position: absolute;
-    bottom: 6%;
-    width: 30%;
+    top: 39rem;
+    /*width: 40%;*/
   }
 
   .About .website_text{ 
-    width: 120%;
+    width: 20vw;
+    height: 25%;
 
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
-    line-height: 50px;
-    border-radius: 30px;
+    line-height: 3.125rem;
+    border-radius: 1.875rem;
     text-transform: uppercase;
     cursor: pointer;
     transition: .2s;
@@ -196,13 +230,14 @@
   }
 */
   .About .diabetes_text{
-    width: 120%;
-    margin-left: 20%;
+    width: 20vw;
+    height: 25%;
+    margin-left: 10rem;
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
-    line-height: 50px;
-    border-radius: 30px;
+    line-height: 3.125rem;
+    border-radius: 1.875rem;
     text-transform: uppercase;
     cursor: pointer;
     transition: .2s;
@@ -213,7 +248,41 @@
   .About .diabetes_text:hover {
     background-color:#92c7a8;
   }
-/*
+
+  @media screen and (max-width: 960px) {  /* page layout for phones */
+    .logo .HouseIcon{
+        display: None;
+    }
+
+    .logo .CompanyName {
+      display: none;
+    }
+
+    .logo .Message {
+      display: None;
+    }
+
+    .form-wrapper {
+      background-color: #CFE6BD;
+      width: 35%;
+      left: 30%;
+    }
+
+    .About {
+      margin-left: 10%;
+    }
+    /*
+    .About .website_text {
+      left: 30%;
+    }
+
+    .About .diabetes_text {
+      right: 50%;
+    }
+    */
+
+
+  /*
     <div class="icon-wrapper">
       <i class="iconfont phs-weixin"></i>
       <i class="iconfont phs-weibo"></i>
