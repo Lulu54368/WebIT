@@ -91,13 +91,6 @@
     background: #E1F0DB;
     border-radius: 53px;
     
-    /*
-    width: 300px;
-    background-color: rgb(255, 255, 255);
-    color: #fff;
-    border-radius: 2px;
-    padding: 50px;
-    */
     }
 
   
@@ -110,20 +103,7 @@
   }
   
   .form-wrapper .input-wrapper input {
-    /* Enter your username 
-    position: absolute;
-    width: 334px;
-    height: 42px;
-    left: 1367px;
-    top: 368px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 42px;
-
-    color: rgba(0, 0, 0, 0.5);*/
+    /* Enter your username */
     font-family: 'Roboto';
     font-weight: 500;
     /*top: 40%;*/
@@ -162,19 +142,8 @@
     display: flex;
     justify-content: center;
   }
-  .form-wrapper .action .btn {
-/*    
-    position: absolute;
-    left: 67.4%;
-    right: 7.4%;
-    top: 61.2%;
-    bottom: 30.09%;
-    background: #8FBC88;
-    border-radius: 50px;
-*/    
-
+  .form-wrapper .action .btn {  
     width: 60%;
-    
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
@@ -223,12 +192,7 @@
     background-color:#92c7a8;
   }
 
-/*
-  .about_diabetes {
-    display: inline-block;
-    float:right;
-  }
-*/
+
   .About .diabetes_text{
     width: 20vw;
     height: 25%;
