@@ -255,7 +255,9 @@
     }
 
     .logo .CompanyName {
-      display: none;
+      font-size: 30px !important;
+      left: 30% !important;
+      top: 1.5rem !important;
     }
 
     .logo .Message {
