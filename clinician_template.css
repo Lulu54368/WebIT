@@ -1,0 +1,138 @@
+
+
+nav {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 20%;
+    height: 120%;
+    left: 0%;
+    top:8%;
+    background: #CFE6BD;
+    
+    
+}
+
+li {
+    position: flex;
+    width: 15%;
+    left: 5%;
+    font-family: "Roboto";
+    font-style: normal;
+    text-align: center;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.5);
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 75px 0px;
+}
+.bar{
+    position: absolute;
+    width: 120%;
+    height: 8%;
+    left: 0%;
+    top: 0%;
+    background: #e1f0db;
+
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    position: absolute;
+    width: 65%;
+    height: 17%;
+    left: 25%;
+    top: 10%;
+    display: inline;
+    
+}
+h1{
+    font-size:4em;
+    position: static;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: left;
+    line-height: 10%;
+
+}
+
+h2{
+    position: static;
+   font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2em;
+    color: rgba(0, 0, 0, 0.6);
+   
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 28px 0px;
+    line-height: 5%;
+}
+
+table{
+    position: absolute;
+    table-layout:auto;
+    width: 80%;
+    height: 80%;
+    left: 25%;
+    top: 40%;
+    background-color:#E1F0DB;
+    border-top: 20em;
+    border-right: 20em;
+    border-bottom: 20em;
+    border-left: 20em;
+    border-color: black;
+    border-spacing: white 2px;
+    
+    
+}
+tr{
+    border: white 2px;
+}
+td{
+    border: white 2px;
+    text-align: center;
+   
+}
+table.category{
+    font-size: 4em;
+    font-family: 'Roboto';
+    font-style:italic;
+    font-weight: bolder;
+}
+
+table.data{
+    font-size: 1.5em;
+    font-style: normal;
+}
+.menu{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    height: 5%;
+    top:5%;
+    width: 25%;
+    left:70%;
+    column-gap: 4em;
+    
+
+   
+}
+.menu.elem{
+    grid-column: auto;
+    padding: 0px;
+    position: absolute;
+    flex-direction: row;
+    text-align: center;
+    font-size: 1em;
+
+}
