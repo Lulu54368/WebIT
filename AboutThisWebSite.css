@@ -8,9 +8,9 @@ aside {
     position: flex;
     width: 15%;
     height: 1020px;
-    left: 0%;
+    left: 0pm;
     top: 8%;
-    background: #cfe6bd;
+    
   }
 
   article {
@@ -18,7 +18,8 @@ aside {
     position: absolute;
     width: 50%;
     height: 80%;
-    left: 20%;
+    margin-left:5%;
+    left: 15%;
     top: 8%;
     display: inline-block;
     font-family: "Roboto", sans-sarif;
@@ -46,11 +47,11 @@ aside {
     flex-direction: row;
     padding: 0px;
     position: absolute;
-    width: 20%;
+    width: 15%;
     height: 100%;
     left: 0%;
-    text-align: center;
-   
+    text-align: right;
+    background: #cfe6bd;
     
   }
   ul{
