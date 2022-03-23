@@ -1,0 +1,132 @@
+header {
+  position: fixed;
+  background: #e1f0db;
+
+  width: 100%;
+  height: 8%;
+  left: 0%;
+  top: 0%;
+
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 5%;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.homepage {
+  position: fixed;
+  background: #8fbc88;
+  border-radius: 50px;
+
+  width: 10%;
+  height: 5%;
+  left: 88%;
+  top: 1.5%;
+
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  line-height: 5%;
+}
+
+aside {
+  position: fixed;
+  background: #cfe6bd;
+
+  width: 15%;
+  height: 100%;
+  left: 0%;
+  top: 8%;
+
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+}
+
+aside p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 80px 0px;
+}
+
+aside a {
+  text-decoration: none;
+}
+
+.nav {
+  left: 5%;
+  width: 90%;
+  text-align: justify;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  padding-top: 10%;
+  color: rgba(0, 0, 0, 0.5);
+  list-style-type: none;
+}
+
+article {
+  position: absolute;
+
+  width: 40%;
+  height: 80%;
+  left: 20%;
+  top: 8%;
+
+  text-align: justify;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 24px;
+}
+
+.video {
+  position: fixed;
+  width: 33%;
+  height: 35%;
+  left: 65%;
+  top: 10%;
+}
+
+.links {
+  position: fixed;
+  background: #e1f0db;
+
+  width: 33%;
+  height: 40%;
+  left: 65%;
+  top: 55%;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+}
+
+.links h3 {
+  text-align: center;
+}
+
+.links li {
+  list-style-type: none;
+}
+
+.links a {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 640px) {
+  /* page layout for phones */
+  aside {
+    display: None;
+  }
+  .video {
+    display: None;
+  }
+  article {
+    left: 5%;
+    width: 90%;
+  }
+  .links {
+    display: None;
+  }
+}
