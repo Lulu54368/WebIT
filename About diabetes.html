@@ -5,193 +5,154 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About diabetes</title>
-
-    <style>
-      aside {
-        position: absolute;
-        width: 15%;
-        height: 100%;
-        left: 0px;
-        top: 8%;
-        background: #cfe6bd;
-      }
-
-      article {
-        position: absolute;
-        width: 45%;
-        height: 80%;
-        left: 20%;
-        top: 8%;
-
-        font-family: "Times New Roman", Times, serif;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 1rem;
-        line-height: 28px;
-        text-align: justify;
-      }
-
-      header {
-        position: absolute;
-        text-align: center;
-        width: 100%;
-        height: 8%;
-        left: 0px;
-        top: 0px;
-        background: #e1f0db;
-      }
-      @media screen and (max-width: 640px) {
-        /* page layout for phones */
-        aside {
-          display: None;
-        }
-        .video {
-          display: None;
-        }
-        article {
-          left: 5%;
-          width: 90%;
-        }
-      }
-
-      li {
-        width: 80%;
-        font-family: "Times New Roman", Times, serif;
-        font-size: 1em;
-        color: rgba(0, 0, 0, 0.5);
-        margin: 75px 0px;
-      }
-    </style>
+    <link rel="stylesheet" href="About diabetes.css" />
   </head>
 
   <body>
-    <aside>
-      <nav>
-        <ul>
-          <li>What's on this page?</li>
-          <li>Overview</li>
-          <li>Type 2 diabetes</li>
-          <li>Type 1 diabetes</li>
-          <li>Gestational diabetes</li>
-          <li>Delay type 2 diabetes and its complications</li>
-        </ul>
-      </nav>
-    </aside>
-
     <main>
       <header>
-        <p
-          style="
-            text-align: center;
-
-            font-family: 'Times New Roman', Times, serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 1.5em;
-
-            color: rgba(0, 0, 0, 0.7);
-          "
-        >
-          About diabetes
-        </p>
+        <p>About diabetes</p>
       </header>
 
+      <div class="homepage">
+        <p>HomePage</p>
+      </div>
+
+      <aside>
+        <p>
+          <a href="#Overview">Overview</a>
+        </p>
+        <p>
+          <a href="#Type 2 diabetes">Type 2 diabetes</a>
+        </p>
+        <p>
+          <a href="#Type 1 diabetes">Type 1 diabetes</a>
+        </p>
+        <p>
+          <a href="#Gestational diabetes">Gestational diabetes</a>
+        </p>
+        <p>
+          <a href="#Health tips">Health tips</a>
+        </p>
+      </aside>
+
       <article>
-        <h2>Overview</h2>
-        <p>
-          Diabetes is a chronic disease that occurs either when the pancreas
-          does not produce enough insulin or when the body cannot effectively
-          use the insulin it produces. Insulin is a hormone that regulates blood
-          sugar. Hyperglycaemia, or raised blood sugar, is a common effect of
-          uncontrolled diabetes and over time leads to serious damage to many of
-          the body's systems, especially the nerves and blood vessels.<br />
-        </p>
+        <section>
+          <a name="Overview"></a>
+          <h2>Overview</h2>
+          <p>
+            Diabetes is a chronic disease that occurs either when the pancreas
+            does not produce enough insulin or when the body cannot effectively
+            use the insulin it produces. Insulin is a hormone that regulates
+            blood sugar. Hyperglycaemia, or raised blood sugar, is a common
+            effect of uncontrolled diabetes and over time leads to serious
+            damage to many of the body's systems, especially the nerves and
+            blood vessels.
+          </p>
+        </section>
 
-        <h2>Type 2 diabetes</h2>
-        <p>
-          Type 2 diabetes (formerly called non-insulin-dependent, or
-          adult-onset) results from the body’s ineffective use of insulin. More
-          than 95% of people with diabetes have type 2 diabetes. This type of
-          diabetes is largely the result of excess body weight and physical
-          inactivity.<br />
-        </p>
+        <section>
+          <a name="Type 2 diabetes"></a>
+          <h2>Type 2 diabetes</h2>
+          <p>
+            Type 2 diabetes (formerly called non-insulin-dependent, or
+            adult-onset) results from the body’s ineffective use of insulin.
+            More than 95% of people with diabetes have type 2 diabetes. This
+            type of diabetes is largely the result of excess body weight and
+            physical inactivity.
+          </p>
+        </section>
 
-        <h2>Type 1 diabetes</h2>
-        <p>
-          Type 1 diabetes (previously known as insulin-dependent, juvenile or
-          childhood-onset) is characterized by deficient insulin production and
-          requires daily administration of insulin. Neither its cause nor the
-          means to prevent it are known. Symptoms include excessive excretion of
-          urine (polyuria), thirst (polydipsia), constant hunger, weight loss,
-          vision changes, and fatigue. These symptoms may occur suddenly.<br />
-        </p>
+        <section>
+          <a name="Type 1 diabetes"></a>
+          <h2>Type 1 diabetes</h2>
+          <p>
+            Type 1 diabetes (previously known as insulin-dependent, juvenile or
+            childhood-onset) is characterized by deficient insulin production
+            and requires daily administration of insulin. Neither its cause nor
+            the means to prevent it are known. Symptoms include excessive
+            excretion of urine (polyuria), thirst (polydipsia), constant hunger,
+            weight loss, vision changes, and fatigue. These symptoms may occur
+            suddenly.
+          </p>
+        </section>
 
-        <h2>Gestational diabetes</h2>
-        <p>
-          Gestational diabetes is hyperglycaemia with blood glucose values above
-          normal but below those diagnostic of diabetes. Gestational diabetes
-          occurs during pregnancy. Women with gestational diabetes are at an
-          increased risk of complications during pregnancy and at delivery.
-          These women and possibly their children are also at increased risk of
-          type 2 diabetes in the future. Gestational diabetes is diagnosed
-          through prenatal screening, rather than through reported symptoms.<br />
-        </p>
+        <section>
+          <a name="Gestational diabetes"></a>
+          <h2>Gestational diabetes</h2>
+          <p>
+            Gestational diabetes is hyperglycaemia with blood glucose values
+            above normal but below those diagnostic of diabetes. Gestational
+            diabetes occurs during pregnancy. Women with gestational diabetes
+            are at an increased risk of complications during pregnancy and at
+            delivery. These women and possibly their children are also at
+            increased risk of type 2 diabetes in the future. Gestational
+            diabetes is diagnosed through prenatal screening, rather than
+            through reported symptoms.
+          </p>
+        </section>
 
-        <h2>
-          To help delay type 2 diabetes and its complications, people should:
-        </h2>
-        <p>
-          1. Achieve and maintain a healthy body weight<br />
-          2. Be physically active – doing at least 30 minutes of regular,
-          moderate-intensity activity on most days. More activity is required
-          for weight control<br />
-          3. Eat a healthy diet, avoiding sugar and saturated fats<br />
-          4. Avoid tobacco use – smoking increases the risk of diabetes and
-          cardiovascular disease
-        </p>
+        <section>
+          <a name="Health tips"></a>
+          <h2>Health tips</h2>
+          <ol>
+            <li>Achieve and maintain a healthy body weight.</li>
+            <li>
+              Be physically active – doing at least 30 minutes of regular,
+              moderate-intensity activity on most days. More activity is
+              required for weight control.
+            </li>
+            <li>Eat a healthy diet, avoiding sugar and saturated fats.</li>
+            <li>
+              Avoid tobacco use – smoking increases the risk of diabetes and
+              cardiovascular disease.
+            </li>
+          </ol>
+        </section>
       </article>
+
       <div class="video">
-        <p
-          style="
-            position: absolute;
-            width: 30%;
-            height: 30%;
-            left: 68%;
-            top: 15%;
-          "
-        >
+        <p>
           <iframe
             width="100%"
-            height="100%"
+            height="250"
             src="https://www.youtube.com/embed/wZAjVQWbMlE"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen=""
+            allowfullscreen
           ></iframe>
         </p>
       </div>
-      <div class="useful links">
-        <p
-          style="
-            position: absolute;
-            width: 30%;
-            height: 30%;
-            left: 68%;
-            top: 60%;
-            background: #e1f0db;
-          "
-        >
-          Useful links<br />
-          <strong>WHO: </strong
-          >https://www.who.int/news-room/fact-sheets/detail/diabetes<br /><br />
-          <strong>Diabetes Australia: </strong
-          >https://www.diabetesaustralia.com.au/<br /><br />
-          <strong>Lancet: </strong
-          >https://www.thelancet.com/journals/landia/onlineFirst<br /><br />
-          <strong>CDC: </strong
-          >https://www.cdc.gov/diabetes/basics/diabetes.html<br /><br />
-        </p>
+
+      <div class="links">
+        <h3>Useful Links</h3>
+        <ul>
+          <li>
+            <strong>WHO: </strong
+            ><a href="https://www.who.int/news-room/fact-sheets/detail/diabetes"
+              >https://www.who.int/news-room/fact-sheets/detail/diabetes</a
+            ><br /><br />
+          </li>
+          <li>
+            <strong>Diabetes Australia: </strong
+            ><a href="https://www.diabetesaustralia.com.au/"
+              >https://www.diabetesaustralia.com.au/</a
+            ><br /><br />
+          </li>
+          <li>
+            <strong>Lancet: </strong
+            ><a href="https://www.thelancet.com/journals/landia/onlineFirst"
+              >https://www.thelancet.com/journals/landia/onlineFirst</a
+            ><br /><br />
+          </li>
+          <li>
+            <strong>CDC: </strong
+            ><a href="https://www.cdc.gov/diabetes/basics/diabetes.html"
+              >https://www.cdc.gov/diabetes/basics/diabetes.html</a
+            ><br /><br />
+          </li>
+        </ul>
       </div>
     </main>
   </body>
