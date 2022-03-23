@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>About diabetes</title>
 
     <style>
       aside {
-        position: absolute;
+        position: fixed;
         width: 15%;
         height: 100%;
         left: 0px;
@@ -23,7 +24,7 @@
         left: 20%;
         top: 8%;
 
-        font-family: "Times New Roman", Times, serif;
+        font-family: "Roboto", sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 1rem;
@@ -32,12 +33,12 @@
       }
 
       header {
-        position: absolute;
+        position: fixed;
         text-align: center;
         width: 100%;
         height: 8%;
         left: 0px;
-        top: 0px;
+        top: 0;
         background: #e1f0db;
       }
       @media screen and (max-width: 640px) {
@@ -52,11 +53,14 @@
           left: 5%;
           width: 90%;
         }
+        .usefulLinks {
+          display: None;
+        }
       }
 
       li {
         width: 80%;
-        font-family: "Times New Roman", Times, serif;
+        font-family: "Roboto", sans-serif;
         font-size: 1em;
         color: rgba(0, 0, 0, 0.5);
         margin: 75px 0px;
@@ -68,7 +72,6 @@
     <aside>
       <nav>
         <ul>
-          <li>What's on this page?</li>
           <li>Overview</li>
           <li>Type 2 diabetes</li>
           <li>Type 1 diabetes</li>
@@ -84,7 +87,7 @@
           style="
             text-align: center;
 
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Roboto', sans-serif;
             font-style: normal;
             font-weight: 700;
             font-size: 1.5em;
@@ -152,13 +155,7 @@
       </article>
       <div class="video">
         <p
-          style="
-            position: absolute;
-            width: 30%;
-            height: 30%;
-            left: 68%;
-            top: 15%;
-          "
+          style="position: fixed; width: 30%; height: 30%; left: 68%; top: 15%"
         >
           <iframe
             width="100%"
@@ -171,10 +168,11 @@
           ></iframe>
         </p>
       </div>
-      <div class="useful links">
+      <div class="usefulLinks">
         <p
           style="
-            position: absolute;
+            position: fixed;
+            font-family: 'Roboto', sans-serif;
             width: 30%;
             height: 30%;
             left: 68%;
@@ -182,7 +180,7 @@
             background: #e1f0db;
           "
         >
-          Useful links<br />
+          <strong>Useful Links</strong><br />
           <strong>WHO: </strong
           >https://www.who.int/news-room/fact-sheets/detail/diabetes<br /><br />
           <strong>Diabetes Australia: </strong
