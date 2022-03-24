@@ -15,14 +15,16 @@ html {
   left: 0%;
   top: 0%;
 
+  z-index: 1;
+  overflow: hidden;
+}
+
+.header p {
   text-align: center;
-  /* font-size: 2vw; */
   font-size: 1.5em;
   font-weight: 700;
   line-height: 5%;
   color: rgba(0, 0, 0, 0.7);
-
-  overflow: hidden;
 }
 
 .homepage {
@@ -36,14 +38,13 @@ html {
   top: 1.5%;
 
   text-align: center;
-  /* font-size: 1.2vw; */
   font-size: 1em;
   line-height: 5%;
 
   float: left;
 }
 
-.aside {
+.sidenav {
   position: fixed;
   background: #cfe6bd;
 
@@ -58,17 +59,18 @@ html {
   float: left;
 }
 
-.aside p {
+.sidenav p {
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.5);
   margin: 80px 0px;
 }
 
-.aside a {
+.sidenav a {
   text-decoration: none;
+  display: block;
 }
 
-.aside a:hover {
+.sidenav a:hover {
   background: #e1f0db;
 }
 
@@ -136,7 +138,7 @@ html {
 
 @media screen and (max-width: 640px) {
   /* page layout for phones */
-  .aside {
+  .sidenav {
     display: None;
   }
   .video,
