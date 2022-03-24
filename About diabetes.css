@@ -1,5 +1,6 @@
 html {
   font-family: "Roboto", sans-serif;
+  font-size: 3vh;
 }
 
 .header {
@@ -15,7 +16,7 @@ html {
 
 .header p {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 3.5vh;
   font-weight: 700;
   line-height: 5%;
   color: rgba(0, 0, 0, 0.7);
@@ -30,13 +31,10 @@ html {
   left: 88%;
   top: 1.5%;
   z-index: 1;
-
-  float: left;
 }
 
 .homepage p {
   text-align: center;
-  font-size: 1em;
   line-height: 5%;
 }
 
@@ -47,35 +45,21 @@ html {
   height: 100%;
   left: 0%;
   top: 8%;
-
-  float: left;
 }
 
 .sidenav p {
   text-align: center;
-  font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.5);
   margin: 80px 0px;
 }
 
 .sidenav a {
   text-decoration: none;
-  display: block;
 }
 
 .sidenav a:hover {
   background: #e1f0db;
 }
-
-/* .nav {
-  left: 5%;
-  width: 90%;
-  text-align: justify;
-  font-size: 1em;
-  padding-top: 10%;
-  color: rgba(0, 0, 0, 0.5);
-  list-style-type: none;
-} */
 
 .article {
   position: absolute;
@@ -84,32 +68,25 @@ html {
   left: 20%;
   top: 8%;
   text-align: justify;
-  font-size: 1rem;
   line-height: 24px;
-
-  float: left;
 }
 
 .video {
-  position: fixed;
+  position: absolute;
   width: 33%;
   height: 35%;
   left: 65%;
   top: 10%;
-
-  float: left;
 }
 
 .links {
-  position: fixed;
+  position: absolute;
   background: #e1f0db;
   overflow: scroll;
   width: 33%;
   height: 40%;
   left: 65%;
   top: 55%;
-
-  float: left;
 }
 
 .links h3 {
@@ -118,7 +95,6 @@ html {
 
 .links li {
   list-style-type: none;
-  font-size: 1em;
 }
 
 .links a {
