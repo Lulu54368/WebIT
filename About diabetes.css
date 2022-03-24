@@ -1,4 +1,12 @@
-header {
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
   position: fixed;
   background: #e1f0db;
 
@@ -7,9 +15,13 @@ header {
   left: 0%;
   top: 0%;
 
+  z-index: 1;
+  overflow: hidden;
+}
+
+.header p {
   text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 700;
   line-height: 5%;
   color: rgba(0, 0, 0, 0.7);
@@ -26,12 +38,13 @@ header {
   top: 1.5%;
 
   text-align: center;
-  font-family: "Roboto", sans-serif;
   font-size: 1em;
   line-height: 5%;
+
+  float: left;
 }
 
-aside {
+.sidenav {
   position: fixed;
   background: #cfe6bd;
 
@@ -41,33 +54,37 @@ aside {
   top: 8%;
 
   text-align: center;
-  font-family: "Roboto", sans-serif;
   font-size: 1rem;
+
+  float: left;
 }
 
-aside p {
-  font-family: "Roboto", sans-serif;
+.sidenav p {
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.5);
   margin: 80px 0px;
 }
 
-aside a {
+.sidenav a {
   text-decoration: none;
+  display: block;
 }
 
-.nav {
+.sidenav a:hover {
+  background: #e1f0db;
+}
+
+/* .nav {
   left: 5%;
   width: 90%;
   text-align: justify;
-  font-family: "Roboto", sans-serif;
   font-size: 1em;
   padding-top: 10%;
   color: rgba(0, 0, 0, 0.5);
   list-style-type: none;
-}
+} */
 
-article {
+.article {
   position: absolute;
 
   width: 40%;
@@ -76,9 +93,10 @@ article {
   top: 8%;
 
   text-align: justify;
-  font-family: "Roboto", sans-serif;
   font-size: 1rem;
   line-height: 24px;
+
+  float: left;
 }
 
 .video {
@@ -87,19 +105,23 @@ article {
   height: 35%;
   left: 65%;
   top: 10%;
+
+  float: left;
 }
 
 .links {
   position: fixed;
   background: #e1f0db;
+  overflow: scroll;
 
   width: 33%;
   height: 40%;
   left: 65%;
   top: 55%;
 
-  font-family: "Roboto", sans-serif;
   font-size: 1em;
+
+  float: left;
 }
 
 .links h3 {
@@ -116,17 +138,15 @@ article {
 
 @media screen and (max-width: 640px) {
   /* page layout for phones */
-  aside {
+  .sidenav {
     display: None;
   }
-  .video {
-    display: None;
+  .video,
+  .links {
+    width: 100%;
   }
-  article {
+  .article {
     left: 5%;
     width: 90%;
-  }
-  .links {
-    display: None;
   }
 }
