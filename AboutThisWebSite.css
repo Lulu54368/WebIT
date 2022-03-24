@@ -1,6 +1,17 @@
 html{
-    position: relative;
+   position: relative;
     font-family: "Roboto", sans-sarif;
+}
+
+body{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto ;
+  grid-gap: 5%;
+  grid-template-areas: 
+      "header header header"
+      "nav main aside"
+      
 }
 aside {
 
@@ -14,7 +25,7 @@ aside {
   }
 
   article {
-  
+    grid-area: "main";
     position: absolute;
     width: 50%;
     height: 80%;
@@ -31,14 +42,16 @@ aside {
   }
 
   header {
-    position: fixed;
+    position: absolute;
+    grid-area:"header";
+    display: grid;
+    grid-template-columns: 80%, 20%;
+    grid-template-areas: "title, button";
     background: #e1f0db;
-  
     width: 100%;
     height: 8%;
     left: 0%;
     top: 0%;
-  
     text-align: center;
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
@@ -46,11 +59,12 @@ aside {
     line-height: 5%;
     color: rgba(0, 0, 0, 0.7);
   }
+ 
 
   nav {
-
-    position:absolute;
-    display: flex;
+    grid-area: "nav";
+    /*position:absolute;
+    display: flex;*/
     flex-direction: row;
     padding: 0px;
     position: absolute;
@@ -78,7 +92,7 @@ aside {
 
 
   ul.list{
-    position: absolute;
+    /*position: absolute;*/
     grid-area: auto;
     justify-items: center;
     order: 1;
@@ -97,17 +111,18 @@ aside {
 
 
   #homeButton {
-    position: fixed;
+    position: relative;
+    grid-area: "button";
     background: #8fbc88;
+    display:block;
     border-radius: 20vw;
-  
-    width: 10%;
-    height: 5%;
-    left: 88%;
-    top: 1.5%;
-  
+    width: 100px;
+    height: 50px;
+    left: 80%;
+    top: -60%;
     text-align: center;
     font-family: "Roboto", sans-serif;
     font-size: 70%;
     line-height: 5%;
   }
+

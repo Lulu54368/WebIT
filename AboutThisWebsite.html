@@ -12,19 +12,52 @@
       
       @media screen and (max-width: 640px) {  /* page layout for phones */
         
-       
+        body{
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-template-areas: "header main";
+          flex-direction: column;
+        
+        }
+        header{
+          position: relative;
+          grid-area:"header";
+          background: #e1f0db;
+          background-size: cover;
+          width: 150%;
+          height: 50%;
+          left: 0%;
+          top: 0%;
+          text-align: center;
+          font-family: "Roboto", sans-serif;
+          font-size: 1.5rem;
+          font-weight: 700;
+          line-height: 5%;
+          color: rgba(0, 0, 0, 0.7);
+        }
         aside {
             display: None;
             
         }
-        article{
-          top: 5rem;
-          left:5%;
-          width: 90%;
-        }
         .logo{
-            display: None;
+          display: None;
+      }
+        article {
+          grid-area: "main";
+          position: absolute;
+          margin-left:5%;
+          margin-right:5%;
+          margin-top:5%;
+          top:10%;
+          left: 0%;
+          width: 100%;
+          
         }
+
+        #homeButton{
+          top:-100%;
+        }
+        
         
     }
 
@@ -48,12 +81,11 @@
 
     <main>
       <header>
-        <p>
+        <p class = "headertext">
           About this website
         </p>
         
-        <button id = 'homeButton'>
-        Homepage</button>
+        <button id = 'homeButton'>Homepage</button>
   
         
       </header>
@@ -106,6 +138,7 @@
       <p
       style="
       position: absolute;
+      display:block;
       width: 30%;
       height: 20%;
       left: 75%;
@@ -117,6 +150,7 @@
       <p
       style = "
       position: absolute;
+      display:block;
       width: 25%;
       left: 75%;
       top: 60%;
