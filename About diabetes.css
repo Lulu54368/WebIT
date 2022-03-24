@@ -2,10 +2,6 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .header {
   position: fixed;
   background: #e1f0db;
@@ -134,10 +130,12 @@ html {
   .sidenav {
     display: None;
   }
-  .video,
-  .links {
-    width: 100%;
+
+  .links,
+  .video {
+    display: None;
   }
+
   .article {
     left: 5%;
     width: 90%;
