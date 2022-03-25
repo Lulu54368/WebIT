@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="About.css" />
+
+    <title>About Diabetes</title>
+
+    <style>
+      body > * {
+        /* this is just shading to show the different regions */
+        font-family: "Roboto", sans-serif;
+      }
+
+      body {
+        /* page layout - desktop version */
+
+        display: grid;
+        grid-template-columns: 5fr 20fr 10fr;
+        grid-template-rows: auto auto;
+        grid-gap: 0;
+        margin: 0;
+
+        grid-template-areas:
+          "header header header"
+          "aside main nav"
+          "footer footer footer";
+      }
+
+      /* assign regions of the page to the grid */
+      header {
+        grid-area: header;
+      }
+      aside {
+        grid-area: aside;
+      }
+      main {
+        grid-area: main;
+      }
+      nav {
+        grid-area: nav;
+      }
+      footer {
+        grid-area: footer;
+      }
+
+      @media screen and (max-width: 640px) {
+        /* page layout for phones */
+        body {
+          display: flex;
+          flex-direction: column;
+        }
+        aside {
+          display: none;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- content of webpage begins here -->
+  <body>
+    <header>
+      <h2>About This Website</h2>
+    </header>
+
+    <nav>
+      <div class="logo">
+        <svg
+          style="
+            position: fixed;
+            width: 220px;
+            height: 200px;
+            left: 1100px;
+            top: 180px;
+          "
+          width="213"
+          height="155"
+          viewBox="0 0 213 155"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            width="137.757"
+            height="17.0959"
+            transform="translate(0 86.7266) rotate(-39.0178)"
+            fill="#E1F0DB"
+          />
+          <rect
+            width="87.0999"
+            height="17.5959"
+            transform="translate(34.3121 154.713) rotate(-90)"
+            fill="#E1F0DB"
+          />
+          <rect
+            width="87.0999"
+            height="17.5959"
+            transform="translate(167.161 154.713) rotate(-90)"
+            fill="#E1F0DB"
+          />
+          <rect
+            width="137.757"
+            height="17.0959"
+            transform="translate(106.73) rotate(40)"
+            fill="#E1F0DB"
+          />
+          <rect
+            width="69.504"
+            height="14.0768"
+            transform="translate(71.2635 95.7671)"
+            fill="#E1F0DB"
+          />
+          <rect
+            width="70.3838"
+            height="13.197"
+            transform="translate(99.4171 137.998) rotate(-90)"
+            fill="#E1F0DB"
+          />
+        </svg>
+      </div>
+      <p
+        style="
+          position: fixed;
+          width: 500px;
+          height: 200px;
+          left: 960px;
+          top: 320px;
+
+          font-weight: 550;
+          font-size: 36px;
+          line-height: 50px;
+          text-align: center;
+
+          color: rgba(0, 0, 0, 0.73);
+        "
+      >
+        Diabetes@Home<br />
+        Health Tracker
+      </p>
+
+      <p
+        style="
+          position: fixed;
+          width: 500px;
+          height: 200px;
+          left: 960px;
+          top: 430px;
+          font-style: italic;
+          font-weight: 400;
+          font-size: 20px;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.46);
+        "
+      >
+        Today's care for better tomorrow
+      </p>
+    </nav>
+
+    <main>
+      <div class="article">
+        <a name="Description"></a><br /><br />
+        <h2>Description</h2>
+        <p>
+          Diabetes Health Tracker is a platform built to assist diabetes
+          patients and their doctors to record relevant data and monitor health
+          status. This platform bridges connections between patients and
+          doctors.<br /><br />
+          For patients, they can record and update their diabetes-related health
+          data on a daily basis. These index include blood glucose level,
+          weight, doses of insulin intake, and step count. Patient are also
+          encouraged to write comment on any of these index to the doctor.
+          <br /><br />
+          On the other hand, doctors can monitor patient’s health status by
+          viewing the data and comments uploaded by the patients. Doctors will
+          enter the safe threshold for each index and the system will emphasize
+          on index fallen out of the safe boundary. Doctors will also write
+          support messages to patient on a daily basis in order to encourage
+          patient to record.
+        </p>
+
+        <a name="Aim"></a><br /><br />
+        <h2>Aim</h2>
+        <p>
+          Besides, this platform also aims to provide support and encoragement
+          to diabetes patients. This is achieved by the briged communication
+          between doctors and patients as doctors are encouraged to write a
+          “support message” for their patients. <br /><br />
+          On the other hand, the “leader board” also encourages patient to
+          record their data through displaying the top-5 most engaging users.
+          The enaging rate is calculated by the completion percentage of evey
+          day's data record.
+        </p>
+
+        <a name="Who are we"></a><br /><br />
+        <h2>Who are we</h2>
+        <p>
+          This website is built by students from The University of Melbourne.
+          For further enquiries please contact: jiahe3@student.unimelb.edu.au;
+          anzhec@student.unimelb.edu.au; qzzhu1@student.unimelb.edu.au;
+          yuntaol@student.unimelb.edu.au; william@student.unimelb.edu.au
+        </p>
+
+        <a name="Log in requirement"></a><br /><br />
+        <h2>Log in requirement</h2>
+        <p>
+          This website is built for diabetes patients and their doctors. Thus,
+          people need to be logged in to access most of the features.
+        </p>
+      </div>
+    </main>
+
+    <aside>
+      <div class="sidenav">
+        <p>
+          <a href="#Description">Description</a>
+        </p>
+        <p>
+          <a href="#Aim">Aim</a>
+        </p>
+        <p>
+          <a href="#Who are we">Who are we</a>
+        </p>
+        <p>
+          <a href="#Login requirement">Login requirement</a>
+        </p>
+      </div>
+    </aside>
+    <footer>
+      <div class="homepage">
+        <a href="#">Homepage</a>
+      </div>
+    </footer>
+  </body>
+</html>
