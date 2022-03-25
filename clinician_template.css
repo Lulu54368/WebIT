@@ -116,23 +116,32 @@ table.data{
     font-style: normal;
 }
 .menu{
+    position: relative;
     display: grid;
     grid-template-columns: auto auto auto;
-    height: 5%;
+    height: 100%;
     top:5%;
     width: 25%;
-    left:70%;
+    left:0%;
     column-gap: 4em;
-    
+  
 
    
 }
-.menu.elem{
-    grid-column: auto;
-    padding: 0px;
-    position: absolute;
-    flex-direction: row;
-    text-align: center;
-    font-size: 1em;
+button{
+ 
+        position: relative;
+        top:0%;
+        height: 90%;
+        width: 100px;
+        grid-area: "button";
+        background: #8fbc88;
+        justify-content: center;
+        border-radius: 20vw;
+        text-align: center;
+        font-family: "Roboto", sans-serif;
+        font-size: 2vh;
+        line-height: 5%;
+      
 
 }
