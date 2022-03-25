@@ -50,3 +50,7 @@ footer a{
 footer a:hover {
     background: #8fbc88;
   }
+
+.greeting {
+    color: red;
+}
