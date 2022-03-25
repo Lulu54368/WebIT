@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="about.css" />
+
+    <title>About Diabetes</title>
+
+    <style>
+        body > * {  /* this is just shading to show the different regions */
+            font-family: "Roboto", sans-serif;
+        }
+
+        body { /* page layout - desktop version */
+            display: grid;
+            grid-template-columns: 5fr 20fr 10fr;
+            grid-template-rows: auto auto;
+            grid-gap:0;
+            margin:0;
+
+            grid-template-areas: 
+                "header header header"
+                "aside main nav"
+                "footer footer footer";
+            }
+        
+        /* assign regions of the page to the grid */
+        header {grid-area: header;}
+        aside {grid-area: aside;}
+        main {grid-area: main;}
+        nav {grid-area: nav;}
+        footer{grid-area: footer;}
+
+        @media screen and (max-width: 640px) {  /* page layout for phones */
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+            aside
+            {
+                display: none;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<!-- content of webpage begins here -->
+<body>
+    <header>
+        ######### uper content
+    </header>
+
+    <nav>
+        ######### right side content (hi john)
+    </nav>
+
+        
+    <main>
+        ######### center content
+    </main>
+
+    <aside>
+        ######### left side content (menu)
+    </aside>
+
+    <footer>
+        ######### footer
+    </footer>
+
+</body>
+
+</html>

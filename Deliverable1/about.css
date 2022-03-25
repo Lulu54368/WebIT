@@ -5,13 +5,14 @@ header{
 }
 
 .article {
+    color:rgb(70, 70, 70);
     text-align: justify;
     margin-left: 5%;
     margin-right: 5%;
 }
 .sidenav {
     background-color: #CFE6BD;
-    display: block;
+    display: blocfk;
     float:left;
     height: 100%;
 }
@@ -37,15 +38,19 @@ header{
     color: #818181;
 }
 
-.homepage a{
+footer a{
     padding: 20px 20px 20px 20px;
     font-size: 20px;
     text-decoration: none;
     text-align: center;
-    background: #8fbc88;
+    background: #E1F0DB;
     color: rgb(70, 70, 70);
     display: block;
 }
-.homepage a:hover {
-    background: #CFE6BD;
+footer a:hover {
+    background: #8fbc88;
   }
+
+.greeting {
+    color: red;
+}
