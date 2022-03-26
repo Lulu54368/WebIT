@@ -1,4 +1,26 @@
+body > * {  /* this is just shading to show the different regions */
+    font-family: "Roboto", sans-serif;
+}
 
+body { /* page layout - desktop version */
+    display: grid;
+    grid-template-columns: 5fr 20fr 10fr;
+    grid-template-rows: auto auto;
+    grid-gap:0;
+    margin:0;
+
+    grid-template-areas: 
+        "header header header"
+        "nav main aside"
+        "footer footer footer";
+    }
+
+/* assign regions of the page to the grid */
+header {grid-area: header;}
+aside {grid-area: aside;}
+main {grid-area: main;}
+nav {grid-area: nav;}
+footer{grid-area: footer;}
 
 nav {
     position:absolute;
@@ -7,7 +29,7 @@ nav {
     align-items: flex-start;
     padding: 0px;
     width: 20%;
-    height: 120%;
+ 
     left: 0%;
     top:8%;
     background: #CFE6BD;
@@ -15,11 +37,12 @@ nav {
     
 }
 
+  
 li {
     position: flex;
     width: 15%;
     left: 5%;
-    font-family: "Roboto";
+  
     font-style: normal;
     text-align: center;
     font-size: 1em;
@@ -29,7 +52,7 @@ li {
     flex-grow: 0;
     margin: 75px 0px;
 }
-.bar{
+header{
     position: absolute;
     width: 120%;
     height: 8%;
@@ -39,7 +62,7 @@ li {
 
 }
 
-header{
+.greeting{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -83,7 +106,7 @@ table{
     position: absolute;
     table-layout:auto;
     width: 80%;
-    height: 80%;
+    height: 100%;
     left: 25%;
     top: 40%;
     background-color:#E1F0DB;
@@ -91,29 +114,19 @@ table{
     border-right: 20em;
     border-bottom: 20em;
     border-left: 20em;
-    border-color: black;
-    border-spacing: white 2px;
+    border-color: white;
+    border-spacing: white 10px;
+    border-collapse:collapse
     
     
 }
 tr{
-    border: white 2px;
+    border:3px solid white;
 }
 td{
-    border: white 2px;
+    border:  3px solid white;
     text-align: center;
    
-}
-table.category{
-    font-size: 4em;
-    font-family: 'Roboto';
-    font-style:italic;
-    font-weight: bolder;
-}
-
-table.data{
-    font-size: 1.5em;
-    font-style: normal;
 }
 .menu{
     position: relative;
@@ -124,9 +137,10 @@ table.data{
     width: 25%;
     left:0%;
     column-gap: 4em;
-  
+}
 
-   
+.menu>.elem{
+    grid-area: auto;
 }
 button{
  

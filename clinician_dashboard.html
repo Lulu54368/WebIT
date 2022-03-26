@@ -11,44 +11,64 @@
         
     </head>
     <body>
-    <div class = "bar">
+    <header>
         <div class = "menu">
             <button class = "elem">About diabetes</button>
             <button class = "elem">About this website</button>
             <button class = "elem">log out</button>
         </div>
         
-    </div>
-    <header>
-        <h1>Hi Dr.Doe!</h1>
-        <h2>Today: Tuesday, March 15</h2>
     </header>
     <nav>
-      
-            <ul>
-                <li>Dashboard</li>
-                <li>Patient’s Data</li>
-                <li>Patient’s
-                    Comments</li>
-                <li>Clinical Notes</li>
-                <li>Messages</li>
-            </ul>
-       
         
+        <ul>
+            <li class = "sidenav">Dashboard</li>
+            <li class = "sidenav">Patient’s Data</li>
+            <li class = "sidenav">Patient’s
+                Comments</li>
+            <li class = "sidenav">Clinical Notes</li>
+            <li class = "sidenav">Messages</li>
+        </ul>
+   
+    
     </nav>
+    <main>
+    <div class = "greeting">
+        <h1>Hi Dr.Doe!</h1>
+        <h2>Today: Tuesday, March 15</h2>
+    </div>
+    
         
 
-    <table frame="BOX">
+    <table class = "parent" frame="BOX">
         
-        <div class = "category">
-            <tr>
+       
+            <tr class = "catagory" style = "font-size: 1.5em;">
                 <td>Patient name</td>
                 <td>Blood glucose level</td>
                 <td>Weight</td>
                 <td>Doses of insulin intake</td>
             </tr>
-        </div>
-        <div class="data">    
+       
+        <div class="data" style = "font-size: 1em;">    
+            <tr>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
             <tr>
                 <td>abc</td>
                 <td>abc</td>
@@ -71,5 +91,6 @@
         </div>
         
     </table>
+    </main>
     </body>
 </html>
