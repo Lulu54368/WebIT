@@ -26,7 +26,7 @@ header{
     background-color: #CFE6BD;
     display: blocfk;
     float:left;
-    height: 100%;
+    height: 1000px; /*Mannually drag background color to the bottom*/
 }
 .sidenav a:hover {
     background: white;
@@ -73,7 +73,7 @@ header{
     position: absolute;
     width: 65%;
     height: 17%;
-    left: 25%;
+    left: 18%;
     top: 10%;
     display: inline;
     
@@ -110,8 +110,8 @@ table{
     table-layout:auto;
     width: 80%;
     height: 100%;
-    left: 25%;
-    top: 40%;
+    left: 18%;
+    top: 28%;
     background-color:#E1F0DB;
     border-top: 20em;
     border-right: 20em;
@@ -138,7 +138,7 @@ td{
     height: 80%;
     top:5%;
     width: 25%;
-    left:0%;
+    left:70%;
     column-gap: 4em;
 }
 
