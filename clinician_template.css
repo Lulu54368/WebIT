@@ -39,7 +39,10 @@ header{
     display: block;
   }
 
-  
+ 
+.active {
+    background-color: white;
+}
 li {
     position: flex;
     width: 15%;

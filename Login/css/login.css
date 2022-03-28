@@ -143,7 +143,7 @@
     justify-content: center;
   }
   .form-wrapper .action .btn {  
-    width: 60%;
+    width: 50%;
     border: 2px solid #8FBC88;
     background: #8FBC88;
     
@@ -184,8 +184,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: .2s;
-    text-align: center;
-    color: #00000080;
+    text-align: center;*/
   }
 
   .About .website_text:hover {
@@ -194,12 +193,12 @@
 
 
   .About .diabetes_text{
-    width: 20vw;
+    width: 18vw;
     height: 25%;
     margin-left: 10rem;
     border: 2px solid #8FBC88;
     background: #8FBC88;
-    
+
     line-height: 3.125rem;
     border-radius: 1.875rem;
     text-transform: uppercase;
@@ -236,6 +235,10 @@
 
     .About {
       margin-left: 10%;
+    }
+
+    .btn {
+      font-size: 85%;
     }
     /*
     .About .website_text {
