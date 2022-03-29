@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
   <html>
     <head>
@@ -6,98 +7,49 @@
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>clinician dashboard</title>
-        <style>
-            body > * {  /* this is just shading to show the different regions */
-                font-family: "Roboto", sans-serif;
-            }
-    
-            body { /* page layout - desktop version */
-                display: grid;
-                grid-template-columns: 5fr 20fr 10fr;
-                grid-template-rows: auto auto;
-                grid-gap:0;
-                margin:0;
-    
-                grid-template-areas: 
-                    "header header header"
-                    "nav main aside"
-                    "footer footer footer";
-                }
-            
-            /* assign regions of the page to the grid */
-            header {grid-area: header;}
-            aside {grid-area: aside;}
-            main {grid-area: main;}
-            nav {grid-area: nav;}
-            footer{grid-area: footer;}
-    
-            @media screen and (max-width: 640px) {  /* page layout for phones */
-                body {
-                    display: flex;
-                    flex-direction: column;
-                }
-                nav
-                {
-                    display: none;
-                    flex-direction: column;
-                }
-            }
-        </style>  
+        
+        
     </head>
     <body>
-    <header>
+    <div class = "bar">
         <div class = "menu">
-            <button class = "elem"><a href="Deliverable1/aboutdiabetes.html" style="text-decoration: none; color: black;">About diabetes</a></button>
-            <button class = "elem"><a href="Deliverable1/aboutthiswebsite.html" style="text-decoration: none; color: black;">About this website</a></button>
-            <button class = "elem"><a href="Login/login.html" style="text-decoration: none; color: black;">log out</a></button>
+            <button class = "elem">About diabetes</button>
+            <button class = "elem">About this website</button>
+            <button class = "elem">log out</button>
         </div>
         
-    </header>
-    <nav>
-        <div class="sidenav">
-            <p>
-                <img src="page-logo.png" style="width: 80%; margin-left: 20px;">
-            </p>
-            <p class="active">
-              <a href="clinician_dashboard.html">Dashboard</a>
-            </p>
-            <p>
-              <a href="clinician_patientdata.html">Patient's Data</a>
-            </p>
-            <p>
-              <a href="clinician_patientcomment.html">Patient's Comments</a>
-            </p>
-            <p>
-              <a href="clinician_clinicalnotes.html">Clinical Notes</a>
-            </p>
-            <p>
-              <a href="clinician_message.html">Messages</a>
-            </p>
-          </div>
-        </nav>
-
-    <main>
-    <div class = "greeting">
+    </div>
+    <header>
         <h1>Hi Dr.Doe!</h1>
         <h2>Today: Tuesday, March 15</h2>
-    </div>
-    
+    </header>
+    <nav>
+      
+            <ul>
+                <li>Dashboard</li>
+                <li>Patient’s Data</li>
+                <li>Patient’s
+                    Comments</li>
+                <li>Clinical Notes</li>
+                <li>Messages</li>
+            </ul>
+       
+        
+    </nav>
         
 
-    <table class = "parent" frame="BOX">
+    <table frame="BOX">
         
-       
-            <tr class = "catagory" style = "font-size: 1.5em;">
-                <td style="height:15%; font-family:Roboto sans-serif">Patient name</td>
-                <td style="height:15%; font-family:Roboto sans-serif">Blood glucose level</td>
-                <td style="height:15%; font-family:Roboto sans-serif">Weight</td>
-                <td style="height:15%; font-family:Roboto sans-serif">Doses of insulin intake</td>
-                <td style="height:15%; font-family:Roboto sans-serif">Exercise Step Count</td>
-            </tr>
-       
-        <div class="data" style = "font-size: 1em;">    
+        <div class = "category">
             <tr>
-                <td>abc</td>
+                <td>Patient name</td>
+                <td>Blood glucose level</td>
+                <td>Weight</td>
+                <td>Doses of insulin intake</td>
+            </tr>
+        </div>
+        <div class="data">    
+            <tr>
                 <td>abc</td>
                 <td>abc</td>
                 <td>abc</td>
@@ -108,31 +60,8 @@
                 <td>123</td>
                 <td>123</td>
                 <td>123</td>
-                <td>123</td>
             </tr>
             <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
-            <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
                 <td>456</td>
                 <td>456</td>
                 <td>456</td>
@@ -142,6 +71,5 @@
         </div>
         
     </table>
-    </main>
     </body>
 </html>
