@@ -1,0 +1,138 @@
+body > * {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  /* page layout - desktop version */
+  display: grid;
+  grid-template-columns: 5fr 20fr 10fr;
+  grid-template-rows: auto auto;
+  grid-gap: 0;
+  margin: 0;
+
+  grid-template-areas:
+    "header header header"
+    "nav main aside"
+    "footer footer footer";
+}
+
+/* assign regions of the page to the grid */
+header {
+  grid-area: header;
+}
+aside {
+  grid-area: aside;
+}
+main {
+  grid-area: main;
+}
+nav {
+  grid-area: nav;
+}
+footer {
+  grid-area: footer;
+}
+
+@media screen and (max-width: 640px) {
+  /* page layout for phones */
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+header {
+  background-color: #e1f0db;
+  text-align: center;
+  width: 100%;
+}
+
+.sidenav {
+  background-color: #cfe6bd;
+  font-size: 15px;
+  display: block;
+  float: left;
+  height: 100%;
+}
+.sidenav a:hover {
+  background: white;
+}
+.sidenav a {
+  padding: 20px 20px 20px 20px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
+
+.links {
+  background-color: #e1f0db;
+  text-align: left;
+}
+.links h3 {
+  text-align: center;
+}
+.links a {
+  color: #818181;
+}
+
+footer {
+  background: #e1f0db;
+  text-align: center;
+}
+footer a {
+  padding: 22px 22px 22px 22px;
+  text-decoration: none;
+  text-align: center;
+  background: #e1f0db;
+  color: rgb(70, 70, 70);
+  line-height: 63px;
+}
+footer a:hover {
+  background: #8fbc88;
+}
+
+aside {
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+}
+.greeting {
+  font-size: 250%;
+  color: rgb(70, 70, 70);
+}
+.date {
+  font-size: 100%;
+  color: rgb(70, 70, 70);
+}
+
+main {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
+table {
+  width: 100%;
+  padding: 20px;
+  font-size: 2vh;
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
+  border-width: 5px;
+  border-spacing: 10px;
+  border-style: solid;
+  border-collapse: collapse;
+}
+tr {
+  padding: 10px;
+  border: solid #e1f0db;
+}
+td {
+  padding: 10px;
+  border: 1px solid #e1f0db;
+  text-align: center;
+}
