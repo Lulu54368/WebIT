@@ -1,13 +1,26 @@
-const express = require("express");
-const app = express();
-const port = 8080;
-app.use(express.json);
-app.get("/", (req, res)=>{
-    res.sendFile(__dirname + "/static/index.html");
-});
+const data = require("../models/patients.js");
+const getAllPatients = (req, res)=>{
+    res.send(data);
+    
+}
+const getOnePatient = (req, res)=>{
+    const patient = data.find((one)=> one.id == req.params.id);
+    if(patient){
+        res.send(patient);
+    }
+    else{
+        res.send("patient not found");
+    }
 
-const patientRouter = require("router/patient.js");
-app.use("/patient", patientRouter);
-app.listen(port, ()=> {
-    console.log("server is running... ");
-})
+}
+const addOnePatient = (req, res)=>{
+    const newPatient = req.body;
+    if(JSON.stringify(newPatient) != "{}"){
+        if(!data.find(d => d.id == newPatient.id)){
+            data.push(newPatient);
+        }
+    }
+    res.send(data);
+}
+const patientController = { getAllPatients, getOnePatient, addOnePatient}
+module.exports =patientController
