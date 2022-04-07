@@ -2,7 +2,7 @@
   <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="clinician_template.css" />
+        
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>clinician dashboard</title>
@@ -95,49 +95,17 @@
                 <td style="height:15%; font-family:Roboto sans-serif">Exercise Step Count</td>
             </tr>
        
-        <div class="data" style = "font-size: 1em;">    
+        <div class="data" style = "font-size: 1em;">  
+             {{#each patients}}
             <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
+                <td>{{name}}</td>
+                <td>{{blood_level}}</td>
+                <td>{{weight}}</td>
+                <td>{{insulin_intake}}</td>
+                <td>{{exercise}}</td>
             </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
-            <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
+            {{/each}}  
+           
        
         </div>
         
