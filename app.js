@@ -9,7 +9,7 @@ app.engine('hbs', exphbs.engine({
     extname: 'hbs',
     
 }))
-app.use(express.static('/public'));
+app.use(express.static('./public'));
 const clinicianRouter = require("./router/clinician.js");
 const patientRouter = require("./router/patient.js")
 app.use("/patient", patientRouter);
