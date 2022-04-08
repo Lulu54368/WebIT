@@ -2,7 +2,7 @@
   <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="clinician_template.css" />
+        <link rel="stylesheet" href="/clinician_template.css" />
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>clinician patient's data</title>
@@ -77,8 +77,9 @@
         </nav>
 
     <main>
+    {{#with patient}}
     <div class = "greeting">
-        <h1>For John Smith</h1>
+        <h1>For {{this.name}}</h1>
         <h2>Today: Tuesday, March 15</h2>
     </div>
     
@@ -86,8 +87,7 @@
 
     <table class = "parent" frame="BOX">
         
-       
-            <tr class = "catagory" style = "font-size: 1.5em;">
+             <tr class = "catagory" style = "font-size: 1.5em;">
                 <td style="width:18%; height:15%; font-family: Roboto;">Date</td>
                 <td style="height: 15%; font-family: Roboto">Blood glucose level</td>
                 <td style="height: 15%; font-family: Roboto">Weight</td>
@@ -95,53 +95,23 @@
                 <td style="height: 15%; font-family: Roboto;">Exercise Step Count</td>
             </tr>
        
+           
+       
         <div class="data" style = "font-size: 1em;">    
+         
             <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
+                <td>{{this.date}}</td>
+                <td>{{this.blood_level}}</td>
+                <td>{{this.weight}}</td>
+                <td>{{this.insulin_intake}}</td>
+                <td>{{this.exercise}}</td>
             </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
-            <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
+            
        
         </div>
         
     </table>
+    {{/with}}
     </main>
     </body>
 </html>

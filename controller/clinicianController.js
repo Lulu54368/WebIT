@@ -6,9 +6,9 @@ const getAllPatients = (req, res)=>{
     
 }
 const getOnePatient = (req, res)=>{
-    const patient = data.find((one)=> one.id == req.params.id);
+    const patient = patients_data.find((one)=> one.id == req.params.id);
     if(patient){
-        res.send(patient);
+        res.render("../views/layouts/clinician_patientdata.hbs",{patient: patient});
     }
     else{
         res.send("patient not found");

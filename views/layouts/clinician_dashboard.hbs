@@ -6,43 +6,7 @@
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>clinician dashboard</title>
-        <style>
-            body > * {  /* this is just shading to show the different regions */
-                font-family: "Roboto", sans-serif;
-            }
-    
-            body { /* page layout - desktop version */
-                display: grid;
-                grid-template-columns: 5fr 20fr 10fr;
-                grid-template-rows: auto auto;
-                grid-gap:0;
-                margin:0;
-    
-                grid-template-areas: 
-                    "header header header"
-                    "nav main aside"
-                    "footer footer footer";
-                }
-            
-            /* assign regions of the page to the grid */
-            header {grid-area: header;}
-            aside {grid-area: aside;}
-            main {grid-area: main;}
-            nav {grid-area: nav;}
-            footer{grid-area: footer;}
-    
-            @media screen and (max-width: 640px) {  /* page layout for phones */
-                body {
-                    display: flex;
-                    flex-direction: column;
-                }
-                nav
-                {
-                    display: none;
-                    flex-direction: column;
-                }
-            }
-        </style> 
+        
     </head>
     <body>
     <header>
