@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="about.css" />
+
+    <title>Template</title>
+
+    <style>
+      body > * {
+        /* this is just shading to show the different regions */
+        font-family: "Roboto", sans-serif;
+      }
+
+      body {
+        /* page layout - desktop version */
+
+        display: grid;
+        grid-template-columns: 5fr 20fr 10fr;
+        grid-template-rows: auto auto;
+        grid-gap: 0;
+        margin: 0;
+
+        grid-template-areas:
+          "header header header"
+          "nav main aside"
+          "footer footer footer";
+      }
+
+      /* assign regions of the page to the grid */
+      header {
+        grid-area: header;
+      }
+      aside {
+        grid-area: aside;
+      }
+      main {
+        grid-area: main;
+      }
+      nav {
+        grid-area: nav;
+      }
+      footer {
+        grid-area: footer;
+      }
+
+      @media screen and (max-width: 640px) {
+        /* page layout for phones */
+        body {
+          display: flex;
+          flex-direction: column;
+        }
+        nav {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- content of webpage begins here -->
+  <body>
+    <header>
+      <h2>Leaderboard</h2>
+    </header>
+
+    <aside>
+      <div class = "greeting">
+        <h1> Hi John!</h1>
+      </div>
+      <div class = "date">
+        <h4> Today: Tuseday, March 15</h4>
+      </div>
+
+    </aside>
+
+    <main>
+
+      <section>
+        <div class = "sectionborder">
+
+          <table class = "parent" style="width:100%">
+
+            <tr class = "categories" style = "font-size: 1em;">
+              <td style="width:15%; height:15%; font-family: Roboto">Rank</td>
+              <td style="height:15%; font-family: Roboto">Photo</td>
+              <td style="height:15%; font-family: Roboto">Screen Name</td>
+              <td style="height:15%; font-family: Roboto">Engagement Rate</td>
+          </tr>
+
+            <tr>
+              <td>1</td>
+              <td><img src = "page-logo.png" style = "width: 80%; margin-left: 20px;"></img></td>
+              <td>Johnny</button></td>
+              <td>100%</td>
+            </tr>
+
+            <tr>
+              <td>2</td>
+              <td><img src = "page-logo.png" style = "width: 80%; margin-left: 20px;"></img></td>
+              <td>Janethebest</button></td>
+              <td>100%</td>
+            </tr>
+
+            <tr>
+              <td>3</td>
+              <td><img src = "page-logo.png" style = "width: 80%; margin-left: 20px;"></td>
+              <td>John</button></td>
+              <td>67%</td>
+            </tr>
+
+            <tr>
+              <td>4</td>
+              <td><img src = "page-logo.png" style = "width: 80%; margin-left: 20px;"></td>
+              <td>Mary</button></td>
+              <td>50%</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+      <br><br>
+      
+
+      <section>
+        <div class = sectionborder>
+          <h3>Today's badge</h3>
+          <table style="width:100%">
+
+            <tr>
+              <td>
+                <input type="checkbox" id="bgl" name="bgl" value="bgl">
+                <label for="bgl">Blood glucose level</label>
+              </td>
+              <td>
+                <input type="checkbox" id="weight" name="weight" value="weight">
+                <label for="weight">Weight</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <input type="checkbox" id="insulin" name="insulin" value="insulin">
+                <label for="insulin">Insulin</label>
+              </td>
+              <td>
+                <input type="checkbox" id="exercise" name="exercise" value="exercise">
+                <label for="exercise">Excercise</label>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+      <br><br>
+    </main>
+
+    
+    <nav>
+      <div class="sidenav">
+        <p>
+          <a href="#Homepage">Homepage</a>
+        </p>
+        <p>
+          <a href="#History data">History data</a>
+        </p>
+        <p>
+          <a href="#Leader board">Leader board</a>
+        </p>
+      </div>
+    </nav>
+      </div>
+    </nav>
+
+    <footer>
+        <a href="#">About this website</a>
+        <a href="#">About diabetes</a>
+        <a href="#">Log out</a>
+
+    </footer>
+  </body>
+</html>
