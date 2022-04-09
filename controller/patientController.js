@@ -67,10 +67,10 @@ const addTodayData = (req, res)=>{
             patient.data.push(data);
         }
        
-        data.blood_level.data = newData.blood_level;
-        data.insulin_intake.data = newData.insulin_intake;
-        data.exercise.data = newData.exercise;
-        
+        data.blood_level = newData.blood_level;
+        data.insulin_intake = newData.insulin_intake;
+        data.exercise = newData.exercise;
+        data.weight = newData.weight;
         res.send(data);
     }
     //redirect here
