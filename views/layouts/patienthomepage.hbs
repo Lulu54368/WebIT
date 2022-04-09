@@ -3,59 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="about.css" />
+    <link rel="stylesheet" href="/about.css" />
 
     <title>Template</title>
 
     <style>
-      body > * {
-        /* this is just shading to show the different regions */
-        font-family: "Roboto", sans-serif;
-      }
-
-      body {
-        /* page layout - desktop version */
-
-        display: grid;
-        grid-template-columns: 5fr 20fr 10fr;
-        grid-template-rows: auto auto;
-        grid-gap: 0;
-        margin: 0;
-
-        grid-template-areas:
-          "header header header"
-          "nav main aside"
-          "footer footer footer";
-      }
-
-      /* assign regions of the page to the grid */
-      header {
-        grid-area: header;
-      }
-      aside {
-        grid-area: aside;
-      }
-      main {
-        grid-area: main;
-      }
-      nav {
-        grid-area: nav;
-      }
-      footer {
-        grid-area: footer;
-      }
-
-      @media screen and (max-width: 640px) {
-        /* page layout for phones */
-        body {
-          display: flex;
-          flex-direction: column;
-        }
-        nav {
-          display: flex;
-          flex-direction: column;
-        }
-      }
+      
     </style>
   </head>
 
@@ -67,10 +20,10 @@
 
     <aside>
       <div class = "greeting">
-        <h1> Hi John!</h1>
+        <h1> Hi {{name}}!</h1>
       </div>
       <div class = "date">
-        <h4> Today: Tuseday, March 15</h4>
+        <h4> Today:{{today_date}}</h4>
       </div>
 
     </aside>
@@ -90,30 +43,35 @@
           <h3>Record today's data</h3>
 
           <table style="width:100%">
-
+            {{#with data}}
             <tr>
               <td>Blood glucose level(mmol/L)</td>
+              <td>{{this.blood_level.data}}</td>
               <td><button class = "button ">Enter</button></td>
               <td><button class = "button ">Comment</button></td>
             </tr>
 
             <tr>
               <td>Your weight(kg)</td>
+              <td>{{this.weight.data}}</td>
               <td><button class = "button ">Enter</button></td>
               <td><button class = "button ">Comment</button></td>
             </tr>
 
             <tr>
               <td>Doses of insulin taken(doses)</td>
+              <td>{{this.insulin_intake.data}}</td>
               <td><button class = "button ">Enter</button></td>
               <td><button class = "button ">Comment</button></td>
             </tr>
 
             <tr>
               <td>Exercise(step count)</td>
+              <td>{{this.exercise.data}}</td>
               <td><button class = "button ">Enter</button></td>
               <td><button class = "button ">Comment</button></td>
             </tr>
+            {{/with}}
           </table>
         </div>
       </section>

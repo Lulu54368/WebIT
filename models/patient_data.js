@@ -42,6 +42,25 @@ const patients_data = [
                     "data": 999,
                     "comment": "this is exercise"
                 }
+            },
+            {
+                "date": "09/04/2022",
+                "blood_level": {
+                    "data": 9,
+                    "comment": "this is blood_level"
+                },
+                "weight":{
+                    "data": 60,
+                    "comment": "this is weight"
+                },
+                "insulin_intake": {
+                    "data": 3,
+                    "comment": "this is insulin intake"
+                },
+                "exercise":{
+                    "data": 999,
+                    "comment": "this is exercise"
+                }
             }
         ]
         
