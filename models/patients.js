@@ -2,6 +2,7 @@ const Patients = [
     {
         "id": 1,
         "name": "John Smith",
+        
         "date": "1/1/2022",
         "blood_level": "11",
         "weight": "65",
