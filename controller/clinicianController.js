@@ -1,14 +1,15 @@
-const patients_data = require("../models/patients.js");
-
+const patients_medical_data = require("../models/utils/patient_medical_data");
+const patients_data = require("../models/patient_data");
 const getAllPatients = (req, res)=>{
     //res.render("../HistoryData/historyData.hbs");
-    res.render("../views/layouts/clinician_dashboard.hbs",{patients: patients_data});
+    res.render("../views/layouts/clinician_dashboard.hbs",{patients: patients_medical_data});
     
 }
 const getOnePatient = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id);
     if(patient){
-        res.render("../views/layouts/clinician_patientdata.hbs",{patient: patient});
+        res.render("../views/layouts/clinician_patientdata.hbs",{name: patient.name, 
+            patient_data: patient.data});
     }
     else{
         res.send("patient not found");

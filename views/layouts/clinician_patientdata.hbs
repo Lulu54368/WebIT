@@ -77,7 +77,7 @@
         </nav>
 
     <main>
-    {{#with patient}}
+    
     <div class = "greeting">
         <h1>For {{this.name}}</h1>
         <h2>Today: Tuesday, March 15</h2>
@@ -98,20 +98,20 @@
            
        
         <div class="data" style = "font-size: 1em;">    
-         
+            {{#each patient_data}}
             <tr>
                 <td>{{this.date}}</td>
-                <td>{{this.blood_level}}</td>
-                <td>{{this.weight}}</td>
-                <td>{{this.insulin_intake}}</td>
-                <td>{{this.exercise}}</td>
+                <td>{{this.blood_level.data}}</td>
+                <td>{{this.weight.data}}</td>
+                <td>{{this.insulin_intake.data}}</td>
+                <td>{{this.exercise.data}}</td>
             </tr>
-            
+            {{/each}}
        
         </div>
         
     </table>
-    {{/with}}
+    
     </main>
     </body>
 </html>
