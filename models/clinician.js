@@ -1,7 +1,8 @@
 const clinician_data = [
     {
         "id": 1,
-        "name": "Xiao ming",
+        "firstname": "Xiao ming",
+        "lastname": "Zhang",
         "patients": [1,2] //patients' id
     }
 ]

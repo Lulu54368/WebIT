@@ -11,7 +11,8 @@ const getAllPatients = (req, res)=>{
     patient_id_list.includes(patient.id)
     )
     
-    res.render("../views/layouts/clinician_dashboard.hbs",{patients: patients_medical_data});
+    res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
+        patients: patients_medical_data});
     
 }
 const getOnePatient = (req, res)=>{
