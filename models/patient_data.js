@@ -50,15 +50,15 @@ const patients_data = [
                     "comment": "this is blood_level"
                 },
                 "weight":{
-                    "data": 60,
+                    "data": 67,
                     "comment": "this is weight"
                 },
                 "insulin_intake": {
-                    "data": 3,
+                    "data": 5,
                     "comment": "this is insulin intake"
                 },
                 "exercise":{
-                    "data": 999,
+                    "data": 456,
                     "comment": "this is exercise"
                 }
             }

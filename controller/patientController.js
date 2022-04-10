@@ -39,7 +39,7 @@ const getCurrData = (req, res)=>{
 const addTodayData = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id)
     const newData = req.body;
-    console.log(JSON.stringify(newData));
+
     if(JSON.stringify(newData) != "{}"){
         console.log(patient);
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
@@ -71,7 +71,9 @@ const addTodayData = (req, res)=>{
         data.insulin_intake = newData.insulin_intake;
         data.exercise = newData.exercise;
         data.weight = newData.weight;
-        res.send(data);
+        patient.data.pop();
+        patient.data.push(data)
+        res.send(patient.data);
     }
     //redirect here
   
