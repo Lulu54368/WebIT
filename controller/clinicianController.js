@@ -1,6 +1,7 @@
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
-const clinician_data = require("../models/clinician.js")
+const clinician_data = require("../models/clinician.js");
+const patient_medical_data = require("../models/utils/patient_medical_data");
 const getAllPatients = (req, res)=>{
     
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
@@ -33,13 +34,24 @@ const getOnePatient = (req, res)=>{
 
 }
 const addOnePatient = (req, res)=>{
+    
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
     const newPatient = req.body;
-    if(JSON.stringify(newPatient) != "{}"){
-        if(!data.find(d => d.id == newPatient.id)){
-            data.push(newPatient);
+    if(clinician){
+        const patient_id_list = clinician.patients;
+        const data = patients_medical_list.filter((patient)=>
+        patient_id_list.includes(patient.id)
+        )
+        if(JSON.stringify(newPatient) != "{}"){
+            if(!data.find(d => d.id == newPatient.id)){
+                data.push(newPatient);
+            }
         }
+    
+        res.send(data);
     }
-    res.send(data);
+   
+    
 }
 const clinicianController = { getAllPatients, getOnePatient, addOnePatient}
 module.exports =clinicianController
