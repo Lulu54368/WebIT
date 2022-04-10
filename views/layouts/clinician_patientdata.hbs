@@ -85,32 +85,7 @@
     
         
 
-    <table class = "parent" frame="BOX">
-        
-             <tr class = "catagory" style = "font-size: 1.5em;">
-                <td style="width:18%; height:15%; font-family: Roboto;">Date</td>
-                <td style="height: 15%; font-family: Roboto">Blood glucose level</td>
-                <td style="height: 15%; font-family: Roboto">Weight</td>
-                <td style="height: 15%; font-family: Roboto;">Doses of insulin intake</td>
-                <td style="height: 15%; font-family: Roboto;">Exercise Step Count</td>
-            </tr>
-       
-           
-       
-        <div class="data" style = "font-size: 1em;">    
-            {{#each patient_data}}
-            <tr>
-                <td>{{this.date}}</td>
-                <td>{{this.blood_level.data}}</td>
-                <td>{{this.weight.data}}</td>
-                <td>{{this.insulin_intake.data}}</td>
-                <td>{{this.exercise.data}}</td>
-            </tr>
-            {{/each}}
-       
-        </div>
-        
-    </table>
+    {{>patient}}
     
     </main>
     </body>

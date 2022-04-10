@@ -4,15 +4,19 @@ const clinician_data = require("../models/clinician.js")
 const getAllPatients = (req, res)=>{
     
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
-
-    const patient_id_list = clinician.patients;
+    if(clinician){
+        const patient_id_list = clinician.patients;
+        const patients_medical_data = patients_medical_list.filter((patient)=>
+        patient_id_list.includes(patient.id)
+        )
     
-    const patients_medical_data = patients_medical_list.filter((patient)=>
-    patient_id_list.includes(patient.id)
-    )
-    
-    res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
+        res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
         patients: patients_medical_data});
+    }
+    else{
+        res.send("can not find the clinician");
+    }
+    
     
 }
 const getOnePatient = (req, res)=>{
