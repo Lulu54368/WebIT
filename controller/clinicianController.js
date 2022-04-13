@@ -2,7 +2,7 @@ const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
 const clinician_data = require("../models/clinician.js");
 
-const patient_input = require("../models/patient_input");
+const patients_input = require("../models/patient_input");
 const getAllPatients = (req, res)=>{
     
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
@@ -55,7 +55,17 @@ const getOnePatient = (req, res)=>{
     
 }*/
 const changeInput = (req, res)=>{
-    
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const patient_id_list = clinician.patients;
+    const patient = patient_id_list.find((one)=> one.id == req.params.patient_id);
+    const patient_input = patients_input.find((one)=> one.id == req.params.patient_id);
+    if(patient && patient_input){
+        patient_input.input = req.body.input;
+        res.send(patient_input);
+    }
+    else{
+        res.send("can not find the patient");
+    }
 }
 const clinicianController = { getAllPatients, getOnePatient, addOnePatient, changeInput}
 module.exports =clinicianController
