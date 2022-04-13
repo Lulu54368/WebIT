@@ -9,3 +9,4 @@ const patient_input = [
     }
     
 ]
+module.exports = patient_input;

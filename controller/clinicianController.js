@@ -55,9 +55,12 @@ const getOnePatient = (req, res)=>{
     
 }*/
 const changeInput = (req, res)=>{
+    // find the patient of the clinician and check whether it's exist 
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
     const patient_id_list = clinician.patients;
-    const patient = patient_id_list.find((one)=> one.id == req.params.patient_id);
+   
+    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
+    // get the data the patient is required to enter
     const patient_input = patients_input.find((one)=> one.id == req.params.patient_id);
     if(patient && patient_input){
         patient_input.input = req.body.input;
@@ -67,5 +70,5 @@ const changeInput = (req, res)=>{
         res.send("can not find the patient");
     }
 }
-const clinicianController = { getAllPatients, getOnePatient, addOnePatient, changeInput}
+const clinicianController = { getAllPatients, getOnePatient, changeInput}
 module.exports =clinicianController

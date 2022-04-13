@@ -1,4 +1,5 @@
 const patients_data = require("../models/patient_data");
+const patient_input = require("../models/patient_input");
 const getCurrData = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id);
     const today = new Date().toLocaleDateString();
@@ -26,12 +27,12 @@ const getCurrData = (req, res)=>{
             }
         }
         patient.data.push(today_data);
-        console.log(patient.data);
-        console.log("hello");
+      
+      
 
     }
    
-    console.log(today_data);
+   
     res.render("../views/layouts/patienthomepage.hbs", 
     {name: patient.name,
     message: patient.message, data: today_data, today_date: today});
@@ -66,11 +67,10 @@ const addTodayData = (req, res)=>{
             
             patient.data.push(data);
         }
-       
-        data.blood_level = newData.blood_level;
-        data.insulin_intake = newData.insulin_intake;
-        data.exercise = newData.exercise;
-        data.weight = newData.weight;
+        const attributes = patient_input.find((one)=>one.id == req.params.id);
+        attributes.input.forEach(attr => {
+            data[attr] = req.body[attr];
+        });
         patient.data.pop();
         patient.data.push(data)
         res.send(patient.data);
