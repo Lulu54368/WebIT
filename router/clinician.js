@@ -10,7 +10,7 @@ clinicianRouter.get("/:id", clinicianController.getAllPatients);
 clinicianRouter.post("/:id/:patient_id", clinicianController.changeInput);
 
 /*
-Phillips
+//Phillips
 //get all of patient's comment (id is clinincian id)
 clinicianRouter.get("/:id/comments", clinicianController.getAllComment);
 //get all of threshold 
