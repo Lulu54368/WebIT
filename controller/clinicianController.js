@@ -3,6 +3,7 @@ const patients_data = require("../models/patient_data");
 const clinician_data = require("../models/clinician.js");
 
 const patients_input = require("../models/patient_input");
+//This function get medical data for all patients
 const getAllPatients = (req, res)=>{
     
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
@@ -21,6 +22,7 @@ const getAllPatients = (req, res)=>{
     
     
 }
+//This function get the medical data for a specified patient
 const getOnePatient = (req, res)=>{
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
     const patient_id_list = clinician.patients;
@@ -54,6 +56,7 @@ const getOnePatient = (req, res)=>{
    
     
 }*/
+//This function change the attributes the patient need to enter
 const changeInput = (req, res)=>{
     // find the patient of the clinician and check whether it's exist 
     const clinician = clinician_data.find((one)=>one.id == req.params.id);

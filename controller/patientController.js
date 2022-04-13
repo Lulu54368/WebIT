@@ -1,5 +1,6 @@
 const patients_data = require("../models/patient_data");
 const patient_input = require("../models/patient_input");
+//This function get the most recent data for a specified patient
 const getCurrData = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id);
     const today = new Date().toLocaleDateString();
@@ -37,6 +38,7 @@ const getCurrData = (req, res)=>{
     {name: patient.name,
     message: patient.message, data: today_data, today_date: today});
 }
+//This function add the newest data
 const addTodayData = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id)
     const newData = req.body;

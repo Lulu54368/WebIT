@@ -1,3 +1,4 @@
+//This threshold for patient
 const patients_threshold =[ {
     "id": 1,
     "threshold":{

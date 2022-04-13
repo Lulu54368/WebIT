@@ -1,3 +1,4 @@
+//This is data for clinician(personal information and patient's id)
 const clinician_data = [
     {
         "id": 1,

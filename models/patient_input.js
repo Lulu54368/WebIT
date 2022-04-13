@@ -1,3 +1,4 @@
+//This is attributes patients need to enter
 const patient_input = [
     {
         "id": 1,

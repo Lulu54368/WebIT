@@ -1,3 +1,4 @@
+//This is medical data for patients
 const patients_data = [
     {
         "id": 1,
