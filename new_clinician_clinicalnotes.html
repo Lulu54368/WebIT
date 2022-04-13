@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/about.css" />
+        <META http-equiv="Content-Style-Type" content="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>clinician clinical notes</title>
+    </head>
+    <body>
+    <header class = "clinician_header">
+        <div class = "menu">
+            <button class = "elem">About diabetes</button>
+            <button class = "elem">About this website</button>
+            <button class = "elem">log out</button>
+        </div>
+        
+    </header>
+    <nav>
+        <div class="cli_sidenav">
+            <p>
+            <img class = "image" src = "page-logo.png">
+            </p>
+            <p>
+              <a href="#Dashboard">Dashboard</a>
+            </p>
+            <p>
+              <a href="#Patient's Data">Patient's Data</a>
+            </p>
+            <p>
+              <a href="#Patient's Comments">Patient's Comments</a>
+            </p>
+            <p class="cli_active">
+              <a href="#Clinical Notes">Clinical Notes</a>
+            </p>
+            <p>
+              <a href="#Messages">Messages</a>
+            </p>
+          </div>
+        </nav>
+
+    <main>
+    <div class = "cli_greeting">
+        <h1>Hi Dr.Doe!</h1>
+        <h2>Today: Tuesday, March 15</h2>
+    </div>
+    
+        
+    <div class="cli_table">
+    <table>
+        <tr class = "notes">
+            <th>Patient Name</th>
+            <th>Blood glucose level<br>(nmol/L)</th>
+            <th>Weight<br>(kg)</th>
+            <th>Doses of insulin intake<br>(doses)</th>
+            <th>Exercise Step Count<br>(steps)</th>
+        </tr>
+
+        <div class="data">    
+            <tr>
+                <td>
+                    John
+
+                </td>
+                <td>
+                    <input type="checkbox" id="record_bgl" name="record_bgl" value="record_bgl">
+                    <label for="record_bgl">recordance needed</label><br><br>
+
+                    <form>
+                        <label for="ut_bgl">upper threshold:</label><br>
+                        <input type="text" id="ut_bgl" name="ut_bgl" value=""><br>
+                        <label for="lt_bgl">lower threshold:</label><br>
+                        <input type="text" id="lt_bgl" name="lt_bgl" value="">
+                      </form>
+                </td>
+                <td>
+                    <input type="checkbox" id="record_weight" name="record_weight" value="">
+                    <label for="record_weight">recordance needed</label><br><br>
+
+                    <form>
+                        <label for="ut_weight">upper threshold:</label><br>
+                        <input type="text" id="ut_weight" name="ut_weight" value=""><br>
+                        <label for="lt_weight">lower threshold:</label><br>
+                        <input type="text" id="lt_weight" name="lt_weight" value="">
+                      </form>
+                </td>
+                <td>
+
+                    <input type="checkbox" id="record_insulin" name="record_insulin" value="">
+                    <label for="record_insulin">recordance needed</label><br><br>
+
+                    <form>
+                        <label for="ut_insulin">upper threshold:</label><br>
+                        <input type="text" id="ut_insulin" name="ut_insulin" value=""><br>
+                        <label for="lt_insulin">lower threshold:</label><br>
+                        <input type="text" id="lt_insulin" name="lt_insulin" value="">
+                      </form>
+                </td>
+                <td>
+
+                    <input type="checkbox" id="record_step" name="record_step" value="">
+                    <label for="record_step">recordance needed</label><br><br>
+
+                    <form>
+                        <label for="ut_step">upper threshold:</label><br>
+                        <input type="text" id="ut_step" name="ut_step" value=""><br>
+                        <label for="lt_step">lower threshold:</label><br>
+                        <input type="text" id="lt_step" name="lt_step" value="">
+                      </form>
+                </td>
+            </tr>
+            <td>John</td>
+            <td>
+                <input type="checkbox" id="record_bgl" name="record_bgl" value="record_bgl" onclick="myFunction()">
+                <label for="record_bgl">recordance needed</label><br><br>
+
+                <form>
+                    <label for="ut_bgl">upper threshold:</label><br>
+                    <input type="text" id="ut_bgl" name="ut_bgl" value=""><br>
+                    <label for="lt_bgl">lower threshold:</label><br>
+                    <input type="text" id="lt_bgl" name="lt_bgl" value="">
+                  </form>
+            </td>
+            <td>
+                <input type="checkbox" id="record_weight" name="record_weight" value="">
+                <label for="record_weight">recordance needed</label><br><br>
+
+                <form>
+                    <label for="ut_weight">upper threshold:</label><br>
+                    <input type="text" id="ut_weight" name="ut_weight" value=""><br>
+                    <label for="lt_weight">lower threshold:</label><br>
+                    <input type="text" id="lt_weight" name="lt_weight" value="">
+                  </form>
+            </td>
+            <td>
+
+                <input type="checkbox" id="record_insulin" name="record_insulin" value="">
+                <label for="record_insulin">recordance needed</label><br><br>
+
+                <form>
+                    <label for="ut_insulin">upper threshold:</label><br>
+                    <input type="text" id="ut_insulin" name="ut_insulin" value=""><br>
+                    <label for="lt_insulin">lower threshold:</label><br>
+                    <input type="text" id="lt_insulin" name="lt_insulin" value="">
+                  </form>
+            </td>
+            <td>
+
+                <input type="checkbox" id="record_step" name="record_step" value="">
+                <label for="record_step">recordance needed</label><br><br>
+
+                <form>
+                    <label for="ut_step">upper threshold:</label><br>
+                    <input type="text" id="ut_step" name="ut_step" value=""><br>
+                    <label for="lt_step">lower threshold:</label><br>
+                    <input type="text" id="lt_step" name="lt_step" value="">
+                  </form>
+            </td>
+        </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
+            <tr>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
+       
+        </div>
+        
+    </table>
+    </div>
+    </main>
+    </body>
+    <footer>
+        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+      </footer>
+</html>

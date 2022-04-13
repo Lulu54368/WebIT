@@ -1,0 +1,25 @@
+
+    <div class="cli_table" >
+        <table class = "parent" frame="BOX">
+            <tr class = "catagory">
+                <th>Date<br>(DD/MM/YYYY)</th>
+                <th>Blood glucose level<br>(nmol/L)</th>
+                <th>Weight<br>(kg)</th>
+                <th>Doses of insulin intake<br>(doses)</th>
+                <th>Exercise Step Count<br>(steps)</th>
+            </tr>
+            {{#each patient_data}}
+            <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.blood_level.data}}</td>
+            <td>{{this.weight.data}}</td>
+            <td>{{this.insulin_intake.data}}</td>
+            <td>{{this.exercise.data}}</td>
+            </tr>
+            {{/each}}  
+       
+        
+        </table>
+    </div> 
+        
+           

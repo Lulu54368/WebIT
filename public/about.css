@@ -1,79 +1,145 @@
-body > * {
-    /* this is just shading to show the different regions */
+
+* {
     font-family: "Roboto", sans-serif;
   }
-
-body {
-    /* page layout - desktop version */
-
-    display: grid;
-    grid-template-columns: 5fr 20fr 10fr;
-    grid-template-rows: auto auto;
-    grid-gap: 0;
-    margin: 0;
-
-    grid-template-areas:
-      "header header header"
-      "nav main aside"
-      "footer footer footer";
-}
-
-  /* assign regions of the page to the grid */
-  header {
+  
+header{
     grid-area: header;
-  }
-  aside {
-    grid-area: aside;
-  }
-  main {
-    grid-area: main;
-  }
-  nav {
-    grid-area: nav;
-  }
-  footer {
-    grid-area: footer;
-  }
-
-  @media screen and (max-width: 640px) {
-    /* page layout for phones */
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    nav {
-      display: flex;
-      flex-direction: column;
-    }
-  }
- header{
     background-color:  #E1F0DB;
     text-align: center;
     width: 100%;
+    height: 48px
+}
+header a {
+  text-decoration: none;
+}
+
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#8fbc88;
+  width: 100%;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: inline-block;
+  color:white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+ul.topnav li a:hover {background-color: rgba(229, 229, 229, 0.5);}
+
+ul.topnav li.icon {display: none;}
+
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
+body {
+  /* page layout - desktop version */
+
+  display: grid;
+  grid-template-columns: 5fr 25fr 10fr;
+  grid-template-rows: auto auto;
+  grid-gap: 0;
+  margin: 0;
+  grid-template-areas:
+    "header header header"
+    "nav main aside"
+    "footer footer footer";
+}
+
+  
+  .topnav {
+    background-color: #333;
+    position: absolute;
+  }
+  
+
+/* assign regions of the page to the grid */
+  
+
+@media screen and (max-width: 640px) {
+  /* page layout for phones */
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    display: none;
+    flex-direction: column;
+  }
+  .mobile-container {
+    display: flex;
+    margin: auto;
+  }
 }
 
 .article {
     color:rgb(70, 70, 70);
     text-align: justify;
 }
+
+nav {
+    grid-area: nav;
+  }
+  
 .sidenav {
     background-color: #CFE6BD;
-    font-size: 15px;
-    display: block;
     float:left;
     height: 100%;
 }
-.sidenav a:hover {
-    background: white;
-  }
-.sidenav a {
-    padding: 20px 20px 20px 20px;
-    font-size: 20px;
-    text-decoration: none;
-    color: #818181;
-    display: block;
-  }
-  
+
+.about_sidenav {
+  background-color: #CFE6BD;
+  font-size: 15px;
+  display: block;
+  float:left;
+  height: 100%;
+}
+.about_sidenav  a:hover {
+  background: white;
+}
+.about_sidenav  a {
+  padding: 20px 20px 20px 20px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
+
+.sidenav .image {
+  height: 200px;
+  margin: 10px
+}
 .links {
     background-color: #E1F0DB;
     text-align: left;
@@ -86,25 +152,25 @@ body {
 }
 
 footer {
+  color:#818181;
+    grid-area: footer;
     background: #E1F0DB;
     text-align: center;
 }
 
 footer a{
-    padding: 22px 22px 22px 22px;
     text-decoration: none;
     text-align: center;
     background: #E1F0DB;
     color:rgb(70, 70, 70);
-    line-height:63px;
 }
 footer a:hover {
     background: #8fbc88;
   }
 
 aside {
-    margin-left: 5%;
-    margin-right: 5%;
+    grid-area: aside;
+    width:100%
 }
 .greeting {
     
@@ -118,9 +184,11 @@ aside {
 }
 
 main {
+    grid-area: main;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 5%
+    margin-top: 5%;
+    overflow:scroll;
 }
 
 
@@ -128,8 +196,13 @@ main {
     color:rgb(70, 70, 70);
     border-color: #E1F0DB; 
     border-width: 5px;
-    border-spacing: 10px;
+    border-spacing: 20px;
     border-style: solid;  
+    width: 98%;
+    overflow:auto;
+}
+.sectionborder tr td {
+  text-align: left;
 }
 .view {
     text-align: center;
@@ -149,11 +222,386 @@ main {
     background-color: rgba(229, 229, 229, 0.5);
     border-radius: 25px;
   }
+
 .viewbutton {
     position: relative;
     left: 45%;
 }
 
-table, th, td {
+.sectionborder table, th, td {
     padding: 10px;
 }
+
+.leaderboard_sectionborder {
+  overflow: auto;
+  color:rgb(70, 70, 70);
+  border-color: #E1F0DB; 
+  border-width: 5px;
+  border-spacing: 10px;
+  border-style: solid;  
+}
+
+.historyData table {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
+  border-width: 5px;
+  border-spacing: 5px;
+  border-style: solid;
+  border-collapse: collapse;
+}
+.historyData tr {
+  padding: 10px;
+  border: solid #e1f0db;
+}
+.historyData td {
+  padding: 10px;
+  border: 1px solid #e1f0db;
+  text-align: center;
+}
+.historyData .title {
+  font-size: 11.5px;
+  font-weight: bold;
+}
+
+/*BLOW ARE LOGIN PAGE CSS*/
+.loginbody {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0px;
+  background-color: #CFE6BD;
+
+}
+.form-wrapper {
+  
+  position: absolute;
+  width: 30%;
+  height: 80vh;
+  right: 10vh;
+  top: 6rem;
+  background: #E1F0DB;
+  border-radius: 53px;
+  }
+
+
+
+.form-wrapper .header {
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+  line-height: 300%;
+}
+
+.form-wrapper .input-wrapper input {
+  /* Enter your username */
+  font-weight: 500;
+  /*top: 40%;*/
+  background-color: white;
+  border: 0;
+  text-align: center;
+  font-size: 15px;
+  color: #00000080;
+  outline: none;
+  
+}
+
+.form-wrapper .input-wrapper .border-wrapper {
+  align-items: flex-start;
+  background: white;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 8%;
+  border-radius: 30px;
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+}
+
+.form-wrapper .input-wrapper .border-wrapper .border-item {
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+  border-radius: 30px;
+}
+.form-wrapper .action {
+  display: flex;
+  justify-content: center;
+}
+.form-wrapper .action .btn {  
+  width: 50%;
+  border: 2px solid #8FBC88;
+  background: #8FBC88;
+  line-height: 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .2s;
+  text-align: center;
+  color: #00000080;
+
+}
+.form-wrapper .action .btn a {
+  color:black;
+  text-decoration: none; 
+  font-size: medium
+}
+
+.form-wrapper .action .btn:hover{
+  background-color:#92c7a8;
+}
+
+
+.About {
+  display: flex;
+  /*justify-content: space-between;*/
+  margin-inline: 5%;
+  position: absolute;
+  top: 39rem;
+  /*width: 40%;*/
+}
+
+.About .website_text{ 
+  width: 20vw;
+  height: 25%;
+  border: 2px solid #8FBC88;
+  background: #8FBC88;
+  line-height: 3.125rem;
+  border-radius: 1.875rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+}
+.About .website_text a {
+  text-decoration: none; 
+  font-size: medium;
+  background-color:#92c7a8;
+}
+
+.About .diabetes_text{
+  width: 18vw;
+  height: 25%;
+  margin-left: 10rem;
+  border: 2px solid #8FBC88;;
+  background: #8FBC88;
+  line-height: 3.125rem;
+  border-radius: 1.875rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+}
+.About .diabetes_text a {
+  text-decoration: none; 
+  font-size: medium;
+  background-color:#92c7a8;
+}
+
+.logo .CompanyName {
+  
+  position: absolute;
+  width: 40%;
+  height: auto;
+  left: 9%;
+  top: 18rem;
+  font-style: normal;
+  font-weight: bold;;
+  font-size: 4em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+}
+.logo .Message {
+  position: absolute;
+  width: 60%;
+  left: 9%;
+  top: 30rem;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.5em;
+  color: rgba(0, 0, 0, 0.46);
+}
+@media screen and (max-width: 640px) {  /* page layout for phones */
+  .logo .HouseIcon{
+    display: none;
+  }
+  .form-wrapper .header {
+    color:#333;
+    font-weight: bold;
+    display: flex;
+    position: relative;
+    left:35px
+  }
+  .form-wrapper .border-wrapper .border-item{
+    font-size: small;
+  }
+
+  .logo .Message {
+    display: None;
+  }
+
+  .logo .CompanyName {  
+    font-weight: bold;
+    font-size: 22px;
+    top: 3rem ;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left:5px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .form-wrapper {
+    background-color:#CFE6BD;
+    width: 60%;
+    left: 20%;
+    height: 500px;
+    
+  }
+  .input-wrapper .border-wrapper{ /*enterpassword*/
+    position: relative;
+    top: 10em;
+    font-size: 7px;
+  }
+  .form-wrapper .action .btn { /*login*/
+    position: relative;
+    font-size:x-small;
+    top:7em;
+    width:100%;
+  }
+  .About .website_text{
+    font-size:small;
+    width: 100px;
+    height:100px
+  }
+  .About .diabetes_text{
+    position: relative;
+    right: 20px;
+    font-size:small;
+    width: 100px;
+    height:100px;
+  }
+}
+.sectionborder .categories .td {
+  text-align: center;
+}
+
+/*BLOW ARE CSS FOR CLINICIAN*/
+
+.clinician_header{
+  height:50px;
+  background-color:  #E1F0DB;
+  text-align: center;
+  width: 100%;
+}
+
+.cli_sidenav{
+  background-color: #CFE6BD;
+  display: block;
+  float:left;
+  height: 1000px; /*Mannually drag background color to the bottom*/
+}
+.cli_sidenav img {
+  width: 80%; 
+  margin-left: 20px;
+}
+
+.cli_sidenav a:hover {
+  background: white;
+}
+.cli_sidenav a {
+  padding: 20px 20px 20px 20px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
+
+
+.active{
+  background-color:#818181;
+}
+
+.cli_active {
+  background-color:white;
+}
+
+.cli_greeting{
+  position: absolute;
+  width: 65%;
+  left: 18%;
+  top: 8%;
+  display:flex;
+  flex-direction: column;
+
+}
+.cli_greeting h1{
+  font-size:4em;
+  position: static;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: left;
+  line-height: 10%;
+}
+
+.cli_greeting h2{
+  position: static;
+  font-style: normal;
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.6);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 28px 0px;
+  line-height: 5%;
+}
+
+.cli_table table{
+  position: absolute;
+  table-layout:auto;
+  width: 80%;
+  height: 60%;
+  left: 18%;
+  top: 28%;
+  background-color:#E1F0DB;
+  border-top: 20em;
+  border-right: 20em;
+  border-bottom: 20em;
+  border-left: 20em;
+  border-color: white;
+  border-spacing: white 10px;
+  border-collapse:collapse;
+  border-radius:5rem;
+}
+
+.cli_table th, tr, td{
+  border:  3px solid white;
+  text-align: center;
+  color:rgba(0, 0, 0, 0.7)
+}
+.menu{
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 80%;
+  top:5%;
+  width: 25%;
+  left:70%;
+  column-gap: 4em;
+}
+
+
+.menu .elem{
+  border-width: 0;
+  border-radius: 15vh;
+  background-color: #8fbc88;
+  width: 100px;
+}
+.menu .elem a {
+  text-decoration: none; 
+  color: black;
+}
+.menu .elem:hover {
+  background-color: rgb(157, 196, 157);
+}
+
+

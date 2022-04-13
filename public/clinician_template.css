@@ -15,11 +15,6 @@ body { /* page layout - desktop version */
         "footer footer footer";
     }
 
-/* assign regions of the page to the grid */
-body > * {  /* this is just shading to show the different regions */
-    font-family: "Roboto", sans-serif;
-}
-
 body { /* page layout - desktop version */
     display: grid;
     grid-template-columns: 5fr 20fr 10fr;
@@ -40,33 +35,29 @@ main {grid-area: main;}
 nav {grid-area: nav;}
 footer{grid-area: footer;}
 
-@media screen and (max-width: 640px) {  /* page layout for phones */
-    body {
-        display: flex;
-        flex-direction: column;
-    }
-    nav
-    {
-        display: none;
-        flex-direction: column;
-    }
-}
-header{
+
+.clinician_header{
+    height:50px;
     background-color:  #E1F0DB;
     text-align: center;
     width: 100%;
 }
 
-.sidenav {
+.clisidenav{
     background-color: #CFE6BD;
-    display: blocfk;
+    display: block;
     float:left;
     height: 1000px; /*Mannually drag background color to the bottom*/
 }
-.sidenav a:hover {
+.clisidenav img {
+    width: 80%; 
+    margin-left: 20px;
+}
+
+.clisidenav a:hover {
     background: white;
   }
-.sidenav a {
+.clisidenav a {
     padding: 20px 20px 20px 20px;
     font-size: 20px;
     text-decoration: none;
@@ -75,7 +66,7 @@ header{
   }
 
  
-.active {
+.active{
     background-color: white;
 }
 li {
@@ -103,20 +94,12 @@ header{
 
 }*/
 
-.greeting{
+.cli_greeting{
     
-    /*display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    position: fixed;
-    width: 65%;
-    left: 18%;
-    top: 10%;*/
     position: absolute;
     width: 65%;
     left: 18%;
-    top: 5%;
+    top: 8%;
     display:flex;
     flex-direction: column;
 
@@ -124,23 +107,17 @@ header{
 h1{
     font-size:4em;
     position: static;
-    font-family: 'Roboto';
     font-style: normal;
-    font-weight: 500;
     color: rgba(0, 0, 0, 0.7);
     text-align: left;
     line-height: 10%;
-
 }
 
 h2{
     position: static;
-   font-family: 'Roboto';
     font-style: normal;
-    font-weight: 500;
     font-size: 2em;
     color: rgba(0, 0, 0, 0.6);
-
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -148,16 +125,11 @@ h2{
     line-height: 5%;
 }
 
-/*
-.parent .category {
-    width: 100%;
-}*/
-
-table{
+.clinotes_table table{
     position: absolute;
     table-layout:auto;
     width: 80%;
-    height: 100%;
+    height: 60%;
     left: 18%;
     top: 28%;
     background-color:#E1F0DB;
@@ -167,17 +139,14 @@ table{
     border-left: 20em;
     border-color: white;
     border-spacing: white 10px;
-    border-collapse:collapse
-    
-    
+    border-collapse:collapse;
+    border-radius:5rem;
 }
-tr{
-    border:3px solid white;
-}
-td{
+
+.clinotes_table th, tr, td{
     border:  3px solid white;
     text-align: center;
-   
+    color:rgba(0, 0, 0, 0.7)
 }
 .menu{
     position: relative;
@@ -192,10 +161,15 @@ td{
 
 
 .menu .elem{
+    border-width: 0;
     border-radius: 15vh;
     background-color: #8fbc88;
+    width: 100px;
 }
-
+.menu .elem a {
+    text-decoration: none; 
+    color: black;
+}
 .menu .elem:hover {
     background-color: rgb(157, 196, 157);
 }

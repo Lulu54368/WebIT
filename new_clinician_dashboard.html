@@ -20,7 +20,7 @@
     <nav>
         <div class="cli_sidenav">
             <p>
-                <img src="/page-logo.png">
+                <img src="page-logo.png">
             </p>
             <p class="cli_active">
               <a href="clinician_dashboard.html">Dashboard</a>
@@ -42,16 +42,63 @@
 
     <main>
     <div class = "cli_greeting">
-        <h1>Hi Dr {{this.name}}!</h1>
+        <h1>Hi Dr!</h1>
         <h2>Today: Tuesday, March 15</h2>
     </div>
 
-    {{>patient}}
-      
+    <div class="cli_table">
+      <table>
+        <tr class = "notes">
+            <th>Patient Name</th>
+            <th>Blood glucose level<br>(nmol/L)</th>
+            <th>Weight<br>(kg)</th>
+            <th>Doses of insulin intake<br>(doses)</th>
+            <th>Exercise Step Count<br>(steps)</th>
+        </tr>
+
+        <div class="data">    
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
+            <tr>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
+       
+        </div>
+        
+    </table>
     </main>
     </body>
     <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
     </footer>
 </html>
-
