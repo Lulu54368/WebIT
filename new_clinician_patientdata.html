@@ -2,10 +2,11 @@
   <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" href="./public/about.css" />
+        <link rel="stylesheet" href="./public/about.css">
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>clinician patient's comments</title>
+        <title>clinician dashboard</title>
+        
     </head>
     <body>
     <header>
@@ -21,13 +22,12 @@
             <p>
                 <img src="./public/page-logo.png">
             </p>
-            <p>
               <a href="new_clinician_dashboard.html">Dashboard</a>
             </p>
-            <p>
+            <p class="cli_active">    
               <a href="new_clinician_patientdata.html">Patient's Data</a>
             </p>
-            <p class="cli_active">
+            <p>
               <a href="new_clinician_patientcomment.html">Patient's Comments</a>
             </p>
             <p>
@@ -41,70 +41,63 @@
 
     <main>
     <div class = "cli_greeting">
-        <h1>Patient's Comments</h1>
+        <h1>Hi Dr!</h1>
         <h2>Today: Tuesday, March 15</h2>
     </div>
-    
-    <div class = "cli_table">
-        <table class = "parent" frame="BOX">
-            <tr class = "catagory">
-                <th>Patient name</th>
-                <th>Blood glucose level<br>(nmol/L)</th>
-                <th>Weight<br>(kg)</th>
-                <th>Doses of insulin intake<br>(doses)</th>
-                <th>Exercise Step Count<br>(steps)</th>
-            </tr>
 
+    <div class="cli_table">
+      <table>
+        <tr class = "notes">
+            <th>Date</th>
+            <th>Blood glucose level<br>(nmol/L)</th>
+            <th>Weight<br>(kg)</th>
+            <th>Doses of insulin intake<br>(doses)</th>
+            <th>Exercise Step Count<br>(steps)</th>
+        </tr>
+
+        <div class="data">    
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
+            <tr>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+                <td>456</td>
+            </tr>
        
-        <div class="data" style = "font-size: 1em;">    
-            <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
-            <tr>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-                <td>abc</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-                <td>123</td>
-            </tr>
-            <tr>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-                <td>456</td>
-            </tr>
         </div>
-        </table>
-    </div>
+        
+    </table>
     </main>
     </body>
     <footer>
-        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
-      </footer>
+      <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+    </footer>
 </html>
