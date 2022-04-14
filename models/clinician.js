@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const clinician_schema = new Schema({
-    id:{
-        type: Number,
-        required: true
-    },
+    
     firstname:{
         type: String,
         required: false,
@@ -21,6 +18,6 @@ const clinician_schema = new Schema({
     }
 })
 //This is data for clinician(personal information and patient's id)
-const clinician = mongoose.model("clinician", clinician_schema);
+const Clinician = mongoose.model("clinicians", clinician_schema);
 
-module.exports = clinician;
+module.exports = Clinician;

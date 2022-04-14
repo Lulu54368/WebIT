@@ -1,24 +1,34 @@
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
-const clinician_data = require("../models/clinician.js");
+const   Clinician = require("../models/clinician.js");
 
 const patients_input = require("../models/patient_input");
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
+    try{
+        console.log(Clinician.find());
+        const clinician = Clinician.findById(req.params.id).lean();
+        
+        if(clinician){
+            console.log(clinician._id);
+            const patient_id_list = clinician.patients;
+            console.log(clinician.patient_id_list);
+            const patients_medical_data = patients_medical_list.filter((patient)=>
+            patient_id_list.includes(patient.id))
     
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        const patients_medical_data = patients_medical_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
+            res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
+            patients: patients_medical_data});
+        }
+        else{
+            res.sendStatus(404);
+        }
+       
+    }
+    catch(err){
+        return (err)
+    }
     
-        res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-        patients: patients_medical_data});
-    }
-    else{
-        res.send("can not find the clinician");
-    }
+    
     
     
 }
