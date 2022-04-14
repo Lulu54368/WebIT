@@ -11,7 +11,8 @@ app.engine('hbs', exphbs.engine({
     
 }))
 const dbURL = "mongodb+srv://WebIT:AyjApuMSrWMeXh0L@cluster0.zcwkv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(dbURL);
+mongoose.connect(dbURL).then((result)=>console.log("connect to db"))
+.catch((err)=>console.log(err));
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 const clinicianRouter = require("./router/clinician.js");
