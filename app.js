@@ -9,6 +9,13 @@ app.engine('hbs', exphbs.engine({
     extname: 'hbs',
     
 }))
+
+// middleware to log a message each time a request arrives at the server - handy for debugging
+app.use((req,res,next) => {
+    console.log('message arrived: ' + req.method + ' ' + req.path)
+    next()
+})
+
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 const clinicianRouter = require("./router/clinician.js");
