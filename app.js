@@ -11,7 +11,6 @@ app.engine('hbs', exphbs.engine({
     
 }))
 
-
 // Load envioronment variables 
 if (process.env.NODE_ENV !== 'production') { 
     require('dotenv').config() 
@@ -36,7 +35,6 @@ const db = mongoose.connection.on('error', err => {
 db.once('open', async () => { 
     console.log(`Mongo connection started on ${db.host}:${db.port}`) 
 })
-
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
