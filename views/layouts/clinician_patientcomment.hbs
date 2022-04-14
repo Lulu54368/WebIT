@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="/about.css" />
+        <META http-equiv="Content-Style-Type" content="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>clinician patient's comments</title>
+    </head>
+    <body>
+    <header>
+        <div class = "menu">
+            <button class = "elem"><a href="/Deliverable1/aboutdiabetes.html">About diabetes</a></button>
+            <button class = "elem"><a href="/Deliverable1/aboutthiswebsite.html">About this website</a></button>
+            <button class = "elem"><a href="/Login/login.html">log out</a></button>
+        </div>
+        
+    </header>
+    <nav>
+        <div class="cli_sidenav">
+            <p>
+                <img src="/page-logo.png">
+            </p>
+            <p>
+              <a href="new_clinician_dashboard.html">Dashboard</a>
+            </p>
+            <p>
+              <a href="new_clinician_patientdata.html">Patient's Data</a>
+            </p>
+            <p class="cli_active">
+              <a href="new_clinician_patientcomment.html">Patient's Comments</a>
+            </p>
+            <p>
+              <a href="new_clinician_clinicalnotes.html">Clinical Notes</a>
+            </p>
+            <p>
+              <a href="new_clinician_message.html">Messages</a>
+            </p>
+          </div>
+        </nav>
+
+    <main>
+    <div class = "cli_greeting">
+        <h1>Patient's Comments</h1>
+        <h2>Today: Tuesday, March 15</h2>
+    </div>
+
+    {{>patient_comments}}
+    
+    </main>
+    </body>
+    <footer>
+        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+      </footer>
+</html>

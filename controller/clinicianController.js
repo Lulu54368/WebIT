@@ -1,16 +1,18 @@
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
 const clinician_data = require("../models/clinician.js");
+const patients_comment_list = require("../models/utils/patient_comment");
 
 const patients_input = require("../models/patient_input");
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
-    
+    // Get the clinician if the patient's id is found in clinician's patient ID list
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
     if(clinician){
         const patient_id_list = clinician.patients;
-        const patients_medical_data = patients_medical_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
+        // include the patient data only if the patient id is included in the patient_id_list
+        const patients_medical_data = patients_medical_list.filter((patienttt)=>
+        patient_id_list.includes(patienttt.id)
         )
     
         res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
@@ -73,5 +75,26 @@ const changeInput = (req, res)=>{
         res.send("can not find the patient");
     }
 }
-const clinicianController = { getAllPatients, getOnePatient, changeInput}
+
+//This function get comments for all patients
+const getAllComments = (req, res)=>{
+    // Get the clinician if the patient's id is found in clinician's patient ID list
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    if(clinician){
+        const patient_id_list = clinician.patients;
+        // include the patient data only if the patient id is included in the patient_id_list
+        const patients_comment = patients_comment_list.filter((patient)=>
+        patient_id_list.includes(patient.id)
+        )
+    
+        res.render("../views/layouts/clinician_patientcomment.hbs",{patient_comment: patients_comment});
+    }
+    else{
+        res.send("can not find the clinician");
+    }
+    
+    
+}
+
+const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments}
 module.exports =clinicianController
