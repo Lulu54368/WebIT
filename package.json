@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "prettier": "prettier --single-quote --no-semi --tab-width 4 --write**/*.js *.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,9 @@
     "express-handlebars": "^6.0.4",
     "mongoose": "^6.2.11",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "prettier": "^2.6.2"
   }
 }
