@@ -10,6 +10,13 @@ app.engine('hbs', exphbs.engine({
     extname: 'hbs',
     
 }))
+
+// middleware to log a message each time a request arrives at the server - handy for debugging
+app.use((req,res,next) => {
+    console.log('message arrived: ' + req.method + ' ' + req.path)
+    next()
+})
+
 const dbURL = "mongodb+srv://WebIT:AyjApuMSrWMeXh0L@cluster0.zcwkv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(dbURL);
 app.use(express.static('./public'));
