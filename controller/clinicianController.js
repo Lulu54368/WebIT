@@ -3,9 +3,41 @@ mongoose.connect(process.env.MONGO_URL);
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data.js");
 const   Clinician = require("../models/clinician.js");
-
+const Patient = require("../models/patient.js")
 const patients_input = require("../models/patient_input");
-
+const addPatient = (req, res)=>{
+    const patient_data_example =  {
+  
+        "name": "David",
+        "message": "hello John",
+        "message_edit_time": "01/01/2022",
+        "data": [
+            {
+                "date": "1/1/2022",
+                
+                "blood_level": {
+                    "data": 11,
+                    "comment": "this is blood_level"
+                },
+                "weight":{
+                    "data": 65,
+                    "comment": "this is weight"
+                },
+                "insulin_intake": {
+                    "data": 2,
+                    "comment": "this is insulin intake"
+                },
+                "exercise":{
+                    "data": 1000,
+                    "comment": "this is exercise"
+                }
+            }]
+        }
+    const patient = new Patient(patient_data_example);
+    console.log(patient);
+    patient.save();
+    res.send(patient);
+}
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
     //try{
@@ -90,5 +122,5 @@ const changeInput = (req, res)=>{
         res.send("can not find the patient");
     }
 }
-const clinicianController = { getAllPatients, getOnePatient, changeInput}
+const clinicianController = { getAllPatients, getOnePatient, changeInput, addPatient}
 module.exports =clinicianController
