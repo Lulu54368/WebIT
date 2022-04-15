@@ -8,8 +8,8 @@ const patients_input = require("../models/patient_input");
 const addPatient = (req, res)=>{
     const patient_data_example =  {
   
-        "name": "David",
-        "message": "hello John",
+        "name": "Lulu",
+        "message": "hello Lulu",
         "message_edit_time": "01/01/2022",
         "data": [
             {
@@ -34,17 +34,19 @@ const addPatient = (req, res)=>{
             }]
         }
     const patient = new Patient(patient_data_example);
-    console.log(patient);
+    
     patient.save();
     res.send(patient);
+    console.log(Patient.find().lean());
 }
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
-    //try{
+    res.send(Clinician.find());
+    /*try{
         console.log("hello");
         console.log(Clinician.find());
-        /*console.log(Clinician.findById(req.params.id).lean());
-        const clinician = Clinician.findById(req.params.id)
+        console.log(Clinician.findById(req.params.id).lean());
+        const clinician = Clinician.findById(req.params.id).lean()
         
         if(clinician){
             console.log(clinician._id);
@@ -58,10 +60,10 @@ const getAllPatients = (req, res)=>{
         }
         else{
             res.sendStatus(404);
-        }*/
+        }
        
     
-    /*
+    
     }
     catch(err){
         return (err)

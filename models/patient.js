@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const Schema = mongoose.Schema;
 //This is medical data for patients
-const Data = {
+const Data = new Schema({
     data:{
         type: Number,
         required: true
@@ -11,7 +11,7 @@ const Data = {
         type: String,
         required: false
     }
-};
+});
 const patient_data = new Schema({
     date:{
         type: Date,
@@ -59,6 +59,6 @@ const Patient = new Schema(
         }
     }
 );
-const Patients = mongoose.model("patients", Patient);
-
+//const Patients = mongoose.model("patients", Patient);
+//console.log(Patients.find())
 module.exports = mongoose.model("patients", Patient);

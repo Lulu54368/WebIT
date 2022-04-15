@@ -13,13 +13,12 @@ const clinician_schema = new Schema({
         required: true
     },
     patients:{
-        type: Object,
+        type: [Schema.Types.ObjectId],
         required: true,
         default: []
     }
 })
 //This is data for clinician(personal information and patient's id)
 const Clinician = mongoose.model("clinicians", clinician_schema);
-console.log("hello");
-console.log(Clinician.find());
+
 module.exports = Clinician;
