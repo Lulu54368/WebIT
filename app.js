@@ -22,11 +22,7 @@ app.use((req,res,next) => {
     console.log('message arrived: ' + req.method + ' ' + req.path)
     next()
 })
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    dbName: 'WebIT' 
-}) 
+mongoose.connect(process.env.MONGO_URL) 
 // Exit on error 
 const db = mongoose.connection.on('error', err => { 
     console.error(err); 

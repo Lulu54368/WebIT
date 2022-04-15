@@ -1,13 +1,18 @@
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL);
 const patients_medical_list = require("../models/utils/patient_medical_data");
-const patients_data = require("../models/patient_data");
+const patients_data = require("../models/patient_data.js");
 const   Clinician = require("../models/clinician.js");
 
 const patients_input = require("../models/patient_input");
+
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
-    try{
+    //try{
+        console.log("hello");
         console.log(Clinician.find());
-        const clinician = Clinician.findById(req.params.id).lean();
+        /*console.log(Clinician.findById(req.params.id).lean());
+        const clinician = Clinician.findById(req.params.id)
         
         if(clinician){
             console.log(clinician._id);
@@ -21,12 +26,14 @@ const getAllPatients = (req, res)=>{
         }
         else{
             res.sendStatus(404);
-        }
+        }*/
        
+    
+    /*
     }
     catch(err){
         return (err)
-    }
+    }*/
     
     
     

@@ -1,4 +1,4 @@
-const patients_data = require("../models/patient_data");
+const patients_data = require("../models/patient_data.js");
 const patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
 const getCurrData = (req, res)=>{
