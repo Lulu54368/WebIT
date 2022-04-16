@@ -6,7 +6,7 @@ const clinicianController = require("../controller/clinicianController");
 //Get a patient's data of a specified clinician
 clinicianRouter.get("/:id/:patient_id", clinicianController.getOnePatient);
 //Get all patients' data of a specified clinician
-clinicianRouter.get("/:id", clinicianController.getAllPatients);
+clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
 //Change whatever the patient need to input
 clinicianRouter.post("/:id/:patient_id", clinicianController.changeInput);
 //changes need to ma

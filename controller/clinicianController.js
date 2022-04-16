@@ -39,13 +39,27 @@ const addPatient = (req, res)=>{
     res.send(patient);
     console.log(Patient.find().lean());
 }
+const getCircularReplacer = () => {
+    const seen = new WeakSet();
+    return (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return;
+        }
+        seen.add(value);
+      }
+      return value;
+    };
+  };
 //This function get medical data for all patients
-const getAllPatients = (req, res)=>{
-    res.send(Clinician.find());
-    /*try{
+const getAllPatients = async(req, res)=>{
+    const result = JSON.stringify(await Clinician.findById(req.params.clinician_id).lean(), getCircularReplacer())
+    res.send(result);
+    console.log(result)
+    try{
         console.log("hello");
-        console.log(Clinician.find());
-        console.log(Clinician.findById(req.params.id).lean());
+        console.log(await Clinician.find());
+        console.log(await Clinician.findById(req.params.id).lean());
         const clinician = Clinician.findById(req.params.id).lean()
         
         if(clinician){
@@ -67,7 +81,7 @@ const getAllPatients = (req, res)=>{
     }
     catch(err){
         return (err)
-    }*/
+    }
     
     
     
