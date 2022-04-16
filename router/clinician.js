@@ -9,8 +9,8 @@ clinicianRouter.get("/:id/:patient_id", clinicianController.getOnePatient);
 clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
 //Change whatever the patient need to input
 clinicianRouter.post("/:id/:patient_id", clinicianController.changeInput);
-//changes need to ma
-clinicianRouter.get("/", clinicianController.addPatient);
+//add a patient
+clinicianRouter.post("/:clinician_id", clinicianController.addOnePatient);
 /*
 //Phillips
 //get all of patient's comment (id is clinincian id)

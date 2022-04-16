@@ -44,6 +44,10 @@ const Patient = new Schema(
             type: String,
             required: true
         },
+        email:{
+            type: String,
+            required: true
+        },
         message:{
             type: String,
             required: false,

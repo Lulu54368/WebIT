@@ -5,41 +5,8 @@ const patients_data = require("../models/patient_data.js");
 const   Clinician = require("../models/clinician.js");
 const Patient = require("../models/patient.js")
 const patients_input = require("../models/patient_input");
-const addPatient = (req, res)=>{
-    const patient_data_example =  {
-  
-        "name": "Lulu",
-        "message": "hello Lulu",
-        "message_edit_time": "01/01/2022",
-        "data": [
-            {
-                "date": "1/1/2022",
-                
-                "blood_level": {
-                    "data": 11,
-                    "comment": "this is blood_level"
-                },
-                "weight":{
-                    "data": 65,
-                    "comment": "this is weight"
-                },
-                "insulin_intake": {
-                    "data": 2,
-                    "comment": "this is insulin intake"
-                },
-                "exercise":{
-                    "data": 1000,
-                    "comment": "this is exercise"
-                }
-            }]
-        }
-    const patient = new Patient(patient_data_example);
-    
-    patient.save();
-    res.send(patient);
-    console.log(Patient.find().lean());
-}
-const getCircularReplacer = () => {
+
+/*const getCircularReplacer = () => {
     const seen = new WeakSet();
     return (key, value) => {
       if (typeof value === 'object' && value !== null) {
@@ -50,23 +17,21 @@ const getCircularReplacer = () => {
       }
       return value;
     };
-  };
+  };*/
 //This function get medical data for all patients
 const getAllPatients = async(req, res)=>{
-    const result = JSON.stringify(await Clinician.findById(req.params.clinician_id).lean(), getCircularReplacer())
-    res.send(result);
-    console.log(result)
+    
+ 
     try{
-        console.log("hello");
-        console.log(await Clinician.find());
-        console.log(await Clinician.findById(req.params.id).lean());
-        const clinician = Clinician.findById(req.params.id).lean()
+        console.log(await Clinician.find().lean())
+        const clinician = await Clinician.findById(req.params.clinician_id).lean()
+        const patients = await Patient.find().lean();
         
         if(clinician){
-            console.log(clinician._id);
+            
             const patient_id_list = clinician.patients;
-            console.log(clinician.patient_id_list);
-            const patients_medical_data = patients_medical_list.filter((patient)=>
+            console.log(patient_id_list);
+            const patients_medical_data = patients.filter((patient)=>
             patient_id_list.includes(patient.id))
     
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
@@ -101,26 +66,45 @@ const getOnePatient = (req, res)=>{
     }
 
 }
-/*const addOnePatient = (req, res)=>{
-    
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const newPatient = req.body;
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        const data = patients_medical_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
-        if(JSON.stringify(newPatient) != "{}"){
-            if(!data.find(d => d.id == newPatient.id)){
-                data.push(newPatient);
+const addOnePatient = async(req, res)=>{
+   
+    try{
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        var newPatient = req.body;
+        if(clinician){
+            if(JSON.stringify(newPatient) == "{}"){
+                res.send("no patient sent");
             }
+            else{
+                const newemail = req.body.email;
+                const currPatient = await Patient.findOne({email: newemail}).lean();
+                if(currPatient!= "{}"){
+                    
+                    res.send("already exist")
+                }
+                else{
+                
+                    newPatient = await new Patient(newPatient);
+                   
+                    clinician.patients.push(newPatient._id);
+                    clinician.save();
+                    newPatient.save();
+                    res.send(newPatient);
+                }
+
+            }
+        
         }
-    
-        res.send(data);
     }
+    catch(err){
+        console.log(err);
+    }
+        
+    
+    
    
     
-}*/
+}
 //This function change the attributes the patient need to enter
 const changeInput = (req, res)=>{
     // find the patient of the clinician and check whether it's exist 
@@ -138,5 +122,5 @@ const changeInput = (req, res)=>{
         res.send("can not find the patient");
     }
 }
-const clinicianController = { getAllPatients, getOnePatient, changeInput, addPatient}
+const clinicianController = { getAllPatients, getOnePatient, changeInput, addOnePatient}
 module.exports =clinicianController
