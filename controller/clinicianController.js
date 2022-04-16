@@ -54,16 +54,22 @@ const getAllPatients = async(req, res)=>{
 }
 //This function get the medical data for a specified patient
 const getOnePatient = (req, res)=>{
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const patient_id_list = clinician.patients;
-    const patient = patients_data.find((one)=> one.id == req.params.patient_id);
-    if(patient && patient_id_list.includes(patient.id)){
-        res.render("../views/layouts/clinician_patientdata.hbs",{name: patient.name, 
-            patient_data: patient.data});
+    try{
+        const clinician = clinician_data.find((one)=>one.id == req.params.id);
+        const patient_id_list = clinician.patients;
+        const patient = patients_data.find((one)=> one.id == req.params.patient_id);
+        if(patient && patient_id_list.includes(patient.id)){
+            res.render("../views/layouts/clinician_patientdata.hbs",{name: patient.name, 
+                patient_data: patient.data});
+        }
+        else{
+            res.send("patient not found");
+        }
     }
-    else{
-        res.send("patient not found");
+    catch(err){
+        console.log(err);
     }
+    
 
 }
 const addOnePatient = async(req, res)=>{
