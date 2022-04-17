@@ -1,6 +1,6 @@
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
-const clinician_data = require("../models/clinician.js");
+const clinician_data = require("../models/clinician_data.js");
 const patients_comment_list = require("../models/utils/patient_comment");
 
 const patients_input = require("../models/patient_input");
