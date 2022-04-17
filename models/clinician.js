@@ -1,10 +1,20 @@
+<<<<<<< HEAD
+//This is data for clinician(personal information and patient's id)
+const clinician_data = [
+    {
+        "id": 1,
+        "firstname": "Xiao ming",
+        "lastname": "Zhang",
+        "patients": [1,2] //patients' id
+    }
+]
+module.exports = clinician_data;
+=======
 const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL);
 const Schema = mongoose.Schema;
-const clinician_schema = new Schema({
-    id:{
-        type: Number,
-        required: true
-    },
+const clinician_schema = Schema({
+    
     firstname:{
         type: String,
         required: false,
@@ -15,12 +25,13 @@ const clinician_schema = new Schema({
         required: true
     },
     patients:{
-        type: Object,
+        type: [Schema.Types.ObjectId],
         required: true,
         default: []
     }
 })
 //This is data for clinician(personal information and patient's id)
-const clinician = mongoose.model("clinician", clinician_schema);
+const Clinician = mongoose.model("clinicians", clinician_schema);
 
-module.exports = clinician;
+module.exports = Clinician;
+>>>>>>> 5160fe9fce7fc75c2ed605c58b7caa1940753128
