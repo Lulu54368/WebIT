@@ -22,8 +22,8 @@ clinicianRouter.post("/:id/:patient_id/threshold", clinicianController.modifyThr
 
 //get all of support sentence
 clinicianRouter.get("/:id//support", clinicianController.getSupportSentence)
-/*
+
 //add support sentence
 clinicianRouter.post("/:id/:patient_id/support", clinicianController.addSupportSentence);
-*/
+
 module.exports = clinicianRouter;

@@ -162,5 +162,25 @@ const getSupportSentence = (req, res)=>{
         
 }
 
-const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence}
+//This function add support messages for the specific patient
+const addSupportSentence = (req, res)=>{
+    // find the patient of the clinician and check whether it's exist 
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const patient_id_list = clinician.patients;
+   // .id refers to clinician id, .patient_id refers to patient id
+    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
+    // get the data the patient is required to enter
+    const patient_data = patients_data.find((one)=> one.id == req.params.patient_id);
+    if(patient && patient_data){
+        patient_data.message = req.body.message;
+        res.send(patient_data.message);
+        patients_data.push(patient_data); // push to database
+    }
+    else{
+        res.send("can not find the patient");
+    }        
+}
+
+const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+addSupportSentence}
 module.exports =clinicianController
