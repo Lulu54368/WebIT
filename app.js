@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 8080;
+
 var bodyParser = require('body-parser');
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
@@ -35,6 +35,13 @@ const db = mongoose.connection.on('error', err => {
 db.once('open', async () => { 
     console.log(`Mongo connection started on ${db.host}:${db.port}`) 
 })
+
+
+
+
+
+
+require("./models")
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
