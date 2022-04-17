@@ -23,19 +23,23 @@ const getAllPatients = async(req, res)=>{
     
  
     try{
-        console.log(await Clinician.find().lean())
+        
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
-        const patients = await Patient.find().lean();
+        var patients = [];
         
         if(clinician){
             
             const patient_id_list = clinician.patients;
-            console.log(patient_id_list);
-            const patients_medical_data = patients.filter((patient)=>
-            patient_id_list.includes(patient.id))
-    
+            //here are some problems
+            patient_id_list.forEach(element => {
+                const patient = await( Patient.findById(element.toString()));
+                console.log(patient);
+                patients.push(patient);
+            });
+            console.log("data");
+            console.log(patients)
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-            patients: patients_medical_data});
+            patients: patients});
         }
         else{
             res.sendStatus(404);
