@@ -13,11 +13,14 @@ clinicianRouter.post("/:id/:patient_id", clinicianController.changeInput);
 //Phillips
 //get all of patient's comment (id is clinincian id)
 clinicianRouter.get("/:id//comments", clinicianController.getAllComments);
-/*
+
 //get all of threshold 
-clinicianRouter.get("/:id/threshold", clinicianController.getAllThreshold);
+clinicianRouter.get("/:id//threshold", clinicianController.getAllThreshold);
+
+/*
 //change threshold of a specified patient
 clinicianRouter.post("/:id/:patient_id/threshold", clinicianController.modifyThreshold);
+/*
 //get all of support sentence
 clinicianRouter.get("/:id/support", clinicianController.getSupportSentence)
 //add support sentence

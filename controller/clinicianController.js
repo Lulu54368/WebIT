@@ -1,7 +1,11 @@
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
-const clinician_data = require("../models/clinician.js");
+const clinician_data = require("../models/clinician_data.js");
+
 const patients_comment_list = require("../models/utils/patient_comment");
+
+const patients_threshold_list = require("../models/utils/patient_threshold");
+const patients_threshold = require("../models/patient_threshold");
 
 const patients_input = require("../models/patient_input");
 //This function get medical data for all patients
@@ -86,15 +90,32 @@ const getAllComments = (req, res)=>{
         const patients_comment = patients_comment_list.filter((patient)=>
         patient_id_list.includes(patient.id)
         )
-    
+        // patient_comment is each from the partial, patients_comment is the filtered comment
         res.render("../views/layouts/clinician_patientcomment.hbs",{patient_comment: patients_comment});
     }
     else{
         res.send("can not find the clinician");
-    }
-    
-    
+    }        
 }
 
-const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments}
+//This function get comments for all patients
+const getAllThreshold = (req, res)=>{
+    // Get the clinician if the patient's id is found in clinician's patient ID list
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    if(clinician){
+        const patient_id_list = clinician.patients;
+        // include the patient data only if the patient id is included in the patient_id_list
+        const patients_threshold = patients_threshold_list.filter((patient)=>
+        patient_id_list.includes(patient.id)
+        )
+        // patient_threshold is each from the partial, patients_threshold is the filtered threshold
+        res.render("../views/layouts/clinician_patientthreshold.hbs",{patient_threshold: patients_threshold});
+    }
+    else{
+        res.send("can not find the clinician");
+    }
+        
+}
+
+const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold}
 module.exports =clinicianController
