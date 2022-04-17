@@ -4,21 +4,39 @@ const clinician_data = require("../models/clinician.js");
 
 const patients_input = require("../models/patient_input");
 //This function get medical data for all patients
-const getAllPatients = (req, res)=>{
+
+const getAllPatients = async(req, res)=>{
     
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        const patients_medical_data = patients_medical_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
+ 
+    try{
+        
+        const clinician = await Clinician.findById(req.params.clinician_id).lean()
+        var patients = [];
+        
+        if(clinician){
+            
+            const patient_id_list = clinician.patients;
+            //here are some problems
+            patient_id_list.forEach(element => {
+                const patient = await( Patient.findById(element.toString()));
+                console.log(patient);
+                patients.push(patient);
+            });
+            console.log("data");
+            console.log(patients)
+            res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
+            patients: patients});
+        }
+        else{
+            res.sendStatus(404);
+        }
+    }
+    catch(err){
+        console.log(err);
+    }  
+
     
-        res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-        patients: patients_medical_data});
-    }
-    else{
-        res.send("can not find the clinician");
-    }
+    
     
     
 }
