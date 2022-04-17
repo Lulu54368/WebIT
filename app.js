@@ -10,21 +10,18 @@ app.engine('hbs', exphbs.engine({
     extname: 'hbs',
     
 }))
-<<<<<<< HEAD
 
 // Load envioronment variables 
 if (process.env.NODE_ENV !== 'production') { 
     require('dotenv').config() 
 } 
 
-=======
->>>>>>> 5160fe9fce7fc75c2ed605c58b7caa1940753128
 // middleware to log a message each time a request arrives at the server - handy for debugging
 app.use((req,res,next) => {
     console.log('message arrived: ' + req.method + ' ' + req.path)
     next()
 })
-<<<<<<< HEAD
+
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -40,10 +37,10 @@ db.once('open', async () => {
     console.log(`Mongo connection started on ${db.host}:${db.port}`) 
 })
 
-=======
+
 
 require("./models")
->>>>>>> 5160fe9fce7fc75c2ed605c58b7caa1940753128
+
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 const clinicianRouter = require("./router/clinician.js");
