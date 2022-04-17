@@ -8,6 +8,9 @@ const patients_threshold_list = require("../models/utils/patient_threshold");
 const patients_threshold = require("../models/patient_threshold");
 
 const patients_input = require("../models/patient_input");
+
+const patients_message_list = require("../models/utils/patient_message");
+
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
     // Get the clinician if the patient's id is found in clinician's patient ID list
@@ -84,6 +87,8 @@ const changeInput = (req, res)=>{
 const getAllComments = (req, res)=>{
     // Get the clinician if the patient's id is found in clinician's patient ID list
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const today = new Date().toLocaleDateString();
+
     if(clinician){
         const patient_id_list = clinician.patients;
         // include the patient data only if the patient id is included in the patient_id_list
@@ -91,7 +96,7 @@ const getAllComments = (req, res)=>{
         patient_id_list.includes(patient.id)
         )
         // patient_comment is each from the partial, patients_comment is the filtered comment
-        res.render("../views/layouts/clinician_patientcomment.hbs",{patient_comment: patients_comment});
+        res.render("../views/layouts/clinician_patientcomment.hbs",{comment_date: today, patient_comment: patients_comment});
     }
     else{
         res.send("can not find the clinician");
@@ -102,6 +107,7 @@ const getAllComments = (req, res)=>{
 const getAllThreshold = (req, res)=>{
     // Get the clinician if the patient's id is found in clinician's patient ID list
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const today = new Date().toLocaleDateString();
     if(clinician){
         const patient_id_list = clinician.patients;
         // include the patient data only if the patient id is included in the patient_id_list
@@ -109,7 +115,7 @@ const getAllThreshold = (req, res)=>{
         patient_id_list.includes(patient.id)
         )
         // patient_threshold is each from the partial, patients_threshold is the filtered threshold
-        res.render("../views/layouts/clinician_patientthreshold.hbs",{patient_threshold: patients_threshold});
+        res.render("../views/layouts/clinician_patientthreshold.hbs",{threshold_date: today, patient_threshold: patients_threshold});
     }
     else{
         res.send("can not find the clinician");
@@ -117,5 +123,44 @@ const getAllThreshold = (req, res)=>{
         
 }
 
-const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold}
+
+//This function change the thresholds the clinician set for patients
+const modifyThreshold = (req, res)=>{
+    // find the patient of the clinician and check whether it's exist 
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const patient_id_list = clinician.patients;
+   // .id refers to clinician id, .patient_id refers to patient id
+    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
+    // get the data the patient is required to enter
+    const patient_threshold = patients_threshold.find((one)=> one.id == req.params.patient_id);
+    if(patient && patient_threshold){
+        patient_threshold.threshold = req.body.threshold;
+        res.send(patient_threshold);
+    }
+    else{
+        res.send("can not find the patient");
+    }
+}
+
+//This function get comments for all patients
+const getSupportSentence = (req, res)=>{
+    // Get the clinician if the patient's id is found in clinician's patient ID list
+    const clinician = clinician_data.find((one)=>one.id == req.params.id);
+    const today = new Date().toLocaleDateString();
+    if(clinician){
+        const patient_id_list = clinician.patients;
+        // include the patient data only if the patient id is included in the patient_id_list
+        const patients_message = patients_message_list.filter((patient)=>
+        patient_id_list.includes(patient.id)
+        )
+        // patient_message is each from the partial, patients_message is the filtered message
+        res.render("../views/layouts/clinician_patientmessage.hbs",{message_date: today, patient_message: patients_message});
+    }
+    else{
+        res.send("can not find the clinician");
+    }
+        
+}
+
+const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence}
 module.exports =clinicianController

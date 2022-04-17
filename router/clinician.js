@@ -17,12 +17,12 @@ clinicianRouter.get("/:id//comments", clinicianController.getAllComments);
 //get all of threshold 
 clinicianRouter.get("/:id//threshold", clinicianController.getAllThreshold);
 
-/*
 //change threshold of a specified patient
 clinicianRouter.post("/:id/:patient_id/threshold", clinicianController.modifyThreshold);
-/*
+
 //get all of support sentence
-clinicianRouter.get("/:id/support", clinicianController.getSupportSentence)
+clinicianRouter.get("/:id//support", clinicianController.getSupportSentence)
+/*
 //add support sentence
 clinicianRouter.post("/:id/:patient_id/support", clinicianController.addSupportSentence);
 */

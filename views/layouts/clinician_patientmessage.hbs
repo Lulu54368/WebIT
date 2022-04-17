@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/about.css" />
-        <META http-equiv="Content-Style-Type" content="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>clinician clinical notes</title>
-    </head>
-    <body>
-    <header class = "clinician_header">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/about.css">
+    <title>clinician messages</title>
+</head>
+<body>
+    <header>
         <div class = "menu">
             <button class = "elem"><a href="/Deliverable1/aboutdiabetes.html">About diabetes</a></button>
             <button class = "elem"><a href="/Deliverable1/aboutthiswebsite.html">About this website</a></button>
@@ -19,21 +19,21 @@
     <nav>
         <div class="cli_sidenav">
             <p>
-            <img class = "image" src = "/page-logo.png">
+                <img src="/page-logo.png">
             </p>
             <p>
               <a href="new_clinician_dashboard.html">Dashboard</a>
             </p>
             <p>
-              <a href="new_historyData.html">Patient's Data</a>
+              <a href="new_clinician_patientdata.html">Patient's Data</a>
             </p>
             <p>
               <a href="new_clinician_patientcomment.html">Patient's Comments</a>
             </p>
-            <p class="cli_active">
+            <p>
               <a href="new_clinician_clinicalnotes.html">Clinical Notes</a>
             </p>
-            <p>
+            <p class = "cli_active">
               <a href="new_clinician_message.html">Messages</a>
             </p>
           </div>
@@ -41,14 +41,14 @@
 
     <main>
     <div class = "cli_greeting">
-        <h1>Hi Dr.Doe!</h1>
-        <h2>Today: {{threshold_date}}</h2>
+        <h1>Today's Support</h1>
+        <h2>Today: {{message_date}}</h2>
     </div>
     {{! this refers to the partial hbs name}}
-    {{>patient_thresholds}}
+    {{>patient_messages}}
     </main>
-    </body>
-    <footer>
-        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
-      </footer>
+</body>
+<footer>
+    <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+  </footer>
 </html>

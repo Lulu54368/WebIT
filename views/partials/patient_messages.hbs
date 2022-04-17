@@ -1,0 +1,18 @@
+<div class = "cli_table">
+    <table class = "support_table">
+        <tr class = "catagory">
+            <th calss = "th1">Patient name</th>
+            <th class = "th2">Support Message</th>
+        </tr>
+       
+        <div class="message">    
+        {{#each patient_message}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.message}}</td>
+        </tr>
+        {{/each}}       
+        </div>
+        
+    </table>
+</div>
