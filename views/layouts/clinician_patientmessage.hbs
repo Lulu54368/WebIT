@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/about.css" />
-        <META http-equiv="Content-Style-Type" content="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>clinician patient's comments</title>
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/about.css">
+    <title>clinician messages</title>
+</head>
+<body>
     <header>
         <div class = "menu">
             <button class = "elem"><a href="/Deliverable1/aboutdiabetes.html">About diabetes</a></button>
@@ -27,13 +27,13 @@
             <p>
               <a href="new_clinician_patientdata.html">Patient's Data</a>
             </p>
-            <p class="cli_active">
+            <p>
               <a href="new_clinician_patientcomment.html">Patient's Comments</a>
             </p>
             <p>
               <a href="new_clinician_clinicalnotes.html">Clinical Notes</a>
             </p>
-            <p>
+            <p class = "cli_active">
               <a href="new_clinician_message.html">Messages</a>
             </p>
           </div>
@@ -41,15 +41,14 @@
 
     <main>
     <div class = "cli_greeting">
-        <h1>Patient's Comments</h1>
+        <h1>Today's Support</h1>
         <h2>Today: {{view_date}}</h2>
     </div>
-{{! this refers to the partial hbs name}}
-    {{>patient_comments}}
-    
+    {{! this refers to the partial hbs name}}
+    {{>patient_messages}}
     </main>
-    </body>
-    <footer>
-        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
-      </footer>
+</body>
+<footer>
+    <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+  </footer>
 </html>

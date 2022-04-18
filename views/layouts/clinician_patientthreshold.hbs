@@ -5,10 +5,10 @@
         <link rel="stylesheet" href="/about.css" />
         <META http-equiv="Content-Style-Type" content="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>clinician patient's comments</title>
+        <title>clinician clinical notes</title>
     </head>
     <body>
-    <header>
+    <header class = "clinician_header">
         <div class = "menu">
             <button class = "elem"><a href="/Deliverable1/aboutdiabetes.html">About diabetes</a></button>
             <button class = "elem"><a href="/Deliverable1/aboutthiswebsite.html">About this website</a></button>
@@ -19,18 +19,18 @@
     <nav>
         <div class="cli_sidenav">
             <p>
-                <img src="/page-logo.png">
+            <img class = "image" src = "/page-logo.png">
             </p>
             <p>
               <a href="new_clinician_dashboard.html">Dashboard</a>
             </p>
             <p>
-              <a href="new_clinician_patientdata.html">Patient's Data</a>
-            </p>
-            <p class="cli_active">
-              <a href="new_clinician_patientcomment.html">Patient's Comments</a>
+              <a href="new_historyData.html">Patient's Data</a>
             </p>
             <p>
+              <a href="new_clinician_patientcomment.html">Patient's Comments</a>
+            </p>
+            <p class="cli_active">
               <a href="new_clinician_clinicalnotes.html">Clinical Notes</a>
             </p>
             <p>
@@ -41,12 +41,11 @@
 
     <main>
     <div class = "cli_greeting">
-        <h1>Patient's Comments</h1>
+        <h1>Hi Dr.Doe!</h1>
         <h2>Today: {{view_date}}</h2>
     </div>
-{{! this refers to the partial hbs name}}
-    {{>patient_comments}}
-    
+    {{! this refers to the partial hbs name}}
+    {{>patient_thresholds}}
     </main>
     </body>
     <footer>
