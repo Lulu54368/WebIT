@@ -242,5 +242,9 @@ const addSupportSentence = (req, res)=>{
 }
 
 const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+
 addSupportSentence, addOnePatient};
-module.exports = clinicianController;
+
+
+module.exports =clinicianController
+
