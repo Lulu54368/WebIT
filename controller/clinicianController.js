@@ -3,6 +3,9 @@ mongoose.connect(process.env.MONGO_URL);
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
 const Clinician = require("../models/clinician.js");
+const Patients = require("../models/patient.js");
+const Patient = Patients.Patients; //patient model
+const Data = Patients.patient_data; //schema
 const clinician_data = require("../models/clinician_data.js");
 const patients_comment_list = require("../models/utils/patient_comment");
 
@@ -31,18 +34,14 @@ const getAllPatients = async(req, res)=>{
     try{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
-        var patients = [];
+        const patients = await Patient.find().lean();
         
         if(clinician){
             
-            const patient_id_list = clinician.patients;
-            patient_id_list.forEach(element => {
-                const patient =  getPatient(element);
-                console.log(patient);
-                patients.push(patient);
-            });
-           
+            var patient_id_list = clinician.patients;
+            patient_id_list = patient_id_list.map((id)=>id.toString());
             
+            patients.filter((patient)=>patient_id_list.includes(patient._id));
             console.log("data");
             console.log(patients)
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 

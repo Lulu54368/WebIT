@@ -65,4 +65,5 @@ const Patient = new Schema(
 );
 //const Patients = mongoose.model("patients", Patient);
 //console.log(Patients.find())
-module.exports = mongoose.model("patients", Patient);
+const Patients = mongoose.model("patients", Patient);
+module.exports = {patient_data, Patients}
