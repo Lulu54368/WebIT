@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+
 const express = require("express");
 const app = express();
 const port = 8080;
@@ -18,23 +18,9 @@ app.use((req,res,next) => {
     next()
 })
 
-const dbURL = "mongodb+srv://WebIT:AyjApuMSrWMeXh0L@cluster0.zcwkv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(dbURL);
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    dbName: 'WebIT' 
-}) 
-// Exit on error 
-const db = mongoose.connection.on('error', err => { 
-    console.error(err); 
-    process.exit(1) 
-}) 
-// Log to console once the database is open 
-db.once('open', async () => { 
-    console.log(`Mongo connection started on ${db.host}:${db.port}`) 
-})
+
+
 
 
 

@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patients_medical_list = require("../models/utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
+const Clinician = require("../models/clinician.js");
 const clinician_data = require("../models/clinician_data.js");
-
 const patients_comment_list = require("../models/utils/patient_comment");
 
 const patients_threshold_list = require("../models/utils/patient_threshold");
@@ -14,19 +14,11 @@ const patients_input = require("../models/patient_input");
 //const patients_message_list = require("../models/utils/patient_message");
 
 //This function get medical data for all patients
-const getAllPatients = (req, res)=>{
-    // Get the clinician if the patient's id is found in clinician's patient ID list
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        // include the patient data only if the patient id is included in the patient_id_list
-        const patients_medical_data = patients_medical_list.filter((patienttt)=>
-        patient_id_list.includes(patienttt.id)
-        )
-const getAllPatients = async(req, res)=>{
+
+const getAllPatients = async (req, res)=>{
     
  
-    try{
+    //try{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         var patients = [];
@@ -36,7 +28,11 @@ const getAllPatients = async(req, res)=>{
             const patient_id_list = clinician.patients;
             //here are some problems
             patient_id_list.forEach(element => {
-                const patient = await( Patient.findById(element.toString()));
+                var patient;
+                async()=>{
+                    patient = await Patient.findById(element.toString());
+                }
+                    
                 console.log(patient);
                 patients.push(patient);
             });
@@ -51,10 +47,10 @@ const getAllPatients = async(req, res)=>{
        
     
     
-    }
+    /*}
     catch(err){
         return (err)
-    }
+    }*/
     
     
     
@@ -246,5 +242,5 @@ const addSupportSentence = (req, res)=>{
 }
 
 const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
-addSupportSentence}
-module.exports =clinicianController
+addSupportSentence, addOnePatient};
+module.exports = clinicianController;
