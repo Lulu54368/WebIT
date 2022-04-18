@@ -9,7 +9,7 @@ const patients_threshold = require("../models/patient_threshold");
 
 const patients_input = require("../models/patient_input");
 
-const patients_message_list = require("../models/utils/patient_message");
+//const patients_message_list = require("../models/utils/patient_message");
 
 //This function get medical data for all patients
 const getAllPatients = (req, res)=>{
@@ -96,7 +96,7 @@ const getAllComments = (req, res)=>{
         patient_id_list.includes(patient.id)
         )
         // patient_comment is each from the partial, patients_comment is the filtered comment
-        res.render("../views/layouts/clinician_patientcomment.hbs",{comment_date: today, patient_comment: patients_comment});
+        res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
     }
     else{
         res.send("can not find the clinician");
@@ -115,7 +115,7 @@ const getAllThreshold = (req, res)=>{
         patient_id_list.includes(patient.id)
         )
         // patient_threshold is each from the partial, patients_threshold is the filtered threshold
-        res.render("../views/layouts/clinician_patientthreshold.hbs",{threshold_date: today, patient_threshold: patients_threshold});
+        res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
     }
     else{
         res.send("can not find the clinician");
@@ -150,11 +150,19 @@ const getSupportSentence = (req, res)=>{
     if(clinician){
         const patient_id_list = clinician.patients;
         // include the patient data only if the patient id is included in the patient_id_list
-        const patients_message = patients_message_list.filter((patient)=>
+        const patient_data = patients_data.filter((patient)=>
         patient_id_list.includes(patient.id)
         )
-        // patient_message is each from the partial, patients_message is the filtered message
-        res.render("../views/layouts/clinician_patientmessage.hbs",{message_date: today, patient_message: patients_message});
+        
+        if (!patient_data.viewed) {
+            // patient_message is each from the partial, patients_message is the filtered message
+            res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patient_data});
+            patient_data.viewed = true;
+        }
+        else {
+            res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
+        }
+
     }
     else{
         res.send("can not find the clinician");
@@ -173,7 +181,9 @@ const addSupportSentence = (req, res)=>{
     const patient_data = patients_data.find((one)=> one.id == req.params.patient_id);
     if(patient && patient_data){
         patient_data.message = req.body.message;
+        patient_data.viewed = false;
         res.send(patient_data.message);
+
         patients_data.push(patient_data); // push to database
     }
     else{

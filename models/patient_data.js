@@ -4,7 +4,7 @@ const patients_data = [
         "id": 1,
         "name": "John Smith",
         "message": "hello John",
-        "message_edit_time": "01/01/2022",
+        "viewed": false,
         "data": [
             {
                 "date": "1/1/2022",
@@ -72,6 +72,7 @@ const patients_data = [
         "id": 2,
         "name": "Jane Smith",
         "message": "hello jane",
+        "viewed": false,
         "data": [
             {
                 "date": "3/1/2022",
