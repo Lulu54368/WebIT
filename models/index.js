@@ -16,4 +16,4 @@ db.once('open', async () => {
 })
 
 require("./patient");
-require("./clinician.js");
+require("./clinician_data");

@@ -22,5 +22,8 @@
     "express-handlebars": "^6.0.4",
     "mongoose": "^6.2.11",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
