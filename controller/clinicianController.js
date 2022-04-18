@@ -15,10 +15,20 @@ const patients_input = require("../models/patient_input");
 
 //This function get medical data for all patients
 
-const getAllPatients = async (req, res)=>{
+const  getPatient = async(element)=>{
+    try{
+        const patient= await Patient.find({_id: element.toString()}).lean();
+        return patient;
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+}
+const getAllPatients = async(req, res)=>{
     
  
-    //try{
+    try{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         var patients = [];
@@ -26,16 +36,13 @@ const getAllPatients = async (req, res)=>{
         if(clinician){
             
             const patient_id_list = clinician.patients;
-            //here are some problems
             patient_id_list.forEach(element => {
-                var patient;
-                async()=>{
-                    patient = await Patient.findById(element.toString());
-                }
-                    
+                const patient =  getPatient(element);
                 console.log(patient);
                 patients.push(patient);
             });
+           
+            
             console.log("data");
             console.log(patients)
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
@@ -47,10 +54,10 @@ const getAllPatients = async (req, res)=>{
        
     
     
-    /*}
+    }
     catch(err){
         return (err)
-    }*/
+    }
     
     
     

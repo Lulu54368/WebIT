@@ -12,7 +12,7 @@ clinicianRouter.post("/:id/:patient_id", clinicianController.changeInput);
 
 //add a patient
 clinicianRouter.post("/:clinician_id", clinicianController.addOnePatient);
-/*
+
 //Phillips
 //get all of patient's comment (id is clinincian id)
 clinicianRouter.get("/:id//comments", clinicianController.getAllComments);
