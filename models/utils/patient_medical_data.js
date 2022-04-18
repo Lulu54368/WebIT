@@ -1,5 +1,5 @@
 //This is transformation of data structure for futher use
-const patient_data = require("../../models/patient_data.js");
+const patient_data = require("../patient_data.js");
 var patient_medical_list = []
 patient_data.forEach((element) => {
     const data = element.data;

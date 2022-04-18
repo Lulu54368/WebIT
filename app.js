@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-
+const port = 8080;
 var bodyParser = require('body-parser');
 const exphbs = require("express-handlebars");
-const mongoose = require("mongoose");
+
 app.set('view engine', 'hbs')
 app.engine('hbs', exphbs.engine({
     defaultLayout: 'index',
@@ -22,6 +22,7 @@ app.use((req,res,next) => {
     console.log('message arrived: ' + req.method + ' ' + req.path)
     next()
 })
+
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -36,9 +37,6 @@ const db = mongoose.connection.on('error', err => {
 db.once('open', async () => { 
     console.log(`Mongo connection started on ${db.host}:${db.port}`) 
 })
-
-
-
 
 
 

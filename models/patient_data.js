@@ -1,5 +1,4 @@
-//This is medical data for patients
-const patients_data = [
+const patient_data = [
     {
         "id": 1,
         "name": "John Smith",
@@ -116,4 +115,4 @@ const patients_data = [
 
     }
 ]
-module.exports = patients_data;
+module.exports = patient_data;
