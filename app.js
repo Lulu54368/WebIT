@@ -32,9 +32,11 @@ const clinicianRouter = require("./router/clinician.js");
 const patientRouter = require("./router/patient.js")
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
+
 app.listen(port, ()=> {
     console.log("server is running... ");
 })
+
 
 
 

@@ -41,6 +41,8 @@
     }
     </script>
 
+    <script src="/js/UpdatePatientBadge.js" defer></script>
+
     <aside>
       <div class = "greeting">
         <h1> Hi John!</h1>
@@ -68,71 +70,76 @@
 
             <tr>
               <td>Blood glucose level(mmol/L)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_bgl">
-              <button>Summit</button></td>
+              <td><input type="text" placeholder="Enter data..." id="patientdata_bgl" value={{data.blood_level.data}}>
+                <button onclick="submitCheck()">Submit</button></td>
 
-              <td><input type="text" placeholder="Enter Comment..." id="patientcmt_bgl">
-              <button>Summit</button></td>
+              <td><input type="text" placeholder="Enter Comment..." id="patientcmt_bgl" value={{data.blood_level.comment}}>
+              <button>Submit</button></td>
             </tr>
 
             <tr>
               <td>Your weight(kg)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_weight">
-                <button>Summit</button></td>
+              <td><input type="text" placeholder="Enter data..." id="patientdata_weight" value={{data.weight.data}}>
+                <button onclick="submitCheck()">Submit</button></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_weight">
-                <button>Summit</button></td>
+                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_weight" value={{data.weight.comment}}>
+                <button>Submit</button></td>
             </tr>
 
             <tr>
               <td>Doses of insulin taken(doses)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_weight">
-                <button>Summit</button></td>
+              <td><input type="text" placeholder="Enter data..." id="patientdata_insulin" value={{data.insulin_intake.data}}>
+                <button onclick="submitCheck()">Submit</button></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_weight">
-                <button>Summit</button></td>
+                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_insulin" value={{data.insulin_intake.comment}}>
+                <button>Submit</button></td>
             </tr>
 
             <tr>
               <td>Exercise(step count)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_weight">
-                <button>Summit</button></td>
+              <td><input type="text" placeholder="Enter data..." id="patientdata_exercise" value={{data.exercise.data}}>
+                <button onclick="submitCheck()">Submit</button></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_weight">
-                <button>Summit</button></td>
+                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_exercise" value={{data.exercise.comment}}>
+                <button>Submit</button></td>
             </tr>
           </table>
         </div>
       </section>
       <br><br>
-      
 
       <section>
         <div class = sectionborder>
-          <h3>Today's badge</h3>
           <table>
             <tr>
               <td>
-                <input type="checkbox" id="bgl" name="bgl" value="bgl">
+                <input type="checkbox" id="bgl" name="bgl" value="bgl" onclick="return false">
                 <label for="bgl">Blood glucose level</label>
               </td>
               <td>
-                <input type="checkbox" id="weight" name="weight" value="weight">
+                <input type="checkbox" id="weight" name="weight" value="weight" onclick="return false">
                 <label for="weight">Weight</label>
               </td>
             </tr>
 
             <tr>
               <td>
-                <input type="checkbox" id="insulin" name="insulin" value="insulin">
+                <input type="checkbox" id="insulin" name="insulin" value="insulin" onclick="return false">
                 <label for="insulin">Insulin</label>
               </td>
               <td>
-                <input type="checkbox" id="exercise" name="exercise" value="exercise">
-                <label for="exercise">Excercise</label>
+                <input type="checkbox" id="exercise" name="exercise" value="exercise" onclick="return false">
+                <label for="exercise">Exercise</label>
               </td>
             </tr>
           </table>
+        </div>
+      </section>
+      <br><br>
+      <section>
+        <div class = sectionborder>
+          <h3>Today's badge</h3>
+          <center> <img class = "image" src = "/badge.png" id = "badge"> </center>
         </div>
       </section>
       <br><br>
@@ -141,7 +148,7 @@
     
     <nav>
       <div class="sidenav">
-          <img class = "image" src = "page-logo.png">
+          <img class = "image" src = "/page-logo.png">
       </div>
     </nav>
   
