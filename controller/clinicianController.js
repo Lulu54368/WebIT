@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
-const patients_medical_list = require("../models/utils/patient_medical_data");
+const patient_medical_list = require("./utils/patient_medical_data");
 const patients_data = require("../models/patient_data");
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model
-const Data = Patients.patient_data; //schema
+//const Patient_Data_Schema = Patients.Patient_data_schema; //schema
+//const Data_Schema = Patients.Data_schema;
 const clinician_data = require("../models/clinician_data.js");
-const patients_comment_list = require("../models/utils/patient_comment");
+const patients_comment_list = require("./utils/patient_comment");
 
-const patients_threshold_list = require("../models/utils/patient_threshold");
+const patients_threshold_list = require("./utils/patient_threshold");
 const patients_threshold = require("../models/patient_threshold");
 
 const patients_input = require("../models/patient_input");
@@ -18,16 +19,7 @@ const patients_input = require("../models/patient_input");
 
 //This function get medical data for all patients
 
-const  getPatient = async(element)=>{
-    try{
-        const patient= await Patient.find({_id: element.toString()}).lean();
-        return patient;
-    }
-    catch(err){
-        console.log(err);
-    }
-    
-}
+
 const getAllPatients = async(req, res)=>{
     
  
@@ -42,10 +34,10 @@ const getAllPatients = async(req, res)=>{
             patient_id_list = patient_id_list.map((id)=>id.toString());
             
             patients.filter((patient)=>patient_id_list.includes(patient._id));
-            console.log("data");
-            console.log(patients)
+            const patient_medical_data = patient_medical_list(patients);
+            console.log(patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-            patients: patients});
+            patients: patient_medical_data});
         }
         else{
             res.sendStatus(404);

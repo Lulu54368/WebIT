@@ -53,11 +53,16 @@ const Patient = new Schema(
             required: false,
             default: ""
         },
+        viewed:{
+            type: Boolean,
+            required: false,
+            default: false
+        },
         weight:{
             type: Number,
             required: false
         },
-        date:{
+        data:{
             type: [patient_data],
             required: false
         }
@@ -66,4 +71,4 @@ const Patient = new Schema(
 //const Patients = mongoose.model("patients", Patient);
 //console.log(Patients.find())
 const Patients = mongoose.model("patients", Patient);
-module.exports = {patient_data, Patients}
+module.exports = {patient_data,Data, Patients}

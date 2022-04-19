@@ -1,7 +1,10 @@
 const patients_data = require("../models/patient_data.js");
 const patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
-
+const Patients = require("../models/patient.js");
+const Patient = Patients.Patients; //patient model
+const Patient_Data_Schema = Patients.patient_data; //schema
+const Data_Schema = Patients.Data;
 const getCurrData = (req, res)=>{
     const patient = patients_data.find((one)=> one.id == req.params.id);
     const today = new Date().toLocaleDateString();
@@ -40,40 +43,41 @@ const getCurrData = (req, res)=>{
     message: patient.message, data: today_data, today_date: today});
 }
 //This function add the newest data
-const addTodayData = (req, res)=>{
-    const patient = patients_data.find((one)=> one.id == req.params.id)
+const addTodayData = async (req, res)=>{
+    const patient = await Patient.findById(req.params.patient_id);
     const newData = req.body;
 
     if(JSON.stringify(newData) != "{}"){
-        console.log(patient);
+        //console.log(patient);
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
         if(!data){
-            data = {
+            data = new Patient_Data_Schema({
                 "date": new Date().toLocaleDateString(),
-                "blood_level": {
+                "blood_level": new Data_Schema({
                     "data": "",
                     "comment": ""
-                },
-                "weight":{
+                }),
+                "weight":new Data_Schema({
                     "data": "",
                     "comment": ""
-                },
-                "insulin_intake": {
+                }),
+                "insulin_intake":new Data_Schema( {
                     "data": "",
                     "comment": ""
-                },
-                "exercise":{
+                }),
+                "exercise":new Data_Schema({
                     "data": "",
                     "comment": ""
-                }
-            }
+                })
+            })
             
             patient.data.push(data);
         }
         const attributes = patient_input.find((one)=>one.id == req.params.id);
         attributes.input.forEach(attr => {
-            data[attr] = req.body[attr];
+            data[attr] = new Data_Schema(req.body[attr]);
         });
+        //some modification need to be made here
         patient.data.pop();
         patient.data.push(data)
         res.send(patient.data);
