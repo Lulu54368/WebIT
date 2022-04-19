@@ -48,38 +48,39 @@ const addTodayData = async (req, res)=>{
     const newData = req.body;
 
     if(JSON.stringify(newData) != "{}"){
-        //console.log(patient);
+        console.log(patient);
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
         if(!data){
-            data = new Patient_Data_Schema({
+            data = {
                 "date": new Date().toLocaleDateString(),
-                "blood_level": new Data_Schema({
+                "blood_level": {
                     "data": "",
                     "comment": ""
-                }),
-                "weight":new Data_Schema({
+                },
+                "weight":{
                     "data": "",
                     "comment": ""
-                }),
-                "insulin_intake":new Data_Schema( {
+                },
+                "insulin_intake": {
                     "data": "",
                     "comment": ""
-                }),
-                "exercise":new Data_Schema({
+                },
+                "exercise":{
                     "data": "",
                     "comment": ""
-                })
-            })
+                }
+            };
             
             patient.data.push(data);
         }
-        const attributes = patient_input.find((one)=>one.id == req.params.id);
+        const attributes = patient_input.find((one)=>one.id == req.params.patient_id);
         attributes.input.forEach(attr => {
-            data[attr] = new Data_Schema(req.body[attr]);
+            data[attr] = req.body[attr];
         });
         //some modification need to be made here
         patient.data.pop();
-        patient.data.push(data)
+        patient.data.push(data);
+        patient.save();
         res.send(patient.data);
     }
     //redirect here

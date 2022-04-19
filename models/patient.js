@@ -14,7 +14,7 @@ const Data = new Schema({
 });
 const patient_data = new Schema({
     date:{
-        type: Date,
+        type: String,
         required: true
     },
     blood_level:{
