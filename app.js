@@ -38,11 +38,11 @@ db.once('open', async () => {
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
-const clinicianRouter = require("./router/clinician.js");
+const clinicianRouter = require("./models/clinician.js");
 const patientRouter = require("./router/patient.js")
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log('The app is running!')
     })
 
