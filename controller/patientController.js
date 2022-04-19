@@ -44,7 +44,7 @@ const getCurrData = (req, res)=>{
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
-    const patient = await Patient.findById(req.params.patient_id);
+     patient = await Patient.findById(req.params.patient_id);
     const newData = req.body;
 
     if(JSON.stringify(newData) != "{}"){
@@ -54,20 +54,16 @@ const addTodayData = async (req, res)=>{
             data = {
                 "date": new Date().toLocaleDateString(),
                 "blood_level": {
-                    "data": "",
-                    "comment": ""
+                    
                 },
                 "weight":{
-                    "data": "",
-                    "comment": ""
+                    
                 },
                 "insulin_intake": {
-                    "data": "",
-                    "comment": ""
+                   
                 },
                 "exercise":{
-                    "data": "",
-                    "comment": ""
+                    
                 }
             };
             

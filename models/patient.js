@@ -5,11 +5,14 @@ const Schema = mongoose.Schema;
 const Data = new Schema({
     data:{
         type: Number,
-        required: true
+        required: false,
+        default: -1
+
     },
     comment:{
         type: String,
-        required: false
+        required: false,
+        default: ""
     }
 });
 const patient_data = new Schema({
@@ -63,7 +66,7 @@ const Patient = new Schema(
             required: false
         },
         data:{
-            type: [patient_data],
+            type: Array, //should be patient_data here
             required: false
         }
     }
