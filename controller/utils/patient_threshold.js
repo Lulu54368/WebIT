@@ -1,5 +1,5 @@
 //This is transformation of data structure for futher use
-const patient_threshold_data = require("../../models/patient_threshold.js");
+const patient_threshold_data = require("../../models/patient_threshold_sample.js");
 var patient_threshold_list = []
 patient_threshold_data.forEach((element) => {
     const threshold = element.threshold;

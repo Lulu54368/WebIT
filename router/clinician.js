@@ -2,7 +2,7 @@ const express = require("express");
 const clinicianRouter = express.Router();
 const clinicianController = require("../controller/clinicianController");
 
-
+//have to replace every id here with clinician_id
 //Get a patient's data of a specified clinician
 clinicianRouter.get("/:id/:patient_id", clinicianController.getOnePatient);
 //Get all patients' data of a specified clinician
