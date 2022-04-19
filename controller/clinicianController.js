@@ -57,7 +57,7 @@ const getAllPatients = async(req, res)=>{
 //This function get the medical data for a specified patient
 const getOnePatient = (req, res)=>{
     try{
-        const clinician = clinician_data.find((one)=>one.id == req.params.id);
+        const clinician = clinician_data.find((one)=>one.id == req.params.clinician_id);
         const patient_id_list = clinician.patients;
         const patient = patients_data.find((one)=> one.id == req.params.patient_id);
         if(patient && patient_id_list.includes(patient.id)){
