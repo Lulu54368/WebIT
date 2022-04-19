@@ -69,6 +69,7 @@ const addTodayData = async (req, res)=>{
             
             patient.data.push(data);
         }
+        //connect here to the database
         const attributes = patient_input.find((one)=>one.id == req.params.patient_id);
         attributes.input.forEach(attr => {
             data[attr] = req.body[attr];

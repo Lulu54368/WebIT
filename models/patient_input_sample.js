@@ -5,7 +5,7 @@ const patient_input = [
         "input": ["blood_level", "weight", "insulin_intake"]
     },
     {
-        "id": "625a67544aa046e9f1c41e47",
+        "id": "625a67967074dc49888723f3",
         "input": ["blood_level", "weight", "exercise"]
     }
     
