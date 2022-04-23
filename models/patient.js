@@ -21,7 +21,7 @@ const patient_data = new Schema({
         required: true
     },
     blood_level:{
-        type: Data,
+        data: Data,
         required: false,
       
     },
@@ -66,7 +66,7 @@ const Patient = new Schema(
             required: false
         },
         data:{
-            type: Array, //should be patient_data here
+            type: patient_data, //should be patient_data here
             required: false
         }
     }
