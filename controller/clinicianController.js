@@ -14,6 +14,7 @@ const patients_threshold_list = require("./utils/patient_threshold");
 const patients_threshold = require("../models/patient_threshold_sample");
 
 const patients_input = require("../models/patient_input_sample");
+const patient_comment = require("./utils/patient_comment");
 
 //const patients_message_list = require("../models/utils/patient_message");
 
@@ -26,15 +27,16 @@ const getAllPatients = async(req, res)=>{
     try{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
-        const patients = await Patient.find().lean();
+        const patients = await Patient.find().lean();  // taken from /model/patient.js
         
         if(clinician){
             
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
-            
+            // filter to include only patients whose id are stored under a certain clinician
             patients.filter((patient)=>patient_id_list.includes(patient._id));
-            const patient_medical_data = patient_medical_list(patients);
+            const patient_medical_data = patient_medical_list(patients); // the argument patients was filtered on the last line
+                                                                        // and now pass as an argument specified in /utils/patient_medical_data.js
             console.log(patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data});
@@ -132,22 +134,32 @@ const changeInput = (req, res)=>{
 }
 
 //This function get comments for all patients
-const getAllComments = (req, res)=>{
-    // Get the clinician if the patient's id is found in clinician's patient ID list
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const today = new Date().toLocaleDateString();
+const getAllComments = async(req, res, next)=>{   
+    try {
+        // Get the clinician if the patient's id is found in clinician's patient ID list
+        const clinician = await Clinician.findById(req.params.clinician_id).lean()  // Clinician model
+        const patients = await Patient.find().lean();  // taken from /models/patient
+        //const data_schema = await Data_Schema.find().lean();  // taken from /models/patient
+        const today = new Date().toLocaleDateString();
 
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        // include the patient data only if the patient id is included in the patient_id_list
-        const patients_comment = patients_comment_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
-        // patient_comment is each from the partial, patients_comment is the filtered comment
-        res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
+        if(clinician){
+            var patient_id_list = clinician.patients;
+            patient_id_list = patient_id_list.map((id)=>id.toString());
+            
+            // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
+            patients.filter((patient) => patient_id_list.includes(patient._id));
+            const patients_comment = patients_comment_list(patients); // the argument patients was filtered on the above line
+            // and now passed as an argument specified in /utils/patient_medical_data.js
+            console.log(patients_comment);
+            // patient_comment is each from the partial, patients_comment is the filtered comment
+            res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
+        }
+        else{
+            res.sendStatus(404);
+        }
     }
-    else{
-        res.send("can not find the clinician");
+    catch(err) {
+        return next(err);
     }        
 }
 

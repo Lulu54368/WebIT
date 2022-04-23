@@ -1,8 +1,10 @@
 //This is transformation of data structure for futher use
-const patient_data = require("../../models/patient_sample.js");
-var patient_comment_list = []
-patient_data.forEach((element) => {
+const patient_comment_list = (patient_data) => {
+    var patient_comment_list = []
+    console.log(patient_data);
+    patient_data.forEach((element) => {
     const data = element.data;
+    console.log(data);
     data.forEach((attr)=>{
         const component = {
             "id": element.id,
@@ -17,6 +19,9 @@ patient_data.forEach((element) => {
         patient_comment_list.push(component)
     })
     
-});
-const patient_comment = patient_comment_list;
-module.exports = patient_comment;
+    });
+    return patient_comment_list;
+
+}
+
+module.exports = patient_comment_list;
