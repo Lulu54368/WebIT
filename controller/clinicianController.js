@@ -8,14 +8,14 @@ const Patient = Patients.Patients; //patient model
 //const Patient_Data_Schema = Patients.Patient_data_schema; //schema
 //const Data_Schema = Patients.Data_schema;
 const clinician_data = require("../models/clinician_sample.js");
-const patients_comment_list = require("./utils/patient_comment");
+const patient_comment_list = require("./utils/patient_comment");
 
 const Patient_Threshold = require("../models/patient_threshold");
-const patients_threshold_list = require("./utils/patient_threshold");
+const patient_threshold_list = require("./utils/patient_threshold");
 const patients_threshold = require("../models/patient_threshold_sample");
 
 const patients_input = require("../models/patient_input_sample");
-const patient_comment = require("./utils/patient_comment");
+const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
 
 //const patients_message_list = require("../models/utils/patient_message");
@@ -150,7 +150,7 @@ const getAllComments = async(req, res, next)=>{
             
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
             patients.filter((patient) => patient_id_list.includes(patient._id));
-            const patients_comment = patients_comment_list(patients); // the argument patients was filtered on the above line
+            const patients_comment = patient_comment_list(patients); // the argument patients was filtered on the above line
             // and now passed as an argument specified in /utils/patient_comment.js
             console.log(patients_comment);
             // patient_comment is each from the partial, patients_comment is the filtered comment
@@ -183,7 +183,7 @@ const getAllThreshold = async (req, res, next)=>{
             //console.log("patient_id_list = " + patient_id_list);
             //console.log("patient_thresholds = " + patient_thresholds);
             patient_thresholds.filter((threshold) => patient_id_list.includes(threshold.id));
-            const patients_threshold = patients_threshold_list(patient_thresholds);  // the argument patient_thresholds was filtered on the above line
+            const patients_threshold = patient_threshold_list(patient_thresholds);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
             console.log(patients_threshold);
             res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
@@ -217,32 +217,38 @@ const modifyThreshold = (req, res)=>{
     }
 }
 
-//This function get comments for all patients
-const getSupportSentence = (req, res)=>{
-    // Get the clinician if the patient's id is found in clinician's patient ID list
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const today = new Date().toLocaleDateString();
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        // include the patient data only if the patient id is included in the patient_id_list
-        const patient_data = patients_data.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
-        
-        if (!patient_data.viewed) {
-            // patient_message is each from the partial, patients_message is the filtered message
-            res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patient_data});
-            patient_data.viewed = true;
-        }
-        else {
-            res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
-        }
+//This function get support messages for all patients
+const getSupportSentence = async (req, res, next)=>{
+    try {
+        // Find the clinician by matching the http:/clinician_id with the database clinician id 
+        const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
+        const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
+        const today = new Date().toLocaleDateString();
+        if (clinician) {
+            // copy the patient's id list stored in the clinician
+            var patient_id_list = clinician.patients;
+            patient_id_list = patient_id_list.map((id)=>id.toString());
 
-    }
-    else{
-        res.send("can not find the clinician");
-    }
+            // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
+            patients.filter((patient) => patient_id_list.includes(patient._id));
+            const patients_message = patient_message_list(patients); // the argument patients was filtered on the above line
+            // the patient hasn't viewed the message
+            if (!patients_message.viewed) {
+                console.log(patients_message);
+                res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patients_message});
+                patients_message.viewed = true;
+            } else {
+                res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
+            }
         
+        } else {
+            res.sendStatus(404);
+        }
+        
+    } catch(err) {
+        return next(err);
+    }
+           
 }
 
 //This function add support messages for the specific patient
