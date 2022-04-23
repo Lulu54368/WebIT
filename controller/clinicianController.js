@@ -10,11 +10,13 @@ const Patient = Patients.Patients; //patient model
 const clinician_data = require("../models/clinician_sample.js");
 const patients_comment_list = require("./utils/patient_comment");
 
+const Patient_Threshold = require("../models/patient_threshold");
 const patients_threshold_list = require("./utils/patient_threshold");
 const patients_threshold = require("../models/patient_threshold_sample");
 
 const patients_input = require("../models/patient_input_sample");
 const patient_comment = require("./utils/patient_comment");
+const { sendStatus } = require("express/lib/response");
 
 //const patients_message_list = require("../models/utils/patient_message");
 
@@ -136,20 +138,20 @@ const changeInput = (req, res)=>{
 //This function get comments for all patients
 const getAllComments = async(req, res, next)=>{   
     try {
-        // Get the clinician if the patient's id is found in clinician's patient ID list
-        const clinician = await Clinician.findById(req.params.clinician_id).lean()  // Clinician model
-        const patients = await Patient.find().lean();  // taken from /models/patient
-        //const data_schema = await Data_Schema.find().lean();  // taken from /models/patient
+        // Find a single clinician by matching the http:/clinician_id with the database clinician id 
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();  // Clinician model taken from /models/clinician
+        const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
         const today = new Date().toLocaleDateString();
-
+        // The clinician is valid
         if(clinician){
+            // copy the patient's id list stored in the clinician
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
             
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
             patients.filter((patient) => patient_id_list.includes(patient._id));
             const patients_comment = patients_comment_list(patients); // the argument patients was filtered on the above line
-            // and now passed as an argument specified in /utils/patient_medical_data.js
+            // and now passed as an argument specified in /utils/patient_comment.js
             console.log(patients_comment);
             // patient_comment is each from the partial, patients_comment is the filtered comment
             res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
@@ -163,22 +165,35 @@ const getAllComments = async(req, res, next)=>{
     }        
 }
 
-//This function get comments for all patients
-const getAllThreshold = (req, res)=>{
-    // Get the clinician if the patient's id is found in clinician's patient ID list
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const today = new Date().toLocaleDateString();
-    if(clinician){
-        const patient_id_list = clinician.patients;
-        // include the patient data only if the patient id is included in the patient_id_list
-        const patients_threshold = patients_threshold_list.filter((patient)=>
-        patient_id_list.includes(patient.id)
-        )
-        // patient_threshold is each from the partial, patients_threshold is the filtered threshold
-        res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
-    }
-    else{
-        res.send("can not find the clinician");
+//This function get thresholds for all patients
+const getAllThreshold = async (req, res, next)=>{
+    try {
+        // Find the clinician by matching the http:/clinician_id with the database clinician id 
+        const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
+        const patient_thresholds = await Patient_Threshold.find().lean();
+        console.log("patient_thresholds = " + patient_thresholds);
+        const today = new Date().toLocaleDateString();
+        // the clinician is valid
+        if(clinician) {
+            // copy the patient's id list stored in the clinician
+            var patient_id_list = clinician.patients;
+            patient_id_list = patient_id_list.map((id)=>id.toString());
+
+            // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
+            //console.log("patient_id_list = " + patient_id_list);
+            //console.log("patient_thresholds = " + patient_thresholds);
+            patient_thresholds.filter((threshold) => patient_id_list.includes(threshold.id));
+            const patients_threshold = patients_threshold_list(patient_thresholds);  // the argument patient_thresholds was filtered on the above line
+            // and now passed as an argument specified in /utils/patient_threshold.js
+            console.log(patients_threshold);
+            res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
+        }
+        else {
+            sendStatus(404);
+        }
+    } 
+    catch(err) {
+        return next(err);
     }
         
 }

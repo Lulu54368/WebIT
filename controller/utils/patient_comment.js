@@ -1,6 +1,6 @@
 //This is transformation of data structure for futher use
 const patient_comment_list = (patient_data) => {
-    var patient_comment_list = []
+    var patient_comment_ls = []
     console.log(patient_data);
     patient_data.forEach((element) => {
     const data = element.data;
@@ -16,11 +16,11 @@ const patient_comment_list = (patient_data) => {
             "insulin_intake": attr.insulin_intake.comment
 
         }
-        patient_comment_list.push(component)
+        patient_comment_ls.push(component)
     })
     
     });
-    return patient_comment_list;
+    return patient_comment_ls;
 
 }
 

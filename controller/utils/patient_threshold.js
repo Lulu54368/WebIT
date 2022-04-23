@@ -1,8 +1,10 @@
 //This is transformation of data structure for futher use
-const patient_threshold_data = require("../../models/patient_threshold_sample.js");
-var patient_threshold_list = []
-patient_threshold_data.forEach((element) => {
-    const threshold = element.threshold;
+const patient_threshold_list = (patient_threshold_data) => {
+    var patient_threshold_ls = []
+    console.log(patient_threshold_data);
+    patient_threshold_data.forEach((element) => {
+        const threshold = element.threshold;
+        console.log(threshold);
         const component = {
             "id": element.id,
             "blood_level_u": threshold.blood_level.upper_bound,
@@ -13,11 +15,11 @@ patient_threshold_data.forEach((element) => {
             "insulin_intake_l": threshold.insulin_intake.lower_bound,
             "exercise_u": threshold.exercise.upper_bound,
             "exercise_l": threshold.exercise.lower_bound
-
-
         }
-        patient_threshold_list.push(component)
+        patient_threshold_ls.push(component)
     
-});
-const patient_threshold = patient_threshold_list;
-module.exports = patient_threshold;
+    });
+    return patient_threshold_ls;
+}
+
+module.exports = patient_threshold_list;

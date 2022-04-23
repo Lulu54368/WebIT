@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const patient_threshold = require("../controller/utils/patient_threshold");
+//const patient_threshold = require("../controller/utils/patient_threshold");
 mongoose.connect(process.env.MONGO_URL);
 //refer to subdocument
 const Schema = mongoose.Schema;
@@ -57,7 +57,7 @@ const PatinetThreshold = new Schema({
     }
 });
 //This is data for patient input
-const Patient_threshold = mongoose.model("patientThreshold", patient_threshold);
+const Patient_threshold = mongoose.model("patient_threshold", PatinetThreshold);
 
 
 module.exports = Patient_threshold;
