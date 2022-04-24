@@ -71,14 +71,15 @@ const addTodayData = async (req, res)=>{
             patient.data.push(data);
         }
         //connect here to the database
-        const attributes = await Patient_input.find({id: req.params.patient_id});
+        const attributes = await Patient_input.findOne({id: req.params.patient_id});
+        console.log(attributes);
         attributes.input.forEach(attr => {
             data[attr] = req.body[attr];
         });
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
-        Patient.findByIdAndUpdate(patient_id, {data: patient.data});
+        Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
         res.send(patient.data);
     }
     //redirect here
