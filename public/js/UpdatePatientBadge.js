@@ -25,3 +25,7 @@ function isNumeric(str) {
     !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
 }
 submitCheck()
+
+function submitStats(){
+  console.log("hello from submit stats")
+}
