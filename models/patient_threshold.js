@@ -52,11 +52,13 @@ const PatinetThreshold = new Schema({
         {
             "upper_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: Infinity
             },
             "lower_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: 0
             }
         }
     }
