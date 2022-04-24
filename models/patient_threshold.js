@@ -13,12 +13,13 @@ const PatinetThreshold = new Schema({
         "blood_level": {
             "upper_bound": {
                 type: Number,
-                required: false
-                
+                required: false,
+                default: Infinity
             },
             "lower_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: 0
             }
         }
         ,
@@ -26,21 +27,25 @@ const PatinetThreshold = new Schema({
         "weight":{
             "upper_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: Infinity
             },
             "lower_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: 0
             }
         },
         "insulin_intake":{
             "upper_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: Infinity
             },
             "lower_bound": {
                 type: Number,
-                required: false
+                required: false,
+                default: 0
             }
         },
         "exercise":
