@@ -62,7 +62,7 @@ const PatinetThreshold = new Schema({
     }
 });
 //This is data for patient input
-const Patient_threshold = mongoose.model("patient_thresholds", PatinetThreshold);
+const Patient_threshold = mongoose.model("patient_threshold", PatinetThreshold);
 
 
 module.exports = Patient_threshold;

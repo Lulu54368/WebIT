@@ -17,6 +17,7 @@ const patients_threshold = require("../models/patient_threshold_sample");
 const patients_input = require("../models/patient_input_sample");
 const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
+const Patient_input = require("../models/patient_input");
 
 //const patients_message_list = require("../models/utils/patient_message");
 
@@ -90,17 +91,19 @@ const addOnePatient = async(req, res)=>{
             else{
                 const newemail = req.body.email;
                 const currPatient = await Patient.findOne({email: newemail}).lean();
-                if(currPatient!= "{}"){
+                if(currPatient!= null){
                     
-                    res.send("already exist")
+                    res.send(currPatient);
                 }
                 else{
                 
                     newPatient = await new Patient(newPatient);
                    
                     clinician.patients.push(newPatient._id);
-                    clinician.save();
+                    await Clinician.findByIdAndUpdate(req.params.clinician_id, {patients: clinician.patients});
                     newPatient.save();
+                    await Patient_Threshold.create({id: newPatient._id});
+                    await Patient_input.create({id: newPatient._id});
                     res.send(newPatient);
                 }
 
