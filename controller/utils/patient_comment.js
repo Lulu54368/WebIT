@@ -1,10 +1,10 @@
 //This is transformation of data structure for futher use
 const patient_comment_list = (patient_data) => {
     var patient_comment_ls = []
-    console.log(patient_data);
+    console.log("line 4 utils/patient_comment patient_data: " + patient_data);
     patient_data.forEach((element) => {
     const data = element.data;
-    console.log(data);
+    console.log("line 7 utils/patient_comment data: " + data);
     data.forEach((attr)=>{
         const component = {
             "id": element.id,

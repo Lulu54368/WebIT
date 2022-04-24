@@ -1,7 +1,7 @@
 //This is transformation of data structure for futher use
 const patient_message_list = (patient_data) => {
     var patient_message_ls = []
-    console.log(patient_data);
+    console.log("line 4 /utils/patient_message.js patient_data " + patient_data);
     patient_data.forEach((element) => {
         //const today = new Date().toLocaleDateString();
         const component = {

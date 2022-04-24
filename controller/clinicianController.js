@@ -18,6 +18,7 @@ const patients_input = require("../models/patient_input_sample");
 const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
 const Patient_input = require("../models/patient_input");
+const Patient_threshold = require("../models/patient_threshold");
 
 //const patients_message_list = require("../models/utils/patient_message");
 
@@ -155,7 +156,7 @@ const getAllComments = async(req, res, next)=>{
             patients.filter((patient) => patient_id_list.includes(patient._id));
             const patients_comment = patient_comment_list(patients); // the argument patients was filtered on the above line
             // and now passed as an argument specified in /utils/patient_comment.js
-            console.log(patients_comment);
+            console.log("line 158 clinicianController patients_comment = " + patients_comment);
             // patient_comment is each from the partial, patients_comment is the filtered comment
             res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
         }
@@ -174,7 +175,7 @@ const getAllThreshold = async (req, res, next)=>{
         // Find the clinician by matching the http:/clinician_id with the database clinician id 
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
-        console.log("patient_thresholds = " + patient_thresholds);
+        console.log("line 177 clinicianController patient_thresholds = " + patient_thresholds);
         const today = new Date().toLocaleDateString();
         // the clinician is valid
         if(clinician) {
@@ -188,7 +189,7 @@ const getAllThreshold = async (req, res, next)=>{
             patient_thresholds.filter((threshold) => patient_id_list.includes(threshold.id));
             const patients_threshold = patient_threshold_list(patient_thresholds);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
-            console.log(patients_threshold);
+            console.log("line 191 clinicianController patient_threshold = " + patients_threshold);
             res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
         }
         else {
@@ -203,7 +204,68 @@ const getAllThreshold = async (req, res, next)=>{
 
 
 //This function change the thresholds the clinician set for patients
-const modifyThreshold = (req, res)=>{
+const modifyThreshold = async (req, res, next)=>{
+    try {
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        const patient_thresholds = await Patient_Threshold.find().lean(); // get all patient_threholds from database
+        console.log("line 211 clinicianController modifyThreshold patient_thresholds = " + patient_thresholds);
+        // define the entire Threshold object for processing, consiting of "id":{} and "threshold": {}
+        var newThreshold = req.body;
+
+        if (clinician) {
+            if (JSON.stringify(newThreshold) == '{}') {
+                res.send("No threshold was sent");
+            } else {
+                const patient_id = newThreshold.id; // take the patient_id passed in the http params   
+                var curr_threshold = await Patient_Threshold.findOne({id: patient_id}) // find the existing threshold
+                console.log("line 221 clinicianController modifyThreshold patient_id = " + patient_id + " curr_threshold = " + curr_threshold);
+                // this is the first time the threshold is being added (does not exist yet), add this to database
+                if (!curr_threshold) {
+                    newThreshold = await new Patient_Threshold(newThreshold);
+                    newThreshold.save();
+                    res.send(newThreshold);
+                } else {
+                    var threshold = curr_threshold.threshold;
+                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold + "length = " + Object.keys(threshold).length);
+                    var record_count = 0;
+                    var bound_count = 0;
+                    if (patient_id && threshold) {
+                        for (var record in threshold) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
+                            bound_count = 0;
+                            record_count ++;
+                            if (record_count > Object.keys(threshold).length) {  // to avoid redundant attributes being triggered
+                                break;
+                            }
+                            console.log("record = " + record, " record object = " + threshold[record]);
+                            for (var bound in threshold[record]) {
+                                bound_count ++;
+                                if (bound_count > Object.keys(threshold[record]).length) {  // to avoid redundant attributes being triggered
+                                    break;
+                                }
+                                console.log("bound = " + bound);
+                                threshold[record][bound] = newThreshold["threshold"][record][bound];
+                            }
+                        }
+                        // update to database
+                        curr_threshold.save();
+                        res.send(threshold);
+                    } else {
+                        res.send("can not find the patient");
+                    }
+                }
+
+            }
+
+        } else {
+            res.sendStatus(404);
+        }
+
+    } catch (err) {
+        return next(err);
+    }
+    
+    
+/*    
     // find the patient of the clinician and check whether it's exist 
     const clinician = clinician_data.find((one)=>one.id == req.params.id);
     const patient_id_list = clinician.patients;
@@ -218,6 +280,7 @@ const modifyThreshold = (req, res)=>{
     else{
         res.send("can not find the patient");
     }
+*/
 }
 
 //This function get support messages for all patients
@@ -237,7 +300,7 @@ const getSupportSentence = async (req, res, next)=>{
             const patients_message = patient_message_list(patients); // the argument patients was filtered on the above line
             // the patient hasn't viewed the message
             if (!patients_message.viewed) {
-                console.log(patients_message);
+                console.log("line 240 clinicianController patients_message = " + patients_message);
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patients_message});
                 patients_message.viewed = true;
             } else {
