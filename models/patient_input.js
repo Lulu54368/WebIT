@@ -13,7 +13,7 @@ const patient_input = new Schema({
 
 })
 //This is data for patient input
-const Patient_input = mongoose.model("patientInput", patient_input);
+const Patient_input = mongoose.model("patientinputs", patient_input);
 
 
 module.exports = Patient_input;
