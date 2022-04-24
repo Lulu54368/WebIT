@@ -225,30 +225,35 @@ const modifyThreshold = async (req, res, next)=>{
                     newThreshold.save();
                     res.send(newThreshold);
                 } else {
-                    var threshold = curr_threshold.threshold;
-                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold + "length = " + Object.keys(threshold).length);
+                    var threshold_object = curr_threshold.threshold;
+                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold_object + "length = " + Object.keys(threshold_object).length);
                     var record_count = 0;
                     var bound_count = 0;
-                    if (patient_id && threshold) {
-                        for (var record in threshold) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
+                    if (patient_id && threshold_object) {
+                        for (var record in threshold_object) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
                             bound_count = 0;
                             record_count ++;
-                            if (record_count > Object.keys(threshold).length) {  // to avoid redundant attributes being triggered
+                            if (record_count > Object.keys(threshold_object).length) {  // to avoid redundant attributes being triggered
                                 break;
                             }
-                            console.log("record = " + record, " record object = " + threshold[record]);
-                            for (var bound in threshold[record]) {
+                            console.log("record = " + record, " record object = " + threshold_object[record]);
+                            for (var bound in threshold_object[record]) {
                                 bound_count ++;
-                                if (bound_count > Object.keys(threshold[record]).length) {  // to avoid redundant attributes being triggered
+                                if (bound_count > Object.keys(threshold_object[record]).length) {  // to avoid redundant attributes being triggered
                                     break;
                                 }
                                 console.log("bound = " + bound);
-                                threshold[record][bound] = newThreshold["threshold"][record][bound];
+                                curr_threshold.update({"_id": curr_threshold._id},
+                                    {$set: {
+                                    "threshold.record.bound": newThreshold["threshold"][record][bound]}
+                                })
+                                //console.log("line 250 curr_threshold._id = " + curr_threshold._id);
+                                //threshold[record][bound] = newThreshold["threshold"][record][bound];
                             }
                         }
                         // update to database
-                        curr_threshold.save();
-                        res.send(threshold);
+                        //curr_threshold.save();
+                        res.send(curr_threshold.threshold);
                     } else {
                         res.send("can not find the patient");
                     }
