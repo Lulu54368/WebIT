@@ -4,7 +4,7 @@ mongoose.connect(process.env.MONGO_URL);
 //refer to subdocument
 const Schema = mongoose.Schema;
 const PatinetThreshold = new Schema({
-    "id": {
+    "id": {  // patient's id
         type: Schema.Types.ObjectId,
         required: true
     },
