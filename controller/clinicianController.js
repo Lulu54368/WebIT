@@ -18,7 +18,6 @@ const patients_input = require("../models/patient_input_sample");
 const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
 const Patient_input = require("../models/patient_input");
-const Patient_threshold = require("../models/patient_threshold");
 
 //const patients_message_list = require("../models/utils/patient_message");
 
@@ -184,6 +183,7 @@ const getAllThreshold = async (req, res, next)=>{
         // Find the clinician by matching the http:/clinician_id with the database clinician id 
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
+        const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
         console.log("line 177 clinicianController patient_thresholds = " + patient_thresholds);
         const today = new Date().toLocaleDateString();
         // the clinician is valid
@@ -191,14 +191,24 @@ const getAllThreshold = async (req, res, next)=>{
             // copy the patient's id list stored in the clinician
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
-
+            console.log("line 194 patient_id_list = ");
+            console.log(patient_id_list);
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
-            //console.log("patient_id_list = " + patient_id_list);
-            //console.log("patient_thresholds = " + patient_thresholds);
-            patient_thresholds.filter((threshold) => patient_id_list.includes(threshold.id));
-            const patients_threshold = patient_threshold_list(patient_thresholds);  // the argument patient_thresholds was filtered on the above line
+            var filtered_id_list = [];
+            var filtered_thresholds = patient_thresholds.filter((threshold) => {
+                if (patient_id_list.includes(threshold.id.toString())) {
+                    filtered_id_list.push(threshold.id.toString());  // add the threshold ids associated with patients under the current clinician
+                }
+                return patient_id_list.includes(threshold.id.toString()) });
+
+            var filtered_patients = patients.filter((patient) => {  // find the patients with the matching threshold ids
+                console.log(patient);
+                return filtered_id_list.includes(patient._id.toString()) });    
+            console.log("line 209 filtered patients = ")
+            console.log(filtered_patients);
+            const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
-            console.log("line 191 clinicianController patient_threshold = " + patients_threshold);
+            console.log("line 213 clinicianController patient_threshold = " + patients_threshold);
             res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
         }
         else {
@@ -206,7 +216,7 @@ const getAllThreshold = async (req, res, next)=>{
         }
     } 
     catch(err) {
-        return next(err);
+        return (err);
     }
         
 }
