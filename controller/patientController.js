@@ -79,16 +79,13 @@ console.log("newData", newData)
             
             patient.data.push(data);
         }
-        //connect here to the database :
-        console.log(req.params.patient_id)
-        const attributes = await Patient_input.findOne({id: req.params.patient_id});
-        console.log(attributes);
-        attributes.input.forEach(attr => {
-            let attr_data = attr + "_data";
-            let attr_comment = attr + "_comment";
-            data[attr].data = req.body[attr_data];
-            data[attr].comment = req.body[attr_comment];
-        });
+        //connect here to the database : //temporarily removed patient input is missing patients
+       // console.log(req.params.patient_id)
+       // const attributes = await Patient_input.findOne({id: req.params.patient_id});
+       // console.log(attributes);
+       // attributes.input.forEach(attr => {
+       //     data[attr] = req.body[attr];
+       // });
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
