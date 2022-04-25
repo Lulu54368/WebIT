@@ -1,12 +1,13 @@
 const patients_data = require("../models/patient_sample.js");
 const patient_input = require("../models/patient_input_sample");
+const Patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
-const getCurrData = (req, res)=>{
-    const patient = patients_data.find((one)=> one.id == req.params.id);
+const getCurrData = async (req, res)=>{
+    const patient = await Patient.findById(req.params.patient_id);
     const today = new Date().toLocaleDateString();
     var today_data = patient.data.find(
         (one)=>(one.date == today)
@@ -38,17 +39,17 @@ const getCurrData = (req, res)=>{
     }
    
    
-    res.render("../views/layouts/patienthomepage.hbs", 
+    res.render("../views/layouts/patienthomepage.hbs",
     {name: patient.name,
     message: patient.message, data: today_data, today_date: today});
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
-     patient = await Patient.findById(req.params.patient_id);
+    patient = await Patient.findById(req.params.patient_id);
     const newData = req.body;
 
     if(JSON.stringify(newData) != "{}"){
-        console.log(patient);
+        
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
         if(!data){
             data = {
@@ -70,14 +71,18 @@ const addTodayData = async (req, res)=>{
             patient.data.push(data);
         }
         //connect here to the database
-        const attributes = patient_input.find((one)=>one.id == req.params.patient_id);
+        const attributes = await Patient_input.findOne({id: req.params.patient_id});
+        console.log(attributes);
         attributes.input.forEach(attr => {
-            data[attr] = req.body[attr];
+            let attr_data = attr + "_data";
+            let attr_comment = attr + "_comment";
+            data[attr].data = req.body[attr_data];
+            data[attr].comment = req.body[attr_comment];
         });
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
-        patient.save();
+        Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
         res.send(patient.data);
     }
     //redirect here
