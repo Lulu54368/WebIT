@@ -3,7 +3,7 @@ const patient_threshold = require("../controller/utils/patient_threshold");
 mongoose.connect(process.env.MONGO_URL);
 //refer to subdocument
 const Schema = mongoose.Schema;
-const PatinetThreshold = new Schema({
+const PatientThreshold = new Schema({
     "id": {
         type: Schema.Types.ObjectId,
         required: true
@@ -57,7 +57,7 @@ const PatinetThreshold = new Schema({
     }
 });
 //This is data for patient input
-const Patient_threshold = mongoose.model("patientThreshold", patient_threshold);
+const Patient_threshold = mongoose.model("patient_thresholds", PatientThreshold);
 
 
 module.exports = Patient_threshold;

@@ -8,6 +8,7 @@ const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
 const getCurrData = async (req, res)=>{
     const patient = await Patient.findById(req.params.patient_id);
+    const threshold = await Patient_Threshod.findOne({id: req.params.patient_id}).threshold;
     const today = new Date().toLocaleDateString();
     var today_data = patient.data.find(
         (one)=>(one.date == today)
@@ -38,10 +39,10 @@ const getCurrData = async (req, res)=>{
 
     }
    
-   
+    
     res.render("../views/layouts/patienthomepage.hbs",
     {name: patient.name,
-    message: patient.message, data: today_data, today_date: today});
+    message: patient.message, data: today_data, today_date: today, threshold: threshold});
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{

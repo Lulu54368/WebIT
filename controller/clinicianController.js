@@ -15,6 +15,7 @@ const patients_threshold = require("../models/patient_threshold_sample");
 
 const patients_input = require("../models/patient_input_sample");
 
+const Patient_Threshod = require("../models/patient_threshold");
 //const patients_message_list = require("../models/utils/patient_message");
 
 //This function get medical data for all patients
@@ -27,15 +28,18 @@ const getAllPatients = async(req, res)=>{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         const patients = await Patient.find().lean();
-        
+        const threshold = await Patient_Threshod.find().lean();
         if(clinician){
             
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
             
             patients.filter((patient)=>patient_id_list.includes(patient._id));
-            const patient_medical_data = patient_medical_list(patients);
-            console.log(patient_medical_data);
+          
+            threshold.filter((threshold)=>patient_id_list.includes(threshold.id)); //find the patients' threshold 
+           
+            const patient_medical_data = patient_medical_list(patients, threshold);
+            
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data});
         }
