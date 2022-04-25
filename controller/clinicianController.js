@@ -40,12 +40,12 @@ const getAllPatients = async(req, res)=>{
             console.log("before filter = " + patients);
             patient_id_list = patient_id_list.map((id)=>id.toString());
             // filter to include only patients whose id are stored under a certain clinician
-            patients.filter((patient)=> { 
+            var filtered_patients = patients.filter((patient)=> { 
                 console.log(patient._id.toString());
-                return patient_id_list.includes((patient._id).toString()) });  // toString doesn't work, should fix later
-            console.log("after filter = " + patients);
+                return patient_id_list.includes((patient._id).toString()) }); 
+            console.log("after filter = " + filtered_patients);
             
-            const patient_medical_data = patient_medical_list(patients); // the argument patients was filtered on the last line
+            const patient_medical_data = patient_medical_list(filtered_patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
             console.log("patient_medical_data = " + patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
@@ -159,9 +159,11 @@ const getAllComments = async(req, res, next)=>{
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
             
-            // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
-            patients.filter((patient) => patient_id_list.includes(patient._id));
-            const patients_comment = patient_comment_list(patients); // the argument patients was filtered on the above line
+            // filter to include only patients whose id are stored under a certain clinician
+            var filtered_patients = patients.filter((patient)=> { 
+                return patient_id_list.includes((patient._id).toString()) }); 
+
+            const patients_comment = patient_comment_list(filtered_patients); // the argument patients was filtered on the above line
             // and now passed as an argument specified in /utils/patient_comment.js
             console.log("line 158 clinicianController patients_comment = " + patients_comment);
             // patient_comment is each from the partial, patients_comment is the filtered comment
@@ -288,8 +290,9 @@ const getSupportSentence = async (req, res, next)=>{
             patient_id_list = patient_id_list.map((id)=>id.toString());
 
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
-            patients.filter((patient) => patient_id_list.includes(patient._id.toString)); // toString doesn't work, should fix later
-            const patients_message = patient_message_list(patients); // the argument patients was filtered on the above line
+            var filtered_patients = patients.filter((patient)=> { 
+                return patient_id_list.includes((patient._id).toString()) }); 
+            const patients_message = patient_message_list(filtered_patients); // the argument patients was filtered on the above line
             // the patient hasn't viewed the message
             if (!patients_message.viewed) {
                 console.log("line 240 clinicianController patients_message = " + patients_message);
