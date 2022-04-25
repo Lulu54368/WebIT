@@ -45,9 +45,11 @@ const getCurrData = async (req, res)=>{
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
+  // console.log("now sending data to mongodb")
     patient = await Patient.findById(req.params.patient_id);
+  // console.log(patient)
     const newData = req.body;
-
+console.log("newData", newData)
     if(JSON.stringify(newData) != "{}"){
         
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
@@ -55,22 +57,30 @@ const addTodayData = async (req, res)=>{
             data = {
                 "date": new Date().toLocaleDateString(),
                 "blood_level": {
-                    
+                    data:newData.bloodLevelData,
+                    comment:newData.bloodLevelComment
                 },
                 "weight":{
+                    data:newData.weightData,
+                    comment:newData.weightComment
                     
                 },
                 "insulin_intake": {
+                    data:newData.insulinIntakeData,
+                    comment:newData.insulinIntakeComment
                    
                 },
                 "exercise":{
+                    data:newData.exerciseData,
+                    comment:newData.exerciseComment
                     
                 }
             };
             
             patient.data.push(data);
         }
-        //connect here to the database
+        //connect here to the database :
+        console.log(req.params.patient_id)
         const attributes = await Patient_input.findOne({id: req.params.patient_id});
         console.log(attributes);
         attributes.input.forEach(attr => {
@@ -82,8 +92,16 @@ const addTodayData = async (req, res)=>{
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
-        Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
-        res.send(patient.data);
+       // console.log(patient.data)
+        await Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
+       // res.send(patient.data);
+        const today = new Date().toLocaleDateString();
+        var today_data = patient.data.find(
+            (one)=>(one.date == today)
+        );
+        res.render("../views/layouts/patienthomepage.hbs",
+            {name: patient.name,
+                message: patient.message, data: today_data, today_date: today, isAllComplete:true});
     }
     //redirect here
   

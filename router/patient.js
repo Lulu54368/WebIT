@@ -9,5 +9,5 @@ patientRouter.get("/:patient_id/data", patientController.getCurrData);
 
 
 //add current patient's data
-patientRouter.post("/:patient_id", patientController.addTodayData);
+patientRouter.post("/:patient_id/data", patientController.addTodayData);
 module.exports = patientRouter;
