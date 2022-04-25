@@ -224,36 +224,33 @@ const modifyThreshold = async (req, res, next)=>{
                     newThreshold = await new Patient_Threshold(newThreshold);
                     newThreshold.save();
                     res.send(newThreshold);
+                
+                // if threshold record has been initialised in database, update it. Assume the request body contains all 4 record attributes and 8 bounds 
                 } else {
-                    var threshold_object = curr_threshold.threshold;
-                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold_object + "length = " + Object.keys(threshold_object).length);
+                    var threshold = curr_threshold.threshold;
+                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold + "length = " + Object.keys(threshold).length);
                     var record_count = 0;
                     var bound_count = 0;
-                    if (patient_id && threshold_object) {
-                        for (var record in threshold_object) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
+                    if (patient_id && threshold) {
+                        for (var record in threshold) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
                             bound_count = 0;
                             record_count ++;
-                            if (record_count > Object.keys(threshold_object).length) {  // to avoid redundant attributes being triggered
+                            if (record_count > Object.keys(threshold).length) {  // to avoid redundant attributes being triggered
                                 break;
                             }
-                            console.log("record = " + record, " record object = " + threshold_object[record]);
-                            for (var bound in threshold_object[record]) {
+                            console.log("record = " + record, " record object = " + threshold[record]);
+                            for (var bound in threshold[record]) {
                                 bound_count ++;
-                                if (bound_count > Object.keys(threshold_object[record]).length) {  // to avoid redundant attributes being triggered
+                                if (bound_count > Object.keys(threshold[record]).length) {  // to avoid redundant attributes being triggered
                                     break;
                                 }
                                 console.log("bound = " + bound);
-                                curr_threshold.update({"_id": curr_threshold._id},
-                                    {$set: {
-                                    "threshold.record.bound": newThreshold["threshold"][record][bound]}
-                                })
-                                //console.log("line 250 curr_threshold._id = " + curr_threshold._id);
-                                //threshold[record][bound] = newThreshold["threshold"][record][bound];
+                                threshold[record][bound] = newThreshold["threshold"][record][bound];
                             }
                         }
                         // update to database
-                        //curr_threshold.save();
-                        res.send(curr_threshold.threshold);
+                        curr_threshold.save();
+                        res.send(threshold);
                     } else {
                         res.send("can not find the patient");
                     }
@@ -269,23 +266,6 @@ const modifyThreshold = async (req, res, next)=>{
         return next(err);
     }
     
-    
-/*    
-    // find the patient of the clinician and check whether it's exist 
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const patient_id_list = clinician.patients;
-   // .id refers to clinician id, .patient_id refers to patient id
-    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
-    // get the data the patient is required to enter
-    const patient_threshold = patients_threshold.find((one)=> one.id == req.params.patient_id);
-    if(patient && patient_threshold){
-        patient_threshold.threshold = req.body.threshold;
-        res.send(patient_threshold);
-    }
-    else{
-        res.send("can not find the patient");
-    }
-*/
 }
 
 //This function get support messages for all patients
