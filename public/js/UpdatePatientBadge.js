@@ -14,9 +14,9 @@ function submitCheck(){
   document.getElementById("insulin").checked = isNumeric(insulin)
   if(isAllComplete)
   {
-    document.getElementById("badge").style.display = "block"
+  //  document.getElementById("badge").style.display = "block"
   } else {
-    document.getElementById("badge").style.display = "none"
+ //   document.getElementById("badge").style.display = "none"
   }
 }
 function isNumeric(str) {
@@ -26,6 +26,14 @@ function isNumeric(str) {
 }
 submitCheck()
 
-function submitStats() {
-  console.log("hello from submitStats")
+function submitPatientDataForm (event) {
+  event.preventDefault()
+  var pathName=window.location.pathname
+  var splitPath=pathName.split("/")
+  var patientID=splitPath[2]
+  var request = new XMLHttpRequest();
+  var url = ""
+  request.open('POST', url);
+  request.send(new FormData(event.target));
 }
+//document.getElementById("patientDataForm").addEventListener("submit", submitPatientDataForm)

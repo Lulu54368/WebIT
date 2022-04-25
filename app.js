@@ -14,8 +14,11 @@ app.engine('hbs', exphbs.engine({
 // Load envioronment variables 
 if (process.env.NODE_ENV !== 'production') { 
     require('dotenv').config() 
-} 
-
+}
+//lets anything in the form
+app.use(express.urlencoded({
+    extended: true
+}))
 // middleware to log a message each time a request arrives at the server - handy for debugging
 app.use((req,res,next) => {
     console.log('message arrived: ' + req.method + ' ' + req.path)

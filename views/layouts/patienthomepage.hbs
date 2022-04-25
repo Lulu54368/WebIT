@@ -66,37 +66,39 @@
       <section>
         <div class = "sectionborder">
           <h3>Record today's data</h3>
+            <form action="" method="POST" id=patientDataForm">
           <table>
 
             <tr>
               <td>Blood glucose level(mmol/L)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_bgl" value={{data.blood_level.data}}></td>
+              <td><input type="text" placeholder="Enter data..." name="bloodLevelData" id="patientdata_bgl" value={{data.blood_level.data}}></td>
 
-              <td><input type="text" placeholder="Enter Comment..." id="patientcmt_bgl" value={{data.blood_level.comment}}></td>
+              <td><input type="text" placeholder="Enter Comment..." name="bloodLevelComment" id="patientcmt_bgl" value={{data.blood_level.comment}}></td>
             </tr>
 
             <tr>
               <td>Your weight(kg)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_weight" value={{data.weight.data}}></td>
+              <td><input type="text" placeholder="Enter data..." name="weightData" id="patientdata_weight" value={{data.weight.data}}></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_weight" value={{data.weight.comment}}></td>
+                <td><input type="text" placeholder="Enter Comment..." name="weightComment" id="patientcmt_weight" value={{data.weight.comment}}></td>
             </tr>
 
             <tr>
               <td>Doses of insulin taken(doses)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_insulin" value={{data.insulin_intake.data}}></td>
+              <td><input type="text" placeholder="Enter data..." name="insulinData" id="patientdata_insulin" value={{data.insulin_intake.data}}></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_insulin" value={{data.insulin_intake.comment}}></td>
+                <td><input type="text" placeholder="Enter Comment..." name="insulinComment" id="patientcmt_insulin" value={{data.insulin_intake.comment}}></td>
             </tr>
 
             <tr>
               <td>Exercise(step count)</td>
-              <td><input type="text" placeholder="Enter data..." id="patientdata_exercise" value={{data.exercise.data}}></td>
+              <td><input type="text" placeholder="Enter data..." name="exerciseData" id="patientdata_exercise" value={{data.exercise.data}}></td>
   
-                <td><input type="text" placeholder="Enter Comment..." id="patientcmt_exercise" value={{data.exercise.comment}}></td>
+                <td><input type="text" placeholder="Enter Comment..." name="exerciseComment"id="patientcmt_exercise" value={{data.exercise.comment}}></td>
             </tr>
           </table>
-            <button onclick="submitStats()">Submit</button>
+            <button type="submit" >Submit</button>
+            </form>
         </div>
       </section>
       <br><br>
@@ -130,10 +132,12 @@
       </section>
       <br><br>
       <section>
+          {{#if isAllComplete}}
         <div class = sectionborder>
           <h3>Today's badge</h3>
           <center> <img class = "image" src = "/badge.png" id = "badge"> </center>
         </div>
+          {{/if}}
       </section>
       <br><br>
     </main>
