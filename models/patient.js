@@ -61,10 +61,6 @@ const Patient = new Schema(
             required: false,
             default: false
         },
-        weight:{
-            type: Number,
-            required: false
-        },
         data:{
             type: [patient_data], //should be patient_data here, change it at last
             required: false

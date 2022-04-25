@@ -38,7 +38,7 @@ const getAllPatients = async(req, res)=>{
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
             // filter to include only patients whose id are stored under a certain clinician
-            patients.filter((patient)=>patient_id_list.includes(patient._id));
+            patients.filter((patient)=>patient_id_list.includes(patient._id).toString());  // toString doesn't work, should fix later
             const patient_medical_data = patient_medical_list(patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
             console.log(patient_medical_data);
@@ -263,7 +263,7 @@ const modifyThreshold = async (req, res, next)=>{
         }
 
     } catch (err) {
-        return next(err);
+        return (err);
     }
     
 }
@@ -281,7 +281,7 @@ const getSupportSentence = async (req, res, next)=>{
             patient_id_list = patient_id_list.map((id)=>id.toString());
 
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
-            patients.filter((patient) => patient_id_list.includes(patient._id));
+            patients.filter((patient) => patient_id_list.includes(patient._id.toString)); // toString doesn't work, should fix later
             const patients_message = patient_message_list(patients); // the argument patients was filtered on the above line
             // the patient hasn't viewed the message
             if (!patients_message.viewed) {
@@ -297,30 +297,43 @@ const getSupportSentence = async (req, res, next)=>{
         }
         
     } catch(err) {
-        return next(err);
+        return (err);
     }
            
 }
 
 //This function add support messages for the specific patient
-const addSupportSentence = (req, res)=>{
-    // find the patient of the clinician and check whether it's exist 
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const patient_id_list = clinician.patients;
-   // .id refers to clinician id, .patient_id refers to patient id
-    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
-    // get the data the patient is required to enter
-    const patient_data = patients_data.find((one)=> one.id == req.params.patient_id);
-    if(patient && patient_data){
-        patient_data.message = req.body.message;
-        patient_data.viewed = false;
-        res.send(patient_data.message);
+const addSupportSentence = async(req, res, next)=>{
+    try{
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        console.log("line 310 clinician_ID = " + typeof clinician._id + " " + clinician._id);
+        var newPatient = req.body;
+        if(clinician){
+            if(JSON.stringify(newPatient) == "{}"){
+                res.send("no message sent");
+            }
+            else{
+                const newMessage = req.body.message;
+                console.log("request patient id = " + req.params.patient_id);
+                
+                var currPatient = await Patient.findById(req.params.patient_id);
+                console.log(currPatient);
+                console.log("new Message = " + newMessage + " old message = " + currPatient.message);
+                currPatient.message = newMessage;
+                //currPatient.message = newMessage;
+               
+                Patient.findByIdAndUpdate(req.params.patient_id, {$set: {message: currPatient.message}, new: true}); // still doesn't update to database
+                res.send(currPatient.message);
+                console.log(currPatient.message);
 
-        patients_data.push(patient_data); // push to database
+            }
+        
+        }
     }
-    else{
-        res.send("can not find the patient");
-    }        
+    catch(err){
+        console.log(err);
+    }
+    
 }
 
 const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
