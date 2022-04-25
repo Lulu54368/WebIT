@@ -36,12 +36,18 @@ const getAllPatients = async(req, res)=>{
         if(clinician){
             
             var patient_id_list = clinician.patients;
+            console.log(patient_id_list);
+            console.log("before filter = " + patients);
             patient_id_list = patient_id_list.map((id)=>id.toString());
             // filter to include only patients whose id are stored under a certain clinician
-            patients.filter((patient)=>patient_id_list.includes(patient._id).toString());  // toString doesn't work, should fix later
+            patients.filter((patient)=> { 
+                console.log(patient._id.toString());
+                return patient_id_list.includes((patient._id).toString()) });  // toString doesn't work, should fix later
+            console.log("after filter = " + patients);
+            
             const patient_medical_data = patient_medical_list(patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
-            console.log(patient_medical_data);
+            console.log("patient_medical_data = " + patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data});
         }
@@ -87,6 +93,7 @@ const addOnePatient = async(req, res)=>{
         var newPatient = req.body;
         if(clinician){
             if(JSON.stringify(newPatient) == "{}"){
+                console.log(JSON.stringify(newPatient));
                 res.send("no patient sent");
             }
             else{
@@ -287,7 +294,6 @@ const getSupportSentence = async (req, res, next)=>{
             if (!patients_message.viewed) {
                 console.log("line 240 clinicianController patients_message = " + patients_message);
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patients_message});
-                patients_message.viewed = true;
             } else {
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
             }
@@ -318,13 +324,14 @@ const addSupportSentence = async(req, res, next)=>{
                 
                 var currPatient = await Patient.findById(req.params.patient_id);
                 console.log(currPatient);
-                console.log("new Message = " + newMessage + " old message = " + currPatient.message);
+                
                 currPatient.message = newMessage;
+                currPatient.viewed = false;
                 //currPatient.message = newMessage;
-               
-                Patient.findByIdAndUpdate(req.params.patient_id, {$set: {message: currPatient.message}, new: true}); // still doesn't update to database
+                currPatient.save();
+                
+                //Patient.findByIdAndUpdate(req.params.patient_id, {message: currPatient.message, new: true}); // still doesn't update to database
                 res.send(currPatient.message);
-                console.log(currPatient.message);
 
             }
         
