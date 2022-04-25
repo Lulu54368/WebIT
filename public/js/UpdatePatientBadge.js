@@ -26,6 +26,11 @@ function isNumeric(str) {
 }
 submitCheck()
 
+<<<<<<< Updated upstream
 function submitStats(){
   console.log("hello from submit stats")
+=======
+function submitStats() {
+  console.log("hello from submitStats")
+>>>>>>> Stashed changes
 }
