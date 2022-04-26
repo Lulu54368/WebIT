@@ -88,7 +88,8 @@ const addTodayData = async (req, res)=>{
 }
 //add a piece of data
 const addOneData = async (req, res)=>{
-    var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
+    try{
+        var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
     attributes = attributes.input;
     console.log(attributes);
     patient = await Patient.findById(req.params.patient_id);
@@ -134,6 +135,10 @@ const addOneData = async (req, res)=>{
     }
     else{
         res.send("no patient sent");
+    }
+    }
+    catch(err){
+        console.log(err);
     }
   
 }
