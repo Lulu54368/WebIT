@@ -7,25 +7,29 @@ const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
 const getCurrData = async (req, res)=>{
+    var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
+    attributes = attributes.input;
     const patient = await Patient.findById(req.params.patient_id);
     const today = new Date().toLocaleDateString();
     var today_data = patient.data.find(
         (one)=>(one.date == today)
     );
-    const attributes = await Patient_input.findOne({id: req.params.patient_id});
+
     // If today's data is not available, manipulate an empty object
     if(!today_data){
+        today_data = {};
         attributes.forEach((attr)=>today_data[attr] = {
             data: "",
-            comment: ""
+            comment: "",
+            recorded: false
         });
         
     }
-   
-   
+    //patient.data.push(today_data);
+    //await patient.save();
+    console.log({data: today_data , patient_name:patient.name, today: (new Date()).toLocaleDateString(), patient_input: attributes});
     res.render("../views/layouts/patienthomepage.hbs",
-    {name: patient.name, id: patient._id,   //attr means the data the patient need to enter
-    message: patient.message, data: today_data, today_date: today, attr: attributes});
+    {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
@@ -70,11 +74,11 @@ const addTodayData = async (req, res)=>{
             data[attr].comment = req.body[attr_comment];
             
         });
-        console.log(data);
+       
         //update the data
         patient.data.pop();
         patient.data.push(data);
-        console.log(patient.data);
+   
         Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
         res.send(patient.data);
 
@@ -82,4 +86,54 @@ const addTodayData = async (req, res)=>{
     //redirect here
   
 }
-module.exports ={ getCurrData, addTodayData};
+//add a piece of data
+const addOneData = async (req, res)=>{
+    var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
+    attributes = attributes.input;
+    console.log(attributes);
+    patient = await Patient.findById(req.params.patient_id);
+    const newData = req.body;
+    if(JSON.stringify(newData) != "{}"){
+        // find today's data
+        const attr = req.body.key;
+        var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
+        
+        if(!data){
+            
+            data = {};
+            data.date = new Date().toLocaleDateString();  //timeStamp
+            attributes.forEach((attr)=>{
+                
+                data[attr] = {
+                data: "",
+                comment: "",
+                recorded: false
+            }});    //initialize
+            
+            
+            data[attr].data = req.body.value;
+            data[attr].comment = req.body.comment;
+            data[attr].recorded = true; //record data
+            console.log(data);
+            patient.data.push(data) //push data
+        }
+        else{
+            var attr_data = patient.data.find((data)=>data[attr].createAt == new Date().toLocaleDateString());
+            if(attr_data.recorded == false){
+                data[attr].data = req.body.value;
+                data[attr].comment = req.body.comment;
+                data[attr].recorded = true;
+            }
+          
+        }
+        //await Patient.findByIdAndUpdate(patient._id, {data, });
+        await patient.save();
+        res.send(patient);
+            
+    }
+    else{
+        res.send("no patient sent");
+    }
+  
+}
+module.exports ={ getCurrData, addTodayData, addOneData};
