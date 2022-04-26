@@ -35,8 +35,7 @@ const getAllPatients = async(req, res)=>{
         if(clinician){
             
             var patient_id_list = clinician.patients;
-            console.log(patient_id_list);
-            console.log("before filter = " + patients);
+          
             patient_id_list = patient_id_list.map((id)=>id.toString());
             // filter to include only patients whose id are stored under a certain clinician
             var filtered_patients = patients.filter((patient)=> { 
@@ -163,8 +162,7 @@ const getAllComments = async(req, res, next)=>{
                 return patient_id_list.includes((patient._id).toString()) }); 
 
             const patients_comment = patient_comment_list(filtered_patients); // the argument patients was filtered on the above line
-            // and now passed as an argument specified in /utils/patient_comment.js
-            console.log("line 158 clinicianController patients_comment = " + patients_comment);
+           
             // patient_comment is each from the partial, patients_comment is the filtered comment
             res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
         }
@@ -184,15 +182,14 @@ const getAllThreshold = async (req, res, next)=>{
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
         const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
-        console.log("line 177 clinicianController patient_thresholds = " + patient_thresholds);
+       
         const today = new Date().toLocaleDateString();
         // the clinician is valid
         if(clinician) {
             // copy the patient's id list stored in the clinician
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
-            console.log("line 194 patient_id_list = ");
-            console.log(patient_id_list);
+          
             // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
             var filtered_id_list = [];
             var filtered_thresholds = patient_thresholds.filter((threshold) => {
@@ -204,11 +201,10 @@ const getAllThreshold = async (req, res, next)=>{
             var filtered_patients = patients.filter((patient) => {  // find the patients with the matching threshold ids
                 console.log(patient);
                 return filtered_id_list.includes(patient._id.toString()) });    
-            console.log("line 209 filtered patients = ")
-            console.log(filtered_patients);
+           
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
-            console.log("line 213 clinicianController patient_threshold = " + patients_threshold);
+            
             res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
         }
         else {
@@ -227,7 +223,7 @@ const modifyThreshold = async (req, res, next)=>{
     try {
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
         const patient_thresholds = await Patient_Threshold.find().lean(); // get all patient_threholds from database
-        console.log("line 211 clinicianController modifyThreshold patient_thresholds = " + patient_thresholds);
+        
         // define the entire Threshold object for processing, consiting of "id":{} and "threshold": {}
         var newThreshold = req.body;
 
@@ -237,7 +233,7 @@ const modifyThreshold = async (req, res, next)=>{
             } else {
                 const patient_id = newThreshold.id; // take the patient_id passed in the http params   
                 var curr_threshold = await Patient_Threshold.findOne({id: patient_id}) // find the existing threshold
-                console.log("line 221 clinicianController modifyThreshold patient_id = " + patient_id + " curr_threshold = " + curr_threshold);
+               
                 // this is the first time the threshold is being added (does not exist yet), add this to database
                 if (!curr_threshold) {
                     newThreshold = await new Patient_Threshold(newThreshold);
@@ -247,7 +243,7 @@ const modifyThreshold = async (req, res, next)=>{
                 // if threshold record has been initialised in database, update it. Assume the request body contains all 4 record attributes and 8 bounds 
                 } else {
                     var threshold = curr_threshold.threshold;
-                    console.log("line 229 clinicianController modifyThreshold threhold = " + threshold + "length = " + Object.keys(threshold).length);
+                    
                     var record_count = 0;
                     var bound_count = 0;
                     if (patient_id && threshold) {
@@ -257,13 +253,13 @@ const modifyThreshold = async (req, res, next)=>{
                             if (record_count > Object.keys(threshold).length) {  // to avoid redundant attributes being triggered
                                 break;
                             }
-                            console.log("record = " + record, " record object = " + threshold[record]);
+                           
                             for (var bound in threshold[record]) {
                                 bound_count ++;
                                 if (bound_count > Object.keys(threshold[record]).length) {  // to avoid redundant attributes being triggered
                                     break;
                                 }
-                                console.log("bound = " + bound);
+                               
                                 threshold[record][bound] = newThreshold["threshold"][record][bound];
                             }
                         }
@@ -305,7 +301,7 @@ const getSupportSentence = async (req, res, next)=>{
             const patients_message = patient_message_list(filtered_patients); // the argument patients was filtered on the above line
             // the patient hasn't viewed the message
             if (!patients_message.viewed) {
-                console.log("line 240 clinicianController patients_message = " + patients_message);
+                
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patients_message});
             } else {
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
@@ -325,7 +321,7 @@ const getSupportSentence = async (req, res, next)=>{
 const addSupportSentence = async(req, res, next)=>{
     try{
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
-        console.log("line 310 clinician_ID = " + typeof clinician._id + " " + clinician._id);
+        
         var newPatient = req.body;
         if(clinician){
             if(JSON.stringify(newPatient) == "{}"){
@@ -333,17 +329,17 @@ const addSupportSentence = async(req, res, next)=>{
             }
             else{
                 const newMessage = req.body.message;
-                console.log("request patient id = " + req.params.patient_id);
+                
                 
                 var currPatient = await Patient.findById(req.params.patient_id);
                 console.log(currPatient);
                 
                 currPatient.message = newMessage;
                 currPatient.viewed = false;
-                //currPatient.message = newMessage;
+                
                 currPatient.save();
                 
-                //Patient.findByIdAndUpdate(req.params.patient_id, {message: currPatient.message, new: true}); // still doesn't update to database
+                
                 res.send(currPatient.message);
 
             }
