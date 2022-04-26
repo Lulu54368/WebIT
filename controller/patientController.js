@@ -119,10 +119,11 @@ const addOneData = async (req, res)=>{
         }
         else{
             var attr_data = patient.data.find((data)=>data[attr].createAt == new Date().toLocaleDateString());
-            if(attr_data.recorded == false){
+            if(!attr_data){
                 data[attr].data = req.body.value;
                 data[attr].comment = req.body.comment;
                 data[attr].recorded = true;
+                data[attr].createAt = new Date().toLocaleDateString();
             }
           
         }
