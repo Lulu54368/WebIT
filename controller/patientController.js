@@ -57,22 +57,18 @@ const addTodayData = async (req, res)=>{
             data = {
                 "date": new Date().toLocaleDateString(),
                 "blood_level": {
-                    data:newData.bloodLevelData,
-                    comment:newData.bloodLevelComment
+                    
                 },
                 "weight":{
-                    data:newData.weightData,
-                    comment:newData.weightComment
+                   
                     
                 },
                 "insulin_intake": {
-                    data:newData.insulinIntakeData,
-                    comment:newData.insulinIntakeComment
+                   
                    
                 },
                 "exercise":{
-                    data:newData.exerciseData,
-                    comment:newData.exerciseComment
+                    
                     
                 }
             };
@@ -85,14 +81,17 @@ const addTodayData = async (req, res)=>{
         const attributes = await Patient_input.findOne({id: req.params.patient_id});
    ;
         attributes.input.forEach(attr => {
-            //let attr_data = attr + "_data";
-            //let attr_comment = attr + "_comment";
-            data[attr].data = req.body[attr].data;
-            data[attr].comment = req.body[attr].comment;
+            let attr_data = attr + "_data";
+            let attr_comment = attr + "_comment";
+            data[attr].data = req.body[attr_data];
+            data[attr].comment = req.body[attr_comment];
+            
         });
+        console.log(data);
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
+        console.log(patient.data);
         Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
         res.send(patient.data);
 

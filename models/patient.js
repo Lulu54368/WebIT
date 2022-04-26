@@ -63,7 +63,7 @@ const Patient = new Schema(
             default: false
         },
         data:{
-            type: [patient_data], //should be patient_data here, change it at last
+            type: Array, //should be patient_data here, change it at last
             required: false
         }
     }
