@@ -12,36 +12,20 @@ const getCurrData = async (req, res)=>{
     var today_data = patient.data.find(
         (one)=>(one.date == today)
     );
+    const attributes = await Patient_input.findOne({id: req.params.patient_id});
+    // If today's data is not available, manipulate an empty object
     if(!today_data){
-        today_data = {
-            "date": today,
-            "blood_level": {
-                "data": "",
-                "comment": ""
-            },
-            "weight":{
-                "data": "",
-                "comment": ""
-            },
-            "insulin_intake": {
-                "data": "",
-                "comment": ""
-            },
-            "exercise":{
-                "data": "",
-                "comment": ""
-            }
-        }
-        patient.data.push(today_data);
-      
-      
-
+        attributes.forEach((attr)=>today_data[attr] = {
+            data: "",
+            comment: ""
+        });
+        
     }
    
    
     res.render("../views/layouts/patienthomepage.hbs",
-    {name: patient.name, id: patient._id,
-    message: patient.message, data: today_data, today_date: today});
+    {name: patient.name, id: patient._id,   //attr means the data the patient need to enter
+    message: patient.message, data: today_data, today_date: today, attr: attributes});
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
@@ -51,9 +35,9 @@ const addTodayData = async (req, res)=>{
     const newData = req.body;
 
     if(JSON.stringify(newData) != "{}"){
-        
+        // find today's data
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
-        if(!data){
+        if(!data){  //If we can not find today's data, we create an empty object
             data = {
                 "date": new Date().toLocaleDateString(),
                 "blood_level": {
@@ -77,10 +61,9 @@ const addTodayData = async (req, res)=>{
         }
 
 
-        //connect here to the database
         const attributes = await Patient_input.findOne({id: req.params.patient_id});
-   ;
-        attributes.input.forEach(attr => {
+   
+        attributes.input.forEach(attr => {  //update the attribute the patient is required to input
             let attr_data = attr + "_data";
             let attr_comment = attr + "_comment";
             data[attr].data = req.body[attr_data];
@@ -88,7 +71,7 @@ const addTodayData = async (req, res)=>{
             
         });
         console.log(data);
-        //some modification need to be made here
+        //update the data
         patient.data.pop();
         patient.data.push(data);
         console.log(patient.data);
