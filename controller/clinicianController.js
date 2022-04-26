@@ -332,7 +332,7 @@ const addSupportSentence = async(req, res, next)=>{
                 
                 
                 var currPatient = await Patient.findById(req.params.patient_id);
-                console.log(currPatient);
+             
                 
                 currPatient.message = newMessage;
                 currPatient.viewed = false;

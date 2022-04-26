@@ -49,7 +49,7 @@ const addTodayData = async (req, res)=>{
     patient = await Patient.findById(req.params.patient_id);
 
     const newData = req.body;
-console.log("newData", newData)
+
     if(JSON.stringify(newData) != "{}"){
         
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
@@ -83,7 +83,7 @@ console.log("newData", newData)
 
         //connect here to the database
         const attributes = await Patient_input.findOne({id: req.params.patient_id});
-        console.log(attributes);
+   ;
         attributes.input.forEach(attr => {
             let attr_data = attr + "_data";
             let attr_comment = attr + "_comment";
