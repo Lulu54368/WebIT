@@ -40,7 +40,7 @@ const getCurrData = async (req, res)=>{
    
    
     res.render("../views/layouts/patienthomepage.hbs",
-    {name: patient.name,
+    {name: patient.name, id: patient._id,
     message: patient.message, data: today_data, today_date: today});
 }
 //This function add the newest data
@@ -85,10 +85,10 @@ const addTodayData = async (req, res)=>{
         const attributes = await Patient_input.findOne({id: req.params.patient_id});
    ;
         attributes.input.forEach(attr => {
-            let attr_data = attr + "_data";
-            let attr_comment = attr + "_comment";
-            data[attr].data = req.body[attr_data];
-            data[attr].comment = req.body[attr_comment];
+            //let attr_data = attr + "_data";
+            //let attr_comment = attr + "_comment";
+            data[attr].data = req.body[attr].data;
+            data[attr].comment = req.body[attr].comment;
         });
         //some modification need to be made here
         patient.data.pop();
