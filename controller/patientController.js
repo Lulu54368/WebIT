@@ -115,6 +115,7 @@ const addOneData = async (req, res)=>{
             data[attr].data = req.body.value;
             data[attr].comment = req.body.comment;
             data[attr].recorded = true; //record data
+            data[attr].createAt = new Date().toLocaleDateString();
             console.log(data);
             patient.data.push(data) //push data
         }
