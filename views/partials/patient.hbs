@@ -10,11 +10,31 @@
             
         {{#each patients}}
             <tr>
-                <td>{{this.name}}</td>
-                <td>{{this.blood_level}}</td>
-                <td>{{this.weight}}</td>
-                <td>{{this.insulin_intake}}</td>
-                <td>{{this.exercise}}</td>
+                <td>{{this.name}}</td>    
+                
+                {{#if this.blood_highlight}}
+                    <td class="high_bl">{{this.blood_level}}</td>
+                {{else}}
+                    <td>{{this.blood_level}}</td>
+                {{/if}}
+
+                {{#if this.weight_highlight}}
+                    <td class="high_we">{{this.weight}}</td>
+                {{else}}
+                    <td>{{this.weight}}</td>
+                {{/if}}
+
+                {{#if this.insulin_highlight}}
+                    <td class="high_in">{{this.insulin_intake}}</td>
+                {{else}}
+                    <td>{{this.insulin_intake}}</td>
+                {{/if}}
+
+                {{#if this.exercise}}
+                    <td class="high_ex">{{this.exercise}}</td>
+                {{else}}
+                    <td>{{this.exercise}}</td>
+                {{/if}}
             </tr>
         
 
