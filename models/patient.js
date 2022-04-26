@@ -6,13 +6,22 @@ const Data = new Schema({
     data:{
         type: Number,
         required: false,
-        default: -1
+      
 
     },
     comment:{
         type: String,
         required: false,
-        default: ""
+        
+    },
+    createAt:{
+        type: String,
+        required: false
+    },
+    recorded:{
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 const patient_data = new Schema({
@@ -23,21 +32,25 @@ const patient_data = new Schema({
     },
     blood_level:{
         data: Data,
-        required: false,
+        required: false
+      
       
     },
     insulin_intake:{
         data: Data,
-        required: false,
+        required: false
+        
      
     },
     exercise:{
         data: Data,
         required: false
+       
     },
     weight:{
         data: Data,
         required: false
+      //default schema here 
     }
 
 
@@ -63,7 +76,7 @@ const Patient = new Schema(
             default: false
         },
         data:{
-            type: Array, //should be patient_data here, change it at last
+            type: [patient_data], //should be patient_data here, change it at last
             required: false
         }
     }

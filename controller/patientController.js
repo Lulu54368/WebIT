@@ -103,11 +103,11 @@ const addOneData = async (req, res)=>{
             
             data = {};
             data.date = new Date().toLocaleDateString();  //timeStamp
-            attributes.forEach((attr)=>{
-                
+           attributes.forEach((attr)=>{
+                data[attr] = {};
                 data[attr] = {
-                data: "",
-                comment: "",
+                //data: "",
+                //comment: "",
                 recorded: false
             }});    //initialize
             
@@ -115,12 +115,15 @@ const addOneData = async (req, res)=>{
             data[attr].data = req.body.value;
             data[attr].comment = req.body.comment;
             data[attr].recorded = true; //record data
+            data[attr].createAt = true;
             console.log(data);
             patient.data.push(data) //push data
         }
         else{
             var attr_data = patient.data.find((data)=>data[attr].createAt == new Date().toLocaleDateString());
-            if(!attr_data){
+            if(!attr_data || (typeof data[attr].data != "obect")){
+                console.log("print");
+                console.log(data[attr]);
                 data[attr].data = req.body.value;
                 data[attr].comment = req.body.comment;
                 data[attr].recorded = true;
