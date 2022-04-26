@@ -22,7 +22,7 @@ const patient_data = new Schema({
         default: new Date()
     },
     blood_level:{
-        type: Data,
+        data: Data,
         required: false,
       
     },
@@ -62,12 +62,8 @@ const Patient = new Schema(
             required: false,
             default: false
         },
-        weight:{
-            type: Number,
-            required: false
-        },
         data:{
-            type: Array, //should be patient_data here
+            type: [patient_data], //should be patient_data here, change it at last
             required: false
         }
     }
@@ -75,4 +71,6 @@ const Patient = new Schema(
 //const Patients = mongoose.model("patients", Patient);
 //console.log(Patients.find())
 const Patients = mongoose.model("patients", Patient);
-module.exports = {patient_data,Data, Patients}
+//const Data_schema = mongoose.model("patients", Data);
+//const Patient_data_schema = mongoose.model("patients", patient_data);
+module.exports = {patient_data, Data, Patients}

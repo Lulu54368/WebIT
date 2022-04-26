@@ -45,9 +45,9 @@ const getCurrData = async (req, res)=>{
 }
 //This function add the newest data
 const addTodayData = async (req, res)=>{
-  // console.log("now sending data to mongodb")
+
     patient = await Patient.findById(req.params.patient_id);
-  // console.log(patient)
+
     const newData = req.body;
 console.log("newData", newData)
     if(JSON.stringify(newData) != "{}"){
@@ -79,26 +79,23 @@ console.log("newData", newData)
             
             patient.data.push(data);
         }
-        //connect here to the database : //temporarily removed patient input is missing patients
-       // console.log(req.params.patient_id)
-       // const attributes = await Patient_input.findOne({id: req.params.patient_id});
-       // console.log(attributes);
-       // attributes.input.forEach(attr => {
-       //     data[attr] = req.body[attr];
-       // });
+
+
+        //connect here to the database
+        const attributes = await Patient_input.findOne({id: req.params.patient_id});
+        console.log(attributes);
+        attributes.input.forEach(attr => {
+            let attr_data = attr + "_data";
+            let attr_comment = attr + "_comment";
+            data[attr].data = req.body[attr_data];
+            data[attr].comment = req.body[attr_comment];
+        });
         //some modification need to be made here
         patient.data.pop();
         patient.data.push(data);
-       // console.log(patient.data)
-        await Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
-       // res.send(patient.data);
-        const today = new Date().toLocaleDateString();
-        var today_data = patient.data.find(
-            (one)=>(one.date == today)
-        );
-        res.render("../views/layouts/patienthomepage.hbs",
-            {name: patient.name,
-                message: patient.message, data: today_data, today_date: today, isAllComplete:true});
+        Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
+        res.send(patient.data);
+
     }
     //redirect here
   
