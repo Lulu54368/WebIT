@@ -1,11 +1,11 @@
 //This is transformation of data structure for futher use
 const patient_threshold_list = (patient_threshold_data, patient_data) => {
     var patient_threshold_ls = []
-    console.log("line 4 utils/patient_threshold.js patient_threshold_data: " + patient_threshold_data + "patient = " + patient_data);   
+   
     var i=0;   
     patient_threshold_data.forEach((element) => {
         const threshold = element.threshold;
-        console.log("line 7 utils/patient_threshold.js threshold: " + threshold);
+       //Some modification shold be added here (find function instead of hardcode)
         const component = {
             "id": element.id,
             "name": patient_data[i].name,
@@ -18,7 +18,7 @@ const patient_threshold_list = (patient_threshold_data, patient_data) => {
             "exercise_u": threshold.exercise.upper_bound,
             "exercise_l": threshold.exercise.lower_bound
         }
-        i++;
+        i++; 
         patient_threshold_ls.push(component)
         
     });   

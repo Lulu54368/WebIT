@@ -31,9 +31,9 @@ const getAllPatients = async(req, res)=>{
         
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         const patients = await Patient.find().lean();  // taken from /model/patient.js
-        
+        const patient_thresholds = await Patient_Threshold.find().lean();
         if(clinician){
-            
+            // list of patient id stored in a certain clinician
             var patient_id_list = clinician.patients;
           
             patient_id_list = patient_id_list.map((id)=>id.toString());
@@ -41,9 +41,17 @@ const getAllPatients = async(req, res)=>{
             var filtered_patients = patients.filter((patient)=> { 
                 console.log(patient._id.toString());
                 return patient_id_list.includes((patient._id).toString()) }); 
-            console.log("after filter = " + filtered_patients);
+            console.log("after filter, filtered_patients = ");
+            console.log(filtered_patients);
+
+            // filter to include only patients' thresholds with id (patient id) contained in a certain clinician 
+            var filtered_thresholds = patient_thresholds.filter((threshold) => {
+                console.log(threshold.id.toString());
+                return patient_id_list.includes((threshold.id).toString()) });
+            console.log("after filter, filtered_thresholds = ");
+            console.log(filtered_thresholds);
             
-            const patient_medical_data = patient_medical_list(filtered_patients); // the argument patients was filtered on the last line
+            const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
             console.log("patient_medical_data = " + patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
@@ -65,13 +73,17 @@ const getAllPatients = async(req, res)=>{
     
 }
 //This function get the medical data for a specified patient
-const getOnePatient = (req, res)=>{
+const getOnePatient = async (req, res)=>{
     try{
-        const clinician = clinician_data.find((one)=>one.id == req.params.clinician_id);
-        const patient_id_list = clinician.patients;
-        const patient = patients_data.find((one)=> one.id == req.params.patient_id);
-        if(patient && patient_id_list.includes(patient.id)){
-            res.render("../views/layouts/clinician_patientdata.hbs",{name: patient.name, 
+        const today = new Date().toLocaleDateString();
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        var patient_id_list = clinician.patients;
+        patient_id_list = patient_id_list.map((id)=>id.toString());
+
+        const patient = await Patient.findById(req.params.patient_id).lean();
+
+        if(patient && patient_id_list.includes(patient._id.toString())){
+            res.render("../views/layouts/clinician_patientdata.hbs",{view_date: today, name: patient.name, 
                 patient_data: patient.data});
         }
         else{
