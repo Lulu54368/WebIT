@@ -7,8 +7,10 @@ const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
 const getCurrData = async (req, res)=>{
-    var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
-    attributes = attributes.input;
+    const attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
+    //console.log("patient controller line 11, attributes = ")
+    //console.log(attributes);
+    var input = attributes.input;
     const patient = await Patient.findById(req.params.patient_id);
     const today = new Date().toLocaleDateString();
     var today_data = patient.data.find(
@@ -18,7 +20,7 @@ const getCurrData = async (req, res)=>{
     // If today's data is not available, manipulate an empty object
     if(!today_data){
         today_data = {};
-        attributes.forEach((attr)=>today_data[attr] = {
+        input.forEach((attr)=>today_data[attr] = {
             data: "",
             comment: "",
             recorded: false
@@ -89,56 +91,64 @@ const addTodayData = async (req, res)=>{
 //add a piece of data
 const addOneData = async (req, res)=>{
     try{
-        var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
-    attributes = attributes.input;
-    console.log(attributes);
-    patient = await Patient.findById(req.params.patient_id);
-    const newData = req.body;
-    if(JSON.stringify(newData) != "{}"){
-        // find today's data
-        const attr = req.body.key;
-        var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
-        
-        if(!data){
+        const attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
+        console.log("patient controller line 95, attributes = ")
+        console.log(attributes);
+        var input = attributes.input;
+        patient = await Patient.findById(req.params.patient_id);
+        const newData = req.body;
+        if(JSON.stringify(newData) != "{}"){
+            // takes the type of data entered (blood_level, insulin, weight, exercise)
+            const attr = req.body.key;
+            // find today's data
+            var data = patient.data.find((stored_data)=>stored_data.date == new Date().toLocaleDateString());  // an array of patient_data (object) types
             
-            data = {};
-            data.date = new Date().toLocaleDateString();  //timeStamp
-           attributes.forEach((attr)=>{
-                data[attr] = {};
-                data[attr] = {
-                //data: "",
-                //comment: "",
-                recorded: false
-            }});    //initialize
+            // if no data was found today, construct a patient_data object
+            if(!data){
             
-            
-            data[attr].data = req.body.value;
-            data[attr].comment = req.body.comment;
-            data[attr].recorded = true; //record data
-            data[attr].createAt = true;
-            console.log(data);
-            patient.data.push(data) //push data
-        }
-        else{
-            var attr_data = patient.data.find((data)=>data[attr].createAt == new Date().toLocaleDateString());
-            if(!attr_data || (typeof data[attr].data != "obect")){
-                console.log("print");
-                console.log(data[attr]);
+                data = {"date": new Date().toLocaleDateString};  // timeStamp
+                // initialise a data schema
+                
+                data[attr] = {"data": req.body.value, "comment": req.body.comment, 
+                "createAt": new Date().toLocaleDateString(), "recorded": true}  // createAt stores the timeStamp?
+                
+            /**
+                input.forEach((attr)=>{
+                    data[attr] = {"data": {"data": req.body.value, "comment": req.body.comment, 
+                                "createAt": new Date().toLocaleDateString, "recorded": true}}
+                }); // created at should be timeStamp
+                
                 data[attr].data = req.body.value;
                 data[attr].comment = req.body.comment;
-                data[attr].recorded = true;
-                data[attr].createAt = new Date().toLocaleDateString();
+                data[attr].recorded = true; //record data
+                data[attr].createAt = true;
+                console.log(data);
+            */
+
+                patient.data.push(data); //push data
             }
-          
-        }
-        //await Patient.findByIdAndUpdate(patient._id, {data, });
-        await patient.save();
-        res.send(patient);
+
+            // if some data was already found today
+            else{
+                var attr_data = patient.data.find((stored_data)=>stored_data[attr].createAt == new Date().toLocaleDateString());
+                if(!attr_data || (typeof data[attr].data != "object")){
+                    console.log("print");
+                    console.log(data[attr]);
+                    data[attr].data = req.body.value;
+                    data[attr].comment = req.body.comment;
+                    data[attr].recorded = true;
+                    data[attr].createAt = new Date().toLocaleDateString();
+                }
             
-    }
-    else{
-        res.send("no patient sent");
-    }
+            }
+            //await Patient.findByIdAndUpdate(patient._id, {data, });
+            await patient.save();
+            res.send(patient);
+                
+        }
+        else{
+            res.send("no patient sent");
+        }
     }
     catch(err){
         console.log(err);
