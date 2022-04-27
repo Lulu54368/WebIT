@@ -96,9 +96,9 @@ const addOneData = async (req, res)=>{
     const newData = req.body;
     if(JSON.stringify(newData) != "{}"){
         // find today's data
-        const attr = req.body.key;
+        const key_attr = req.body.key;
         var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
-        
+ 
         if(!data){
             
             data = {};
@@ -111,16 +111,17 @@ const addOneData = async (req, res)=>{
                 recorded: false
             }});    //initialize
             
-            
-            data[attr].data = req.body.value;
-            data[attr].comment = req.body.comment;
-            data[attr].recorded = true; //record data
-            data[attr].createAt = new Date().toLocaleDateString();
             console.log(data);
+            data[key_attr].data = req.body.value;
+            data[key_attr].comment = req.body.comment;
+            data[key_attr].recorded = true; //record data
+            data[key_attr].createAt = new Date().toLocaleDateString();
+         
             patient.data.push(data) //push data
         }
         else{
-            var attr_data = patient.data.find((data)=>data[attr].createAt == new Date().toLocaleDateString());
+          
+            var attr_data = patient.data.find((data)=>data[key_attr].createAt == new Date().toLocaleDateString());
             if(!attr_data){
                 data[attr].data = req.body.value;
                 data[attr].comment = req.body.comment;
@@ -131,7 +132,7 @@ const addOneData = async (req, res)=>{
         }
         //await Patient.findByIdAndUpdate(patient._id, {data, });
         await patient.save();
-        res.send(patient);
+        res.redirect("/patient/"+ req.params.patient_id);
             
     }
     else{
