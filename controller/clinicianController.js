@@ -73,13 +73,17 @@ const getAllPatients = async(req, res)=>{
     
 }
 //This function get the medical data for a specified patient
-const getOnePatient = (req, res)=>{
+const getOnePatient = async (req, res)=>{
     try{
-        const clinician = clinician_data.find((one)=>one.id == req.params.clinician_id);
-        const patient_id_list = clinician.patients;
-        const patient = patients_data.find((one)=> one.id == req.params.patient_id);
-        if(patient && patient_id_list.includes(patient.id)){
-            res.render("../views/layouts/clinician_patientdata.hbs",{name: patient.name, 
+        const today = new Date().toLocaleDateString();
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        var patient_id_list = clinician.patients;
+        patient_id_list = patient_id_list.map((id)=>id.toString());
+
+        const patient = await Patient.findById(req.params.patient_id).lean();
+
+        if(patient && patient_id_list.includes(patient._id.toString())){
+            res.render("../views/layouts/clinician_patientdata.hbs",{view_date: today, name: patient.name, 
                 patient_data: patient.data});
         }
         else{
