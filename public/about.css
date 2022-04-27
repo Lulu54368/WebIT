@@ -1,14 +1,13 @@
-
 * {
-    font-family: "Roboto", sans-serif;
-  }
-  
-header{
-    grid-area: header;
-    background-color:  #E1F0DB;
-    text-align: center;
-    width: 100%;
-    height: 48px
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  grid-area: header;
+  background-color: #e1f0db;
+  text-align: center;
+  width: 100%;
+  height: 48px;
 }
 header a {
   text-decoration: none;
@@ -19,15 +18,17 @@ ul.topnav {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color:#8fbc88;
+  background-color: #8fbc88;
   width: 100%;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {
+  float: left;
+}
 
 ul.topnav li a {
   display: inline-block;
-  color:white;
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -35,19 +36,27 @@ ul.topnav li a {
   font-size: 17px;
 }
 
-ul.topnav li a:hover {background-color: rgba(229, 229, 229, 0.5);}
+ul.topnav li a:hover {
+  background-color: rgba(229, 229, 229, 0.5);
+}
 
-ul.topnav li.icon {display: none;}
+ul.topnav li.icon {
+  display: none;
+}
 
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
+@media screen and (max-width: 680px) {
+  ul.topnav li:not(:first-child) {
+    display: none;
+  }
   ul.topnav li.icon {
     display: inline-block;
   }
 }
 
-@media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
+@media screen and (max-width: 680px) {
+  ul.topnav.responsive {
+    position: relative;
+  }
   ul.topnav.responsive li.icon {
     position: absolute;
     right: 0;
@@ -65,7 +74,6 @@ ul.topnav li.icon {display: none;}
 
 body {
   /* page layout - desktop version */
-
   display: grid;
   grid-template-columns: 5fr 25fr 10fr;
   grid-template-rows: auto auto;
@@ -77,16 +85,12 @@ body {
     "footer footer footer";
 }
 
-  
-  .topnav {
-    background-color: #333;
-    position: absolute;
-  }
-  
+.topnav {
+  background-color: #333;
+  position: absolute;
+}
 
 /* assign regions of the page to the grid */
-  
-
 @media screen and (max-width: 640px) {
   /* page layout for phones */
   body {
@@ -104,31 +108,31 @@ body {
 }
 
 .article {
-    color:rgb(70, 70, 70);
-    text-align: justify;
+  color: rgb(70, 70, 70);
+  text-align: justify;
 }
 
 nav {
-    grid-area: nav;
-  }
-  
+  grid-area: nav;
+}
+
 .sidenav {
-    background-color: #CFE6BD;
-    float:left;
-    height: 100%;
+  background-color: #cfe6bd;
+  float: left;
+  height: 100%;
 }
 
 .about_sidenav {
-  background-color: #CFE6BD;
+  background-color: #cfe6bd;
   font-size: 15px;
   display: block;
-  float:left;
+  float: left;
   height: 100%;
 }
-.about_sidenav  a:hover {
+.about_sidenav a:hover {
   background: white;
 }
-.about_sidenav  a {
+.about_sidenav a {
   padding: 20px 20px 20px 20px;
   font-size: 20px;
   text-decoration: none;
@@ -138,107 +142,106 @@ nav {
 
 .sidenav .image {
   height: 200px;
-  margin: 10px
+  margin: 10px;
 }
 .links {
-    background-color: #E1F0DB;
-    text-align: left;
+  background-color: #e1f0db;
+  text-align: left;
 }
 .links h3 {
-    text-align: center;
-  }
-.links a{
-    color: #818181;
+  text-align: center;
+}
+.links a {
+  color: #818181;
 }
 
 footer {
-  color:#818181;
-    grid-area: footer;
-    background: #E1F0DB;
-    text-align: center;
+  color: #818181;
+  grid-area: footer;
+  background: #e1f0db;
+  text-align: center;
 }
 
-footer a{
-    text-decoration: none;
-    text-align: center;
-    background: #E1F0DB;
-    color:rgb(70, 70, 70);
+footer a {
+  text-decoration: none;
+  text-align: center;
+  background: #e1f0db;
+  color: rgb(70, 70, 70);
 }
 footer a:hover {
-    background: #8fbc88;
-  }
+  background: #8fbc88;
+}
 
 aside {
-    grid-area: aside;
-    width:100%
+  grid-area: aside;
+  width: 100%;
 }
 .greeting {
-    
-    font-size: 250%;
-    color: rgb(70, 70, 70);
+  font-size: 250%;
+  color: rgb(70, 70, 70);
 }
 
 .date {
-    font-size: 100%;
-    color: rgb(70, 70, 70);
+  font-size: 100%;
+  color: rgb(70, 70, 70);
 }
 
 main {
-    grid-area: main;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    overflow:scroll;
+  grid-area: main;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
 }
 
-
-.sectionborder{
-    color:rgb(70, 70, 70);
-    border-color: #E1F0DB; 
-    border-width: 5px;
-    border-spacing: 20px;
-    border-style: solid;  
-    width: 98%;
-    overflow:auto;
+.sectionborder {
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
+  border-width: 5px;
+  border-spacing: 20px;
+  border-style: solid;
+  width: 98%;
+  overflow: auto;
 }
 .sectionborder tr td {
   text-align: left;
 }
 .view {
-    text-align: center;
-    padding: 5px 5px 5 px 5px;
-    background-color: rgba(229, 229, 229, 0.5);
+  text-align: center;
+  padding: 5px 5px 5 px 5px;
+  background-color: rgba(229, 229, 229, 0.5);
 }
 
 .button {
-    border: none;
-    color: rgb(70, 70, 70);
-    padding: 15px 12px;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: rgba(229, 229, 229, 0.5);
-    border-radius: 25px;
-  }
-
-.viewbutton {
-    position: relative;
-    left: 45%;
+  border: none;
+  color: rgb(70, 70, 70);
+  padding: 15px 12px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: rgba(229, 229, 229, 0.5);
+  border-radius: 25px;
 }
 
-.sectionborder table, th, td {
-    padding: 10px;
+.viewbutton {
+  position: relative;
+  left: 45%;
+}
+
+.sectionborder table,
+th,
+td {
+  padding: 10px;
 }
 
 .leaderboard_sectionborder {
   overflow: auto;
-  color:rgb(70, 70, 70);
-  border-color: #E1F0DB; 
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
   border-width: 5px;
   border-spacing: 10px;
-  border-style: solid;  
+  border-style: solid;
 }
 
 .historyData table {
@@ -272,21 +275,17 @@ main {
   flex-direction: column;
   align-items: baseline;
   padding: 0px;
-  background-color: #CFE6BD;
-
+  background-color: #cfe6bd;
 }
 .form-wrapper {
-  
   position: absolute;
   width: 30%;
   height: 80vh;
   right: 10vh;
   top: 6rem;
-  background: #E1F0DB;
+  background: #e1f0db;
   border-radius: 53px;
-  }
-
-
+}
 
 .form-wrapper .header {
   color: #333;
@@ -307,7 +306,6 @@ main {
   font-size: 15px;
   color: #00000080;
   outline: none;
-  
 }
 
 .form-wrapper .input-wrapper .border-wrapper {
@@ -331,28 +329,26 @@ main {
   display: flex;
   justify-content: center;
 }
-.form-wrapper .action .btn {  
+.form-wrapper .action .btn {
   width: 50%;
-  border: 2px solid #8FBC88;
-  background: #8FBC88;
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
   line-height: 50px;
   border-radius: 30px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
   text-align: center;
   color: #00000080;
-
 }
 .form-wrapper .action .btn a {
-  color:black;
-  text-decoration: none; 
-  font-size: medium
+  color: black;
+  text-decoration: none;
+  font-size: medium;
 }
 
-.form-wrapper .action .btn:hover{
-  background-color:#92c7a8;
+.form-wrapper .action .btn:hover {
+  background-color: #92c7a8;
 }
-
 
 .About {
   display: flex;
@@ -363,11 +359,11 @@ main {
   /*width: 40%;*/
 }
 
-.About .website_text{ 
+.About .website_text {
   width: 20vw;
   height: 25%;
-  border: 2px solid #8FBC88;
-  background: #8FBC88;
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
   line-height: 3.125rem;
   border-radius: 1.875rem;
   text-transform: uppercase;
@@ -375,17 +371,17 @@ main {
   text-align: center;
 }
 .About .website_text a {
-  text-decoration: none; 
+  text-decoration: none;
   font-size: medium;
-  background-color:#92c7a8;
+  background-color: #92c7a8;
 }
 
-.About .diabetes_text{
+.About .diabetes_text {
   width: 18vw;
   height: 25%;
   margin-left: 10rem;
-  border: 2px solid #8FBC88;;
-  background: #8FBC88;
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
   line-height: 3.125rem;
   border-radius: 1.875rem;
   text-transform: uppercase;
@@ -393,20 +389,19 @@ main {
   text-align: center;
 }
 .About .diabetes_text a {
-  text-decoration: none; 
+  text-decoration: none;
   font-size: medium;
-  background-color:#92c7a8;
+  background-color: #92c7a8;
 }
 
 .logo .CompanyName {
-  
   position: absolute;
   width: 40%;
   height: auto;
   left: 9%;
   top: 18rem;
   font-style: normal;
-  font-weight: bold;;
+  font-weight: bold;
   font-size: 4em;
   text-align: center;
   color: rgba(0, 0, 0, 0.7);
@@ -421,18 +416,19 @@ main {
   font-size: 2.5em;
   color: rgba(0, 0, 0, 0.46);
 }
-@media screen and (max-width: 640px) {  /* page layout for phones */
-  .logo .HouseIcon{
+@media screen and (max-width: 640px) {
+  /* page layout for phones */
+  .logo .HouseIcon {
     display: none;
   }
   .form-wrapper .header {
-    color:#333;
+    color: #333;
     font-weight: bold;
     display: flex;
     position: relative;
-    left:35px
+    left: 35px;
   }
-  .form-wrapper .border-wrapper .border-item{
+  .form-wrapper .border-wrapper .border-item {
     font-size: small;
   }
 
@@ -440,68 +436,68 @@ main {
     display: None;
   }
 
-  .logo .CompanyName {  
+  .logo .CompanyName {
     font-weight: bold;
     font-size: 22px;
-    top: 3rem ;
+    top: 3rem;
     position: absolute;
     width: 100%;
     text-align: center;
-    left:5px;
+    left: 5px;
     color: rgba(0, 0, 0, 0.7);
   }
   .form-wrapper {
-    background-color:#CFE6BD;
+    background-color: #cfe6bd;
     width: 60%;
     left: 20%;
     height: 500px;
-    
   }
-  .input-wrapper .border-wrapper{ /*enterpassword*/
+  .input-wrapper .border-wrapper {
+    /*enterpassword*/
     position: relative;
     top: 10em;
     font-size: 7px;
   }
-  .form-wrapper .action .btn { /*login*/
+  .form-wrapper .action .btn {
+    /*login*/
     position: relative;
-    font-size:x-small;
-    top:7em;
-    width:100%;
+    font-size: x-small;
+    top: 7em;
+    width: 100%;
   }
-  .About .website_text{
-    font-size:small;
+  .About .website_text {
+    font-size: small;
     width: 100px;
-    height:100px
+    height: 100px;
   }
-  .About .diabetes_text{
+  .About .diabetes_text {
     position: relative;
     right: 20px;
-    font-size:small;
+    font-size: small;
     width: 100px;
-    height:100px;
+    height: 100px;
   }
 }
 .sectionborder .categories .td {
   text-align: center;
 }
 
-/*BLOW ARE CSS FOR CLINICIAN*/
-
-.clinician_header{
-  height:50px;
-  background-color:  #E1F0DB;
+/*BELOW ARE CSS FOR CLINICIAN*/
+.clinician_header {
+  height: 50px;
+  background-color: #e1f0db;
   text-align: center;
   width: 100%;
 }
 
-.cli_sidenav{
-  background-color: #CFE6BD;
+.cli_sidenav {
+  background-color: #cfe6bd;
   display: block;
-  float:left;
+  float: left;
   height: 1000px; /*Mannually drag background color to the bottom*/
 }
 .cli_sidenav img {
-  width: 80%; 
+  width: 80%;
   margin-left: 20px;
 }
 
@@ -516,26 +512,24 @@ main {
   display: block;
 }
 
-
-.active{
-  background-color:#818181;
+.active {
+  background-color: #818181;
 }
 
 .cli_active {
-  background-color:white;
+  background-color: white;
 }
 
-.cli_greeting{
+.cli_greeting {
   position: absolute;
   width: 65%;
   left: 18%;
   top: 8%;
-  display:flex;
+  display: flex;
   flex-direction: column;
-
 }
-.cli_greeting h1{
-  font-size:4em;
+.cli_greeting h1 {
+  font-size: 4em;
   position: static;
   font-style: normal;
   color: rgba(0, 0, 0, 0.7);
@@ -543,7 +537,7 @@ main {
   line-height: 10%;
 }
 
-.cli_greeting h2{
+.cli_greeting h2 {
   position: static;
   font-style: normal;
   font-size: 2em;
@@ -555,27 +549,35 @@ main {
   line-height: 5%;
 }
 
-.cli_table table{
+.cli_table table {
   position: absolute;
-  table-layout:auto;
+  table-layout: auto;
   width: 80%;
   height: 60%;
   left: 18%;
   top: 28%;
-  background-color:#E1F0DB;
+  background-color: #e1f0db;
   border-top: 20em;
   border-right: 20em;
   border-bottom: 20em;
   border-left: 20em;
   border-color: white;
   border-spacing: white 10px;
-  border-collapse:collapse;
-  border-radius:5rem;
+  border-collapse: collapse;
+  border-radius: 5rem;
 }
 
-.cli_table th, tr, td{
-  border:  3px solid white;
+.cli_table th,
+tr,
+td {
+  border: 3px solid white;
   text-align: center;
+
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.menu {
+
   color:rgba(0, 0, 0, 0.7);
   font-size: 1.3rem;
 }
@@ -614,29 +616,27 @@ main {
 
 
 .menu{
+
   position: relative;
   display: grid;
   grid-template-columns: auto auto auto;
   height: 80%;
-  top:5%;
+  top: 5%;
   width: 25%;
-  left:70%;
+  left: 70%;
   column-gap: 4em;
 }
 
-
-.menu .elem{
+.menu .elem {
   border-width: 0;
   border-radius: 15vh;
   background-color: #8fbc88;
   width: 100px;
 }
 .menu .elem a {
-  text-decoration: none; 
+  text-decoration: none;
   color: black;
 }
 .menu .elem:hover {
   background-color: rgb(157, 196, 157);
 }
-
-
