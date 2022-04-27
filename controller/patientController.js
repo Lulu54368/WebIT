@@ -91,7 +91,7 @@ const addOneData = async (req, res)=>{
     try{
         var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
     attributes = attributes.input;
-    console.log(attributes);
+
     patient = await Patient.findById(req.params.patient_id);
     const newData = req.body;
     if(JSON.stringify(newData) != "{}"){
@@ -120,19 +120,20 @@ const addOneData = async (req, res)=>{
             patient.data.push(data) //push data
         }
         else{
-          
             var attr_data = patient.data.find((data)=>data[key_attr].createAt == new Date().toLocaleDateString());
             if(!attr_data){
-                data[attr].data = req.body.value;
-                data[attr].comment = req.body.comment;
-                data[attr].recorded = true;
-                data[attr].createAt = new Date().toLocaleDateString();
+                data[key_attr].data = req.body.value;
+                data[key_attr].comment = req.body.comment;
+                data[key_attr].recorded = true;
+                data[key_attr].createAt = new Date().toLocaleDateString();
             }
-          
+            patient.data.pop()//remove the latest data
+            patient.data.push(data);          
         }
         //await Patient.findByIdAndUpdate(patient._id, {data, });
         await patient.save();
-        res.redirect("/patient/"+ req.params.patient_id);
+        res.send(patient);
+        //res.redirect("/patient/"+ req.params.patient_id);
             
     }
     else{
