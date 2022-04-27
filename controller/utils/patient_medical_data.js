@@ -36,16 +36,18 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
                 }
             })
             // now compare patient data with their threshold bounds, ready for highlights if data lies beyond safety levels
-            if ((component.blood_level < component.blood_lb) || component.blood_level > component.blood_ub) {
+            // make sure only highlight if there exists data
+            if ( (component.blood_level < component.blood_lb || component.blood_level > component.blood_ub) && (component.blood_level!='') ) {
                 component["blood_highlight"] = true;
+
             }
-            if ((component.weight < component.weight_lb) || component.weight > component.weight_ub) {
+            if ( (component.weight < component.weight_lb || component.weight > component.weight_ub) && (component.weight!='') ){
                 component["weight_highlight"] = true;
             }
-            if ((component.exercise < component.exercise_lb) || component.exercise > component.exercise_ub) {
+            if ( (component.exercise < component.exercise_lb || component.exercise > component.exercise_ub) && (component.exercise!='') ){
                 component["exercise_highlight"] = true;
             }
-            if ((component.insulin_intake < component.insulin_lb) || component.insulin_intake > component.insulin_ub) {
+            if ( (component.insulin_intake < component.insulin_lb || component.insulin_intake > component.insulin_ub) && (component.insulin_intake!='') ){
                 component["insulin_highlight"] = true;
             }
             //console.log("utils line 65 check highlight, patient_component = ");
