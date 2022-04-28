@@ -131,8 +131,8 @@ const addOneData = async (req, res)=>{
         }
         //await Patient.findByIdAndUpdate(patient._id, {data, });
         await patient.save();
-        res.send(patient);
-        //res.redirect("/patient/"+ req.params.patient_id);
+        //res.send(patient);
+        res.redirect("/patient/"+ req.params.patient_id);
             
     }
     else{
