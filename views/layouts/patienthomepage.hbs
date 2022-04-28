@@ -73,11 +73,13 @@
 
       <section>
         <div class = sectionborder>
+
+        <h3>You've recorded these data</h3>
           <table>
             <tr>
               <td> 
                 {{#if data.blood_level.recorded}}
-                <input type="checkbox" id="bgl" name="bgl" value="bgl" checked>Blood glucose level<br></td>
+                <input type="checkbox" id="bgl" name="bgl" value="bgl" onclick="return false"checked>Blood glucose level<br></td>
                 {{else}}
                 <input type="checkbox" id="bgl" name="bgl" value="bgl" onclick="return false">
                 <label for="bgl">Blood glucose level</label>
@@ -85,7 +87,7 @@
               </td>
               <td>
                 {{#if data.weight.recorded}}
-                <input type="checkbox" id="weight" name="weight" value="weight" checked>Weight<br></td>
+                <input type="checkbox" id="weight" name="weight" value="weight" onclick="return false"checked>Weight<br></td>
                 {{else}}
                 <input type="checkbox" id="weight" name="weight" value="weight" onclick="return false">
                 <label for="weight">Weight</label>
@@ -96,7 +98,7 @@
             <tr>
               <td>
                 {{#if data.insulin_intake.recorded}}
-                <input type="checkbox" id="insulin" name="insulin" value="insulin" checked>Insulin<br></td>
+                <input type="checkbox" id="insulin" name="insulin" value="insulin" onclick="return false"checked>Insulin<br></td>
                 {{else}}
                 <input type="checkbox" id="insulin" name="insulin" value="insulin" onclick="return false">
                 <label for="insulin">Insulin</label>
@@ -104,7 +106,7 @@
               </td>
               <td>
                 {{#if data.exercise.recorded}}
-                <input type="checkbox" id="exercise" name="exercise" value="exercise"checked>Exercise<br></td>
+                <input type="checkbox" id="exercise" name="exercise" value="exercise"onclick="return false"checked>Exercise<br></td>
                 {{else}}
                 <input type="checkbox" id="exercise" name="exercise" value="exercise" onclick="return false">
                 <label for="exercise">Exercise</label>
@@ -115,14 +117,10 @@
         </div>
       </section>
       <br><br>
-      <script>
 
-      function myFunction() {
-        var checkBox1 = document.getElementById("bgl");
-        var checkBox2 = document.getElementById("weight");
-        var checkBox3 = document.getElementById("insulin");
-        var checkBox4 = document.getElementById("exercise");
-        if (checkBox1.checked == true && checkBox1.checked == true && checkBox1.checked == true && checkBox1.checked == true){
+      <script>
+      function isChecked() {
+        if (data.blood_level.recorded && data.weight.recorded && data.insulin_intake.recorded && data.exercise.recorded) {
           return true;
         } else {
           return false;
@@ -132,7 +130,7 @@
 
 
       <section>
-          {{#if myFunction}}
+          {{#if isChecked}}
         <div class = sectionborder>
           <h3>Today's badge</h3>
           <center> <img class = "image" src = "/badge.png" id = "badge"> </center>
