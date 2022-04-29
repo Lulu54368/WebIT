@@ -40,21 +40,14 @@ const getAllPatients = async(req, res)=>{
             patient_id_list = patient_id_list.map((id)=>id.toString());
             // filter to include only patients whose id are stored under a certain clinician
             var filtered_patients = patients.filter((patient)=> { 
-                console.log(patient._id.toString());
                 return patient_id_list.includes((patient._id).toString()) }); 
-            console.log("after filter, filtered_patients = ");
-            console.log(filtered_patients);
 
             // filter to include only patients' thresholds with id (patient id) contained in a certain clinician 
             var filtered_thresholds = patient_thresholds.filter((threshold) => {
-                console.log(threshold.id.toString());
                 return patient_id_list.includes((threshold.id).toString()) });
-            console.log("after filter, filtered_thresholds = ");
-            console.log(filtered_thresholds);
             
             const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
-            console.log("patient_medical_data = " + patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data, view_date: today});
         }
@@ -104,7 +97,6 @@ const addOnePatient = async(req, res)=>{
         var newPatient = req.body;
         if(clinician){
             if(JSON.stringify(newPatient) == "{}"){
-                console.log(JSON.stringify(newPatient));
                 res.send("no patient sent");
             }
             else{
@@ -212,13 +204,12 @@ const getAllThreshold = async (req, res, next)=>{
                 return patient_id_list.includes(threshold.id.toString()) });
 
             var filtered_patients = patients.filter((patient) => {  // find the patients with the matching threshold ids
-                console.log(patient);
                 return filtered_id_list.includes(patient._id.toString()) });    
            
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
-            
-            res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
+            res.send({view_date: today, patient_threshold: patients_threshold});
+            //res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
         }
         else {
             sendStatus(404);

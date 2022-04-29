@@ -7,85 +7,37 @@ const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
 const getCurrData = async (req, res)=>{
-    var attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
-    attributes = attributes.input;
-    const patient = await Patient.findById(req.params.patient_id);
-    const today = new Date().toLocaleDateString();
-    var today_data = patient.data.find(
-        (one)=>(one.date == today)
-    );
-
-    // If today's data is not available, manipulate an empty object
-    if(!today_data){
-        today_data = {};
-        attributes.forEach((attr)=>today_data[attr] = {
-            data: "",
-            comment: "",
-            recorded: false
-        });
-        
-    }
-    //patient.data.push(today_data);
-    //await patient.save();
-    console.log({data: today_data , patient_name:patient.name, today: (new Date()).toLocaleDateString(), patient_input: attributes});
-    res.render("../views/layouts/patienthomepage.hbs",
-    {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
-}
-//This function add the newest data
-const addTodayData = async (req, res)=>{
-
-    patient = await Patient.findById(req.params.patient_id);
-
-    const newData = req.body;
-
-    if(JSON.stringify(newData) != "{}"){
-        // find today's data
-        var data = patient.data.find((data)=>data.date == new Date().toLocaleDateString());
-        if(!data){  //If we can not find today's data, we create an empty object
-            data = {
-                "date": new Date().toLocaleDateString(),
-                "blood_level": {
-                    
-                },
-                "weight":{
-                   
-                    
-                },
-                "insulin_intake": {
-                   
-                   
-                },
-                "exercise":{
-                    
-                    
-                }
-            };
+    try {
+        var attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
+        attributes = attributes.input;
+        const patient = await Patient.findById(req.params.patient_id);
+        const today = new Date().toLocaleDateString();
+        var today_data = patient.data.find(
+            (one)=>(one.date == today)
+        );
+    
+        // If today's data is not available, manipulate an empty object
+        if(!today_data){
+            today_data = {};
+            attributes.forEach((attr)=>today_data[attr] = {
+                data: "",
+                comment: "",
+                recorded: false
+            });
             
-            patient.data.push(data);
         }
-
-
-        const attributes = await Patient_input.findOne({id: req.params.patient_id});
-   
-        attributes.input.forEach(attr => {  //update the attribute the patient is required to input
-            let attr_data = attr + "_data";
-            let attr_comment = attr + "_comment";
-            data[attr].data = req.body[attr_data];
-            data[attr].comment = req.body[attr_comment];
-            
-        });
-       
-        //update the data
-        patient.data.pop();
-        patient.data.push(data);
-   
-        Patient.findByIdAndUpdate(req.params.patient_id, {data: patient.data});
-        res.send(patient.data);
-
+    
+        res.render("../views/layouts/patienthomepage.hbs",
+        {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
+    
     }
-    //redirect here
-  
+    catch(err) {
+        console.log(err);
+    }
+    
 }
+
+
 //add a piece of data
 const addOneData = async (req, res)=>{
     try{
@@ -115,7 +67,6 @@ const addOneData = async (req, res)=>{
             data[key_attr].comment = req.body.comment;
             data[key_attr].recorded = true; //record data
             data[key_attr].createAt = new Date().toLocaleDateString();
-            console.log(patient);
             patient.data.push(data) //push data
         }
         else{
@@ -144,4 +95,4 @@ const addOneData = async (req, res)=>{
     }
   
 }
-module.exports ={ getCurrData, addTodayData, addOneData};
+module.exports ={ getCurrData, addOneData};
