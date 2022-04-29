@@ -32,6 +32,7 @@ const getAllPatients = async(req, res)=>{
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         const patients = await Patient.find().lean();  // taken from /model/patient.js
         const patient_thresholds = await Patient_Threshold.find().lean();
+        const today = new Date().toLocaleDateString();
         if(clinician){
             // list of patient id stored in a certain clinician
             var patient_id_list = clinician.patients;
@@ -55,7 +56,7 @@ const getAllPatients = async(req, res)=>{
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
             console.log("patient_medical_data = " + patient_medical_data);
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-            patients: patient_medical_data});
+            patients: patient_medical_data, view_date: today});
         }
         else{
             res.sendStatus(404);
