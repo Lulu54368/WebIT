@@ -1,3 +1,4 @@
+
 function submitCheck(){
   var bgl = document.getElementById("patientdata_bgl").value
   var weight = document.getElementById("patientdata_weight").value
@@ -26,14 +27,3 @@ function isNumeric(str) {
 }
 submitCheck()
 
-function submitPatientDataForm (event) {
-  event.preventDefault()
-  var pathName=window.location.pathname
-  var splitPath=pathName.split("/")
-  var patientID=splitPath[2]
-  var request = new XMLHttpRequest();
-  var url = ""
-  request.open('POST', url);
-  request.send(new FormData(event.target));
-}
-//document.getElementById("patientDataForm").addEventListener("submit", submitPatientDataForm)
