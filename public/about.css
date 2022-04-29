@@ -575,7 +575,6 @@ td {
 
   color: rgba(0, 0, 0, 0.7);
 }
-
 .menu {
 
   color:rgba(0, 0, 0, 0.7);
@@ -639,4 +638,19 @@ td {
 }
 .menu .elem:hover {
   background-color: rgb(157, 196, 157);
+}
+
+.aboutlog {
+  position: relative;
+  border-width: 0;
+  border-radius: 20vh;
+  background-color: #8fbc88;
+  width: 100px;
+  height: 80%;
+  top: -130%;
+  left:40%
+}
+.aboutlog a {
+  text-decoration: none;
+  color: rgb(70, 70, 70);
 }
