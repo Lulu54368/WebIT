@@ -187,8 +187,8 @@ const getAllThreshold = async (req, res, next)=>{
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
         const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
-       
         const today = new Date().toLocaleDateString();
+        const clinician_name = clinician.lastname;
         // the clinician is valid
         if(clinician) {
             // copy the patient's id list stored in the clinician
@@ -208,8 +208,7 @@ const getAllThreshold = async (req, res, next)=>{
            
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients);  // the argument patient_thresholds was filtered on the above line
             // and now passed as an argument specified in /utils/patient_threshold.js
-            res.send({view_date: today, patient_threshold: patients_threshold});
-            //res.render("../views/layouts/clinician_patientthreshold.hbs",{view_date: today, patient_threshold: patients_threshold});
+            res.render("../views/layouts/clinician_patientthreshold.hbs", {c_name: clinician_name, view_date: today, patient_threshold: patients_threshold});
         }
         else {
             sendStatus(404);
