@@ -45,10 +45,16 @@
 
     <aside>
       <div class = "greeting">
-        <h1> Hi John!</h1>
+        <h1> Hi {{patient_name}}!</h1>
       </div>
       <div class = "date">
-        <h4> Today: Tuseday, March 15</h4>
+        <h4 id="MyP">Today is {{today}} </h4>
+        <script>
+            var today = new Date();
+            var day = today.getDay();
+            var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+            document.getElementById("MyP").innerHTML += daylist[day];
+        </script>
       </div>
 
     </aside>
