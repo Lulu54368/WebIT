@@ -223,56 +223,38 @@ const getAllThreshold = async (req, res, next)=>{
 
 //This function change the thresholds the clinician set for patients
 const modifyThreshold = async (req, res, next)=>{
+    
     try {
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
-        const patient_thresholds = await Patient_Threshold.find().lean(); // get all patient_threholds from database
         
-        // define the entire Threshold object for processing, consiting of "id":{} and "threshold": {}
+        // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
         var newThreshold = req.body;
-
+        
         if (clinician) {
             if (JSON.stringify(newThreshold) == '{}') {
                 res.send("No threshold was sent");
+            
             } else {
-                const patient_id = newThreshold.id; // take the patient_id passed in the http params   
-                var curr_threshold = await Patient_Threshold.findOne({id: patient_id}) // find the existing threshold
-               
-                // this is the first time the threshold is being added (does not exist yet), add this to database
-                if (!curr_threshold) {
-                    newThreshold = await new Patient_Threshold(newThreshold);
-                    newThreshold.save();
-                    res.send(newThreshold);
-                
-                // if threshold record has been initialised in database, update it. Assume the request body contains all 4 record attributes and 8 bounds 
-                } else {
-                    var threshold = curr_threshold.threshold;
-                    
-                    var record_count = 0;
-                    var bound_count = 0;
-                    if (patient_id && threshold) {
-                        for (var record in threshold) { // record refers to blood_level:{}, weight:{}, insuintake:{}, exercise:{}
-                            bound_count = 0;
-                            record_count ++;
-                            if (record_count > Object.keys(threshold).length) {  // to avoid redundant attributes being triggered
-                                break;
-                            }
-                           
-                            for (var bound in threshold[record]) {
-                                bound_count ++;
-                                if (bound_count > Object.keys(threshold[record]).length) {  // to avoid redundant attributes being triggered
-                                    break;
-                                }
-                               
-                                threshold[record][bound] = newThreshold["threshold"][record][bound];
-                            }
-                        }
-                        // update to database
-                        curr_threshold.save();
-                        res.send(threshold);
-                    } else {
-                        res.send("can not find the patient");
+                const patient_id = req.params.patient_id; // take the patient_id passed in the http params  
+
+                var curr_threshold = await Patient_Threshold.findOne({id: patient_id}) // find the existing threshold   
+                // take the threshold component of the current Threshold Model
+                var update_threshold = curr_threshold.threshold;
+                const modified_attr = newThreshold.key;  // the attribute that is being updated     
+                // update the specified field    
+                var counter = 0;
+
+                for (var entry of Object.keys(newThreshold)) {
+                    // update upper bound and lower bound accordingly
+                    if (counter > 0) {  // filter out the first entry which is a key 
+                        update_threshold[modified_attr][entry] = newThreshold[entry];  // update bound(s)
                     }
+                    counter ++;
                 }
+
+                curr_threshold.threshold = update_threshold;
+                curr_threshold.save();
+                res.send(curr_threshold);
 
             }
 
