@@ -7,7 +7,7 @@ const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
 const getCurrData = async (req, res)=>{
-    var attributes = await Patient_input.findOne({id: req.params.patient_id}).lean();
+    var attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
     attributes = attributes.input;
     const patient = await Patient.findById(req.params.patient_id);
     const today = new Date().toLocaleDateString();
