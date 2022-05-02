@@ -6,7 +6,7 @@ const patient_threshold_list = (patient_threshold_data, patient_data, patient_in
     patient_threshold_data.forEach((element) => {
         const threshold = element.threshold;
        //Some modification shold be added here (find function instead of hardcode)
-        
+       //include patient input(consider the input patient required to enter) 
        const patient = patient_data.find((data)=>data._id.toString() == element.id.toString());
       
        const patient_input = patient_inputs.find((input)=>input.id.toString() ==element.id.toString());

@@ -206,8 +206,7 @@ const getAllThreshold = async (req, res, next)=>{
 
             var filtered_patients = patients.filter((patient) => {  // find the patients with the matching threshold ids
                 return filtered_id_list.includes(patient._id.toString()) });    
-            //console.log(filtered_id_list);
-            //console.log(patient_inputs.map((input)=>input.id));
+           
             const patient_input = patient_inputs.filter((input)=>patient_id_list.includes(input.id.toString()));
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients, patient_input);  // the argument patient_thresholds was filtered on the above line
             console.log(patients_threshold);
