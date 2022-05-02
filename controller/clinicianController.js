@@ -182,7 +182,7 @@ const getAllComments = async(req, res, next)=>{
 
 //This function get thresholds for all patients
 const getAllThreshold = async (req, res, next)=>{
-    //try {
+    try {
         // Find the clinician by matching the http:/clinician_id with the database clinician id 
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
@@ -217,10 +217,10 @@ const getAllThreshold = async (req, res, next)=>{
         else {
             sendStatus(404);
         }
-    /*} 
+    } 
     catch(err) {
         return (err);
-    }*/
+    }
         
 }
 
