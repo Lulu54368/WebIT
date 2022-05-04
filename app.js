@@ -45,7 +45,34 @@ const clinicianRouter = require("./router/clinician.js");
 const patientRouter = require("./router/patient.js")
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
-
+const flash = require('express-flash')
+const session = require('express-session')
+// Flash messages for failed logins, and (possibly) other success/error messages
+app.use(flash())
+// Track authenticated users through login sessions
+app.use(
+    session({
+    // The secret used to sign session cookies (ADD ENV VAR)
+        secret: process.env.SESSION_SECRET,
+        name: 'diabetesAtHome', // The cookie name (CHANGE THIS)
+        saveUninitialized: false,
+        resave: false,
+        cookie: {
+            maxAge: 300000
+        },
+})
+);
+app.use(passport.initialize());
+app.use(passport.session());
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // Trust first proxy
+}
+// Initialise Passport.js
+const passport = require('./config/passport')(passport);
+app.use(passport.authenticate('session'))
+// Load authentication router
+const authRouter = require('./routes/auth')
+app.use(authRouter)
 
 app.listen(port, ()=> {
     console.log("server is running... ");
