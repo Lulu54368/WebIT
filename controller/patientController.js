@@ -12,6 +12,7 @@ const getCurrData = async (req, res)=>{
         attributes = attributes.input;
         const patient = await Patient.findById(req.params.patient_id);
         const today = new Date().toLocaleDateString();
+        const all_input = ["blood_level", "weight", "insulin_intake", "exercise"];
         var today_data = patient.data.find(
             (one)=>(one.date == today)
         );
@@ -19,14 +20,23 @@ const getCurrData = async (req, res)=>{
         // If today's data is not available, manipulate an empty object
         if(!today_data){
             today_data = {};
-            attributes.forEach((attr)=>today_data[attr] = {
+            attributes.forEach((attr)=>
+            {
+                today_data[attr] = {
                 data: "",
                 comment: "",
                 recorded: false
+                };
+            today_data[attr].required = true; //patient required to enter
             });
             
         }
-    
+        all_input.filter((input)=>!attributes.includes(input))
+        .forEach((input)=>{
+            today_data[input] = {required: false}
+        });
+        
+        //only show the data of the attribute patient required to input 
         res.render("../views/layouts/patienthomepage.hbs",
         {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
     
@@ -80,9 +90,9 @@ const addOneData = async (req, res)=>{
             patient.data.pop()//remove the latest data
             patient.data.push(data);          
         }
-        //await Patient.findByIdAndUpdate(patient._id, {data, });
+        
         await patient.save();
-        //res.send(patient);
+       
         res.redirect("/patient/"+ req.params.patient_id);
             
     }

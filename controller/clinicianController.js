@@ -187,6 +187,7 @@ const getAllThreshold = async (req, res, next)=>{
         const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
         const patient_thresholds = await Patient_Threshold.find().lean();
         const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
+        const patient_inputs = await Patient_input.find().lean();
         const today = new Date().toLocaleDateString();
         const clinician_name = clinician.lastname;
         // the clinician is valid
@@ -206,7 +207,9 @@ const getAllThreshold = async (req, res, next)=>{
             var filtered_patients = patients.filter((patient) => {  // find the patients with the matching threshold ids
                 return filtered_id_list.includes(patient._id.toString()) });    
            
-            const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients);  // the argument patient_thresholds was filtered on the above line
+            const patient_input = patient_inputs.filter((input)=>patient_id_list.includes(input.id.toString()));
+            const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients, patient_input);  // the argument patient_thresholds was filtered on the above line
+            console.log(patients_threshold);
             // and now passed as an argument specified in /utils/patient_threshold.js
             res.render("../views/layouts/clinician_patientthreshold.hbs", {c_name: clinician_name, view_date: today, patient_threshold: patients_threshold});
         }
