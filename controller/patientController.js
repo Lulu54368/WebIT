@@ -113,7 +113,7 @@ const getPatientHistory = async (req, res)=>{
         const patient = await Patient.findById(req.params.patient_id).lean();
         console.log("patientController line 114");
         if(patient){
-            res.render("../views/layouts/patient_historyData.hbs",{view_date: today, name: patient.name, 
+            res.render("../views/layouts/patient_historyData.hbs",{today: new Date().toLocaleDateString(), patient_name: patient.name, 
                 history: patient.data});
         }
         else{
