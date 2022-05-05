@@ -2,78 +2,79 @@
            
           <form action="" method="POST" >
             <tr>
-           
-              <input type="hidden" name="key" value="blood_level" hidden = true>
-              <td>Blood glucose level(mmol/L)</td>
-              {{#if data.blood_level.recorded}}
-              <td> {{data.blood_level.data}} </td>
-              <td> {{data.blood_level.comment}} </td>
-              {{else}}
-              <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_bgl"></td>
-              <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_bgl" ></td>
+              {{#if data.blood_level.required}}
+                <input type="hidden" name="key" value="blood_level" hidden = true>
+                <td>Blood glucose level(mmol/L)</td>
+                {{#if data.blood_level.recorded}}
+                <td> {{data.blood_level.data}} </td>
+                <td> {{data.blood_level.comment}} </td>
+                {{else}}
+                <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_bgl"></td>
+                <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_bgl" ></td>
+                {{/if}}
+                
+                {{#unless data.blood_level.recorded}}
+                <td> <input type="submit">  </td>
+                {{/unless}}
               {{/if}}
-              
-              {{#unless data.blood_level.recorded}}
-              <td> <input type="submit">  </td>
-              {{/unless}}
             </tr>
           </form>  
-          
+
           <form action="" method="POST" >
             <tr>
-            
-              <input type="hidden" name="key" value="weight" hidden = true>
-              <td>Your weight(kg)</td>
-              {{#if data.weight.recorded}}
-              <td> {{data.weight.data}} </td>
-              <td> {{data.weight.comment}} </td>
-              {{else}}
-              <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_weight" ></td>
-              <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_weight" ></td>
+              {{#if data.weight.required}}
+                <input type="hidden" name="key" value="weight" hidden = true>
+                <td>Your weight(kg)</td>
+                {{#if data.weight.recorded}}
+                <td> {{data.weight.data}} </td>
+                <td> {{data.weight.comment}} </td>
+                {{else}}
+                <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_weight" ></td>
+                <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_weight" ></td>
+                {{/if}}
+                {{#unless data.weight.recorded}}
+                <td> <button type="submit"> submit </td>
+                {{/unless}}
               {{/if}}
-              
-              {{#unless data.weight.recorded}}
-              <td> <button type="submit"> submit </td>
-              {{/unless}}
             </tr>
           </form>
           
           <form action="" method="POST" >
             <tr>
-            
-              <input type="hidden" name="key" value="insulin_intake" hidden = true>
-              <td>Doses of insulin taken(doses)</td>
-              {{#if data.insulin_intake.recorded}}
-              <td> {{data.insulin_intake.data}} </td>
-              <td> {{data.insulin_intake.comment}} </td>
-              {{else}}
-              <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_insulin" ></td>
-              <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_insulin"></td>
+              {{#if data.insulin_intake.required}}
+                <input type="hidden" name="key" value="insulin_intake" hidden = true>
+                <td>Doses of insulin taken(doses)</td>
+                {{#if data.insulin_intake.recorded}}
+                <td> {{data.insulin_intake.data}} </td>
+                <td> {{data.insulin_intake.comment}} </td>
+                {{else}}
+                <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_insulin" ></td>
+                <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_insulin"></td>
+                {{/if}}
+                {{#unless data.insulin_intake.recorded}}
+                <td> <button type="submit"> submit </td>
+                {{/unless}}
               {{/if}}
-             
-              {{#unless data.insulin_intake.recorded}}
-              <td> <button type="submit"> submit </td>
-              {{/unless}}
             </tr>
           </form>
-          
+
+          {{#if data.exercise.required}}
           <form action="" method="POST" >
             <tr>
-              
-              <input type="hidden" name="key" value="exercise" hidden = true>
-              <td>Exercise(step count)</td>
-              {{#if data.exercise.recorded}}
-              <td> {{data.exercise.data}} </td>
-              <td> {{data.exercise.comment}} </td
-              {{else}}>
-              <td><input type="text" placeholder="Enter data..." name="value" id="patientdata_exercise" ></td>
-              <td><input type="text" placeholder="Enter Comment..." name="comment" id="patientcmt_exercise"></td>
-              {{/if}}
-              
-              {{#unless data.exercise.recorded}}
-              <td> <button type="submit"> submit </td>
-              {{/unless}}
+                <input type="hidden" name="key" value="exercise" hidden = true>
+                <td>Exercise(step count)</td>
+                {{#if data.exercise.recorded}}
+                <td> {{data.exercise.data}} </td>
+                <td> {{data.exercise.comment}} </td
+                {{else}}>
+                <td><input type="text" placeholder="Enter data..." name="value" id="patientdata_exercise" ></td>
+                <td><input type="text" placeholder="Enter Comment..." name="comment" id="patientcmt_exercise"></td>
+                {{/if}}
+                {{#unless data.exercise.recorded}}
+                <td> <button type="submit"> submit </td>
+                {{/unless}}
             </tr>
           </form>
+          {{/if}}
           </table>
             

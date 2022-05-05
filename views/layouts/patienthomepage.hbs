@@ -24,9 +24,9 @@
         </script>
     
     <ul class="topnav">
-      <li><a class="active" href="#home">Leader Board</a></li>
+      <li><a class="active" href="#home">Homepage</a></li>
       <li><a href="#History Data">History Data</a></li>
-      <li><a href="#Homepage">Homepage</a></li>
+      <li><a href="#Homepage">Leader Board</a></li>
       <li><a href="#About this Website">About this Website</a></li>
       <li><a href="#About Diabetes">About Diabetes</a></li>
       <li><a href="#Log Out">Log Out</a></li>
@@ -83,6 +83,8 @@
         <h3>You've recorded these data</h3>
           <table>
             <tr>
+              <!--only present the checkbox if -->
+              {{#if data.blood_level.required}}
               <td> 
                 {{#if data.blood_level.recorded}}
                 <input type="checkbox" id="bgl" name="bgl" value="bgl" onclick="return false"checked>Blood glucose level<br></td>
@@ -91,6 +93,8 @@
                 <label for="bgl">Blood glucose level</label>
                 {{/if}}
               </td>
+              {{/if}}
+              {{#if data.weight.required}}
               <td>
                 {{#if data.weight.recorded}}
                 <input type="checkbox" id="weight" name="weight" value="weight" onclick="return false"checked>Weight<br></td>
@@ -99,9 +103,8 @@
                 <label for="weight">Weight</label>
                 {{/if}}
               </td>
-            </tr>
-
-            <tr>
+              {{/if}}
+              {{#if data.insulin_intake.required}}
               <td>
                 {{#if data.insulin_intake.recorded}}
                 <input type="checkbox" id="insulin" name="insulin" value="insulin" onclick="return false"checked>Insulin<br></td>
@@ -110,6 +113,8 @@
                 <label for="insulin">Insulin</label>
                 {{/if}}
               </td>
+              {{/if}}
+              {{#if data.exercise.required}}
               <td>
                 {{#if data.exercise.recorded}}
                 <input type="checkbox" id="exercise" name="exercise" value="exercise"onclick="return false"checked>Exercise<br></td>
@@ -118,6 +123,7 @@
                 <label for="exercise">Exercise</label>
                 {{/if}}
               </td>
+              {{/if}}
             </tr>
           </table>
         </div>
