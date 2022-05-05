@@ -257,7 +257,8 @@ const modifyThreshold = async (req, res, next)=>{
 
                 curr_threshold.threshold = update_threshold;
                 curr_threshold.save();
-                res.send(curr_threshold);
+                console.log(curr_threshold);
+                res.redirect("/clinician/"+ req.params.clinician_id + "//threshold");
 
             }
 
