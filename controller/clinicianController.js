@@ -175,7 +175,6 @@ const deleteInput = async (req, res)=>{
         patient_id_list = patient_id_list.map((id)=>id.toString());
 
         const new_key = req.body.key;
-        console.log(new_key);
         // the patient exists and is taken care of by the current clinician
         if(patient && patient_id_list.includes(patient._id.toString())){
             var input_body = await Patient_input.findOne({id: patient._id});
