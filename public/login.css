@@ -184,7 +184,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: .2s;
-    text-align: center;*/
+    text-align: center;
   }
 
   .About .website_text:hover {
@@ -240,41 +240,5 @@
     .btn {
       font-size: 85%;
     }
-    /*
-    .About .website_text {
-      left: 30%;
-    }
-
-    .About .diabetes_text {
-      right: 50%;
-    }
-    */
-
-
-  /*
-    <div class="icon-wrapper">
-      <i class="iconfont phs-weixin"></i>
-      <i class="iconfont phs-weibo"></i>
-      <i class="iconfont phs-github"></i>
-    </div>
-
-
-  .form-wrapper .icon-wrapper {
-    text-align: center;
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 20px;
-    border-top: 1px dashed rgb(146, 146, 146);
-    padding: 20px;
   }
-  
-  .form-wrapper .icon-wrapper i {
-    font-size: 20px;
-    color: rgb(187, 187, 187);
-    cursor: pointer;
-    border: 1px solid #fff;
-    padding: 5px;
-    border-radius: 20px;
-  }
-
-*/  
+   

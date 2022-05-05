@@ -6,6 +6,11 @@ const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const passport = require("passport");
 require('./config/passport');
+// Load envioronment variables 
+if (process.env.NODE_ENV !== 'production') { 
+
+    require('dotenv').config() 
+}
 app.set('view engine', 'hbs')
 app.engine('hbs', exphbs.engine({
     defaultLayout: 'index',
@@ -30,7 +35,8 @@ app.use(
 })
 );
 app.use(passport.initialize());
-app.use(passport.session());
+
+
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1); // Trust first proxy
 }
@@ -41,11 +47,7 @@ app.use(passport.authenticate('session'))
 //const authRouter = require('./routes/auth')
 //app.use(authRouter)
 
-// Load envioronment variables 
-if (process.env.NODE_ENV !== 'production') { 
 
-    require('dotenv').config() 
-}
 //lets anything in the form
 app.use(express.urlencoded({
     extended: true

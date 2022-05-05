@@ -12,11 +12,11 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((login, done) => {
 
     if (login.role === "patient") {
-        Patient.findById(login.id, (err, user)=>
+        Patient.findById(login._id, (err, user)=>
         done(err, user))
     }
     else if(login.role === "clinician"){
-        Clinician.findById(login.id, (err, user)=>{
+        Clinician.findById(login._id, (err, user)=>{
             done(err, user)
         });
     }
