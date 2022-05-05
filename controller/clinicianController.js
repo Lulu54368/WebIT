@@ -131,21 +131,67 @@ const addOnePatient = async(req, res)=>{
    
     
 }
-//This function change the attributes the patient need to enter
-const changeInput = (req, res)=>{
-    // find the patient of the clinician and check whether it's exist 
-    const clinician = clinician_data.find((one)=>one.id == req.params.id);
-    const patient_id_list = clinician.patients;
-   
-    const patient = patient_id_list.find((one)=> one == req.params.patient_id);
-    // get the data the patient is required to enter
-    const patient_input = patients_input.find((one)=> one.id == req.params.patient_id);
-    if(patient && patient_input){
-        patient_input.input = req.body.input;
-        res.send(patient_input);
+
+//This function allows the clinician to add a single input the patient needs to record
+const addInput = async (req, res)=>{
+    try{
+        // find the patient of the clinician and check whether they exist 
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        const patient = await Patient.findById(req.params.patient_id).lean();
+        var patient_id_list = clinician.patients;
+        patient_id_list = patient_id_list.map((id)=>id.toString());
+
+        const new_key = req.body.key;
+        // the patient exists and is taken care of by the current clinician
+        if(patient && patient_id_list.includes(patient._id.toString())){
+            var input_body = await Patient_input.findOne({id: patient._id});
+            var the_input = input_body.input; // this is an array of fields
+            // allow up to 4 input keys, and no repeated keys are allowed
+            if ((!the_input.includes(new_key)) && (the_input.length < 4)) {
+                the_input.push(new_key);
+            }
+            input_body.input = the_input;
+            input_body.save();
+            res.send(input_body);
+        }
+        else{
+            res.send("patient not found");
+        }
+        
     }
-    else{
-        res.send("can not find the patient");
+    catch(err) {
+        console.log(err);
+    }
+    
+}
+
+//This function allows the clinician to delete a single input the patient no longer needs to record
+const deleteInput = async (req, res)=>{
+    try{
+        // find the patient of the clinician and check whether they exist 
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        const patient = await Patient.findById(req.params.patient_id).lean();
+        var patient_id_list = clinician.patients;
+        patient_id_list = patient_id_list.map((id)=>id.toString());
+
+        const new_key = req.body.key;
+        console.log(new_key);
+        // the patient exists and is taken care of by the current clinician
+        if(patient && patient_id_list.includes(patient._id.toString())){
+            var input_body = await Patient_input.findOne({id: patient._id});
+            var the_input = input_body.input; // this is an array of fields
+            the_input = the_input.filter((input) => (input !== new_key)); // filter out the specific input key
+            input_body.input = the_input;
+            input_body.save();
+            res.send(input_body);
+        }
+        else{
+            res.send("patient not found");
+        }
+        
+    }
+    catch(err) {
+        console.log(err);
     }
 }
 
@@ -340,7 +386,7 @@ const addSupportSentence = async(req, res, next)=>{
     
 }
 
-const clinicianController = { getAllPatients, getOnePatient, changeInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+const clinicianController = { getAllPatients, getOnePatient, addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
 
 addSupportSentence, addOnePatient};
 
