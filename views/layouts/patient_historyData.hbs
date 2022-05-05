@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History Data</title>
+    <link rel="stylesheet" href="/about.css" />
+  </head>
+  
+
+  <!-- content of webpage begins here -->
+  <body>
+    <header>
+      <h2>History Data</h2>
+    </header>
+
+    <aside>
+      <div class = "greeting">
+        <h1>Hi {{name}}</h1>
+      </div>
+      <div class = "date">
+        <h4 id="MyP">Today is {{today}} </h4>
+        <script>
+            var today = new Date();
+            document.getElementById("MyP").innerHTML += today.toDateString();
+        </script>
+      </div>
+    </aside>
+
+    <main>
+      {{>patient_history}}
+    </main>
+
+    
+    <nav>
+      <div class="sidenav">
+        <p>
+          <a href="#Homepage">Homepage</a>
+        </p>
+        <p>
+          <a href="#History data">History data</a>
+        </p>
+        <p>
+          <a href="#Leader board">Leader board</a>
+        </p>
+      </div>
+    </nav>
+
+    <footer>
+        <a href="#">About this website</a>
+        <a href="#">About diabetes</a>
+        <a href="#">Log out</a>
+    </footer>
+  </body>
+</html>

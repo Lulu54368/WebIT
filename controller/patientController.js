@@ -105,4 +105,27 @@ const addOneData = async (req, res)=>{
     }
   
 }
-module.exports ={ getCurrData, addOneData};
+
+//This function get the medical data for a specified patient
+const getPatientHistory = async (req, res)=>{
+    try{
+        const today = new Date().toLocaleDateString();
+        const patient = await Patient.findById(req.params.patient_id).lean();
+        console.log("patientController line 114");
+        if(patient){
+            res.render("../views/layouts/patient_historyData.hbs",{view_date: today, name: patient.name, 
+                history: patient.data});
+        }
+        else{
+            res.send("patient not found");
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+
+}
+
+
+module.exports ={ getCurrData, addOneData, getPatientHistory};
