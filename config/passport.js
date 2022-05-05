@@ -10,8 +10,7 @@ passport.serializeUser((user, done) => {
 // When a request comes in, deserialize/expand the serialized information
 // back to what it was (expand from id to full user)
 passport.deserializeUser((login, done) => {
-// Run database query here to retrieve user information
-// For now, just return the hardcoded user
+
     if (login.role === "patient") {
         Patient.findById(login.id, (err, user)=>
         done(err, user))
@@ -37,15 +36,17 @@ passport.use("patient-login",
     },(req, email, password, done) =>{
         process.nextTick(()=>{
             Patient.findById({"email": email.toLowerCase()}, async(err, patient)=> {
-                if(err) return done(err); //call back function
+                if(err) return done(err); //error
                 else if(!patient){
                     //can not find patient
                     return done(null, false, req.flash('loginMessage', 'No user found'))
                 }
                 else if(!await bcrypt.compare(password, patient.passport)){
+                    //password not match
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password'))
                 }
                 else{
+                    //success
                     return done(null, patient, req.flash('loginMessage', 'Login Successful!'))
                 }
                     

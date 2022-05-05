@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL);
+
 const Schema = mongoose.Schema;
 //This is medical data for patients
 const Data = new Schema({

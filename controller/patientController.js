@@ -105,9 +105,11 @@ const addOneData = async (req, res)=>{
     }
   
 }
+const renderLogin = ()=>{
 
+}
 const logout = (req, res) =>{
     req.logout();
     res.redirect("patient/login");
 }
-module.exports ={ getCurrData, addOneData};
+module.exports ={ getCurrData, addOneData, logout, renderLogin};

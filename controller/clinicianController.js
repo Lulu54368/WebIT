@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL);
+//mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const patients_data = require("../models/patient_sample");
+
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model

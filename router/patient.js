@@ -16,9 +16,9 @@ router.get('/', isAuthenticated, (req, res) => {
     res.render('home', { title: 'Express', user: req.user })
 })*/
 // Login page (with failure message displayed upon login failure)
-router.get('/login', utility.unLoggedIn, patientController.renderLogin)
+patientRouter.get('/login', utility.unLoggedIn, patientController.renderLogin)
 // Handle login
-router.post('/login',
+patientRouter.post('/login',
     utility.unLoggedIn,
     passport.authenticate("patient-login", {
         successRedirect: '/patient/home', //id should be here
@@ -28,5 +28,5 @@ router.post('/login',
 
 )
 // Handle logout
-router.post('/logout', utility.isLoggedIn, patientController.logout)
-module.exports = router
+patientRouter.post('/logout', utility.isLoggedIn, patientController.logout)
+module.exports = patientRouter
