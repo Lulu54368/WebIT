@@ -1,18 +1,30 @@
-<div class = "cli_table">
-    <table class = "support_table">
-        <tr class = "catagory">
-            <th calss = "th1">Patient name</th>
-            <th class = "th2">Support Message</th>
-        </tr>
-       
-        <div class="message">    
-        {{#each patient_message}}
-        <tr>
+<div class="cli_table">
+  <table class="support_table">
+    <tr class="catagory">
+      <th calss="th1">Patient name</th>
+      <th class="th2">Support Message</th>
+    </tr>
+
+    <div class="message">
+      {{#each patient_message}}
+        <form action="support/:patient_id" method="POST">
+          <tr>
             <td>{{this.name}}</td>
-            <td>{{this.message}}</td>
-        </tr>
-        {{/each}}       
-        </div>
-        
-    </table>
+            <td>
+              {{#if data.Patients.message}}
+                <td>{{this.message}}</td>
+              {{else}}
+                <input placeholder="Enter support message" id="support_msg" />
+              {{/if}}
+              {{#unless data.Patients.message}}
+                <button type="submit"> submit </button>
+              {{/unless}}
+
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </div>
+
+  </table>
 </div>
