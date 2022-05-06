@@ -1,0 +1,23 @@
+<div class="historyData">    
+      <table>
+        <tr class = "title">
+          <td>Date</td>
+          <td>Blood glucose level<br>(mmol/L)</td>
+          <td>Weight<br>(kg)</td>
+          <td>Doses of insulin intake<br>(doses)</td>
+          <td>Exercise Step Count<br>(step count)</td>
+        </tr>
+   
+      <div class="historyData">    
+        {{#each history}}
+        <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.blood_level.data}}</td>
+            <td>{{this.weight.data}}</td>
+            <td>{{this.insulin_intake.data}}</td>
+            <td>{{this.exercise.data}}</td>
+        </tr>
+        {{/each}}
+      </div>
+      </table>
+      <br/><br/>

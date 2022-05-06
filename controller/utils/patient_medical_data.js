@@ -6,13 +6,17 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
         patient_data.forEach((element) => {
             const data = element.data;
             var component = {"name": element.name, "id": element._id};
-            // store data if it was not empty
+            // store data if it was not empty, here data has stored all data the patient has entered, and each 'attr' is a single data object
             data.forEach((attr)=>{
-                component["date"] = attr.date
-                component["blood_level"] = attr.blood_level.data
-                component["weight"] = attr.weight.data
-                component["exercise"] = attr.exercise.data
-                component["insulin_intake"] = attr.insulin_intake.data
+                var skip_date=0;
+                component["date"] = attr.date  // date must have accompanied input(s) so safe to store it whenever each data object (attr) is not empty
+                // only store relevant inputs
+                for (var input of Object.keys(attr)) {
+                    if(skip_date > 0) {
+                        component[input] = attr[input].data;
+                    }
+                    skip_date++;
+                }
                 component["blood_highlight"] = false;
                 component["weight_highlight"] = false;
                 component["exercise_highlight"] = false;

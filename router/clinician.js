@@ -9,8 +9,11 @@ const clinicianController = require("../controller/clinicianController");
 clinicianRouter.get("/:clinician_id/:patient_id", clinicianController.getOnePatient);
 //Get all patients' data of a specified clinician
 clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
-//Change whatever the patient need to input
-clinicianRouter.post("/:clinician_id/:patient_id", clinicianController.changeInput);
+//Add fields the patient need to input
+clinicianRouter.post("/:clinician_id/:patient_id/add", clinicianController.addInput);
+
+//Delete fields the patient doesn't need to input
+clinicianRouter.post("/:clinician_id/:patient_id/delete", clinicianController.deleteInput);
 
 //add a patient
 clinicianRouter.post("/:clinician_id", clinicianController.addOnePatient);
