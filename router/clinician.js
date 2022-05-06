@@ -22,15 +22,15 @@ clinicianRouter.get("/:clinician_id/support", clinicianController.getSupportSent
 clinicianRouter.get("/:clinician_id/:patient_id", clinicianController.getOnePatient);
 
 //Add fields the patient need to input
-clinicianRouter.post("/:clinician_id/:patient_id/add", clinicianController.addInput);
+clinicianRouter.post("/:clinician_id/add/:patient_id/", clinicianController.addInput);
 
 //Delete fields the patient doesn't need to input
-clinicianRouter.post("/:clinician_id/:patient_id/delete", clinicianController.deleteInput);
+clinicianRouter.post("/:clinician_id/delete/:patient_id/", clinicianController.deleteInput);
 
 //change threshold of a specified patient
-clinicianRouter.post("/:clinician_id/:patient_id/threshold", clinicianController.modifyThreshold);
+clinicianRouter.post("/:clinician_id/threshold/:patient_id/", clinicianController.modifyThreshold);
 
 //add support sentence
-clinicianRouter.post("/:clinician_id/:patient_id/support", clinicianController.addSupportSentence);
+clinicianRouter.post("/:clinician_id/support/:patient_id/", clinicianController.addSupportSentence);
 
 module.exports = clinicianRouter;
