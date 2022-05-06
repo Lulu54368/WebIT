@@ -27,15 +27,16 @@ const getCurrData = async (req, res)=>{
                 comment: "",
                 recorded: false
                 };
-            today_data[attr].required = true; //patient required to enter
+                today_data[attr].required = true; //patient required to enter
             });
             
         }
+     
         all_input.filter((input)=>!attributes.includes(input))
         .forEach((input)=>{
             today_data[input] = {required: false}
         });
-        
+       
         //only show the data of the attribute patient required to input 
         res.render("../views/layouts/patienthomepage.hbs",
         {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
@@ -70,8 +71,11 @@ const addOneData = async (req, res)=>{
                 data[attr] = {
                 data: "",
                 comment: "",
-                recorded: false
-            }});    //initialize
+                recorded: false,
+                required: true
+            }
+            
+        });    //initialize
             
             data[key_attr].data = req.body.value;
             data[key_attr].comment = req.body.comment;
