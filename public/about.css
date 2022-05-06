@@ -576,53 +576,50 @@ td {
   color: rgba(0, 0, 0, 0.7);
 }
 .menu {
-
-  color:rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
   font-size: 1.3rem;
 }
 
-.cli_table .high_bl{
-  border:  3px solid white;
+.cli_table .high_bl {
+  border: 3px solid white;
   text-align: center;
-  background-color: #FDFF90;
+  background-color: #fdff90;
   border-radius: 5rem;
   font-size: 1.3rem;
 }
 
-.cli_table .high_we{
-  border:  3px solid white;
+.cli_table .high_we {
+  border: 3px solid white;
   text-align: center;
-  background-color: #FDFF90;
+  background-color: #fdff90;
   border-radius: 5rem;
   font-size: 1.3rem;
 }
 
-.cli_table .high_in{
-  border:  3px solid white;
+.cli_table .high_in {
+  border: 3px solid white;
   text-align: center;
-  background-color: #FDFF90;
+  background-color: #fdff90;
   border-radius: 5rem;
   font-size: 1.3rem;
 }
 
-.cli_table .high_ex{
-  border:  3px solid white;
+.cli_table .high_ex {
+  border: 3px solid white;
   text-align: center;
-  background-color: #FDFF90;
-  border-radius:5rem;
+  background-color: #fdff90;
+  border-radius: 5rem;
   font-size: 1.3rem;
 }
 
-
-.menu{
-
+.menu {
   position: relative;
   display: grid;
   grid-template-columns: auto auto auto;
   height: 80%;
   top: 5%;
   width: 25%;
-  left: 70%;
+  left: 65%;
   column-gap: 4em;
 }
 
@@ -648,7 +645,7 @@ td {
   width: 100px;
   height: 80%;
   top: -130%;
-  left:40%
+  left: 40%;
 }
 .aboutlog a {
   text-decoration: none;
