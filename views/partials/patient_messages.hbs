@@ -7,19 +7,22 @@
 
     <div class="message">
       {{#each patient_message}}
-        <form action={{data.Patients._id}} method="POST">
+        <form action="support/:patient_id" method="POST">
           <tr>
             <td>{{this.name}}</td>
             <td>
               {{#if patient_message}}
                 <td>{{this.message}}</td>
               {{else}}
-                <input placeholder="Enter support message" id="support_msg" />
+                <input
+                  placeholder="Enter support message"
+                  name="message"
+                  id="support_msg"
+                />
               {{/if}}
               {{#unless patient_message}}
                 <button type="submit"> submit </button>
               {{/unless}}
-
             </td>
           </tr>
         </form>

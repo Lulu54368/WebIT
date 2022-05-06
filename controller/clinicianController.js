@@ -356,6 +356,7 @@ const addSupportSentence = async (req, res, next) => {
         currPatient.save();
 
         res.send(currPatient.message);
+        /* return res.redirect("support/:patient_id"); */
       }
     }
   } catch (err) {
