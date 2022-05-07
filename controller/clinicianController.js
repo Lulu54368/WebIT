@@ -320,13 +320,11 @@ const getSupportSentence = async (req, res, next) => {
       console.log({
         view_date: today,
         patient_message: patients_message,
-     
       });
       if (!patients_message.viewed) {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           view_date: today,
           patient_message: patients_message,
-       
         });
       } else {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
@@ -361,8 +359,7 @@ const addSupportSentence = async (req, res, next) => {
 
         currPatient.save();
 
-        res.send(currPatient.message);
-        /* return res.redirect("support/:patient_id"); */
+        res.redirect("support");
       }
     }
   } catch (err) {
