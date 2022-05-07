@@ -7,13 +7,14 @@
 
     <div class="message">
       {{#each patient_message}}
-        <form action="support/:patient_id" method="POST">
+        <form action=""  method="POST">
           <tr>
             <td>{{this.name}}</td>
             <td>
               {{#if patient_message}}
                 <td>{{this.message}}</td>
               {{else}}
+                <input name = "id"  value ={{this.id}}/>
                 <input
                   placeholder="Enter support message"
                   name="message"

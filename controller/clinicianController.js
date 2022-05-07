@@ -317,10 +317,16 @@ const getSupportSentence = async (req, res, next) => {
       });
       const patients_message = patient_message_list(filtered_patients); // the argument patients was filtered on the above line
       // the patient hasn't viewed the message
+      console.log({
+        view_date: today,
+        patient_message: patients_message,
+     
+      });
       if (!patients_message.viewed) {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           view_date: today,
           patient_message: patients_message,
+       
         });
       } else {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
@@ -348,7 +354,7 @@ const addSupportSentence = async (req, res, next) => {
       } else {
         const newMessage = req.body.message;
 
-        var currPatient = await Patient.findById(req.params.patient_id);
+        var currPatient = await Patient.findById(req.body.id);
 
         currPatient.message = newMessage;
         currPatient.viewed = false;

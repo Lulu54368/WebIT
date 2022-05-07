@@ -4,7 +4,7 @@ const patient_message_list = (patient_data) => {
     patient_data.forEach((element) => {
         //const today = new Date().toLocaleDateString();
         const component = {
-            "id": element.id,
+            "id": element._id.toString().splice(0, -1),
             "name": element.name,
             "viewed": element.viewed,
             "message": element.message
