@@ -267,7 +267,7 @@ const modifyThreshold = async (req, res, next) => {
       if (JSON.stringify(newThreshold) == "{}") {
         res.send("No threshold was sent");
       } else {
-        const patient_id = req.params.patient_id; // take the patient_id passed in the http params
+        const patient_id = newThreshold.id; // take the patient_id passed in the http params
 
         var curr_threshold = await Patient_Threshold.findOne({
           id: patient_id,
@@ -289,7 +289,7 @@ const modifyThreshold = async (req, res, next) => {
 
         curr_threshold.threshold = update_threshold;
         curr_threshold.save();
-        res.redirect("/clinician/" + req.params.clinician_id + "//threshold");
+        res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
       }
     } else {
       res.sendStatus(404);
@@ -350,16 +350,17 @@ const addSupportSentence = async (req, res, next) => {
       if (JSON.stringify(newPatient) == "{}") {
         res.send("no message sent");
       } else {
-        const newMessage = req.body.message;
+        const patient_id = newPatient.id;
+        const newMessage = newPatient.message;
 
-        var currPatient = await Patient.findById(req.body.id);
+        var currPatient = await Patient.findById(patient_id);
 
         currPatient.message = newMessage;
         currPatient.viewed = false;
 
         currPatient.save();
 
-        res.redirect("support");
+        res.redirect("/clinician/" + req.params.clinician_id + "/support");
       }
     }
   } catch (err) {
