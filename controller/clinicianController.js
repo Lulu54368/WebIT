@@ -176,6 +176,7 @@ const getAllComments = async (req, res, next) => {
     // Find a single clinician by matching the http:/clinician_id with the database clinician id
     const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
     const patients = await Patient.find().lean(); // taken from /models/patient, find all documents of patients
+    const patient_inputs = await Patient_input.find().lean();
     const today = new Date().toLocaleDateString();
     // The clinician is valid
     if (clinician) {
@@ -188,7 +189,10 @@ const getAllComments = async (req, res, next) => {
         return patient_id_list.includes(patient._id.toString());
       });
 
-      const patients_comment = patient_comment_list(filtered_patients); // the argument patients was filtered on the above line
+      var filtered_inputs = patient_inputs.filter((input) => {
+          return patient_id_list.includes(input.id.toString());
+      })
+      const patients_comment = patient_comment_list(filtered_patients, filtered_inputs); // the argument patients was filtered on the above line
 
       // patient_comment is each from the partial, patients_comment is the filtered comment
       res.render("../views/layouts/clinician_patientcomment.hbs", {
@@ -267,7 +271,7 @@ const modifyThreshold = async (req, res, next) => {
       if (JSON.stringify(newThreshold) == "{}") {
         res.send("No threshold was sent");
       } else {
-        const patient_id = req.params.patient_id; // take the patient_id passed in the http params
+        const patient_id = newThreshold.id; // take the patient_id passed in the http params
 
         var curr_threshold = await Patient_Threshold.findOne({
           id: patient_id,
@@ -289,7 +293,7 @@ const modifyThreshold = async (req, res, next) => {
 
         curr_threshold.threshold = update_threshold;
         curr_threshold.save();
-        res.redirect("/clinician/" + req.params.clinician_id + "//threshold");
+        res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
       }
     } else {
       res.sendStatus(404);
@@ -321,6 +325,7 @@ const getSupportSentence = async (req, res, next) => {
         view_date: today,
         patient_message: patients_message,
       });
+    
       if (!patients_message.viewed) {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           view_date: today,
@@ -350,16 +355,16 @@ const addSupportSentence = async (req, res, next) => {
       if (JSON.stringify(newPatient) == "{}") {
         res.send("no message sent");
       } else {
-        const newMessage = req.body.message;
+        const patient_id = newPatient.id;
+        const newMessage = newPatient.message;
 
-        var currPatient = await Patient.findById(req.body.id);
-
+        var currPatient = await Patient.findById(patient_id);
+        //console.log(currPatient);
         currPatient.message = newMessage;
         currPatient.viewed = false;
 
         currPatient.save();
-
-        res.redirect("support");
+        res.redirect("/clinician/" + req.params.clinician_id + "/support");
       }
     }
   } catch (err) {
