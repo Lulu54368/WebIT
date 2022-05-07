@@ -21,11 +21,7 @@
                 />
                 <button type="submit"> Edit </button>
                 <td>{{this.message}}</td>
-                {{!-- <input
-                  placeholder={{this.message}}
-                  name="message"
-                  id="support_msg"
-                /> --}}
+
               {{else}}
                 <input hidden="true" name="id" id="id" value={{this.id}} />
                 <input
@@ -34,10 +30,9 @@
                   id="support_msg"
                 />
                 <button type="submit"> Submit </button>
+                <td>No support message yet</td>
               {{/if}}
-              {{!-- {{#unless this.message}}
-                <button type="submit"> submit </button>
-              {{/unless}} --}}
+
             </td>
           </tr>
         </form>
