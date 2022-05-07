@@ -3,6 +3,7 @@
     <tr class="catagory">
       <th calss="th1">Patient name</th>
       <th class="th2">Support Message</th>
+      <th class="th3">Last Support Message</th>
     </tr>
 
     <div class="message">
@@ -11,8 +12,20 @@
           <tr>
             <td>{{this.name}}</td>
             <td>
-              {{#if patient_message}}
+              {{#if this.message}}
+                <input hidden="true" name="id" id="id" value={{this.id}} />
+                <input
+                  placeholder="Edit support message"
+                  name="message"
+                  id="support_msg"
+                />
+                <button type="submit"> Edit </button>
                 <td>{{this.message}}</td>
+                {{!-- <input
+                  placeholder={{this.message}}
+                  name="message"
+                  id="support_msg"
+                /> --}}
               {{else}}
                 <input hidden="true" name="id" id="id" value={{this.id}} />
                 <input
@@ -20,10 +33,11 @@
                   name="message"
                   id="support_msg"
                 />
+                <button type="submit"> Submit </button>
               {{/if}}
-              {{#unless patient_message}}
+              {{!-- {{#unless this.message}}
                 <button type="submit"> submit </button>
-              {{/unless}}
+              {{/unless}} --}}
             </td>
           </tr>
         </form>
