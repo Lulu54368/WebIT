@@ -2,10 +2,11 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Patient = require("../models/patient.js").Patients;
 const Clinician = require("../models/clinician.js")
+const bcrypt = require("bcrypt") //should be deleted later
 // Serialize information to be stored in session/cookie(store and retrieve user information)
 passport.serializeUser((user, done) => {
     // Use id to serialize user
-    done(undefined,{_id: user.id, role: user.role});
+    done(undefined,{_id: user._id, role: user.role});
 })
 // When a request comes in, deserialize/expand the serialized information
 // back to what it was (expand from id to full user)
@@ -41,7 +42,7 @@ passport.use("patient-login",
                     //can not find patient
                     return done(null, false, req.flash('loginMessage', 'No user found'))
                 }
-                else if(!await bcrypt.compare(password, patient.passport)){
+                else if(!await bcrypt.compare(password, patient.passport)){ //should be replaced with method in db
                     //password not match
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password'))
                 }

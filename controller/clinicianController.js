@@ -95,6 +95,7 @@ const addOnePatient = async(req, res)=>{
     try{
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
         var newPatient = req.body;
+  
         if(clinician){
             if(JSON.stringify(newPatient) == "{}"){
                 res.send("no patient sent");
@@ -104,15 +105,14 @@ const addOnePatient = async(req, res)=>{
                 const currPatient = await Patient.findOne({email: newemail}).lean();
                 if(currPatient!= null){
                     
-                    res.send(currPatient);
+                    res.send("patient already exist!");
                 }
                 else{
                 
                     newPatient = await new Patient(newPatient);
-                   
                     clinician.patients.push(newPatient._id);
                     await Clinician.findByIdAndUpdate(req.params.clinician_id, {patients: clinician.patients});
-                    newPatient.save();
+                    await newPatient.save();
                     await Patient_Threshold.create({id: newPatient._id});
                     await Patient_input.create({id: newPatient._id});
                     res.send(newPatient);

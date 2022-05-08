@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const passport = require("passport");
+var crypto = require("crypto")
 require('./config/passport');
 // Load envioronment variables 
 if (process.env.NODE_ENV !== 'production') { 
@@ -29,13 +30,17 @@ app.use(
         name: 'diabetesAtHome', // The cookie name (CHANGE THIS)
         saveUninitialized: false,
         resave: false,
+        proxy: process.env.NODE_ENV == "production",
         cookie: {
+            sameSite: "strict",
+            httpOnly: true,
+            secure: process.env.NODE_ENV == "production",
             maxAge: 300000
         },
 })
 );
 app.use(passport.initialize());
-
+app.use(passport.session());
 
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1); // Trust first proxy
@@ -76,7 +81,8 @@ db.once('open', async () => {
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 const clinicianRouter = require("./router/clinician.js");
-const patientRouter = require("./router/patient.js")
+const patientRouter = require("./router/patient.js");
+const { strict } = require("assert");
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
 
