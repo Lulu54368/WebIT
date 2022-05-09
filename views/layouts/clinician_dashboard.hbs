@@ -1,57 +1,81 @@
+
 <!DOCTYPE html>
-  <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="/about.css">
-        <META http-equiv="Content-Style-Type" content="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>clinician dashboard</title>
-        
-    </head>
-    <body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/about.css" />
+
+    <title>Template</title>
+  </head>
+
+  <!-- content of webpage begins here -->
+  <body>  
     <header>
-        <div class = "menu">
-            <button class = "elem"><a href="Deliverable1/aboutdiabetes.html">About diabetes</a></button>
-            <button class = "elem"><a href="Deliverable1/aboutthiswebsite.html">About this website</a></button>
-            <button class = "elem"><a href="Login/login.html">log out</a></button>
-        </div>
-        
+      <h2>Homepage</h2>
+      </header>
+      <script>
+        var _hmt = _hmt || [];
+        (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    
+    
+    <ul class="topnav">
+      <li><a class="active" href="#home">Dashboard</a></li>
+      <li><a href="">Patient's Data</a></li>
+      <li><a href="">Patient's Comments</a></li>
+      <li><a href="">Thresholds</a></li>
+      <li><a href="">Messages</a></li>
+      <li><a href="">Register Patient</a></li>
+      <li><a href="">About this Website</a></li>
+      <li><a href="">About Diabetes</a></li>
+      <li><a href="">Log Out</a></li>
+      <li class="icon">
+        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+      </li>
+    </ul>
     </header>
+
+    
+    <script>
+    function myFunction() {
+        document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+    }
+    </script>
+
+    <script src="/js/UpdatePatientBadge.js" defer></script>
+        <aside>
+      <div class = "greeting">
+        <h1> Hi {{this.name}}!</h1>
+      </div>
+      <div class = "date">
+        <h4 id="MyP">Today is {{view_date}} </h4>
+        <script>
+            var today = new Date();
+            var day = today.getDay();
+            var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+            document.getElementById("MyP").innerHTML += daylist[day];
+        </script>
+      </div>
+
+    </aside>
+
     <nav>
-        <div class="cli_sidenav">
-            <p>
-                <img src="/page-logo.png">
-            </p>
-            <p class="cli_active">
-              <a href="clinician_dashboard.html">Dashboard</a>
-            </p>
-            <p>
-              <a href="clinician_patientdata.html">Patient's Data</a>
-            </p>
-            <p>
-              <a href="clinician_patientcomment.html">Patient's Comments</a>
-            </p>
-            <p>
-              <a href="clinician_clinicalnotes.html">Clinical Notes</a>
-            </p>
-            <p>
-              <a href="clinician_message.html">Messages</a>
-            </p>
-          </div>
-        </nav>
-
+            <div class="sidenav">
+          <img class = "image" src = "/page-logo.png">
+      </div>
+    </nav>
     <main>
-    <div class = "cli_greeting">
-        <h1>Hi Dr {{this.name}}!</h1>
-        <h2>Today: {{view_date}}</h2>
-    </div>
-
-    {{>patient}}
-      
+      {{>patient}}  
+      {{>patient}}  
     </main>
-    </body>
-    <footer>
+      <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
     </footer>
+    </body>
 </html>
-
