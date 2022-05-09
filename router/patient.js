@@ -14,10 +14,16 @@ patientRouter.get('/login', (req, res)=>res.render("../views/layouts/login.hbs")
 patientRouter.post('/login',
     utility.unLoggedIn,
     passport.authenticate("patient-login", {
-        successRedirect: '/home', //id should be here
+      //id should be here
         failureReqirect: '/login',
         failureFlash: true
-    })
+    }),
+    (req, res)=>{
+        console.log(req);
+        const user = req.user;
+        const link = "/patient/" + user._id.toString()
+        res.redirect(link);
+    }
 
 )
 
