@@ -36,18 +36,20 @@ passport.use("patient-login",
         passReqToCallback: true
     },(req, email, password, done) =>{
         process.nextTick(()=>{
-            Patient.findById({"email": email.toLowerCase()}, async(err, patient)=> {
+            Patient.findOne({"email": email.toLowerCase()}, async(err, patient)=> {
+             
                 if(err) return done(err); //error
                 else if(!patient){
                     //can not find patient
                     return done(null, false, req.flash('loginMessage', 'No user found'))
                 }
-                else if(!await bcrypt.compare(password, patient.passport)){ //should be replaced with method in db
+                else if(!await bcrypt.compare(password, patient.password)){ //should be replaced with method in db
                     //password not match
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password'))
                 }
                 else{
                     //success
+                    patient.role = "patient";
                     return done(null, patient, req.flash('loginMessage', 'Login Successful!'))
                 }
                     

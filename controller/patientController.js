@@ -107,7 +107,7 @@ const addOneData = async (req, res)=>{
   
 }
 const renderLogin = ()=>{
-    console.log("hello")
+    
     res.render("../views/layouts/login.hbs");
 }
 const logout = (req, res) =>{

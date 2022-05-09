@@ -3,7 +3,8 @@ const unLoggedIn = (req, res, next) =>{
         return res.redirect('patient/home')
         //should be id included
     }
-    next;
+    console.log("not authenticated");
+    return next();
 }
 const isLoggedIn = (req, res, next)=>{
     if(req.isAuthenticated()){
