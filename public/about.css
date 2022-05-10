@@ -487,7 +487,8 @@ td {
 
 
 .clinician_header {
-  height: 50px;
+  color:#818181;
+  height: 35px;
   background-color: #e1f0db;
   text-align: center;
   width: 100%;
@@ -565,7 +566,9 @@ td {
   font-size: 11.5px;
   font-weight: bold;
 }
-
+.cli_sectionborder .patient_name a {
+  color: rgba(0, 0, 0, 0.7);
+}
 .menu {
   color: rgba(0, 0, 0, 0.7);
   font-size: 1.3rem;

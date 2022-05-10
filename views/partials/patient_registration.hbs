@@ -1,0 +1,24 @@
+<div class="cli_sectionborder" >
+    <table class = "parent" frame="BOX">
+        <form action="" method="POST" >
+            <tr> {{!this form will be edited later once api connected}}
+              {{#if data.blood_level.required}}
+                <input type="hidden" name="key" value="blood_level" hidden = true>
+                <td>Blood glucose level(mmol/L)</td>
+                {{#if data.blood_level.recorded}}
+                <td> {{data.blood_level.data}} </td>
+                <td> {{data.blood_level.comment}} </td>
+                {{else}}
+                <td><input type="text" placeholder="Enter data..."  name="value" id="patientdata_bgl"></td>
+                <td><input type="text" placeholder="Enter Comment..."  name="comment" id="patientcmt_bgl" ></td>
+                {{/if}}
+                
+                {{#unless data.blood_level.recorded}}
+                <td> <input type="submit">  </td>
+                {{/unless}}
+              {{/if}}
+            </tr>
+          </form>  
+    </table>
+</div> 
+   

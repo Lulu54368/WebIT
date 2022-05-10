@@ -10,7 +10,14 @@
 
         {{#each patients}}
             <tr>
-                <td>{{this.name}}</td>    
+                <td>
+                    <div class = "patient_name">
+                    <a href="#">
+                        {{this.name}}
+                    </a>
+                    </div>
+                    
+                    </td>    
                 
                 {{#if this.blood_highlight}}
                     <td>&#10071;{{this.blood_level}}
