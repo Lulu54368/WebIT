@@ -36,10 +36,10 @@ const getCurrData = async (req, res)=>{
         .forEach((input)=>{
             today_data[input] = {required: false}
         });
-       
+       console.log({data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes, message: patient.message})
         //only show the data of the attribute patient required to input 
         res.render("../views/layouts/patienthomepage.hbs",
-        {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes});
+        {data: today_data , patient_name:patient.name, today: new Date().toLocaleDateString(), patient_input: attributes, message: patient.message});
     
     }
     catch(err) {
