@@ -118,6 +118,7 @@ nav {
 
 .sidenav {
   background-color: #cfe6bd;
+  display: block;
   float: left;
   height: 100%;
 }
@@ -483,8 +484,11 @@ td {
 }
 
 /*BELOW ARE CSS FOR CLINICIAN*/
+
+
 .clinician_header {
-  height: 50px;
+  color:#818181;
+  height: 35px;
   background-color: #e1f0db;
   text-align: center;
   width: 100%;
@@ -492,25 +496,14 @@ td {
 
 .cli_sidenav {
   background-color: #cfe6bd;
-  display: block;
-  float: left;
-  height: 1000px; /*Mannually drag background color to the bottom*/
+  height: 1000px
+  /*Mannually drag background color to the bottom*/
 }
 .cli_sidenav img {
   width: 80%;
   margin-left: 20px;
 }
 
-.cli_sidenav a:hover {
-  background: white;
-}
-.cli_sidenav a {
-  padding: 20px 20px 20px 20px;
-  font-size: 20px;
-  text-decoration: none;
-  color: #818181;
-  display: block;
-}
 
 .active {
   background-color: #818181;
@@ -524,7 +517,7 @@ td {
   position: absolute;
   width: 65%;
   left: 18%;
-  top: 8%;
+  top: 13%;
   display: flex;
   flex-direction: column;
 }
@@ -548,67 +541,36 @@ td {
   margin: 28px 0px;
   line-height: 5%;
 }
-
-.cli_table table {
-  position: absolute;
-  table-layout: auto;
-  width: 80%;
-  height: 60%;
-  left: 18%;
-  top: 28%;
-  background-color: #e1f0db;
-  border-top: 20em;
-  border-right: 20em;
-  border-bottom: 20em;
-  border-left: 20em;
-  border-color: white;
-  border-spacing: white 10px;
+.cli_sectionborder  table {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
+  border-width: 5px;
+  border-spacing: 5px;
+  border-style: solid;
   border-collapse: collapse;
-  border-radius: 5rem;
 }
-
-.cli_table th,
-tr,
-td {
-  border: 3px solid white;
+.cli_sectionborder  tr {
+  padding: 10px;
+  border: solid #e1f0db;
+}
+.cli_sectionborder  td, th{
+  padding: 10px;
+  width: 50px;
+  border: 1px solid #e1f0db;
   text-align: center;
-
+}
+.cli_sectionborder  .title {
+  font-size: 11.5px;
+  font-weight: bold;
+}
+.cli_sectionborder .patient_name a {
   color: rgba(0, 0, 0, 0.7);
 }
 .menu {
   color: rgba(0, 0, 0, 0.7);
-  font-size: 1.3rem;
-}
-
-.cli_table .high_bl {
-  border: 3px solid white;
-  text-align: center;
-  background-color: #fdff90;
-  border-radius: 5rem;
-  font-size: 1.3rem;
-}
-
-.cli_table .high_we {
-  border: 3px solid white;
-  text-align: center;
-  background-color: #fdff90;
-  border-radius: 5rem;
-  font-size: 1.3rem;
-}
-
-.cli_table .high_in {
-  border: 3px solid white;
-  text-align: center;
-  background-color: #fdff90;
-  border-radius: 5rem;
-  font-size: 1.3rem;
-}
-
-.cli_table .high_ex {
-  border: 3px solid white;
-  text-align: center;
-  background-color: #fdff90;
-  border-radius: 5rem;
   font-size: 1.3rem;
 }
 
@@ -650,4 +612,29 @@ td {
 .aboutlog a {
   text-decoration: none;
   color: rgb(70, 70, 70);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color:darkgrey;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
