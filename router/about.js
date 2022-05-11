@@ -9,8 +9,5 @@ aboutRouter.get("/about_website", (req, res) => {
   res.render("../views/about/about_website.hbs");
 });
 
-aboutRouter.get("/login", (req, res) => {
-  res.render("../views/about/login.hbs");
-});
 
 module.exports = aboutRouter;
