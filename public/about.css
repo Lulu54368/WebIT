@@ -485,9 +485,8 @@ td {
 
 /*BELOW ARE CSS FOR CLINICIAN*/
 
-
 .clinician_header {
-  color:#818181;
+  color: #818181;
   height: 35px;
   background-color: #e1f0db;
   text-align: center;
@@ -496,14 +495,13 @@ td {
 
 .cli_sidenav {
   background-color: #cfe6bd;
-  height: 1000px
+  height: 1000px;
   /*Mannually drag background color to the bottom*/
 }
 .cli_sidenav img {
   width: 80%;
   margin-left: 20px;
 }
-
 
 .active {
   background-color: #818181;
@@ -541,7 +539,7 @@ td {
   margin: 28px 0px;
   line-height: 5%;
 }
-.cli_sectionborder  table {
+.cli_sectionborder table {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -552,17 +550,18 @@ td {
   border-style: solid;
   border-collapse: collapse;
 }
-.cli_sectionborder  tr {
+.cli_sectionborder tr {
   padding: 10px;
   border: solid #e1f0db;
 }
-.cli_sectionborder  td, th{
+.cli_sectionborder td,
+th {
   padding: 10px;
   width: 50px;
   border: 1px solid #e1f0db;
   text-align: center;
 }
-.cli_sectionborder  .title {
+.cli_sectionborder .title {
   font-size: 11.5px;
   font-weight: bold;
 }
@@ -623,12 +622,12 @@ td {
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
-  background-color:darkgrey;
+  background-color: darkgrey;
   color: #fff;
   text-align: center;
   padding: 10px 0;
   border-radius: 10px;
- 
+
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
@@ -637,4 +636,8 @@ td {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.notLogin {
+  background-color: #e1f0db;
 }
