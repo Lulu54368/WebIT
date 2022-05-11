@@ -47,10 +47,13 @@ app.use(express.static("./public"));
 app.use(bodyParser.json());
 const clinicianRouter = require("./router/clinician.js");
 const patientRouter = require("./router/patient.js");
+const aboutRouter = require("./router/about.js");
+
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
+app.use("/", aboutRouter);
 
-// user requests About page
+/* // user requests About page
 app.get("/aboutthiswebsite", (req, res) => {
   res.render("./layouts/aboutthiswebsite.hbs");
 });
@@ -62,7 +65,7 @@ app.get("/aboutdiabetes", (req, res) => {
 // user requests Login page
 app.get("/login", (req, res) => {
   res.render("./layouts/login.hbs");
-});
+}); */
 
 app.listen(port, () => {
   console.log("server is running... ");
