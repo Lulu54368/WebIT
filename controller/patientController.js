@@ -177,6 +177,11 @@ const changePassword = async (req, res) => {
     console.log(err);
   }
 };
+
+const renderLeaderboard = (req, res) => {
+  res.render("../views/layouts/patient_leaderboard.hbs");
+};
+
 module.exports = {
   getCurrData,
   addOneData,
@@ -185,4 +190,5 @@ module.exports = {
   getPatientHistory,
   renderChangePwd,
   changePassword,
+  renderLeaderboard,
 };

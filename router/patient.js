@@ -35,6 +35,7 @@ customerRouter.post('/signup', passport.authenticate('local-signup', {
     failureFlash : true // allow flash messages
 }));*/
 //have to replace every id here with patient_id
+
 //get current patient's data
 patientRouter.get("/:patient_id", patientController.getCurrData);
 
@@ -55,10 +56,16 @@ patientRouter.post("/:patient_id", patientController.addOneData);
 patientRouter.get("/:patient_id/changePwd", patientController.renderChangePwd);
 
 patientRouter.post("/:patient_id/changePwd", patientController.changePassword);
+
 // get current patient's history data that was entered
 patientRouter.get(
   "/:patient_id/history_data",
   patientController.getPatientHistory
+);
+
+patientRouter.get(
+  "/:patient_id/leaderboard",
+  patientController.renderLeaderboard
 );
 
 // When you visit http://localhost:3000/register, you will see "Register Page"
