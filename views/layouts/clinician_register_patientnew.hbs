@@ -1,0 +1,232 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/about.css" />
+
+    <title>Register Patient</title>
+  </head>
+
+  <body>
+    <header>
+      <script>
+        var _hmt = _hmt || []; (function() { var hm =
+        document.createElement("script"); hm.src =
+        "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925"; var s =
+        document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s); })();
+      </script>
+
+      <ul class="topnav">
+        <li><a href="">Dashboard</a></li>
+        <li><a href="">Patient's Data</a></li>
+        <li><a href="">Patient's Comments</a></li>
+        <li><a href="">Thresholds</a></li>
+        <li><a href="">Messages</a></li>
+        <li><a class="active" href="">Register Patient</a></li>
+        <li><a href="">About this Website</a></li>
+        <li><a href="">About Diabetes</a></li>
+        <li><a href="">Log Out</a></li>
+        <li class="icon">
+          <a
+            href="javascript:void(0);"
+            style="font-size:15px;"
+            onclick="myFunction()"
+          >☰</a>
+        </li>
+      </ul>
+
+      <script>
+        function myFunction() {
+        document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+        }
+      </script>
+    </header>
+
+    <script src="/js/UpdatePatientBadge.js" defer></script>
+
+    <aside>
+      <div class="greeting">
+        <h1> Hi {{this.name}}!</h1>
+      </div>
+      <div class="date">
+        <h4 id="MyP">Today is {{view_date}} </h4>
+        <script>
+          var today = new Date(); var day = today.getDay(); var daylist =
+          ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+          document.getElementById("MyP").innerHTML += daylist[day];
+        </script>
+      </div>
+
+    </aside>
+
+    <nav>
+      <div class="sidenav">
+        <img class="image" src="/page-logo.png" />
+      </div>
+    </nav>
+
+    <main>
+      <div class="clinician_header">
+        <h1>Registration Board</h1>
+      </div>
+
+      <form id="registerPat" action="" method="POST">
+        <div>
+          <label> Enter email: </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            value=""
+            required
+          />
+        </div>
+
+        <br />
+        <div>
+          <label> Enter password: </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            value=""
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter First Name: </label>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="Enter First Name"
+            value=""
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter Last Name: </label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Enter Last Name"
+            value=""
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter Screen Name: </label>
+          <input
+            type="text"
+            name="screenName"
+            placeholder="Enter Screen Name"
+            value=""
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter Year of Birth: </label>
+          <input
+            type="number"
+            min="1900"
+            max="2022"
+            name="yearOfBirth"
+            value=""
+            required
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter Brief Text Bio: </label>
+          <input
+            type="text"
+            name="textBio"
+            placeholder="Enter Breif Text Bio"
+            value=""
+          />
+        </div>
+        <br />
+        <div>
+          <label> Enter Support Message: </label>
+          <input
+            type="text"
+            name="supportMessage"
+            placeholder="Enter Support Message"
+            value=""
+          />
+        </div>
+        <br />
+        <div>
+          {{! custom radio button }}
+          <label> This Patient need to record blood glucose level: </label>
+          <input
+            type="radio"
+            id="bgl_yes"
+            name="bgl"
+            value="true"
+            required="required"
+          />
+          <label for="bgl_yes"> Yes </label>
+          <input type="radio" id="bgl_no" name="bgl" value="false" />
+          <label for="bgl_no"> No </label>
+        </div>
+        <br />
+        <div>
+          <label> This Patient need to record weight: </label>
+          <input
+            type="radio"
+            id="weight_yes"
+            name="weight"
+            value="true"
+            required="required"
+          />
+          <label for="weight_yes"> Yes </label>
+          <input type="radio" id="weight_no" name="weight" value="false" />
+          <label for="weight_no"> No </label>
+        </div>
+        <br />
+        <div>
+          <label> This Patient need to record doses of insulin taken: </label>
+          <input
+            type="radio"
+            id="doit_yes"
+            name="doit"
+            value="true"
+            required="required"
+          />
+          <label for="doit_yes"> Yes </label>
+          <input type="radio" id="doit_no" name="doit" value="false" />
+          <label for="doit_no"> No </label>
+        </div>
+        <br />
+        <div>
+          <label> This Patient need to record exercise: </label>
+          <input
+            type="radio"
+            id="exercise_yes"
+            name="exercise"
+            value="true"
+            required="required"
+          />
+          <label for="exercise_yes"> Yes </label>
+          <input type="radio" id="exercise_no" name="exercise" value="false" />
+          <label for="exercise_no"> No </label>
+        </div>
+        <br />
+        <button type="submit"> Register </button>
+      </form>
+      <a href="">
+        <button> Back </button>
+      </a>
+      <br /><br />
+    </main>
+  </body>
+
+  <footer>
+    <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+  </footer>
+</html>
