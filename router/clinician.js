@@ -54,7 +54,7 @@ clinicianRouter.post("/:clinician_id/delete/:patient_id/", clinicianController.d
 
 //add support sentence
 clinicianRouter.post("/:clinician_id/:patient_id/support", clinicianController.addSupportSentence);
-clinicianRouter.post("/:clinician_id/:patient_id", clinicianController.changeInput);
+
 //Get one patient's data of a specified clinician
 clinicianRouter.get("/:clinician_id/:patient_id", clinicianController.getOnePatient);
 
