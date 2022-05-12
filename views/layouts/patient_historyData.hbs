@@ -12,36 +12,37 @@
   <!-- content of webpage begins here -->
   <body>
     <header>
-      <h2>History Data</h2>
-    </header>
+      <script>
+        var _hmt = _hmt || []; (function() { var hm =
+        document.createElement("script"); hm.src =
+        "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925"; var s =
+        document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s); })();
+      </script>
+
+      <ul class="topnav">
+        <li><a href="">Homepage</a></li>
+        <li><a class="active" href="">History Data</a></li>
+        <li><a href="">Leader Board</a></li>
+        <li><a href="">Change Password</a></li>
+        <li><a href="/aboutWebsite">About this Website</a></li>
+        <li><a href="/aboutDiabetes">About Diabetes</a></li>
+        <li><a href="">Log Out</a></li>
+        <li class="icon">
+          <a
+            href="javascript:void(0);"
+            style="font-size:15px;"
+            onclick="myFunction()"
+          >☰</a>
+        </li>
+      </ul>
 
       <script>
-        var _hmt = _hmt || [];
-        (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
-    
-    <ul class="topnav">
-      <li><a class="active" href="#home">Leader Board</a></li>
-      <li><a href="#History Data">History Data</a></li>
-      <li><a href="#Homepage">Homepage</a></li>
-      <li><a href="#About this Website">About this Website</a></li>
-      <li><a href="#About Diabetes">About Diabetes</a></li>
-      <li><a href="#Log Out">Log Out</a></li>
-      <li class="icon">
-        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
-      </li>
-    </ul>
-    
-    <script>
-    function myFunction() {
+        function myFunction() {
         document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
-    }
-    </script>
+        }
+      </script>
+    </header>
 
     <script src="/js/UpdatePatientBadge.js" defer></script>
 
