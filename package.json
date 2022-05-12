@@ -18,12 +18,20 @@
   },
   "homepage": "https://github.com/Lulu54368/WebIT#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-flash": "^0.0.2",
     "express-handlebars": "^6.0.4",
-    "live-server": "^1.2.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "flash": "^1.1.0",
+    "live-server": "^1.1.0",
     "mongoose": "^6.3.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "session": "^0.1.0"
   }
 }

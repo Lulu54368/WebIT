@@ -3,6 +3,7 @@ const patient_input = require("../models/patient_input_sample");
 const Patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
 const Patients = require("../models/patient.js");
+const res = require("express/lib/response");
 const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
@@ -132,4 +133,13 @@ const getPatientHistory = async (req, res)=>{
 }
 
 
-module.exports ={ getCurrData, addOneData, getPatientHistory};
+
+const renderLogin = ()=>{
+    
+    res.render("../views/layouts/login.hbs");
+}
+const logout = (req, res) =>{
+    req.logout();
+    res.redirect("patient/login");
+}
+module.exports ={ getCurrData, addOneData, logout, renderLogin, getPatientHistory};

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL);
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 //This is medical data for patients
 const Data = new Schema({
@@ -52,6 +52,10 @@ const Patient = new Schema(
             type: String,
             required: true
         },
+        password:{
+            type: String,
+            required: false //need to change
+        },
         message:{
             type: String,
             required: false,
@@ -68,6 +72,32 @@ const Patient = new Schema(
         }
     }
 );
+// password comparison function
+Patient.methods.verifyPassword = function (password, callback) {
+    bcrypt.compare(password, this.password, (err, valid) => {
+        callback(err, valid)
+    })
+}
+
+const SALT_FACTOR = 10
+
+// hash password before saving
+Patient.pre('save', function save(next) {
+    const user = this// go to next if password field has not been modified
+    if (!user.isModified('password')) {
+        return next()
+    }
+
+    // auto-generate salt/hash
+    bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
+        if (err) {
+            return next(err)
+        }
+        //replace password with hash
+        user.password = hash
+        next()
+    })
+})
 //const Patients = mongoose.model("patients", Patient);
 //console.log(Patients.find())
 const Patients = mongoose.model("patients", Patient);

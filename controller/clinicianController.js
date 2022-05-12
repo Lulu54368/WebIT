@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URL);
+//mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const patients_data = require("../models/patient_sample");
+
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model
@@ -107,10 +107,43 @@ const addOnePatient = async (req, res) => {
           await Patient_Threshold.create({ id: newPatient._id });
           await Patient_input.create({ id: newPatient._id });
           res.send(newPatient);
+
+}
+const addOnePatient = async(req, res)=>{
+   
+    try{
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        var newPatient = req.body;
+  
+        if(clinician){
+            if(JSON.stringify(newPatient) == "{}"){
+                res.send("no patient sent");
+            }
+            else{
+                const newemail = req.body.email;
+                const currPatient = await Patient.findOne({email: newemail}).lean();
+                if(currPatient!= null){
+                    
+                    res.send("patient already exist!");
+                }
+                else{
+                
+                    newPatient = await new Patient(newPatient);
+                    clinician.patients.push(newPatient._id);
+                    await Clinician.findByIdAndUpdate(req.params.clinician_id, {patients: clinician.patients});
+                    await newPatient.save();
+                    await Patient_Threshold.create({id: newPatient._id});
+                    await Patient_input.create({id: newPatient._id});
+                    res.send(newPatient);
+                }
+
+            }
+        
+
         }
       }
-    }
-  } catch (err) {
+    
+   catch (err) {
     console.log(err);
   }
 };
