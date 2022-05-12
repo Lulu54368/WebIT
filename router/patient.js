@@ -40,6 +40,18 @@ patientRouter.get("/:patient_id", patientController.getCurrData);
 //add current patient's data
 patientRouter.post("/:patient_id", patientController.addOneData);
 
+
+//change patient's password
+patientRouter.get("/:patient_id/password", (req, res, next) => {
+
+    const form = '<h1>Change Password Page</h1><form method="post" action="">\
+                    <br>Enter current password:<br><input type="password" name="currPassword">\
+                    <br>Enter newPassword:<br><input type="text" name="newPassword">\
+                    <br><br><input type="submit" value="Submit"></form>';
+
+    res.send(form);
+})
+patientRouter.post("/:patient_id/password", patientController.changePassword);
 // get current patient's history data that was entered
 patientRouter.get("/:patient_id/history_data", patientController.getPatientHistory);
 

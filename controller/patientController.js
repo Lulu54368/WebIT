@@ -4,9 +4,12 @@ const Patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
 const Patients = require("../models/patient.js");
 const res = require("express/lib/response");
+const { deleteOne } = require("../models/patient_input");
 const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
+const alert = require("alert")
+
 const getCurrData = async (req, res)=>{
     try {
         var attributes = await Patient_input.findOne({id: req.params.patient_id.toString()}).lean();
@@ -142,4 +145,38 @@ const logout = (req, res) =>{
     req.logout();
     res.redirect("patient/login");
 }
-module.exports ={ getCurrData, addOneData, logout, renderLogin, getPatientHistory};
+const changePassword = async (req, res) =>{
+    // req body is {currPassWord, newPassword}
+    try{
+        const patient = await Patient.findById(req.params.patient_id);
+        if (patient == null){
+            res.send("can not find patient");
+        }
+        else{
+            console.log(req.body);
+            await patient.verifyPassword(req.body.currPassword, (err, valid)=>{
+                if(valid == true){
+                    patient.password = req.body.newPassword;
+                    patient.save();
+                    //res.send("saved!");
+                    alert("saved !")
+                    res.redirect("/patient/"+req.params.patient_id);
+                }
+                else{
+                  
+                    //res.send("password not match");
+                    alert("something went wrong...")
+                    res.redirect("/patient/"+req.params.patient_id);
+                }
+                
+            });
+        }
+        
+
+    }
+    catch(err){
+        console.log(err);
+    }
+
+}
+module.exports ={ getCurrData, addOneData, logout, renderLogin, getPatientHistory, changePassword};

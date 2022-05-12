@@ -73,8 +73,8 @@ const Patient = new Schema(
     }
 );
 // password comparison function
-Patient.methods.verifyPassword = function (password, callback) {
-    bcrypt.compare(password, this.password, (err, valid) => {
+Patient.methods.verifyPassword = async function (password, callback) {
+    await bcrypt.compare(password, this.password, (err, valid) => {
         callback(err, valid)
     })
 }

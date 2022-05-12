@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Lulu54368/WebIT#readme",
   "dependencies": {
+    "alert": "^5.0.10",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.0",

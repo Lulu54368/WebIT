@@ -88,12 +88,13 @@ const addOnePatient = async (req, res) => {
   try {
     const clinician = await Clinician.findById(req.params.clinician_id).lean();
     var newPatient = req.body;
+    var currPatient;
     if (clinician) {
       if (JSON.stringify(newPatient) == "{}") {
         res.send("no patient sent");
       } else {
         const newemail = req.body.email;
-        const currPatient = await Patient.findOne({ email: newemail }).lean();
+        currPatient = await Patient.findOne({ email: newemail }).lean();
       }
         if (currPatient != null) {
           res.send(currPatient);
