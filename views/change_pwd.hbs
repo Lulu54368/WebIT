@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1> Change Password </h1>
+
+    <form id="pwdForm" action="/patient/updatePwd" method="POST">
+      <div>
+        <label> Current Password: </label>
+        <input
+          type="password"
+          name="oldPwd"
+          placeholder="Enter current password"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <label> New Password: </label>
+        <input
+          type="password"
+          name="newPwd"
+          placeholder="Enter new password"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <label> Confirm Password: </label>
+        <input
+          type="password"
+          name="confirm"
+          placeholder="Confirm new password"
+          required
+        />
+      </div>
+    </form>
+    <br />
+
+    <div>
+      <button type="submit" form="pwdForm"> Change </button>
+      <br />
+      <a href="">
+        <button> Back </button>
+      </a>
+    </div>
+  </body>
+</html>
