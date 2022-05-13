@@ -279,13 +279,13 @@ const modifyThreshold = async (req, res, next)=>{
         
         // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
         var newThreshold = req.body;
-        
+        console.log(req.body);
         if (clinician) {
             if (JSON.stringify(newThreshold) == '{}') {
                 res.send("No threshold was sent");
             
             } else {
-                const patient_id = req.params.patient_id; // take the patient_id passed in the http params  
+                const patient_id = req.body.id; // take the patient_id passed in the http params  
 
                 var curr_threshold = await Patient_Threshold.findOne({id: patient_id}) // find the existing threshold   
                 // take the threshold component of the current Threshold Model
