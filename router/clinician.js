@@ -52,7 +52,7 @@ clinicianRouter.get(
 );
 //change threshold of a specified patient
 clinicianRouter.post(
-  "/:clinician_id/threshold/:patient_id/",
+  "/:clinician_id/threshold/",
   clinicianController.modifyThreshold
 );
 

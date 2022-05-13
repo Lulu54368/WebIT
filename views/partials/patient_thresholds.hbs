@@ -1,4 +1,4 @@
-<div class="cli_table">
+<div class="cli_sectionborder">
     <table>
         <tr class = "notes">
             <th>Patient Name</th>
@@ -17,15 +17,14 @@
                 <td>
                     <input type="checkbox" id="record_bgl" name="record_bgl" value="record_bgl" {{#if this.patient_input.blood_level}}checked{{/if}}>
                     <label for="record_bgl">recordance needed</label><br><br>
-                    
                     <form action="" method="POST" >
-                        <input hidden = "true" name = "id" id = "id" value = {{this.id}} />
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
                         <label for="ut_bgl">upper threshold:</label><br>
-                        
-                        <input type="text" id = "id" name="upper_bound" value={{this.blood_level_u}}><br>
+                        <input  hidden = true type="text" name="key" value="blood_level"><br>
+                        <input type="text" name="upper_bound" value={{this.blood_level_u}}><br><br>
                         <label for="lt_bgl">lower threshold:</label><br>
-                        <input type="text" id = "id" name="lower_bound" value={{this.blood_level_l}}><br><br>
-                        <input type="submit">
+                        <input type="text"  name="lower_bound" value={{this.blood_level_l}}><br><br>
+                        <button type="submit"> submit </button>
                       </form>
                 </td>
 
@@ -35,13 +34,13 @@
                     <label for="record_weight">recordance needed</label><br><br>
 
                     <form action="" method="POST" >
-                        <input type="hidden" name="key" value="weight" hidden = true>
-
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
                         <label for="ut_weight">upper threshold:</label><br>
-                        <input type="text" id="ut_weight" name="ut_weight" value={{this.weight_u}}><br>
+                        <input  hidden = true type="text" name="key" value="weight"><br>
+                        <input type="text" name="upper_bound" value={{this.weight_u}}><br><br>
                         <label for="lt_weight">lower threshold:</label><br>
-                        <input type="text" id="lt_weight" name="lt_weight" value={{this.weight_l}}><br><br>
-                        <input type="submit">
+                        <input type="text"  name="lower_bound" value={{this.weight_l}}><br><br>
+                        <button type="submit"> submit </button>
                       </form>
                 </td>
                 
@@ -52,13 +51,13 @@
                     <label for="record_insulin">recordance needed</label><br><br>
 
                     <form action="" method="POST" >
-                        <input type="hidden" name="key" value="insulin" hidden = true>
-
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
                         <label for="ut_insulin">upper threshold:</label><br>
-                        <input type="text" id="ut_insulin" name="ut_insulin" value={{this.insulin_intake_u}}><br>
+                        <input  hidden = true type="text" name="key" value="insulin_intake"><br>
+                       <input type="text" name="upper_bound" value={{this.insulin_intake_u}}><br><br>
                         <label for="lt_insulin">lower threshold:</label><br>
-                        <input type="text" id="lt_insulin" name="lt_insulin" value={{this.insulin_intake_l}}><br><br>
-                        <input type="submit">
+                        <input type="text" name="lower_bound" value={{this.insulin_intake_l}}><br><br>
+                        <button type="submit"> submit </button>
                       </form>
                 </td>
                 
@@ -69,13 +68,14 @@
                     <label for="record_step">recordance needed</label><br><br>
 
                     <form action="" method="POST" >
-                        <input type="hidden" name="key" value="excercise" hidden = true>
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
 
                         <label for="ut_step">upper threshold:</label><br>
-                        <input type="text" id="ut_step" name="ut_step" value={{this.exercise_u}}><br>
+                        <input  hidden = true type="text" name="key" value="excercise"><br>
+                        <input type="text" name="upper_bound" value={{this.excercise_u}}><br><br>
                         <label for="lt_step">lower threshold:</label><br>
-                        <input type="text" id="lt_step" name="lt_step" value={{this.exercise_l}}><br><br>
-                        <input type="submit">
+                        <input type="text" name="lower_bound" value={{this.excercise_l}}><br><br>
+                        <button type="submit"> submit </button>
                       </form>
                 </td>
             </tr>

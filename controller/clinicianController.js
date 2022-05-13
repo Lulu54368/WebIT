@@ -92,7 +92,8 @@ const getOnePatient = async (req, res)=>{
 const addOnePatient = async(req, res)=>{
    
     try{
-        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        const clinician = await Clinician.findById(req.params.clinician_id).lean()
+        ;
         var newPatient = req.body;
         if(clinician){
             if(JSON.stringify(newPatient) == "{}"){
@@ -256,9 +257,8 @@ const getAllThreshold = async (req, res, next)=>{
             const patient_input = patient_inputs.filter((input)=>patient_id_list.includes(input.id.toString()));
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients, patient_input);  // the argument patient_thresholds was filtered on the above line
             console.log(patients_threshold);
-            console.log({view_date: today, patient_threshold: patients_threshold});
             // and now passed as an argument specified in /utils/patient_threshold.js
-            res.render("../views/layouts/clinician_patientthreshold.hbs", {c_name: clinician_name, view_date: today, patient_threshold: patients_threshold, c_id: clinicain_id}); // where to get patientiid?
+            res.render("../views/layouts/clinician_patientthreshold.hbs", {view_date: today, patient_threshold: patients_threshold}); // where to get patientiid?
         }
         else {
             sendStatus(404);
