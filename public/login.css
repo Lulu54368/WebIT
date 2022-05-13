@@ -30,7 +30,6 @@ body {
 .form-wrapper .header {
   text-align: center;
   font-size: 3em;
-  text-transform: uppercase;
   line-height: 300%;
 }
 
@@ -45,9 +44,6 @@ body {
   font-size: 15px;
   color: #00000080;
   outline: none;
-}
-.form-wrapper .input-wrapper input::placeholder {
-  text-transform: uppercase;
 }
 
 .form-wrapper .input-wrapper .border-wrapper {
@@ -76,10 +72,8 @@ body {
   width: 50%;
   border: 2px solid #8fbc88;
   background: #8fbc88;
-
   line-height: 50px;
   border-radius: 30px;
-  text-transform: uppercase;
   cursor: pointer;
   transition: 0.2s;
   text-align: center;
@@ -113,7 +107,6 @@ body {
 
   line-height: 3.125rem;
   border-radius: 1.875rem;
-  text-transform: uppercase;
   cursor: pointer;
   transition: 0.2s;
   text-align: center;
@@ -135,7 +128,6 @@ body {
 
   line-height: 3.125rem;
   border-radius: 1.875rem;
-  text-transform: uppercase;
   cursor: pointer;
   transition: 0.2s;
   text-align: center;
