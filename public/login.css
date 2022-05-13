@@ -84,6 +84,14 @@ body {
   background-color: #92c7a8;
 }
 
+.action button {
+  background-color: #8fbc88;
+  font-size: 1.5rem;
+  border-radius: 53px;
+  border-width: 0;
+  width: 30%;
+}
+
 .About {
   display: flex;
   margin-inline: 5%;
