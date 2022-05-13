@@ -1,69 +1,64 @@
-
 <div class="cli_sectionborder">
 <table>
-        <th>Patient Name</th>
-        <th>Blood Glucose Level<br>(nmol/L)</th>
-        <th>Weight<br>(kg)</th>
-        <th>Doses of Insulin Intake<br>(doses)</th>
-        <th>Exercise Step Count<br>(steps)</th>
-        <th>Clinician Notes</th>
+    <th>Patient Name</th>
+    <th>Blood Glucose Level<br>(nmol/L)</th>
+    <th>Weight<br>(kg)</th>
+    <th>Doses of Insulin Intake<br>(doses)</th>
+    <th>Exercise Step Count<br>(steps)</th>
+    <th>Clinician Notes</th>
 
-        {{#each patients}}
-            <tr>
-                <td>
-                    <div class = "patient_name">
-                    <a href="#">
-                        {{this.name}}
-                    </a>
-                    </div>
-                    
-                    </td>    
+    {{#each patients}}
+        <tr>
+            <td>
+                <div class = "patient_name">
+                <a href="/clinician/{{this.cli_id}}/{{this.id}}">
+                    {{this.name}}
+                </a>
+                </div>
                 
-                {{#if this.blood_highlight}}
-                    <td>&#10071;{{this.blood_level}}
-                        <div class="tooltip">&#10071;
-                        <span class="tooltiptext">data out of thresholds</span>
-                        </div></td>
-                {{else}}
-                    <td>{{this.blood_level}}</td>
-                {{/if}}
+                </td>    
+            
+            {{#if this.blood_highlight}}
+                <td>&#10071;{{this.blood_level}}
+                    <div class="tooltip">&#10071;
+                    <span class="tooltiptext">data out of thresholds</span>
+                    </div></td>
+            {{else}}
+                <td>{{this.blood_level}}</td>
+            {{/if}}
 
-                {{#if this.weight_highlight}}
-                    <td>&#10071;{{this.weight}}
-                        <div class="tooltip">&#10071;
-                        <span class="tooltiptext">data out of thresholds</span>
-                        </div></td>
-                {{else}}
-                    <td>{{this.weight}}</td>
-                {{/if}}
+            {{#if this.weight_highlight}}
+                <td>&#10071;{{this.weight}}
+                    <div class="tooltip">&#10071;
+                    <span class="tooltiptext">data out of thresholds</span>
+                    </div></td>
+            {{else}}
+                <td>{{this.weight}}</td>
+            {{/if}}
 
-                {{#if this.insulin_highlight}}
-                    <td>&#10071;{{this.insulin}}
-                        <div class="tooltip">&#10071;
-                        <span class="tooltiptext">data out of thresholds</span>
-                        </div></td>
-                {{else}}
-                    <td>{{this.insulin_intake}}</td>
-                {{/if}}
+            {{#if this.insulin_highlight}}
+                <td>&#10071;{{this.insulin}}
+                    <div class="tooltip">&#10071;
+                    <span class="tooltiptext">data out of thresholds</span>
+                    </div></td>
+            {{else}}
+                <td>{{this.insulin_intake}}</td>
+            {{/if}}
 
-                {{#if this.exercise_highlight}}
-                    <td>&#10071;{{this.exercise}}
-                        <div class="tooltip">&#10071;
-                        <span class="tooltiptext">data out of thresholds</span>
-                        </div></td>
-                {{else}}
-                    <td>{{this.exercise}}</td>
-                {{/if}}
-                    <td><input type="text" placeholder="Enter comment..."  name="value" id="cli_cmt" >
-                    <button type="submit"> submit </td>
-            </tr>
-        
+            {{#if this.exercise_highlight}}
+                <td>&#10071;{{this.exercise}}
+                    <div class="tooltip">&#10071;
+                    <span class="tooltiptext">data out of thresholds</span>
+                    </div></td>
+            {{else}}
+                <td>{{this.exercise}}</td>
+            {{/if}}
+                <td><input type="text" placeholder="Enter comment..."  name="value" id="cli_cmt" >
+                <button type="submit"> submit </td>
+        </tr>
 
-        {{/each}}
-        
-
+    {{/each}}
 </table>
 <br><br>
-       
 </div>
         

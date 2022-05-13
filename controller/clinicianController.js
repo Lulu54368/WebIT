@@ -48,6 +48,11 @@ const getAllPatients = async (req, res) => {
         filtered_patients
       ); // the argument patients was filtered on the last line
       // and now pass as an argument specified in /utils/patient_medical_data.js
+
+      patient_medical_data.forEach((pat) => {
+        pat["cli_id"] = clinician._id;
+      });
+
       res.render("../views/layouts/clinician_dashboard.hbs", {
         name: clinician.lastname,
         patients: patient_medical_data,
