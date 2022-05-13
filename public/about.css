@@ -156,6 +156,10 @@ nav {
   color: #818181;
 }
 
+.link {
+  margin: 8%;
+}
+
 footer {
   color: #818181;
   grid-area: footer;
@@ -271,7 +275,7 @@ td {
 }
 
 /*BLOW ARE LOGIN PAGE CSS*/
-.loginbody {
+/* .loginbody {
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -298,9 +302,7 @@ td {
 }
 
 .form-wrapper .input-wrapper input {
-  /* Enter your username */
   font-weight: 500;
-  /*top: 40%;*/
   background-color: white;
   border: 0;
   text-align: center;
@@ -317,7 +319,6 @@ td {
   margin-bottom: 8%;
   border-radius: 30px;
   display: flex;
-  /*align-items: center;*/
   justify-content: center;
 }
 
@@ -353,11 +354,9 @@ td {
 
 .About {
   display: flex;
-  /*justify-content: space-between;*/
   margin-inline: 5%;
   position: absolute;
   top: 39rem;
-  /*width: 40%;*/
 }
 
 .About .website_text {
@@ -418,7 +417,6 @@ td {
   color: rgba(0, 0, 0, 0.46);
 }
 @media screen and (max-width: 640px) {
-  /* page layout for phones */
   .logo .HouseIcon {
     display: none;
   }
@@ -454,13 +452,11 @@ td {
     height: 500px;
   }
   .input-wrapper .border-wrapper {
-    /*enterpassword*/
     position: relative;
     top: 10em;
     font-size: 7px;
   }
   .form-wrapper .action .btn {
-    /*login*/
     position: relative;
     font-size: x-small;
     top: 7em;
@@ -478,7 +474,7 @@ td {
     width: 100px;
     height: 100px;
   }
-}
+} */
 .sectionborder .categories .td {
   text-align: center;
 }
