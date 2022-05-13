@@ -16,10 +16,7 @@ clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
   res.send(form);
 }); */
 
-clinicianRouter.get(
-  "/:clinician_id/register",
-  clinicianController.renderRegister
-);
+//clinicianRouter.get("/:clinician_id/register",clinicianController.renderRegister);
 
 //have to replace every id here with clinician_id
 

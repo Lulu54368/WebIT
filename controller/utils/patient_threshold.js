@@ -11,7 +11,7 @@ const patient_threshold_list = (patient_threshold_data, patient_data, patient_in
       
        const patient_input = patient_inputs.find((input)=>input.id.toString() ==element.id.toString());
         const component = {
-            "id": element.id,
+            "id": element.id.toString(),
             "name": patient.name,
             "patient_input": {},
             //put upper and lower bound threshold into attribute object
