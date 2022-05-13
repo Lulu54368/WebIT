@@ -641,3 +641,12 @@ th {
 .notLogin {
   background-color: #e1f0db;
 }
+
+.whole {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.each {
+  margin: 2em;
+}

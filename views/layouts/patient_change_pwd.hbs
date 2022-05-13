@@ -48,51 +48,23 @@
     </nav>
 
     <main>
-      <h1>Change Password</h1>
-      <form id="pwdForm" action="" method="POST">
-        <div>
-          <label> Current Password: </label>
-          <input
-            type="password"
-            name="oldPwd"
-            placeholder="Enter current password"
-            required
-          />
-        </div>
-        <br />
+      <div class="whole">
+        <h1 id="changePwd">Change Password Page</h1>
+        <form method="post" action="" id="changePwd">
+          <div class="each">
+            Enter current password:
+            <input type="password" name="currPassword" />
+          </div>
 
-        <div>
-          <label> New Password: </label>
-          <input
-            type="password"
-            name="newPwd"
-            placeholder="Enter new password"
-            required
-          />
-        </div>
-        <br />
+          <div class="each">
+            Enter new password:
+            <input type="text" name="newPassword" />
+          </div>
 
-        <div>
-          <label> Confirm Password: </label>
-          <input
-            type="password"
-            name="confirm"
-            placeholder="Confirm new password"
-            required
-          />
-        </div>
-      </form>
-      <br />
-
-      <div>
-        <button type="submit" form="pwdForm"> Change </button>
-        <br />
-        <a href="">
-          <button> Back </button>
-        </a>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
 
-      <br /><br />
     </main>
 
     <footer>
