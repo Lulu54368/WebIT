@@ -16,10 +16,7 @@ clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
   res.send(form);
 }); */
 
-clinicianRouter.get(
-  "/:clinician_id/register",
-  clinicianController.renderRegister
-);
+//clinicianRouter.get("/:clinician_id/register",clinicianController.renderRegister);
 
 //have to replace every id here with clinician_id
 
@@ -55,7 +52,7 @@ clinicianRouter.get(
 );
 //change threshold of a specified patient
 clinicianRouter.post(
-  "/:clinician_id/threshold/:patient_id/",
+  "/:clinician_id/threshold/",
   clinicianController.modifyThreshold
 );
 
