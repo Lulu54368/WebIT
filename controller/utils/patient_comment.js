@@ -13,7 +13,7 @@ const patient_comment_list = (patient_data, patient_input) => {
     // data is the list of all the data objects stored under a patient, attr is each individual data object
     data.forEach((attr)=>{
         const component = {
-            "id": element._id,
+            "id": element._id.toString(),
             "date": attr.date,
             "name": element.name
         }
