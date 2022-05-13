@@ -1,15 +1,12 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>History Data</title>
     <link rel="stylesheet" href="/about.css" />
+    <title>Change Password</title>
   </head>
-  
 
-  <!-- content of webpage begins here -->
   <body>
     <header>
       <script>
@@ -22,9 +19,9 @@
 
       <ul class="topnav">
         <li><a href="">Homepage</a></li>
-        <li><a class="active" href="">History Data</a></li>
+        <li><a href="">History Data</a></li>
         <li><a href="">Leader Board</a></li>
-        <li><a href="">Change Password</a></li>
+        <li><a class="active" href="">Change Password</a></li>
         <li><a href="/aboutWebsite">About this Website</a></li>
         <li><a href="/aboutDiabetes">About Diabetes</a></li>
         <li><a href="">Log Out</a></li>
@@ -44,35 +41,59 @@
       </script>
     </header>
 
-    <script src="/js/UpdatePatientBadge.js" defer></script>
-
-    <aside>
-      <div class = "greeting">
-        <h1> Hi {{patient_name}}!</h1>
-      </div>
-      <div class = "date">
-        <h4 id="MyP">Today is {{today}} </h4>
-        <script>
-            var today = new Date();
-            var day = today.getDay();
-            var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
-            document.getElementById("MyP").innerHTML += daylist[day];
-        </script>
-      </div>
-
-    </aside>
-
-    <main>
-      {{>patient_history}}
-      <br/><br/><br/><br/><br/><br/>
-    </main>
-
-    
     <nav>
       <div class="sidenav">
-          <img class = "image" src = "/page-logo.png">
+        <img class="image" src="/page-logo.png" />
       </div>
     </nav>
+
+    <main>
+      <h1>Change Password</h1>
+      <form id="pwdForm" action="" method="POST">
+        <div>
+          <label> Current Password: </label>
+          <input
+            type="password"
+            name="oldPwd"
+            placeholder="Enter current password"
+            required
+          />
+        </div>
+        <br />
+
+        <div>
+          <label> New Password: </label>
+          <input
+            type="password"
+            name="newPwd"
+            placeholder="Enter new password"
+            required
+          />
+        </div>
+        <br />
+
+        <div>
+          <label> Confirm Password: </label>
+          <input
+            type="password"
+            name="confirm"
+            placeholder="Confirm new password"
+            required
+          />
+        </div>
+      </form>
+      <br />
+
+      <div>
+        <button type="submit" form="pwdForm"> Change </button>
+        <br />
+        <a href="">
+          <button> Back </button>
+        </a>
+      </div>
+
+      <br /><br />
+    </main>
 
     <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>

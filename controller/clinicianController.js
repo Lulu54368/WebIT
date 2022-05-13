@@ -83,7 +83,7 @@ const getOnePatient = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 const addOnePatient = async (req, res) => {
   try {
     const clinician = await Clinician.findById(req.params.clinician_id).lean();
@@ -96,27 +96,25 @@ const addOnePatient = async (req, res) => {
         const newemail = req.body.email;
         currPatient = await Patient.findOne({ email: newemail }).lean();
       }
-        if (currPatient != null) {
-          res.send(currPatient);
-        } else {
-          newPatient = await new Patient(newPatient);
+      if (currPatient != null) {
+        res.send(currPatient);
+      } else {
+        newPatient = await new Patient(newPatient);
 
-          clinician.patients.push(newPatient._id);
-          await Clinician.findByIdAndUpdate(req.params.clinician_id, {
-            patients: clinician.patients,
-          });
-          newPatient.save();
-          await Patient_Threshold.create({ id: newPatient._id });
-          await Patient_input.create({ id: newPatient._id });
-          res.send(newPatient);
-        }
+        clinician.patients.push(newPatient._id);
+        await Clinician.findByIdAndUpdate(req.params.clinician_id, {
+          patients: clinician.patients,
+        });
+        newPatient.save();
+        await Patient_Threshold.create({ id: newPatient._id });
+        await Patient_input.create({ id: newPatient._id });
+        res.send(newPatient);
+      }
     }
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
   }
-
-}
+};
 
 //This function allows the clinician to add a single input the patient needs to record
 const addInput = async (req, res) => {
@@ -193,9 +191,12 @@ const getAllComments = async (req, res, next) => {
       });
 
       var filtered_inputs = patient_inputs.filter((input) => {
-          return patient_id_list.includes(input.id.toString());
-      })
-      const patients_comment = patient_comment_list(filtered_patients, filtered_inputs); // the argument patients was filtered on the above line
+        return patient_id_list.includes(input.id.toString());
+      });
+      const patients_comment = patient_comment_list(
+        filtered_patients,
+        filtered_inputs
+      ); // the argument patients was filtered on the above line
 
       // patient_comment is each from the partial, patients_comment is the filtered comment
       res.render("../views/layouts/clinician_patientcomment.hbs", {
@@ -328,7 +329,7 @@ const getSupportSentence = async (req, res, next) => {
         view_date: today,
         patient_message: patients_message,
       });
-    
+
       if (!patients_message.viewed) {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           view_date: today,
@@ -375,6 +376,10 @@ const addSupportSentence = async (req, res, next) => {
   }
 };
 
+const renderRegister = (req, res) => {
+  res.render("../views/layouts/clinician_register_patientnew.hbs");
+};
+
 const clinicianController = {
   getAllPatients,
   getOnePatient,
@@ -384,8 +389,8 @@ const clinicianController = {
   getAllThreshold,
   modifyThreshold,
   getSupportSentence,
-
   addSupportSentence,
+  renderRegister,
   addOnePatient,
 };
 
