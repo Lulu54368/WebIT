@@ -1,11 +1,36 @@
           <table>
            
+
+              {{#if this.message}}
+                <input hidden="true" name="id" id="id" value={{this.id}} />
+                <input
+                  placeholder="Edit support message"
+                  name="message"
+                  id="support_msg"
+                />
+                <button type="submit"> Edit </button>
+                <td>{{this.message}}</td>
+
+              {{else}}
+                <input hidden="true" name="id" id="id" value={{this.id}} />
+                <input
+                  placeholder="Enter support message"
+                  name="message"
+                  id="support_msg"
+                />
+                <button type="submit"> Submit </button>
+                <td>No support message yet</td>
+              {{/if}}
+
+
+
           <form action="" method="POST" >
             <tr>
               {{#if data.blood_level.required}}
                 <input type="hidden" name="key" value="blood_level" hidden = true>
                 <td>Blood glucose level(mmol/L)</td>
                 {{#if data.blood_level.recorded}}
+                <input hidden="true" name="id" id="id" value={{ data.blood_level.recorded}} />
                 <td> {{data.blood_level.data}} </td>
                 <td> {{data.blood_level.comment}} </td>
                 {{else}}
