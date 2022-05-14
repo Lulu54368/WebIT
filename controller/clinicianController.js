@@ -1,20 +1,19 @@
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const patients_data = require("../models/patient_sample");
+
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model
 //const Patient_Data_Schema = Patients.Patient_data_schema; //schema
 //const Data_Schema = Patients.Data_schema;
-const clinician_data = require("../models/clinician_sample.js");
+
 const patient_comment_list = require("./utils/patient_comment");
 
 const Patient_Threshold = require("../models/patient_threshold");
 const patient_threshold_list = require("./utils/patient_threshold");
-const patients_threshold = require("../models/patient_threshold_sample");
 
-const patients_input = require("../models/patient_input_sample");
+
 const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
 const Patient_input = require("../models/patient_input");
