@@ -59,6 +59,15 @@ const Patient = new Schema(
             type: String,
             required: false //need to change
         },
+        register_date: {
+            type: Date,
+            required: false
+        },
+        screen_name: {
+            type: String,
+            required: false, // should required be true? or should we set a default name unless a patient enters it
+            default: "Anonymous"
+        },
         message:{
             type: String,
             required: false,

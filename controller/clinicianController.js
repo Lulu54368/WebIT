@@ -120,7 +120,7 @@ const addOnePatient = async(req, res)=>{
                 else{
                 
                     newPatient = await new Patient(newPatient);
-                   
+                    newPatient.register_date = new Date()
                     clinician.patients.push(newPatient._id);
                     await Clinician.findByIdAndUpdate(req.params.clinician_id, {patients: clinician.patients});
                     newPatient.save();
@@ -429,12 +429,8 @@ const addSupportSentence = async(req, res, next)=>{
                 res.send("no message sent");
             }
             else{
-                const newMessage = req.body.message;
-                
-                
-                var currPatient = await Patient.findById(req.params.patient_id);
-             
-                
+                const newMessage = req.body.message;                                
+                var currPatient = await Patient.findById(req.params.patient_id);                           
                 currPatient.message = newMessage;
                 currPatient.viewed = false;
                 

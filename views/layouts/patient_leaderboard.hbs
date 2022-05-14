@@ -49,7 +49,7 @@
         <h1> Hi {{patient_name}}!</h1>
       </div>
       <div class = "date">
-        <h4 id="MyP">Today is {{today}} </h4>
+        <h4 id="MyP">Today is {{view_date}} </h4>
         <script>
             var today = new Date();
             var day = today.getDay();
@@ -71,41 +71,16 @@
               <td>Photo</td>
               <td>Screen Name</td>
               <td>Engagement Rate</td>
-          </tr>
-
+            </tr>
+            
+            {{#each top_patient}}
             <tr>
-              <td>1</td>
+              <td>{{this.rank}}</td>
               <td><img src = "/page-logo.png" style = "width: 50%; margin-left: 20px;"></img></td>
-              <td>Johnny</button></td>
-              <td>100%</td>
+              <td>{{this.pat_name}}</button></td>
+              <td>{{this.rate}}%</td>
             </tr>
-
-            <tr>
-              <td>2</td>
-              <td><img src = "/page-logo.png" style = "width: 50%; margin-left: 20px;"></img></td>
-              <td>Janethebest</button></td>
-              <td>100%</td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td><img src = "/page-logo.png" style = "width: 50%; margin-left: 20px;"></td>
-              <td>John</button></td>
-              <td>67%</td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td><img src = "/page-logo.png" style = "width: 50%; margin-left: 20px;"></td>
-              <td>Mary</button></td>
-              <td>50%</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td><img src = "/page-logo.png" style = "width: 50%; margin-left: 20px;"></td></td>
-              <td>Johnnnn</button></td>
-              <td>50%</td>
-            </tr>
+            {{/each}}
           </table>
         </div>
       </section>

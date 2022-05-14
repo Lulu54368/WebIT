@@ -178,8 +178,43 @@ const changePassword = async (req, res) => {
   }
 };
 
-const renderLeaderboard = (req, res) => {
-  res.render("../views/layouts/patient_leaderboard.hbs");
+const renderLeaderboard = async (req, res) => {
+  try {
+    const top_five_patients = []
+    const id_engage_dict = {}
+    var i=0
+    const TOP_LEN = 5
+    const patients = await Patient.find().lean()
+    const curr_patient = await Patient.findById(req.params.patient_id);
+    const today = new Date()
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    console.log(patients);
+    patients.forEach((patient) => {
+      var regisDays = Math.ceil(Math.abs((today - patient.register_date) / oneDay)) // calculate the days patients have been registered
+      var num_data_entered = patient.data.length;
+      var engagement_rate = num_data_entered / regisDays
+      id_engage_dict[patient._id] = engagement_rate
+    })
+    
+    var items = Object.keys(id_engage_dict).map( (key) => { return [key, id_engage_dict[key]] });
+    // Sort the dictionary based on the second element (i.e. the value)
+    items.sort( (first, second) => { return second[1] - first[1] });
+    
+    for (i=0; i<TOP_LEN; i++) {
+      var pat = await Patient.findById(items[i][0])
+      var pat_name = pat.name
+
+      top_five_patients.push({"pat_name": pat_name, "rate":parseFloat(items[i][1]*100).toFixed(2), "rank": i+1})
+    }
+
+    res.render("../views/layouts/patient_leaderboard.hbs", {
+    view_date: today.toLocaleDateString(),
+    patient_name: curr_patient.name,
+    top_patient: top_five_patients});
+    console.log(top_five_patients);
+  } catch (err) {
+    console.log(err)
+  }
 };
 
 module.exports = {
