@@ -5,9 +5,12 @@ const Schema = mongoose.Schema;
 const Data = new Schema({
     data:{
         type: Number,
+        validate: {
+            validator: v => (typeof(v) === 'number'),
+            message: props => `${props.value} is not a number`
+        },
         required: false,
         default: -1
-
     },
     comment:{
         type: String,
