@@ -1,11 +1,21 @@
 //This is transformation of data structure for futher use
-const patient_data_list=(patient_threshold_data, patient_data)=>{
+const patient_data_list=(patient_threshold_data, patient_data, c_notes_data)=>{
     try {
         var patient_medical_list = []
         // each element is a patient object
+        console.log("executing utils patient_medical_data.js")
         patient_data.forEach((element) => {
             const data = element.data;
             var component = {"name": element.name, "id": element._id};
+            
+            // store the clinical note for each patient
+            c_notes_data.forEach((each_note) => {
+                const p_id = each_note.patient_id;  // each_note is a note_schema, where a list of one_notes is stored
+                if(component.id.equals(p_id)) {     // if current clinical note's patient_id matches the pre-stored id in component
+                    component["c_note"] = each_note.notes
+                }
+            })
+            console.log("executing utils patient_medical_data.js")
             // store data if it was not empty, here data has stored all data the patient has entered, and each 'attr' is a single data object
             data.forEach((attr)=>{
                 var skip_date=0;
