@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-
+const { validationResult, matchedData } = require('express-validator');
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; //patient model

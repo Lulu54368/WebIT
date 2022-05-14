@@ -3,7 +3,7 @@ const patientController = require("../controller/patientController.js");
 const patientRouter = express.Router();
 const utility = require("./patientUtility.js");
 const passport = require("passport");
-const res = require("express/lib/response");
+const validationRule = require("../middleware/validationRule")
 
 // Main page which requires login to access
 
@@ -40,7 +40,7 @@ customerRouter.post('/signup', passport.authenticate('local-signup', {
 patientRouter.get("/:patient_id", patientController.getCurrData);
 
 //add current patient's data
-patientRouter.post("/:patient_id", patientController.addOneData);
+patientRouter.post("/:patient_id", validationRule.form,patientController.addOneData);
 
 //change patient's password
 /* patientRouter.get("/:patient_id/password", (req, res, next) => {
