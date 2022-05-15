@@ -3,9 +3,11 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
     try {
         var patient_medical_list = []
         // each element is a patient object
+        console.log("executing utils patient_medical_data.js")
         patient_data.forEach((element) => {
             const data = element.data;
             var component = {"name": element.name, "id": element._id};
+            
             // store data if it was not empty, here data has stored all data the patient has entered, and each 'attr' is a single data object
             data.forEach((attr)=>{
                 var skip_date=0;
