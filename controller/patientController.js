@@ -149,7 +149,9 @@ const logout = (req, res) => {
 };
 
 const renderChangePwd = (req, res) => {
-  res.render("../views/layouts/patient_change_pwd.hbs");
+  res.render("../views/layouts/patient_change_pwd.hbs", {
+    p_id: req.params.patient_id,
+  });
 };
 
 const changePassword = async (req, res) => {
