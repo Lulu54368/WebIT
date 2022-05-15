@@ -65,9 +65,17 @@
       <section>
         <div class = "sectionborder">
           <h3>Today's support message</h3>
-          <button class = "button viewbutton">View</button>
-        </div>
-      </section>
+          <div id="welcomeDiv"  style="display:none;" class="answer_list" > {{message}}</div>
+          <input type="button" class = "button viewbutton" name="answer" value="View" onclick="showDiv()" />
+          <script>
+            function showDiv() {
+            document.getElementById('welcomeDiv').style.display = "block";
+          }
+</script>
+          
+
+          </div>
+          </section>
       <br><br>
       
 
