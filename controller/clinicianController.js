@@ -170,19 +170,16 @@ const addOnePatientNote = async (req, res) => {
             else{
                 const newNote = req.body.note;             
                 var currCNote = await Clinical_Note.findOne({patient_id: req.params.patient_id});
-                console.log("currCNote = " + currCNote)
+               
                 // not stored in database
                 if (!currCNote) {
                     currCNote = new Clinical_Note({patient_id: req.params.patient_id})
                 }
-                console.log("currCNote = ")
-                console.log(currCNote);
+                
                 var note_body = {"note_text": newNote, "edit_date": new Date().toLocaleDateString()}
                 
                 currCNote.notes.push(note_body)
-                console.log("new note = ")
-                console.log(note_body)
-                console.log(currCNote)
+                
                 currCNote.save();
                 
                 

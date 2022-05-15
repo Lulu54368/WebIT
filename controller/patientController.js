@@ -163,12 +163,10 @@ const changePassword = async (req, res) => {
         if (valid == true) {
           patient.password = req.body.newPassword;
           patient.save();
-          //res.send("saved!");
-          alert("saved !");
+       
           res.redirect("/patient/" + req.params.patient_id);
         } else {
-          //res.send("password not match");
-          alert("something went wrong...");
+          
           res.redirect("/patient/" + req.params.patient_id);
         }
       });
@@ -188,7 +186,7 @@ const renderLeaderboard = async (req, res) => {
     const curr_patient = await Patient.findById(req.params.patient_id);
     const today = new Date()
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    console.log(patients);
+
     patients.forEach((patient) => {
       var regisDays = Math.ceil(Math.abs((today - patient.register_date) / oneDay)) // calculate the days patients have been registered
       var num_data_entered = patient.data.length;
@@ -211,7 +209,7 @@ const renderLeaderboard = async (req, res) => {
     view_date: today.toLocaleDateString(),
     patient_name: curr_patient.name,
     top_patient: top_five_patients});
-    console.log(top_five_patients);
+    
   } catch (err) {
     console.log(err)
   }
