@@ -1,19 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/about.css" />
-
     <title>Template</title>
   </head>
 
-  <!-- content of webpage begins here -->
   <body>  
     <header>
-      <h2>Homepage</h2>
-      </header>
       <script>
         var _hmt = _hmt || [];
         (function() {
@@ -22,56 +17,53 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
         })();
-        </script>
+      </script>
     
-    
-    <ul class="topnav">
-      <li><a class="active" href="">Dashboard</a></li>
-      <li><a href="">Patient's Data</a></li>
-      <li><a href="">Patient's Comments</a></li>
-      <li><a href="">Thresholds</a></li>
-      <li><a href="">Messages</a></li>
-      <li><a href="">Register Patient</a></li>
-      <li><a href="/aboutWebsite">About this Website</a></li>
-      <li><a href="/aboutDiabetes">About Diabetes</a></li>
-      <li><a href="">Log Out</a></li>
-      <li class="icon">
-        <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
-      </li>
-    </ul>
+      <ul class="topnav">
+        <li><a class="active" href="">Dashboard</a></li>
+        <li><a href="">Patient's Comments</a></li>
+        <li><a href="">Thresholds</a></li>
+        <li><a href="">Messages</a></li>
+        <li><a href="">Register Patient</a></li>
+        <li><a href="/aboutWebsite">About this Website</a></li>
+        <li><a href="/aboutDiabetes">About Diabetes</a></li>
+        <li><a href="">Log Out</a></li>
+        <li class="icon">
+          <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </li>
+      </ul>
     </header>
 
     
     <script>
-    function myFunction() {
+      function myFunction() {
         document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
-    }
+      }
     </script>
 
     <script src="/js/UpdatePatientBadge.js" defer></script>
-        <aside>
+    <aside>
       <div class = "greeting">
         <h1> Hi {{this.name}}!</h1>
       </div>
       <div class = "date">
         <h4 id="MyP">Today is {{view_date}} </h4>
         <script>
-            var today = new Date();
-            var day = today.getDay();
-            var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
-            document.getElementById("MyP").innerHTML += daylist[day];
+          var today = new Date();
+          var day = today.getDay();
+          var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+          document.getElementById("MyP").innerHTML += daylist[day];
         </script>
       </div>
-
     </aside>
 
     <nav>
-            <div class="sidenav">
-          <img class = "image" src = "/page-logo.png">
+      <div class="sidenav">
+        <img class = "image" src = "/page-logo.png">
       </div>
     </nav>
-    <main>
 
+    <main>
       <div class = "clinician_header">
         <h1>Dashboard</h1>
       </div>
@@ -79,8 +71,9 @@
           <br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </main>
-      <footer>
+
+    <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
     </footer>
-    </body>
+  </body>
 </html>
