@@ -47,6 +47,18 @@ clinicianRouter.post(
   clinicianController.modifyThreshold
 );
 
+// get all clinical notes for a certain patient once clicked their name
+clinicianRouter.get(
+  "/:clinician_id/:patient_id/notes", 
+  clinicianController.getOnePatientAllNotes
+);
+
+// Add a clinical note for a certain patient
+clinicianRouter.post(
+  "/:clinician_id/:patient_id/addnote", 
+  clinicianController.addOnePatientNote
+)
+
 //Add fields the patient need to input
 clinicianRouter.post(
   "/:clinician_id/add/:patient_id/",

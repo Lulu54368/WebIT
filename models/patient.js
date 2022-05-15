@@ -5,9 +5,12 @@ const Schema = mongoose.Schema;
 const Data = new Schema({
     data:{
         type: Number,
+        validate: {
+            validator: v => (typeof(v) === 'number'),
+            message: props => `${props.value} is not a number`
+        },
         required: false,
         default: -1
-
     },
     comment:{
         type: String,
@@ -55,6 +58,15 @@ const Patient = new Schema(
         password:{
             type: String,
             required: false //need to change
+        },
+        register_date: {
+            type: Date,
+            required: false
+        },
+        screen_name: {
+            type: String,
+            required: false, // should required be true? or should we set a default name unless a patient enters it
+            default: "Anonymous"
         },
         message:{
             type: String,
