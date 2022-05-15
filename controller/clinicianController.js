@@ -451,4 +451,3 @@ const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNot
 
 
 module.exports =clinicianController
-
