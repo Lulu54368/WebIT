@@ -446,8 +446,13 @@ const addSupportSentence = async(req, res, next)=>{
     
 }
 
-const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, addInput, 
-    deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence, addSupportSentence, addOnePatient};
+const renderRegister = (req, res) => {
+    res.render("../views/layouts/clinician_register_patient.hbs");
+  };
+
+const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, 
+    addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+    addSupportSentence, addOnePatient, renderRegister};
 
 
 module.exports =clinicianController

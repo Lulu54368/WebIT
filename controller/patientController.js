@@ -53,6 +53,7 @@ const getCurrData = async (req, res) => {
       today: new Date().toLocaleDateString(),
       patient_input: attributes,
       message: patient.message,
+      p_id: req.params.patient_id,
     });
   } catch (err) {
     console.log(err);
@@ -129,6 +130,7 @@ const getPatientHistory = async (req, res) => {
         today: new Date().toLocaleDateString(),
         patient_name: patient.name,
         history: patient.data,
+        p_id: req.params.patient_id,
       });
     } else {
       res.send("patient not found");

@@ -59,7 +59,7 @@ patientRouter.post("/:patient_id/changePwd", patientController.changePassword);
 
 // get current patient's history data that was entered
 patientRouter.get(
-  "/:patient_id/history_data",
+  "/:patient_id/historyData",
   patientController.getPatientHistory
 );
 

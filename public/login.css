@@ -1,244 +1,181 @@
 * {
-    padding: 0;
-    margin: 0;
-    /*border: solid 1px red;*/
-  }
-  
-  html {
-    /*height: 100%;
-    width: 1920px;
-    height: 1080px;
-    */
-    position: relative;
-  }
-  
-  body {
-    /*
-    height: 100%;
-    font-family: 'JetBrains Mono Medium';
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #CFE6BD;
-    */
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
 
-    /* Auto layout */
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    padding: 0px;
+html {
+  position: relative;
+}
 
-    background-color: #CFE6BD;
-    
-    /*
-    grid-template-columns: 1fr 2fr 0.5fr;
-    grid-template-rows: 1fr 4fr 1fr;
-    grid-gap: 1rem;
+body {
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0px;
 
-    grid-template-areas: 
-        "header header header"
-        "aside main nav"
-        "footer footer footer";
-    */
-    
-  }
+  background-color: #cfe6bd;
+}
 
-/*  
+.form-wrapper {
+  position: absolute;
+  width: 30%;
+  height: 80vh;
+  right: 10vh;
+  top: 6rem;
+  background: #e1f0db;
+  border-radius: 53px;
+}
+
+.form-wrapper .header {
+  text-align: center;
+  font-size: 3em;
+  line-height: 300%;
+}
+
+.form-wrapper .input-wrapper input {
+  font-weight: 500;
+
+  background-color: white;
+  border: 0;
+
+  text-align: center;
+  font-size: 15px;
+  color: #00000080;
+  outline: none;
+}
+
+.form-wrapper .input-wrapper .border-wrapper {
+  /* align-items: flex-start; */
+  background: white;
+  width: 80%;
+  height: 50px;
+  margin-left: 10%;
+  margin-bottom: 8%;
+  border-radius: 30px;
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+}
+
+.form-wrapper .input-wrapper .border-wrapper .border-item {
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+  border-radius: 30px;
+}
+.form-wrapper .action {
+  display: flex;
+  justify-content: center;
+}
+.form-wrapper .action .btn {
+  width: 50%;
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
+  line-height: 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+  color: #00000080;
+}
+
+.form-wrapper .action .btn:hover {
+  background-color: #92c7a8;
+}
+
+.action button {
+  background-color: #8fbc88;
+  font-size: 1.2rem;
+  border-radius: 53px;
+  border-width: 0;
+  width: 110px;
+  height: 40px;
+}
+
+.About {
+  display: flex;
+  margin-inline: 5%;
+  position: absolute;
+  top: 39rem;
+  text-decoration: none;
+}
+
+.About a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.About .website_text {
+  width: 20vw;
+  height: 25%;
+
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
+
+  line-height: 3.125rem;
+  border-radius: 1.875rem;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+
+  color: black;
+  font-size: 100%;
+}
+
+.About .website_text:hover {
+  background-color: #92c7a8;
+}
+
+.About .diabetes_text {
+  width: 18vw;
+  height: 25%;
+  margin-left: 10rem;
+  border: 2px solid #8fbc88;
+  background: #8fbc88;
+
+  line-height: 3.125rem;
+  border-radius: 1.875rem;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+
+  color: black;
+  font-size: 100%;
+}
+
+.About .diabetes_text:hover {
+  background-color: #92c7a8;
+}
+
+@media screen and (max-width: 960px) {
+  /* page layout for phones */
   .logo .HouseIcon {
-    position: absolute;
-    width: 28rem;
-    height: 18rem;
-    left: 12%;
-    top: 2rem;
-    max-width: 40%;
+    display: None;
   }
 
   .logo .CompanyName {
-    width: 40%;
-    height: auto;
-    left: 9%;
-    top: 20rem;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 4em;
-   
-    text-align: center;
-    
-    color: rgba(0, 0, 0, 0.73);
+    font-size: 30px !important;
+    left: 30% !important;
+    top: 1.5rem !important;
   }
 
   .logo .Message {
-    position: absolute;
-    width: 60%;
-    left: 9%;
-    top: 30rem;
-    font-family: 'Roboto';
-    font-style: italic;
-    font-weight: 400;
-    font-size: 2.5em;
-    color: rgba(0, 0, 0, 0.46);
+    display: None;
   }
-*/
+
   .form-wrapper {
-    
-    position: absolute;
-    width: 30%;
-    height: 80vh;
-    right: 10vh;
-    top: 6rem;
-    background: #E1F0DB;
-    border-radius: 53px;
-    
-    }
+    background-color: #cfe6bd;
+    width: 35%;
+    left: 30%;
+  }
 
-  
-  
-  .form-wrapper .header {
-    text-align: center;
-    font-size: 3em;
-    text-transform: uppercase;
-    line-height: 300%;
-  }
-  
-  .form-wrapper .input-wrapper input {
-    /* Enter your username */
-    font-family: 'Roboto';
-    font-weight: 500;
-    /*top: 40%;*/
-    background-color: white;
-    border: 0;
-    /*width: 80%;
-    height: 80%;*/
-    text-align: center;
-    font-size: 15px;
-    color: #00000080;
-    outline: none;
-    
-  }
-  .form-wrapper .input-wrapper input::placeholder {
-    text-transform: uppercase;
-  }
-  
-  .form-wrapper .input-wrapper .border-wrapper {
-    align-items: flex-start;
-    background: white;
-    width: 100%;
-    height: 50px;
-    margin-bottom: 8%;
-    border-radius: 30px;
-    display: flex;
-    /*align-items: center;*/
-    justify-content: center;
-  }
-  
-  .form-wrapper .input-wrapper .border-wrapper .border-item {
-    height: calc(100% - 4px);
-    width: calc(100% - 4px);
-    border-radius: 30px;
-  }
-  .form-wrapper .action {
-    display: flex;
-    justify-content: center;
-  }
-  .form-wrapper .action .btn {  
-    width: 50%;
-    border: 2px solid #8FBC88;
-    background: #8FBC88;
-    
-    line-height: 50px;
-    border-radius: 30px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .2s;
-    text-align: center;
-    color: #00000080;
-
-  }
-  
-  .form-wrapper .action .btn:hover{
-    background-color:#92c7a8;
-
-  }
-  
-  
   .About {
-    display: flex;
-    /*justify-content: space-between;*/
-    margin-inline: 5%;
-    position: absolute;
-    top: 39rem;
-    /*width: 40%;*/
+    margin-left: 10%;
   }
 
-  .About .website_text{ 
-    width: 20vw;
-    height: 25%;
-
-    border: 2px solid #8FBC88;
-    background: #8FBC88;
-    
-    line-height: 3.125rem;
-    border-radius: 1.875rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .2s;
-    text-align: center;
+  .btn {
+    font-size: 85%;
   }
-
-  .About .website_text:hover {
-    background-color:#92c7a8;
-  }
-
-
-  .About .diabetes_text{
-    width: 18vw;
-    height: 25%;
-    margin-left: 10rem;
-    border: 2px solid #8FBC88;
-    background: #8FBC88;
-
-    line-height: 3.125rem;
-    border-radius: 1.875rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: .2s;
-    text-align: center;
-    color: #00000080;
-  }
-
-  .About .diabetes_text:hover {
-    background-color:#92c7a8;
-  }
-
-  @media screen and (max-width: 960px) {  /* page layout for phones */
-    .logo .HouseIcon{
-        display: None;
-    }
-
-    .logo .CompanyName {
-      font-size: 30px !important;
-      left: 30% !important;
-      top: 1.5rem !important;
-    }
-
-    .logo .Message {
-      display: None;
-    }
-
-    .form-wrapper {
-      background-color: #CFE6BD;
-      width: 35%;
-      left: 30%;
-    }
-
-    .About {
-      margin-left: 10%;
-    }
-
-    .btn {
-      font-size: 85%;
-    }
-  }
-   
+}

@@ -20,13 +20,13 @@
       </script>
 
       <ul class="topnav">
-        <li><a class="active" href="">Homepage</a></li>
-        <li><a href="">History Data</a></li>
-        <li><a href="">Leader Board</a></li>
-        <li><a href="">Change Password</a></li>
+        <li><a class="active" href="/patient/{{p_id}}">Homepage</a></li>
+        <li><a href="{{p_id}}/historyData">History Data</a></li>
+        <li><a href="{{p_id}}/leaderboard">Leader Board</a></li>
+        <li><a href="{{p_id}}/changePwd">Change Password</a></li>
         <li><a href="/aboutWebsite">About this Website</a></li>
         <li><a href="/aboutDiabetes">About Diabetes</a></li>
-        <li><a href="">Log Out</a></li>
+        <li><a href="/patient/login">Log Out</a></li>
         <li class="icon">
           <a
             href="javascript:void(0);"
@@ -65,9 +65,17 @@
       <section>
         <div class = "sectionborder">
           <h3>Today's support message</h3>
-          <button class = "button viewbutton">View</button>
-        </div>
-      </section>
+          <div id="welcomeDiv"  style="display:none;" class="answer_list" > {{message}}</div>
+          <input type="button" class = "button viewbutton" name="answer" value="View" onclick="showDiv()" />
+          <script>
+            function showDiv() {
+            document.getElementById('welcomeDiv').style.display = "block";
+          }
+</script>
+          
+
+          </div>
+          </section>
       <br><br>
       
 
