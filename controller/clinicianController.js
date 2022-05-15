@@ -47,7 +47,6 @@ const getAllPatients = async(req, res)=>{
             console.log(clinician._id.toString())                                       // and now pass as an argument specified in /utils/patient_medical_data.js
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data, view_date: today, c_id: clinician._id});
-            console.log(c_id);
         }
         else{
             res.sendStatus(404);
