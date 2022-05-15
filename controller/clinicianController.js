@@ -34,21 +34,20 @@ const getAllPatients = async(req, res)=>{
         const patient_thresholds = await Patient_Threshold.find().lean();
         const today = new Date().toLocaleDateString();
         if(clinician){
-            // list of patient id stored in a certain clinician
+           
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
-            //console.log(patient_id_list);
-            // filter to include only patients whose id are stored under a certain clinician
+           
             var filtered_patients = patients.filter((patient)=> { 
                 return patient_id_list.includes((patient._id).toString()) }); 
-            //console.log(filtered_patients);
-            // filter to include only patients' thresholds with id (patient id) contained in a certain clinician 
+           
             var filtered_thresholds = patient_thresholds.filter((threshold) => {
                 return patient_id_list.includes((threshold.id).toString()) });
             const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
-                                                                        // and now pass as an argument specified in /utils/patient_medical_data.js
+            console.log(clinician._id.toString())                                       // and now pass as an argument specified in /utils/patient_medical_data.js
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-            patients: patient_medical_data, view_date: today, c_id: clinician._id});
+            patients: patient_medical_data, view_date: today, c_id: clinician._id.toString()});
+            
         }
         else{
             res.sendStatus(404);
