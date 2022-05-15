@@ -2,7 +2,7 @@
 const patient_comment_list = (patient_data, patient_input) => {
  
     var patient_comment_ls = []
-    
+    //console.log(patient_input)
     patient_data.forEach((element) => {
     const data = element.data;
    
@@ -13,7 +13,7 @@ const patient_comment_list = (patient_data, patient_input) => {
             "name": element.name
         }
       
-        var current_input = patient_input.find((input_object) => input_object.id.toString() === component.id)
+        var current_input = patient_input.find((input_object) => input_object.id.toString() === component.id.toString())
         current_input.input.forEach( (input_field) => {
             component[input_field] = attr[input_field].comment;
         }) 
