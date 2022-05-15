@@ -5,7 +5,7 @@ const clinicianController = require("../controller/clinicianController");
 //Get all patients' data of a specified clinician
 clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
 
-/* clinicianRouter.get("/:clinician_id/register", (req, res, next) => {
+clinicianRouter.get("/:clinician_id/register", (req, res, next) => {
   const form =
     '<h1>Register Page</h1><form method="post" action="">\
                     Enter email:<br><input type="text" name="email">\
@@ -14,9 +14,9 @@ clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
                     <br><br><input type="submit" value="Submit"></form>';
 
   res.send(form);
-}); */
+});
 
-//clinicianRouter.get("/:clinician_id/register",clinicianController.renderRegister);
+clinicianRouter.get("/:clinician_id/register",clinicianController.addOnePatient);
 
 //have to replace every id here with clinician_id
 
