@@ -387,9 +387,13 @@ const addSupportSentence = async(req, res, next)=>{
     
 }
 
+const renderRegister = (req, res) => {
+    res.render("../views/layouts/clinician_register_patient.hbs");
+  };
+
 const clinicianController = { getAllPatients, getOnePatient, addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
 
-addSupportSentence, addOnePatient};
+addSupportSentence, addOnePatient, renderRegister};
 
 
 module.exports =clinicianController
