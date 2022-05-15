@@ -65,9 +65,8 @@ const addOneData = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        console.log(errors);
-        const message = errors.mapped()
-        res.send(message);
+        req.flash("failure", errors.array()[0]);
+        res.redirect("/patient/" + req.params.patient_id);
     }
     else{
       var attributes = await Patient_input.findOne({
