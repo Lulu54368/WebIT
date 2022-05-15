@@ -382,7 +382,7 @@ const addSupportSentence = async (req, res, next) => {
 };
 
 const renderRegister = (req, res) => {
-  res.render("../views/layouts/clinician_register_patientnew.hbs");
+  res.render("../views/layouts/clinician_register_patient.hbs");
 };
 
 const clinicianController = {
