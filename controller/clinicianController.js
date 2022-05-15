@@ -34,7 +34,6 @@ const getAllPatients = async(req, res)=>{
         const patients = await Patient.find().lean();  // taken from /model/patient.js
         const patient_thresholds = await Patient_Threshold.find().lean();
         console.log("executing getAllPatient line 35")
-        const clinical_notes = await Clinical_Note.find().lean();  // all clinical notes from database
         const today = new Date().toLocaleDateString();
         console.log("executing gatAllPatients line 38")
         if(clinician){
@@ -50,12 +49,8 @@ const getAllPatients = async(req, res)=>{
             var filtered_thresholds = patient_thresholds.filter((threshold) => {
                 return patient_id_list.includes((threshold.id).toString()) });
 
-            // get all the clinician notes under the current clinician
-            var filtered_c_notes = clinical_notes.filter((c_note) => {
-                return patient_id_list.includes((c_note.patient_id.toString()));
-            })
 
-            const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients, filtered_c_notes); // the argument patients was filtered on the last line
+            const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data, view_date: today, c_id: clinician._id});
