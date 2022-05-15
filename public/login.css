@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 html {
@@ -34,7 +35,6 @@ body {
 }
 
 .form-wrapper .input-wrapper input {
-  font-family: "Roboto";
   font-weight: 500;
 
   background-color: white;
@@ -86,10 +86,11 @@ body {
 
 .action button {
   background-color: #8fbc88;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border-radius: 53px;
   border-width: 0;
-  width: 30%;
+  width: 110px;
+  height: 40px;
 }
 
 .About {
