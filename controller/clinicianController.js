@@ -4,7 +4,7 @@ const patient_medical_list = require("./utils/patient_medical_data");
 const patients_data = require("../models/patient_sample");
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
-const Patient = Patients.Patients; //patient model
+const Patient = Patients.Patients; // only use the main patient model/schema
 //const Patient_Data_Schema = Patients.Patient_data_schema; //schema
 //const Data_Schema = Patients.Data_schema;
 const clinician_data = require("../models/clinician_sample.js");
@@ -19,6 +19,8 @@ const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
 const Patient_input = require("../models/patient_input");
 
+const Clinical_Notes = require("../models/clinicalNotes");
+const Clinical_Note = Clinical_Notes.ClinicianNote;  // only use the main clinicalNote schema
 //const patients_message_list = require("../models/utils/patient_message");
 
 //This function get medical data for all patients
@@ -28,22 +30,28 @@ const getAllPatients = async(req, res)=>{
     
  
     try{
-        
         const clinician = await Clinician.findById(req.params.clinician_id).lean()
         const patients = await Patient.find().lean();  // taken from /model/patient.js
         const patient_thresholds = await Patient_Threshold.find().lean();
+        console.log("executing getAllPatient line 35")
         const today = new Date().toLocaleDateString();
+        console.log("executing gatAllPatients line 38")
         if(clinician){
-           
+            // list of patient id stored in a certain clinician
             var patient_id_list = clinician.patients;
             patient_id_list = patient_id_list.map((id)=>id.toString());
-           
+            //console.log(patient_id_list);
+            // filter to include only patients whose id are stored under a certain clinician
             var filtered_patients = patients.filter((patient)=> { 
                 return patient_id_list.includes((patient._id).toString()) }); 
-           
+            //console.log(filtered_patients);
+            // filter to include only patients' thresholds with id (patient id) contained in a certain clinician 
             var filtered_thresholds = patient_thresholds.filter((threshold) => {
                 return patient_id_list.includes((threshold.id).toString()) });
-            const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line                                    // and now pass as an argument specified in /utils/patient_medical_data.js
+
+
+            const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
+                                                                        // and now pass as an argument specified in /utils/patient_medical_data.js
             res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
             patients: patient_medical_data, view_date: today, c_id: clinician._id});
         }
@@ -55,6 +63,7 @@ const getAllPatients = async(req, res)=>{
     
     }
     catch(err){
+        console.log(err)
         return (err)
     }
     
@@ -73,7 +82,7 @@ const getOnePatient = async (req, res)=>{
         const patient = await Patient.findById(req.params.patient_id).lean();
 
         if(patient && patient_id_list.includes(patient._id.toString())){
-            res.render("../views/layouts/clinician_patientdata.hbs",{view_date: today, name: patient.name, 
+            res.render("../views/layouts/clinician_patientdata.hbs",{view_date: today, p_name: patient.name, c_name: clinician.lastname,
                 patient_data: patient.data});
         }
         else{
@@ -106,7 +115,7 @@ const addOnePatient = async(req, res)=>{
                 else{
                 
                     newPatient = await new Patient(newPatient);
-                   
+                    newPatient.register_date = new Date()
                     clinician.patients.push(newPatient._id);
                     await Clinician.findByIdAndUpdate(req.params.clinician_id, {patients: clinician.patients});
                     newPatient.save();
@@ -122,10 +131,62 @@ const addOnePatient = async(req, res)=>{
     catch(err){
         console.log(err);
     }
+           
+}
+
+const getOnePatientAllNotes = async (req, res) => {
+    try{
+        console.log("getOnePatientAllNotes executing");
+        const today = new Date().toLocaleDateString();
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        const patient = await Patient.findById(req.params.patient_id).lean();
+        const clinical_notes = await Clinical_Note.findOne({patient_id: req.params.patient_id}).lean();  // clinical note collection for a specific patient from database
+        console.log(clinical_notes);
+        res.render("../views/layouts/clinician_cli_notes.hbs",{view_date: today, 
+        p_name: patient.name, 
+        c_name: clinician.lastname,
+        c_note: clinical_notes.notes});
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+}
+
+const addOnePatientNote = async (req, res) => {
+    try{
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
         
-    
-    
-   
+        var newNote = req.body;
+        if(clinician){
+            if(JSON.stringify(newNote) == "{}"){
+                res.send("no clinical notes entered");
+            }
+            else{
+                const newNote = req.body.note;             
+                var currCNote = await Clinical_Note.findOne({patient_id: req.params.patient_id});
+               
+                // not stored in database
+                if (!currCNote) {
+                    currCNote = new Clinical_Note({patient_id: req.params.patient_id})
+                }
+                
+                var note_body = {"note_text": newNote, "edit_date": new Date().toLocaleDateString()}
+                
+                currCNote.notes.push(note_body)
+                
+                currCNote.save();
+                
+                
+                res.send(currCNote.notes);
+
+            }
+        
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
     
 }
 
@@ -360,12 +421,8 @@ const addSupportSentence = async(req, res, next)=>{
                 res.send("no message sent");
             }
             else{
-                const newMessage = req.body.message;
-                
-                
-                var currPatient = await Patient.findById(req.params.patient_id);
-             
-                
+                const newMessage = req.body.message;                                
+                var currPatient = await Patient.findById(req.params.patient_id);                           
                 currPatient.message = newMessage;
                 currPatient.viewed = false;
                 
@@ -388,10 +445,9 @@ const renderRegister = (req, res) => {
     res.render("../views/layouts/clinician_register_patient.hbs");
   };
 
-const clinicianController = { getAllPatients, getOnePatient, addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
-
-addSupportSentence, addOnePatient, renderRegister};
+const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, 
+    addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+    addSupportSentence, addOnePatient, renderRegister};
 
 
 module.exports =clinicianController
-
