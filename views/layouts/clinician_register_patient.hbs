@@ -17,8 +17,8 @@
       </script>
 
       <ul class="topnav">
-        <li><a href="">Dashboard</a></li>
-        <li><a href="">Patient's Comments</a></li>
+        <li><a href="/clinician/{{c_id}}">Dashboard</a></li>
+        <li><a href="/clinician/{{c_id}}/comments">Patient's Comments</a></li>
         <li><a href="threshold">Thresholds</a></li>
         <li><a href="support">Messages</a></li>
         <li><a class="active" href="register">Register Patient</a></li>
@@ -45,7 +45,7 @@
 
     <aside>
       <div class="greeting">
-        <h1> Hi {{this.name}}!</h1>
+        <h1> Hi Dr. {{c_name}}!</h1>
       </div>
       <div class="date">
         <h4 id="MyP">Today is {{view_date}} </h4>

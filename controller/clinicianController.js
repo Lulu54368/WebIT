@@ -52,8 +52,11 @@ const getAllPatients = async(req, res)=>{
 
             const patient_medical_data = patient_medical_list(filtered_thresholds, filtered_patients); // the argument patients was filtered on the last line
                                                                         // and now pass as an argument specified in /utils/patient_medical_data.js
-            res.render("../views/layouts/clinician_dashboard.hbs",{name: clinician.lastname, 
-            patients: patient_medical_data, view_date: today, c_id: clinician._id});
+            res.render("../views/layouts/clinician_dashboard.hbs",{
+                patients: patient_medical_data, 
+                view_date: today, 
+                c_id: clinician._id, 
+                c_name: clinician.lastname});
         }
         else{
             res.sendStatus(404);
@@ -82,7 +85,11 @@ const getOnePatient = async (req, res)=>{
         const patient = await Patient.findById(req.params.patient_id).lean();
 
         if(patient && patient_id_list.includes(patient._id.toString())){
-            res.render("../views/layouts/clinician_patientdata.hbs",{view_date: today, p_name: patient.name, c_name: clinician.lastname,
+            res.render("../views/layouts/clinician_patientdata.hbs",{
+                view_date: today, 
+                p_name: patient.name, 
+                c_id: clinician._id,
+                c_name: clinician.lastname,
                 patient_data: patient.data});
         }
         else{
@@ -274,7 +281,11 @@ const getAllComments = async(req, res, next)=>{
             const patients_comment = patient_comment_list(filtered_patients, patient_inputs); // the argument patients was filtered on the above line
            
             // patient_comment is each from the partial, patients_comment is the filtered comment
-            res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
+            res.render("../views/layouts/clinician_patientcomment.hbs",{
+                view_date: today, 
+                patient_comment: patients_comment, 
+                c_id: clinician._id,
+                c_name: clinician.lastname});
         }
         else{
             res.sendStatus(404);
@@ -295,7 +306,6 @@ const getAllThreshold = async (req, res, next)=>{
         const patient_inputs = await Patient_input.find().lean();
         const today = new Date().toLocaleDateString();
         const clinician_name = clinician.lastname;
-        const clinicain_id = clinician.clinician_id;
         // the clinician is valid
         if(clinician) {
             // copy the patient's id list stored in the clinician
@@ -318,7 +328,11 @@ const getAllThreshold = async (req, res, next)=>{
             const patients_threshold = patient_threshold_list(filtered_thresholds, filtered_patients, patient_input);  // the argument patient_thresholds was filtered on the above line
             console.log(patients_threshold);
             // and now passed as an argument specified in /utils/patient_threshold.js
-            res.render("../views/layouts/clinician_patientthreshold.hbs", {view_date: today, patient_threshold: patients_threshold}); // where to get patientiid?
+            res.render("../views/layouts/clinician_patientthreshold.hbs", {
+                view_date: today, 
+                patient_threshold: patients_threshold, 
+                c_id: clinician._id, 
+                c_name: clinician_name}); // where to get patientiid?
         }
         else {
             sendStatus(404);
@@ -397,7 +411,11 @@ const getSupportSentence = async (req, res, next)=>{
             // the patient hasn't viewed the message
             if (!patients_message.viewed) {
                 
-                res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: patients_message});
+                res.render("../views/layouts/clinician_patientmessage.hbs",{
+                    view_date: today, 
+                    patient_message: patients_message, 
+                    c_id: clinician._id, 
+                    c_name: clinician.lastname});
             } else {
                 res.render("../views/layouts/clinician_patientmessage.hbs",{view_date: today, patient_message: ""});
             }
@@ -443,9 +461,21 @@ const addSupportSentence = async(req, res, next)=>{
     
 }
 
-const renderRegister = (req, res) => {
-    res.render("../views/layouts/clinician_register_patient.hbs");
-  };
+const renderRegister = async (req, res) => {
+    try {
+        const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
+        const today = new Date().toLocaleDateString()
+        res.render("../views/layouts/clinician_register_patient.hbs", {
+            view_date: today,
+            c_id: clinician._id,
+            c_name: clinician.lastname
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }    
+    
+};
 
 const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, 
     addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,

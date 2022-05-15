@@ -21,10 +21,10 @@
     
       <ul class="topnav">
         <li><a class="active" href="">Dashboard</a></li>
-        <li><a href="">Patient's Comments</a></li>
-        <li><a href="">Thresholds</a></li>
-        <li><a href="">Messages</a></li>
-        <li><a href="">Register Patient</a></li>
+        <li><a href="/clinician/{{c_id}}/comments">Patient's Comments</a></li>
+        <li><a href="/clinician/{{c_id}}/threshold">Thresholds</a></li>
+        <li><a href="/clinician/{{c_id}}/support">Messages</a></li>
+        <li><a href="/clinician/{{c_id}}/register">Register Patient</a></li>
         <li><a href="/aboutWebsite">About this Website</a></li>
         <li><a href="/aboutDiabetes">About Diabetes</a></li>
         <li><a href="">Log Out</a></li>
@@ -44,7 +44,7 @@
     <script src="/js/UpdatePatientBadge.js" defer></script>
     <aside>
       <div class = "greeting">
-        <h1> Hi {{this.name}}!</h1>
+        <h1> Hi Dr. {{c_name}}!</h1>
       </div>
       <div class = "date">
         <h4 id="MyP">Today is {{view_date}} </h4>

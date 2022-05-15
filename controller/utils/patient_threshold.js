@@ -2,15 +2,17 @@
 const patient_threshold_list = (patient_threshold_data, patient_data, patient_inputs) => {
     var patient_threshold_ls = []
     const all_input = ["blood_level", "weight", "insulin_intake", "exercise"]
-
     patient_threshold_data.forEach((element) => {
         const threshold = element.threshold;
-       //Some modification shold be added here (find function instead of hardcode)
+        //Some modification shold be added here (find function instead of hardcode)
        //include patient input(consider the input patient required to enter) 
-       const patient = patient_data.find((data)=>data._id.toString() == element.id.toString());
-      
-       const patient_input = patient_inputs.find((input)=>input.id.toString() ==element.id.toString());
-        const component = {
+       var patient = patient_data.find((data)=> {
+           //console.log(data._id)
+           return data._id.toString() === element.id.toString()});
+
+       var patient_input = patient_inputs.find((input)=>(input.id).toString() === element.id.toString());
+
+       const component = {
             "id": element.id.toString(),
             "name": patient.name,
             "patient_input": {},
@@ -24,7 +26,6 @@ const patient_threshold_list = (patient_threshold_data, patient_data, patient_in
             "exercise_u": threshold.exercise.upper_bound,
             "exercise_l": threshold.exercise.lower_bound
         }
-        
         if( patient_input != null){
             
             patient_input.input.forEach((input)=>component.patient_input[input]= true);
