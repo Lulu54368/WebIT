@@ -142,7 +142,8 @@ const getOnePatientAllNotes = async (req, res) => {
         const patient = await Patient.findById(req.params.patient_id).lean();
         const clinical_notes = await Clinical_Note.findOne({patient_id: req.params.patient_id}).lean();  // clinical note collection for a specific patient from database
         console.log(clinical_notes);
-        res.render("../views/layouts/clinician_cli_notes.hbs",{view_date: today, 
+        res.render("../views/layouts/clinician_cli_notes.hbs",{
+        view_date: today, 
         p_name: patient.name, 
         c_name: clinician.lastname,
         c_note: clinical_notes.notes});
@@ -258,6 +259,7 @@ const getAllComments = async(req, res, next)=>{
         // Find a single clinician by matching the http:/clinician_id with the database clinician id 
         const clinician = await Clinician.findById(req.params.clinician_id).lean();  // Clinician model taken from /models/clinician
         const patients = await Patient.find().lean();  // taken from /models/patient, find all documents of patients
+        const patient_inputs = await Patient_input.find().lean();
         const today = new Date().toLocaleDateString();
         // The clinician is valid
         if(clinician){
@@ -269,7 +271,7 @@ const getAllComments = async(req, res, next)=>{
             var filtered_patients = patients.filter((patient)=> { 
                 return patient_id_list.includes((patient._id).toString()) }); 
 
-            const patients_comment = patient_comment_list(filtered_patients); // the argument patients was filtered on the above line
+            const patients_comment = patient_comment_list(filtered_patients, patient_inputs); // the argument patients was filtered on the above line
            
             // patient_comment is each from the partial, patients_comment is the filtered comment
             res.render("../views/layouts/clinician_patientcomment.hbs",{view_date: today, patient_comment: patients_comment});
