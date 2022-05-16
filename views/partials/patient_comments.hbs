@@ -1,23 +1,26 @@
-<div class="cli_sectionborder" >
-    <table class = "parent" frame="BOX">
-        <tr class = "comments">
-            <th>Date</th>
-            <th>Patient Name</th>
-            <th>Blood glucose level<br>(nmol/L)</th>
-            <th>Weight<br>(kg)</th>
-            <th>Doses of insulin intake<br>(doses)</th>
-            <th>Exercise Step Count<br>(steps)</th>
-        </tr>
-        {{#each patient_comment}}
-        <tr>
-            <td>{{this.date}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.blood_level}}</td>
-            <td>{{this.weight}}</td>
-            <td>{{this.insulin_intake}}</td>
-            <td>{{this.exercise}}</td>
-        </tr>
-        {{/each}}      
-    </table>
-</div> 
-   
+<div class="cli_sectionborder">
+  <table class="parent" frame="BOX">
+    <tr class="comments">
+      <th>Date</th>
+      <th>Patient Name</th>
+      <th>Blood glucose level<br />(nmol/L)</th>
+      <th>Weight<br />(kg)</th>
+      <th>Doses of insulin intake<br />(doses)</th>
+      <th>Exercise Step Count<br />(steps)</th>
+    </tr>
+    {{#each patient_comment}}
+      <tr>
+        <td>{{this.date}}</td>
+        <div class="patient_name">
+            <td>
+                <a href="/clinician/{{../c_id}}/{{this.id}}">{{this.name}}</a>
+            </td>
+        </div>
+        <td>{{this.blood_level}}</td>
+        <td>{{this.weight}}</td>
+        <td>{{this.insulin_intake}}</td>
+        <td>{{this.exercise}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
