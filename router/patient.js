@@ -9,7 +9,7 @@ const res = require("express/lib/response");
 
 // Login page (with failure message displayed upon login failure)
 patientRouter.get("/login",utility.unLoggedIn, (req, res) =>
-  res.render("../views/layouts/login.hbs")
+  res.render("../views/layouts/login.hbs", {flash: req.flash()})
 ); // utility.unLoggedIn,
 // Handle login
 patientRouter.post(
@@ -20,11 +20,14 @@ patientRouter.post(
     failureReqirect: "/patient/login",
     failureFlash: true,
   }),
-  (req, res) => {
-    console.log(req);
-    const user = req.user;
-    const link = "/patient/" + user._id.toString();
-    res.redirect(link);
+  (req, res, err) => {
+    if(!err){
+      console.log(req);
+      const user = req.user;
+      const link = "/patient/" + user._id.toString();
+      res.redirect(link);
+    }
+    
   }
 );
 // Handle logout
