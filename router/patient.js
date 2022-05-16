@@ -27,7 +27,8 @@ patientRouter.post(
     res.redirect(link);
   }
 );
-
+// Handle logout
+patientRouter.get("/logout", utility.isLoggedIn, patientController.logout);
 /*/ POST - user submits the signup form -- signup a new user
 customerRouter.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/customer', // redirect to the homepage
@@ -37,10 +38,10 @@ customerRouter.post('/signup', passport.authenticate('local-signup', {
 //have to replace every id here with patient_id
 
 //get current patient's data
-patientRouter.get("/:patient_id", patientController.getCurrData);
+patientRouter.get("/:patient_id", utility.isLoggedIn, patientController.getCurrData);
 
 //add current patient's data
-patientRouter.post("/:patient_id", patientController.addOneData);
+patientRouter.post("/:patient_id", utility.isLoggedIn, patientController.addOneData);
 
 //change patient's password
 /* patientRouter.get("/:patient_id/password", (req, res, next) => {
@@ -53,23 +54,22 @@ patientRouter.post("/:patient_id", patientController.addOneData);
     res.send(form);
 }) */
 
-patientRouter.get("/:patient_id/changePwd", patientController.renderChangePwd);
+patientRouter.get("/:patient_id/changePwd",utility.isLoggedIn, patientController.renderChangePwd);
 
-patientRouter.post("/:patient_id/changePwd", patientController.changePassword);
+patientRouter.post("/:patient_id/changePwd",utility.isLoggedIn, patientController.changePassword);
 
 // get current patient's history data that was entered
 patientRouter.get(
-  "/:patient_id/historyData",
+  "/:patient_id/historyData",utility.isLoggedIn,
   patientController.getPatientHistory
 );
 
 patientRouter.get(
-  "/:patient_id/leaderboard",
+  "/:patient_id/leaderboard",utility.isLoggedIn,
   patientController.renderLeaderboard
 );
 
 // When you visit http://localhost:3000/register, you will see "Register Page"
 
-// Handle logout
-patientRouter.post("/logout", utility.isLoggedIn, patientController.logout);
+
 module.exports = patientRouter;

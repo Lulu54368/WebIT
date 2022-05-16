@@ -145,7 +145,7 @@ const renderLogin = () => {
 };
 const logout = (req, res) => {
   req.logout();
-  res.redirect("patient/login");
+  res.redirect("/patient/login");
 };
 
 const renderChangePwd = (req, res) => {
