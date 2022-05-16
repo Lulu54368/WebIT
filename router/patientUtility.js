@@ -1,6 +1,7 @@
 const unLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return res.redirect("/patient/"+req.user.id);
+    console.log("/patient/"+req.user._id.toString());
+    return res.redirect("/patient/"+req.user._id.toString());
     //should be id included
   }
   console.log("not authenticated");

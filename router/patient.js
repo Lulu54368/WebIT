@@ -8,7 +8,7 @@ const res = require("express/lib/response");
 // Main page which requires login to access
 
 // Login page (with failure message displayed upon login failure)
-patientRouter.get("/login", (req, res) =>
+patientRouter.get("/login",utility.unLoggedIn, (req, res) =>
   res.render("../views/layouts/login.hbs")
 ); // utility.unLoggedIn,
 // Handle login
@@ -17,7 +17,7 @@ patientRouter.post(
   utility.unLoggedIn,
   passport.authenticate("patient-login", {
     //id should be here
-    failureReqirect: "/login",
+    failureReqirect: "/patient/login",
     failureFlash: true,
   }),
   (req, res) => {

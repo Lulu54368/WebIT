@@ -76,6 +76,14 @@ app.use(
   })
 );
 
+
+
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  const status = err.status || 500;
+  res.status(status);
+  res.render('error');
+});
 // middleware to log a message each time a request arrives at the server - handy for debugging
 
 app.use((req, res, next) => {
@@ -102,6 +110,7 @@ const db = mongoose.connection.on('error', err => {
 db.once('open', async () => { 
     console.log(`Mongo connection started on ${db.host}:${db.port}`) 
 })
+
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());

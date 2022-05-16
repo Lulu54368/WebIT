@@ -141,7 +141,7 @@ const getPatientHistory = async (req, res) => {
 };
 
 const renderLogin = () => {
-  res.render("../views/layouts/login.hbs");
+  res.render("../views/layouts/login.hbs", {flash: req.flash('loginMessage')});
 };
 const logout = (req, res) => {
   req.logout();
