@@ -7,7 +7,9 @@
             <th>Doses of insulin intake<br>(doses)</th>
             <th>Exercise Step Count<br>(steps)</th>
         </tr>
+        
 
+        </script>
         <div class="thresholds">    
             {{#each patient_threshold}}
             <tr>
@@ -110,22 +112,7 @@
                       {{/unless}}         
                 </td>
             </tr>
-            <script>
-                $('input[type="checkbox"]').on('click', function(){
-                    var data = {};
-                    
-                    data.key = $(this).attr('name');
-                    data.checked = $(this).is(':checked') ? true : false;
-                    $.ajax({
-                        type: "POST",
-                        url: "/clinician_id/:patient_id/inputp",
-                        data: data,
-                    }).done(function(data) {
-                        console.log(data);
-                    });
-                });
-
-            </script>
+            
             {{/each}}
         </div>
         
