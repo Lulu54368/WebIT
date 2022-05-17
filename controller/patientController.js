@@ -46,6 +46,16 @@ const getCurrData = async (req, res) => {
       patient_input: attributes,
       message: patient.message,
     });
+
+    // calculate current patient's engagement rate
+    const currEngagement = getEngagement(patient);
+    var issueBadge;
+    console.log(currEngagement);
+    if (currEngagement >= 0.8) {
+      issueBadge = true;
+    } else {
+      issueBadge = false;
+    }
     //only show the data of the attribute patient required to input
     res.render("../views/layouts/patienthomepage.hbs", {
       data: today_data,
@@ -54,6 +64,8 @@ const getCurrData = async (req, res) => {
       patient_input: attributes,
       message: patient.message,
       p_id: req.params.patient_id,
+      engagement: parseFloat(currEngagement*100).toFixed( 2 ),
+      badge: issueBadge
     });
   } catch (err) {
     console.log(err);
@@ -126,11 +138,23 @@ const getPatientHistory = async (req, res) => {
     const patient = await Patient.findById(req.params.patient_id).lean();
     console.log("patientController line 114");
     if (patient) {
+      // calculate current patient's engagement rate
+      const currEngagement = getEngagement(patient);
+      var issueBadge;
+      console.log(currEngagement);
+      if (currEngagement >= 0.8) {
+        issueBadge = true;
+      } else {
+        issueBadge = false;
+      }
+
       res.render("../views/layouts/patient_historyData.hbs", {
         today: new Date().toLocaleDateString(),
         patient_name: patient.name,
         history: patient.data,
         p_id: req.params.patient_id,
+        engagement: parseFloat(currEngagement*100).toFixed( 2 ),
+        badge: issueBadge
       });
     } else {
       res.send("patient not found");
@@ -180,6 +204,14 @@ const changePassword = async (req, res) => {
   }
 };
 
+const getEngagement = function(patient) {
+  const today = new Date()
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+  const regisDays = Math.ceil(Math.abs((today - patient.register_date) / oneDay)) // calculate the days patients have been registered
+  const engageDays = patient.data.length;
+  return engageDays / regisDays
+}
+
 const renderLeaderboard = async (req, res) => {
   try {
     const top_five_patients = []
@@ -187,15 +219,11 @@ const renderLeaderboard = async (req, res) => {
     var i=0
     const TOP_LEN = 5
     const patients = await Patient.find().lean()
+    const patient = await Patient.findById(req.params.patient_id);
     const curr_patient = await Patient.findById(req.params.patient_id);
     const today = new Date()
-    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-
     patients.forEach((patient) => {
-      var regisDays = Math.ceil(Math.abs((today - patient.register_date) / oneDay)) // calculate the days patients have been registered
-      var num_data_entered = patient.data.length;
-      var engagement_rate = num_data_entered / regisDays
-      id_engage_dict[patient._id] = engagement_rate
+      id_engage_dict[patient._id] = getEngagement(patient);
     })
     
     var items = Object.keys(id_engage_dict).map( (key) => { return [key, id_engage_dict[key]] });
@@ -208,16 +236,30 @@ const renderLeaderboard = async (req, res) => {
 
       top_five_patients.push({"pat_name": pat_name, "rate":parseFloat(items[i][1]*100).toFixed(2), "rank": i+1})
     }
+    
+    // calculate current patient's engagement rate
+    const currEngagement = getEngagement(patient);
+    var issueBadge;
+    console.log(currEngagement);
+    if (currEngagement >= 0.8) {
+      issueBadge = true;
+    } else {
+      issueBadge = false;
+    }
 
     res.render("../views/layouts/patient_leaderboard.hbs", {
     view_date: today.toLocaleDateString(),
     patient_name: curr_patient.name,
+    p_id: patient._id,
+    engagement: parseFloat(currEngagement*100).toFixed( 2 ),
+    badge: issueBadge,
     top_patient: top_five_patients});
     
   } catch (err) {
     console.log(err)
   }
 };
+
 
 module.exports = {
   getCurrData,

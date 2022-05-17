@@ -91,7 +91,7 @@ const getOnePatient = async (req, res)=>{
                 c_id: clinician._id,
                 c_name: clinician.lastname,
                 p_id: patient._id,
-                patient_data: patient.data});
+                patient_data: patient.data.sort( (a, b) => Date.parse(a.date) > Date.parse(b.date) ? 1: -1)});
         }
         else{
             res.send("patient not found");
@@ -159,7 +159,7 @@ const getOnePatientAllNotes = async (req, res) => {
             p_name: patient.name,
             c_id: clinician._id, 
             c_name: clinician.lastname,
-            c_note: clinical_notes.notes});
+            c_note: clinical_notes.notes.reverse()});
     }
     catch(err){
         console.log(err);
@@ -322,7 +322,7 @@ const getOnesComments = async(req, res) => {
                 p_name: patient.name, 
                 c_id: clinician._id,
                 c_name: clinician.lastname,
-                p_comment: patient.data});  // each data comment is also stored under data, within each datafield
+                p_comment: patient.data.sort( (a, b) => Date.parse(a.date) > Date.parse(b.date) ? 1: -1)});  // each data comment is also stored under data, within each datafield
         }
         else{
             res.send("patient not found");
