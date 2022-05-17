@@ -21,7 +21,7 @@ patientRouter.post(
     failureFlash: true,
   }),
   (req, res, err) => {
-    if(!err){
+    {
       console.log(req);
       const user = req.user;
       const link = "/patient/" + user._id.toString();
