@@ -46,7 +46,9 @@ passport.use("patient-login",
                 else if(!await bcrypt.compare(password, patient.password)){ //should be replaced with method in db
                     //password not match
                     console.log("unmatch");
+                  
                     return done(null, false, {message: "oops! Not correct password!"})
+             
                 }
                 else{
                     //success

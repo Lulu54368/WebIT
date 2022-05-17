@@ -61,15 +61,15 @@ clinicianRouter.post(
 
 //Add fields the patient need to input
 clinicianRouter.post(
-  "/:clinician_id/add/:patient_id/",
-  clinicianController.addInput
+  "/:clinician_id/:patient_id/input",
+  clinicianController.modifyInput
 );
 
-//Delete fields the patient doesn't need to input
+/*//Delete fields the patient doesn't need to input
 clinicianRouter.post(
   "/:clinician_id/delete/:patient_id/",
   clinicianController.deleteInput
-);
+);*/
 
 //add support sentence
 clinicianRouter.post(

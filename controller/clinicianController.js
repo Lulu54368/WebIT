@@ -199,7 +199,7 @@ const addOnePatientNote = async (req, res) => {
 }
 
 //This function allows the clinician to add a single input the patient needs to record
-const addInput = async (req, res)=>{
+const modifyInput = async (req, res)=>{
     try{
         // find the patient of the clinician and check whether they exist 
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
@@ -213,8 +213,12 @@ const addInput = async (req, res)=>{
             var input_body = await Patient_input.findOne({id: patient._id});
             var the_input = input_body.input; // this is an array of fields
             // allow up to 4 input keys, and no repeated keys are allowed
-            if ((!the_input.includes(new_key)) && (the_input.length < 4)) {
+
+            if (req.body.checked == true && (!the_input.includes(new_key)) && (the_input.length < 4)) {
                 the_input.push(new_key);
+            }
+            else if(req.body.checked == false){
+                the_input = the_input.filter((input) => (input !== new_key)); // filter out the specific input key
             }
             input_body.input = the_input;
             input_body.save();
@@ -231,7 +235,7 @@ const addInput = async (req, res)=>{
     
 }
 
-//This function allows the clinician to delete a single input the patient no longer needs to record
+/*//This function allows the clinician to delete a single input the patient no longer needs to record
 const deleteInput = async (req, res)=>{
     try{
         // find the patient of the clinician and check whether they exist 
@@ -258,7 +262,7 @@ const deleteInput = async (req, res)=>{
     catch(err) {
         console.log(err);
     }
-}
+}*/
 
 //This function get comments for all patients
 const getAllComments = async(req, res, next)=>{   
@@ -478,7 +482,7 @@ const renderRegister = async (req, res) => {
 };
 
 const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, 
-    addInput, deleteInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+    modifyInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
     addSupportSentence, addOnePatient, renderRegister};
 
 

@@ -10,7 +10,7 @@ const res = require("express/lib/response");
 // Login page (with failure message displayed upon login failure)
 patientRouter.get("/login",utility.unLoggedIn, (req, res) =>
   res.render("../views/layouts/login.hbs", {flash: req.flash()})
-); // utility.unLoggedIn,
+);
 // Handle login
 patientRouter.post(
   "/login",
