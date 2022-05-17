@@ -32,13 +32,7 @@ patientRouter.post(
 );
 // Handle logout
 patientRouter.get("/logout", utility.isLoggedIn, patientController.logout);
-/*/ POST - user submits the signup form -- signup a new user
-customerRouter.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/customer', // redirect to the homepage
-    failureRedirect : '/customer/register', // redirect to signup page
-    failureFlash : true // allow flash messages
-}));*/
-//have to replace every id here with patient_id
+
 
 //get current patient's data
 patientRouter.get("/:patient_id", utility.isLoggedIn, patientController.getCurrData);
@@ -46,16 +40,7 @@ patientRouter.get("/:patient_id", utility.isLoggedIn, patientController.getCurrD
 //add current patient's data
 patientRouter.post("/:patient_id", utility.isLoggedIn, patientController.addOneData);
 
-//change patient's password
-/* patientRouter.get("/:patient_id/password", (req, res, next) => {
 
-    const form = '<h1>Change Password Page</h1><form method="post" action="">\
-                    <br>Enter current password:<br><input type="password" name="currPassword">\
-                    <br>Enter newPassword:<br><input type="text" name="newPassword">\
-                    <br><br><input type="submit" value="Submit"></form>';
-
-    res.send(form);
-}) */
 
 patientRouter.get("/:patient_id/changePwd",utility.isLoggedIn, patientController.renderChangePwd);
 
