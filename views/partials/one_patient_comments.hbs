@@ -1,0 +1,24 @@
+
+    <div class="cli_sectionborder" >
+        <table class = "parent" frame="BOX">
+            <tr class = "catagory">
+                <th>Edit Date<br>(DD/MM/YYYY)</th>
+                <th>Blood glucose level</th>
+                <th>Weight</th>
+                <th>Doses of insulin intake</th>
+                <th>Exercise Step Count</th>
+            </tr>
+            {{#each p_comment}}
+            <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.blood_level.comment}}</td>
+            <td>{{this.weight.comment}}</td>
+            <td>{{this.insulin_intake.comment}}</td>
+            <td>{{this.exercise.comment}}</td>                                    
+            </tr>
+            {{/each}}  
+       
+        
+        </table>
+    </div> 
+        

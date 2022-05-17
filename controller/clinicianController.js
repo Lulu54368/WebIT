@@ -304,6 +304,35 @@ const getAllComments = async(req, res, next)=>{
     }        
 }
 
+// This function gets all comments for one patient
+const getOnesComments = async(req, res) => {
+    try {
+        console.log("getOnesComments executing");
+        const today = new Date().toLocaleDateString();
+        const clinician = await Clinician.findById(req.params.clinician_id).lean();
+        var patient_id_list = clinician.patients;
+        patient_id_list = patient_id_list.map((id)=>id.toString());
+
+        const patient = await Patient.findById(req.params.patient_id).lean();
+
+        if(patient && patient_id_list.includes(patient._id.toString())){
+            res.render("../views/layouts/clinician_onePatientComments.hbs",{
+                view_date: today, 
+                p_name: patient.name, 
+                c_id: clinician._id,
+                c_name: clinician.lastname,
+                p_comment: patient.data});  // each data comment is also stored under data, within each datafield
+        }
+        else{
+            res.send("patient not found");
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+
+}
+
 //This function get thresholds for all patients
 const getAllThreshold = async (req, res, next)=>{
     try {
@@ -486,7 +515,7 @@ const renderRegister = async (req, res) => {
 };
 
 const clinicianController = { getAllPatients, getOnePatient, getOnePatientAllNotes, addOnePatientNote, 
-    modifyInput, getAllComments, getAllThreshold, modifyThreshold, getSupportSentence,
+    modifyInput, getAllComments, getOnesComments, getAllThreshold, modifyThreshold, getSupportSentence,
     addSupportSentence, addOnePatient, renderRegister};
 
 

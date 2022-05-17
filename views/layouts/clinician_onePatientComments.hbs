@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/about.css" />
+    <title>Template</title>
+  </head>
+
+  <!-- content of webpage begins here -->
+  <body>  
+    <header>
+      <script>
+        var _hmt = _hmt || [];
+        (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+      </script>
+    
+      <ul class="topnav">
+        <li><a href="/clinician/{{c_id}}">Dashboard</a></li>
+        <li><a href="/clinician/{{c_id}}">Patient's Data</a></li>
+        <li><a class="active" href="">Patient's Comments</a></li>
+        <li><a href="threshold">Thresholds</a></li>
+        <li><a href="support">Messages</a></li>
+        <li><a href="register">Register Patient</a></li>
+        <li><a href="/aboutWebsite">About this Website</a></li>
+        <li><a href="/aboutDiabetes">About Diabetes</a></li>
+        <li><a href="">Log Out</a></li>
+        <li class="icon">
+          <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a>
+        </li>
+      </ul>
+    </header>
+
+    
+    <script>
+    function myFunction() {
+        document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+    }
+    </script>
+
+    <script src="/js/UpdatePatientBadge.js" defer></script>
+        <aside>
+      <div class = "greeting">
+        <h1>Hi Dr {{c_name}}!</h1>
+      </div>
+      <div class = "date">
+        <h4 id="MyP">Today is {{view_date}} </h4>
+        <script>
+          var today = new Date();
+          var day = today.getDay();
+          var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+          document.getElementById("MyP").innerHTML += daylist[day];
+        </script>
+      </div>
+
+    </aside>
+
+    <nav>
+            <div class="sidenav">
+          <img class = "image" src = "/page-logo.png">
+      </div>
+    </nav>
+    <main>
+      <div class = "clinician_header">
+        <h1>Comments for {{p_name}}</h1>
+      </div>
+     {{>one_patient_comments}}
+
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    </main>
+    </body>
+    
+    
+    <footer>
+        <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
+      </footer>
+</html>
