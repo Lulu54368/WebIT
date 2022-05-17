@@ -179,3 +179,13 @@ body {
     font-size: 85%;
   }
 }
+
+.alert {
+  color:rgb(255, 132, 0);
+  font-size: larger;
+  font-weight: bold;
+  background-color: rgb(255, 214, 137);
+  height:30px;
+  width: 100%;
+  text-align: center;
+}

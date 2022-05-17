@@ -563,6 +563,7 @@ th {
 }
 .cli_sectionborder .patient_name a {
   color: rgba(0, 0, 0, 0.7);
+  text-decoration: underline;
 }
 .menu {
   color: rgba(0, 0, 0, 0.7);
@@ -645,4 +646,23 @@ th {
 
 .each {
   margin: 2em;
+}
+
+.news .image {
+  width: 200px;
+  height: 300px
+}
+.news table {
+  padding: 10px;
+  font-size: 14px;
+  color: rgb(70, 70, 70);
+  border-color: #e1f0db;
+  border-width: 5px;
+  border-spacing: 5px;
+  border-style: solid;
+  border-collapse: collapse;
+}
+.news table a {
+  color: rgb(70, 70, 70);
+  text-decoration: none;
 }

@@ -11,11 +11,12 @@
     {{#each patient_comment}}
       <tr>
         <td>{{this.date}}</td>
-        <div class="patient_name">
+        
             <td>
-                <a href="/clinician/{{../c_id}}/{{this.id}}">{{this.name}}</a>
+              <div class="patient_name">
+                 <a href="/clinician/{{../c_id}}/{{this.id}}">{{this.name}}</a>
+              </div>
             </td>
-        </div>
         <td>{{this.blood_level}}</td>
         <td>{{this.weight}}</td>
         <td>{{this.insulin_intake}}</td>
