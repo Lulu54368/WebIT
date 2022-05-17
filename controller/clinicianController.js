@@ -90,6 +90,7 @@ const getOnePatient = async (req, res)=>{
                 p_name: patient.name, 
                 c_id: clinician._id,
                 c_name: clinician.lastname,
+                p_id: patient._id,
                 patient_data: patient.data});
         }
         else{
@@ -147,13 +148,18 @@ const getOnePatientAllNotes = async (req, res) => {
         const today = new Date().toLocaleDateString();
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
         const patient = await Patient.findById(req.params.patient_id).lean();
-        const clinical_notes = await Clinical_Note.findOne({patient_id: req.params.patient_id}).lean();  // clinical note collection for a specific patient from database
+        let clinical_notes = await Clinical_Note.findOne({patient_id: req.params.patient_id}).lean();  // clinical note collection for a specific patient from database
         console.log(clinical_notes);
+        // not stored in database
+        if (!clinical_notes) {
+            clinical_notes = new Clinical_Note({patient_id: req.params.patient_id})  // temporary assignment for unentered notes
+        }        
         res.render("../views/layouts/clinician_cli_notes.hbs",{
-        view_date: today, 
-        p_name: patient.name, 
-        c_name: clinician.lastname,
-        c_note: clinical_notes.notes});
+            view_date: today, 
+            p_name: patient.name,
+            c_id: clinician._id, 
+            c_name: clinician.lastname,
+            c_note: clinical_notes.notes});
     }
     catch(err){
         console.log(err);
@@ -173,11 +179,6 @@ const addOnePatientNote = async (req, res) => {
             else{
                 const newNote = req.body.note;             
                 var currCNote = await Clinical_Note.findOne({patient_id: req.params.patient_id});
-               
-                // not stored in database
-                if (!currCNote) {
-                    currCNote = new Clinical_Note({patient_id: req.params.patient_id})
-                }
                 
                 var note_body = {"note_text": newNote, "edit_date": new Date().toLocaleDateString()}
                 

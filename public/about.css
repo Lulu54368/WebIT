@@ -646,3 +646,12 @@ th {
 .each {
   margin: 2em;
 }
+
+.cli_notes {
+  /*border-width: 15px;
+  border-radius: 20vh;
+  */
+  border-radius: 10px;
+  font-size: 22px;
+  color: #8fbc88;
+}
