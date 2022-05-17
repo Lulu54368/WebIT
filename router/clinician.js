@@ -53,6 +53,12 @@ clinicianRouter.get(
   clinicianController.getOnePatientAllNotes
 );
 
+// get all comments for a certain patient once clicked their name
+clinicianRouter.get(
+  "/:clinician_id/:patient_id/comments",
+  clinicianController.getOnesComments
+);
+
 // Add a clinical note for a certain patient
 clinicianRouter.post(
   "/:clinician_id/:patient_id/addnote", 
