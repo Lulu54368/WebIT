@@ -58,7 +58,15 @@
             document.getElementById("MyP").innerHTML += daylist[day];
         </script>
       </div>
-
+      <div class="displayBadge">
+        <br><br>
+        {{#if badge}}
+        <h3 id="above"> Well done on achiving {{engagement}}% engagement! </h3>
+        <img class="image" src="/badge.png">
+        {{else}}
+        <h3 id="below"> Your current engagement is {{engagement}}%, achieve 80%+ to receive a badge!</h3>
+        {{/if}}
+      </div>
     </aside>
 
     <main>
