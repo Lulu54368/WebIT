@@ -9,7 +9,7 @@
         </tr>
         
 
-        </script>
+        
         <div class="thresholds">    
             {{#each patient_threshold}}
             <tr>
@@ -17,8 +17,9 @@
                     {{this.name}}
                 </td>
                 <td>
-                    <input type="checkbox" id="record_bgl" 
-                     name="key" value="blood_level" {{#if this.patient_input.blood_level}}checked{{/if}}>
+                    
+                    <input type="checkbox" id= {{this.id}} 
+                     name="blood_level" {{#if this.patient_input.blood_level}}checked{{/if}}>
                     <label for="record_bgl">recordance needed</label><br><br>
                     {{#unless this.blood_level_l}}
                     <form action="" method="POST" >
@@ -41,7 +42,7 @@
 
                 
                 <td>
-                    <input type="checkbox" id="record_weight" name="key" value="weight" {{#if this.patient_input.weight}}checked{{/if}}>
+                    <input type="checkbox" id="record_weight" name="weight" {{#if this.patient_input.weight}}checked{{/if}}>
                     <label for="record_weight">recordance needed</label><br><br>
 
                     {{#unless this.weight_l}}
@@ -65,7 +66,7 @@
 
                 
                 <td>
-                    <input type="checkbox" id="record_insulin" name="key" value="insulin_intake" {{#if this.patient_input.insulin_intake}}checked{{/if}}>
+                    <input type="checkbox" id="record_insulin" name="insulin_intake" {{#if this.patient_input.insulin_intake}}checked{{/if}}>
                     <label for="record_insulin">recordance needed</label><br><br>
 
                     {{#unless this.insulin_intake_l}}
@@ -85,11 +86,15 @@
                       {{this.insulin_intake_l}}<br><br>
                       {{/unless}}                      
                 </td>
-                
+                <script>
+                    function handleInput() {
+                        console.log("id");
+                    }
+                </script>
                 
                 
                 <td>
-                    <input type="checkbox" id="record_step" name="key" value="exercise" {{#if this.patient_input.exercise}}checked{{/if}}>
+                    <input type="checkbox" id="record_step" onchange="handleInput" name="exercise" {{#if this.patient_input.exercise}}checked{{/if}}>
                     <label for="record_step">recordance needed</label><br><br>
 
 
@@ -112,7 +117,7 @@
                       {{/unless}}         
                 </td>
             </tr>
-            
+
             {{/each}}
         </div>
         

@@ -201,12 +201,13 @@ const addOnePatientNote = async (req, res) => {
 //This function allows the clinician to add a single input the patient needs to record
 const modifyInput = async (req, res)=>{
     try{
+        
         // find the patient of the clinician and check whether they exist 
         const clinician = await Clinician.findById(req.params.clinician_id).lean();
         const patient = await Patient.findById(req.params.patient_id).lean();
         var patient_id_list = clinician.patients;
         patient_id_list = patient_id_list.map((id)=>id.toString());
-
+        console.log(req.body);
         const new_key = req.body.key;
         // the patient exists and is taken care of by the current clinician
         if(patient && patient_id_list.includes(patient._id.toString())){
@@ -214,15 +215,18 @@ const modifyInput = async (req, res)=>{
             var the_input = input_body.input; // this is an array of fields
             // allow up to 4 input keys, and no repeated keys are allowed
 
-            if (req.body.checked == true && (!the_input.includes(new_key)) && (the_input.length < 4)) {
+            if (req.body.checked == 'true' && (!the_input.includes(new_key)) && (the_input.length < 4)) {
                 the_input.push(new_key);
             }
-            else if(req.body.checked == false){
+            else if(req.body.checked == 'false'){
                 the_input = the_input.filter((input) => (input !== new_key)); // filter out the specific input key
+                console.log(the_input);
             }
             input_body.input = the_input;
+            
+           
             input_body.save();
-            res.send(input_body);
+            res.redirect("/clinician/"+clinician._id+"/threshold")
         }
         else{
             res.send("patient not found");
