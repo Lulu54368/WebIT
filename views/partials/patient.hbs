@@ -58,13 +58,17 @@
         {{/if}}
 
         <td>
+          <form action="{{../c_id}}/{{this.id}}/addnote" method="POST" >
+
+        
           <input
             type="text"
             placeholder="Enter comment..."
-            name="value"
+            name="note"
             id="cli_cmt"
           />
           <button type="submit"> submit </button>
+          </form>
         </td>
       </tr>
     {{/each}}
