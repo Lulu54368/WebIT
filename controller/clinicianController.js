@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const { validationResult, matchedData } = require('express-validator');
+const { validationResult, matchedData } = require("express-validator");
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; // only use the main patient model/schema
@@ -12,7 +12,6 @@ const patient_comment_list = require("./utils/patient_comment");
 
 const Patient_Threshold = require("../models/patient_threshold");
 const patient_threshold_list = require("./utils/patient_threshold");
-
 
 const patient_message_list = require("./utils/patient_message");
 const { sendStatus } = require("express/lib/response");
@@ -118,8 +117,8 @@ const addOnePatient = async (req, res) => {
           newPatient.save();
           await Patient_Threshold.create({ id: newPatient._id });
           await Patient_input.create({ id: newPatient._id });
-          await Clinical_Note.create({patient_id: newPatient._id});
-          res.redirect("/clinician/" + clinician._id + "/register");
+          await Clinical_Note.create({ patient_id: newPatient._id });
+          res.redirect("/clinician/" + clinician._id + "/" + newPatient._id);
         }
       }
     }
