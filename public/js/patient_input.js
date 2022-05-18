@@ -1,10 +1,11 @@
 $(document).ready(function(){
     $('input[type="checkbox"]').on('click', function(){
         var data = {};
-       
+        
      
         data.key = $(this).attr('name');
         data.checked = $(this).is(':checked') ? true : false;
+        alert(data.key);
         $.ajax({
             type: "POST",
             url: `${this.id}/input`,

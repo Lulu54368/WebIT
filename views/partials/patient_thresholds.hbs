@@ -42,7 +42,7 @@
 
                 
                 <td>
-                    <input type="checkbox" id="record_weight" name="weight" {{#if this.patient_input.weight}}checked{{/if}}>
+                    <input type="checkbox" id= {{this.id}}  name="weight" {{#if this.patient_input.weight}}checked{{/if}}>
                     <label for="record_weight">recordance needed</label><br><br>
 
                     {{#unless this.weight_l}}
@@ -66,7 +66,7 @@
 
                 
                 <td>
-                    <input type="checkbox" id="record_insulin" name="insulin_intake" {{#if this.patient_input.insulin_intake}}checked{{/if}}>
+                    <input type="checkbox" id= {{this.id}}  name="insulin_intake" {{#if this.patient_input.insulin_intake}}checked{{/if}}>
                     <label for="record_insulin">recordance needed</label><br><br>
 
                     {{#unless this.insulin_intake_l}}
@@ -86,15 +86,11 @@
                       {{this.insulin_intake_l}}<br><br>
                       {{/unless}}                      
                 </td>
-                <script>
-                    function handleInput() {
-                        console.log("id");
-                    }
-                </script>
+            
                 
                 
                 <td>
-                    <input type="checkbox" id="record_step" onchange="handleInput" name="exercise" {{#if this.patient_input.exercise}}checked{{/if}}>
+                    <input type="checkbox" id= {{this.id}}   name="exercise" {{#if this.patient_input.exercise}}checked{{/if}}>
                     <label for="record_step">recordance needed</label><br><br>
 
 
