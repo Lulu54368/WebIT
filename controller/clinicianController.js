@@ -497,8 +497,8 @@ const renderRegister = async (req, res) => {
   }
 };
 const logout = (req, res) => {
-    req.logout();
-    res.redirect("/patient/login");
+  req.logout();
+  res.redirect("/clinician/login");
 };
 
 const clinicianController = {
@@ -515,7 +515,7 @@ const clinicianController = {
   addSupportSentence,
   addOnePatient,
   renderRegister,
-  logout
+  logout,
 };
 
 module.exports = clinicianController;

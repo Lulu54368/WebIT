@@ -3,6 +3,7 @@ const clinicianRouter = express.Router();
 const clinicianController = require("../controller/clinicianController");
 const utility = require("./clinicianUtility.js");
 const passport = require("passport");
+
 // Handle login
 clinicianRouter.post(
   "/login",
@@ -22,7 +23,11 @@ clinicianRouter.post(
   }
 );
 
-clinicianRouter.get("/login", utility.unLoggedIn, (req, res, next) => {
+clinicianRouter.get("/login", utility.unLoggedIn, (req, res) =>
+  res.render("../views/layouts/login.hbs", { flash: req.flash() })
+);
+
+/* clinicianRouter.get("/login", utility.unLoggedIn, (req, res, next) => {
   const form =
     '<h1>Login</h1><form method="post" action="">\
                   <br>Enter email<br><input type="email" name="email">\
@@ -31,7 +36,7 @@ clinicianRouter.get("/login", utility.unLoggedIn, (req, res, next) => {
 
   //res.send(form);
   res.render("../views/layouts/login");
-});
+}); */
 clinicianRouter.get("/logout", utility.isLoggedIn, clinicianController.logout);
 
 clinicianRouter.post(
