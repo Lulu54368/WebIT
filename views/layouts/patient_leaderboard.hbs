@@ -57,8 +57,13 @@
             document.getElementById("MyP").innerHTML += daylist[day];
         </script>
       </div>
+      <br>
+      <div class = "progress">
+        <h4>Engagement rate:</h4>
+          <progress id="file" value={{engagement}} max="100"> {{engagement}}</progress>  {{engagement}}%
+      </div>
+      
       <div class="displayBadge">
-        <br><br>
         {{#if badge}}
         <h3 id="above"> Well done on achiving {{engagement}}% engagement! </h3>
         <img class="image" src="/badge.png">

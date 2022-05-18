@@ -165,8 +165,8 @@ footer {
   grid-area: footer;
   background: #e1f0db;
   text-align: center;
-}
 
+}
 footer a {
   text-decoration: none;
   text-align: center;
@@ -565,6 +565,14 @@ th {
   color: rgba(0, 0, 0, 0.7);
   text-decoration: underline;
 }
+.cli_notes {
+  text-align: center;
+  background-color:#8fbc88;
+}
+.cli_notes a {
+  color:white;
+  font-size: 13px;
+}
 .menu {
   color: rgba(0, 0, 0, 0.7);
   font-size: 1.3rem;
@@ -666,11 +674,9 @@ th {
 .news table a {
   color: rgb(70, 70, 70);
   text-decoration: none;
-
-.cli_notes {
-  border-radius: 10px;
-  font-size: 22px;
-  color: #8fbc88;
+}
+.clinician_header a {
+  color: #818181
 }
 
 .displayBadge #above {
@@ -680,4 +686,11 @@ th {
 
 .displayBadge #below {
   font-style:italic;
-  color:black;
+  color:rgb(70, 70, 70);
+}
+
+progress {
+  width: 250px;
+  height: 20px;
+  color:rgb(70, 70, 70);
+}
