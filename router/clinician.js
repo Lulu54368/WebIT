@@ -1,13 +1,65 @@
 const express = require("express");
 const clinicianRouter = express.Router();
 const clinicianController = require("../controller/clinicianController");
+const utility = require("./clinicianUtility.js")
+const passport = require("passport");
+// Handle login
+clinicianRouter.post(
+  "/login",
+  utility.unLoggedIn,
+  passport.authenticate("clinician-login", {
+    //id should be here
+    failureReqirect: "/clinician/login",
+    failureFlash: true,
+  }),
+  (req, res, err) => {
+    {
+      console.log(req);
+      const user = req.user;
+      const link = "/clinician/" + user._id.toString();
+      res.redirect(link);
+    }
+    
+  }
+);
 
+clinicianRouter.get("/login", utility.unLoggedIn,
+    (req, res, next) => {
+
+      const form = '<h1>Login</h1><form method="post" action="">\
+                  <br>Enter email<br><input type="email" name="currPassword">\
+                  <br>Enter password<br><input type="password" name="newPassword">\
+                  <br><br><input type="submit" value="Submit"></form>';
+
+    res.send(form);
+  }
+);
+
+clinicianRouter.post('/signup', passport.authenticate('local-signup', {
+  successRedirect : '/clinician/login', // redirect to the homepage
+  failureRedirect : '/signup', // redirect to signup page
+  failureFlash : false // should be true here 
+}));
+
+clinicianRouter.get("/signup", utility.unLoggedIn,
+    (req, res, next) => {
+
+      const form = '<h1>Signup</h1><form method="post" action="">\
+                  <br>Enter email<br><input type="email" name="email">\
+                  <br>Enter firstname<br><input type="text" name="firstname">\
+                  <br>Enter lastname<br><input type="text" name="lastname">\
+                  <br>Enter password<br><input type="password" name="password">\
+                  <br><br><input type="submit" value="Submit"></form>';
+
+    res.send(form);
+  }
+);
 //Get all patients' data of a specified clinician
 clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
 
 clinicianRouter.get("/:clinician_id/register", clinicianController.renderRegister);
 
-clinicianRouter.get("/:clinician_id/register",clinicianController.addOnePatient);
+
 
 //have to replace every id here with clinician_id
 
@@ -53,6 +105,12 @@ clinicianRouter.get(
   clinicianController.getOnePatientAllNotes
 );
 
+// get all comments for a certain patient once clicked their name
+clinicianRouter.get(
+  "/:clinician_id/:patient_id/comments",
+  clinicianController.getOnesComments
+);
+
 // Add a clinical note for a certain patient
 clinicianRouter.post(
   "/:clinician_id/:patient_id/addnote", 
@@ -82,5 +140,6 @@ clinicianRouter.get(
   "/:clinician_id/:patient_id",
   clinicianController.getOnePatient
 );
+
 
 module.exports = clinicianRouter;

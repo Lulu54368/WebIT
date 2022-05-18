@@ -64,6 +64,89 @@ passport.use("patient-login",
     
     
 ))
+
+passport.use("clinician-login",
+
+// Check if user exists and password matches the hash in the database
+    new LocalStrategy({
+        usernameField: "email", //email in dataabase
+        passwordField: "password", //password in database
+        passReqToCallback: true
+    },(req, email, password, done) =>{
+        process.nextTick(()=>{
+            Clinician.findOne({"email": email.toLowerCase()}, async(err, clinician)=> {
+             
+                if(err) return done(err); //error
+                else if(!clinician){
+                    //can not find patient
+                    return done(null, false, {message: "no User found"})
+                }
+                else if(!await bcrypt.compare(password, clinician.password)){ //should be replaced with method in db
+                    //password not match
+                    console.log("unmatch");
+                    return done(null, false, {message: "oops! Not correct password!"})
+                }
+                else{
+                    //success
+                    patient.role = "clinician";
+                    return done(null, clinician, {message: "login sucessful!"})
+                }
+                    
+
+            })
+        })
+
+    }
+    
+    
+))
+
+
+ // Sign up strategy
+ passport.use('local-signup', new LocalStrategy( {
+    usernameField: 'email', 
+    passwordField: 'password',
+    passReqToCallback: true},
+
+    function(req, email, password, done) {
+        process.nextTick(function() {
+            console.log(req.body);
+            Clinician.findOne({'email': email}, function(err, clinician) {
+            // Handling case of invalid registration
+            if(err) {
+                console.log(err)
+                
+                return done(err)
+            }
+            if(clinician) {
+               
+                return done(null, false, {message: 'Email already existed.'})
+            }
+
+            if(password.length < 6) {
+                //req.session.message = "Password should not be less than 6 characters"
+                
+                return done(null, false,{ message: "Password must not be less than 6 characters."})
+            }
+
+           // Successful signup
+            var newUser = {};
+            newUser.email = req.body.email;
+            newUser.password = req.body.password;
+            newUser.firstname = req.body.firstname;
+            newUser.lastname = req.body.lastname;
+
+            Clinician.create(newUser, (err)=>{
+                if(err){
+                    console.log(err);
+                }
+            })
+            console.log("saved");
+            
+
+        })
+    })
+}))
     
 
 module.exports = passport
