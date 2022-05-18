@@ -24,7 +24,7 @@ clinicianRouter.post(
 );
 
 clinicianRouter.get("/login", utility.unLoggedIn, (req, res) =>
-  res.render("../views/layouts/login.hbs", { flash: req.flash() })
+  res.render("../views/layouts/login_clinician.hbs", { flash: req.flash() })
 );
 
 /* clinicianRouter.get("/login", utility.unLoggedIn, (req, res, next) => {
@@ -38,6 +38,22 @@ clinicianRouter.get("/login", utility.unLoggedIn, (req, res) =>
   res.render("../views/layouts/login");
 }); */
 clinicianRouter.get("/logout", utility.isLoggedIn, clinicianController.logout);
+
+clinicianRouter.get("/aboutDiabetes", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("../views/about/about_diabetes_login_clinician.hbs");
+  } else {
+    res.render("../views/about/about_diabetes_clinician.hbs");
+  }
+});
+
+clinicianRouter.get("/aboutWebsite", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("../views/about/about_website_login_clinician.hbs");
+  } else {
+    res.render("../views/about/about_website_clinician.hbs");
+  }
+});
 
 clinicianRouter.post(
   "/signup",
