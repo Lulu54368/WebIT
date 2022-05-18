@@ -118,6 +118,7 @@ const addOnePatient = async (req, res) => {
           newPatient.save();
           await Patient_Threshold.create({ id: newPatient._id });
           await Patient_input.create({ id: newPatient._id });
+          await Clinical_Note.create({patient_id: newPatient._id});
           res.redirect("/clinician/" + clinician._id + "/register");
         }
       }
