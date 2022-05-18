@@ -7,5 +7,8 @@ exports.form = [
     .withMessage("e-mail should not be empty")
     .isEmail()
     .withMessage("Please enter valid email"),
-  check("password").trim().notEmpty().withMessage("e-mail should not be empty"),
+  check("password")
+    .trim()
+    .notEmpty()
+    .withMessage("password should not be empty"),
 ];
