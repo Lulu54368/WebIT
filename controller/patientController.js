@@ -1,4 +1,4 @@
-const { validationResult, matchedData } = require('express-validator');
+const { validationResult, matchedData } = require("express-validator");
 
 const Patient_input = require("../models/patient_input");
 //This function get the most recent data for a specified patient
@@ -8,7 +8,6 @@ const { deleteOne } = require("../models/patient_input");
 const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
-
 
 const getCurrData = async (req, res) => {
   try {
@@ -65,11 +64,8 @@ const getCurrData = async (req, res) => {
       message: patient.message,
 
       p_id: req.params.patient_id,
-      engagement: parseFloat(currEngagement*100).toFixed( 2 ),
-      badge: issueBadge
-
-     
-
+      engagement: parseFloat(currEngagement * 100).toFixed(2),
+      badge: issueBadge,
     });
   } catch (err) {
     console.log(err);
@@ -81,17 +77,15 @@ const addOneData = async (req, res) => {
   try {
     //validate
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-       
-        req.flash("failure", errors.array()[0]);
-        res.redirect("/patient/" + req.params.patient_id);
-    }
-    else{
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/patient/" + req.params.patient_id);
+    } else {
       var attributes = await Patient_input.findOne({
         id: req.params.patient_id,
       }).lean();
       attributes = attributes.input;
-  
+
       patient = await Patient.findById(req.params.patient_id);
       const newData = req.body;
       if (JSON.stringify(newData) != "{}") {
@@ -100,7 +94,7 @@ const addOneData = async (req, res) => {
         var data = patient.data.find(
           (data) => data.date == new Date().toLocaleDateString()
         );
-  
+
         if (!data) {
           data = {};
           data.date = new Date().toLocaleDateString(); //timeStamp
@@ -112,7 +106,7 @@ const addOneData = async (req, res) => {
               required: true,
             };
           }); //initialize
-  
+
           data[key_attr].data = req.body.value;
           data[key_attr].comment = req.body.comment;
           data[key_attr].recorded = true; //record data
@@ -131,15 +125,14 @@ const addOneData = async (req, res) => {
           patient.data.pop(); //remove the latest data
           patient.data.push(data);
         }
-  
+
         await patient.save();
-  
+
         res.redirect("/patient/" + req.params.patient_id);
       } else {
         res.send("no patient sent");
       }
     }
-    
   } catch (err) {
     console.log(err);
   }
@@ -167,8 +160,8 @@ const getPatientHistory = async (req, res) => {
         patient_name: patient.name,
         history: patient.data,
         p_id: req.params.patient_id,
-        engagement: parseFloat(currEngagement*100).toFixed( 2 ),
-        badge: issueBadge
+        engagement: parseFloat(currEngagement * 100).toFixed(2),
+        badge: issueBadge,
       });
     } else {
       res.send("patient not found");
@@ -179,7 +172,9 @@ const getPatientHistory = async (req, res) => {
 };
 
 const renderLogin = () => {
-  res.render("../views/layouts/login.hbs", {flash: req.flash('loginMessage')});
+  res.render("../views/layouts/login.hbs", {
+    flash: req.flash("loginMessage"),
+  });
 };
 const logout = (req, res) => {
   req.logout();
@@ -205,16 +200,12 @@ const changePassword = async (req, res) => {
         if (valid == true) {
           patient.password = req.body.newPassword;
           patient.save();
+          req.logout();
 
-       
-          res.redirect("/patient/" + req.params.patient_id);
+          res.redirect("/patient/login");
         } else {
-
-          //res.send("saved!");
-    
-          res.redirect("/patient/" + req.params.patient_id);
-        } 
-        
+          res.send("Failed to change the password!");
+        }
       });
     }
   } catch (err) {
@@ -222,39 +213,49 @@ const changePassword = async (req, res) => {
   }
 };
 
-const getEngagement = function(patient) {
-  const today = new Date()
+const getEngagement = function (patient) {
+  const today = new Date();
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-  const regisDays = Math.ceil(Math.abs((today - patient.register_date) / oneDay)) // calculate the days patients have been registered
+  const regisDays = Math.ceil(
+    Math.abs((today - patient.register_date) / oneDay)
+  ); // calculate the days patients have been registered
   const engageDays = patient.data.length;
-  return engageDays / regisDays
-}
+  return engageDays / regisDays;
+};
 
 const renderLeaderboard = async (req, res) => {
   try {
-    const top_five_patients = []
-    const id_engage_dict = {}
-    var i=0
-    const TOP_LEN = 5
-    const patients = await Patient.find().lean()
+    const top_five_patients = [];
+    const id_engage_dict = {};
+    var i = 0;
+    const TOP_LEN = 5;
+    const patients = await Patient.find().lean();
     const patient = await Patient.findById(req.params.patient_id);
     const curr_patient = await Patient.findById(req.params.patient_id);
-    const today = new Date()
+    const today = new Date();
     patients.forEach((patient) => {
       id_engage_dict[patient._id] = getEngagement(patient);
-    })
-    
-    var items = Object.keys(id_engage_dict).map( (key) => { return [key, id_engage_dict[key]] });
-    // Sort the dictionary based on the second element (i.e. the value)
-    items.sort( (first, second) => { return second[1] - first[1] });
-    
-    for (i=0; i<TOP_LEN; i++) {
-      var pat = await Patient.findById(items[i][0])
-      var pat_name = pat.name
+    });
 
-      top_five_patients.push({"pat_name": pat_name, "rate":parseFloat(items[i][1]*100).toFixed(2), "rank": i+1})
+    var items = Object.keys(id_engage_dict).map((key) => {
+      return [key, id_engage_dict[key]];
+    });
+    // Sort the dictionary based on the second element (i.e. the value)
+    items.sort((first, second) => {
+      return second[1] - first[1];
+    });
+
+    for (i = 0; i < TOP_LEN; i++) {
+      var pat = await Patient.findById(items[i][0]);
+      var pat_name = pat.name;
+
+      top_five_patients.push({
+        pat_name: pat_name,
+        rate: parseFloat(items[i][1] * 100).toFixed(2),
+        rank: i + 1,
+      });
     }
-    
+
     // calculate current patient's engagement rate
     const currEngagement = getEngagement(patient);
     var issueBadge;
@@ -266,18 +267,17 @@ const renderLeaderboard = async (req, res) => {
     }
 
     res.render("../views/layouts/patient_leaderboard.hbs", {
-    view_date: today.toLocaleDateString(),
-    patient_name: curr_patient.name,
-    p_id: patient._id,
-    engagement: parseFloat(currEngagement*100).toFixed( 2 ),
-    badge: issueBadge,
-    top_patient: top_five_patients});
-    
+      view_date: today.toLocaleDateString(),
+      patient_name: curr_patient.name,
+      p_id: patient._id,
+      engagement: parseFloat(currEngagement * 100).toFixed(2),
+      badge: issueBadge,
+      top_patient: top_five_patients,
+    });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
-
 
 module.exports = {
   getCurrData,

@@ -176,7 +176,9 @@ const addOnePatientNote = async (req, res) => {
 
         currCNote.save();
 
-        res.send(currCNote.notes);
+        res.redirect(
+          "/clinician/" + clinician._id + "/" + req.params.patient_id + "notes"
+        );
       }
     }
   } catch (err) {
