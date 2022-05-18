@@ -4,6 +4,7 @@ const port = process.env.PORT || 8080;
 var bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
+require('express-validator')
 app.set("view engine", "hbs");
 app.engine(
   "hbs",
