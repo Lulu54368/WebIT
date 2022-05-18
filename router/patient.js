@@ -8,8 +8,8 @@ const validationRule = require("../middleware/validationRule")
 // Main page which requires login to access
 
 // Login page (with failure message displayed upon login failure)
-patientRouter.get("/login",utility.unLoggedIn, (req, res) =>
-  res.render("../views/layouts/login.hbs", {flash: req.flash()})
+patientRouter.get("/login", utility.unLoggedIn, (req, res) =>
+  res.render("../views/layouts/login.hbs", { flash: req.flash() })
 );
 // Handle login
 patientRouter.post(
@@ -27,38 +27,65 @@ patientRouter.post(
       const link = "/patient/" + user._id.toString();
       res.redirect(link);
     }
-    
   }
 );
 // Handle logout
 patientRouter.get("/logout", utility.isLoggedIn, patientController.logout);
+patientRouter.get("/aboutDiabetes", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("../views/about/about_diabetes_login.hbs");
+  } else {
+    res.render("../views/about/about_diabetes.hbs");
+  }
+});
 
+patientRouter.get("/aboutWebsite", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("../views/about/about_website_login.hbs");
+  } else {
+    res.render("../views/about/about_website.hbs");
+  }
+});
 
 //get current patient's data
-patientRouter.get("/:patient_id", utility.isLoggedIn, patientController.getCurrData);
+patientRouter.get(
+  "/:patient_id",
+  utility.isLoggedIn,
+  patientController.getCurrData
+);
 
 
-patientRouter.post("/:patient_id", validationRule.form, patientController.addOneData);
+
+
+patientRouter.post("/:patient_id", validationRule.form,utility.isLoggedIn, patientController.addOneData);
 
 
 
+patientRouter.get(
+  "/:patient_id/changePwd",
+  utility.isLoggedIn,
+  patientController.renderChangePwd
+);
 
-patientRouter.get("/:patient_id/changePwd",utility.isLoggedIn, patientController.renderChangePwd);
-
-patientRouter.post("/:patient_id/changePwd",utility.isLoggedIn, patientController.changePassword);
+patientRouter.post(
+  "/:patient_id/changePwd",
+  utility.isLoggedIn,
+  patientController.changePassword
+);
 
 // get current patient's history data that was entered
 patientRouter.get(
-  "/:patient_id/historyData",utility.isLoggedIn,
+  "/:patient_id/historyData",
+  utility.isLoggedIn,
   patientController.getPatientHistory
 );
 
 patientRouter.get(
-  "/:patient_id/leaderboard",utility.isLoggedIn,
+  "/:patient_id/leaderboard",
+  utility.isLoggedIn,
   patientController.renderLeaderboard
 );
 
 // When you visit http://localhost:3000/register, you will see "Register Page"
-
 
 module.exports = patientRouter;
