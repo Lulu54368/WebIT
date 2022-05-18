@@ -41,19 +41,19 @@ passport.use("patient-login",
                 if(err) return done(err); //error
                 else if(!patient){
                     //can not find patient
-                    return done(null, false, {message: "no User found"})
+                    return done(null, false, {message: "No user found"})
                 }
                 else if(!await bcrypt.compare(password, patient.password)){ //should be replaced with method in db
                     //password not match
                     console.log("unmatch");
                   
-                    return done(null, false, {message: "oops! Not correct password!"})
+                    return done(null, false, {message: "Oops! Incorrect password!"})
              
                 }
                 else{
                     //success
                     patient.role = "patient";
-                    return done(null, patient, {message: "login sucessful!"})
+                    return done(null, patient, {message: "Login sucessful!"})
                 }
                     
 
