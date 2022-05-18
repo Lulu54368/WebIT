@@ -130,10 +130,10 @@ span.psw {
 
 
 .alert {
-  color:rgb(255, 132, 0);
+  color:white;
   font-size: larger;
   font-weight: bold;
-  background-color: rgb(255, 214, 137);
+  background-color:darkgray;
   height:30px;
   width: 100%;
   text-align: center;
