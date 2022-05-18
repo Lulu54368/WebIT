@@ -27,19 +27,28 @@ clinicianRouter.get("/login", utility.unLoggedIn,
     (req, res, next) => {
 
       const form = '<h1>Login</h1><form method="post" action="">\
-                  <br>Enter email<br><input type="email" name="currPassword">\
-                  <br>Enter password<br><input type="password" name="newPassword">\
+                  <br>Enter email<br><input type="email" name="email">\
+                  <br>Enter password<br><input type="password" name="password">\
                   <br><br><input type="submit" value="Submit"></form>';
 
     res.send(form);
   }
 );
-
+clinicianRouter.get("/logout",utility.isLoggedIn, clinicianController.logout);
 clinicianRouter.post('/signup', passport.authenticate('local-signup', {
   successRedirect : '/clinician/login', // redirect to the homepage
-  failureRedirect : '/signup', // redirect to signup page
-  failureFlash : false // should be true here 
-}));
+  failureRedirect : '/clinician/signup', // redirect to signup page
+  failureFlash : true // should be true here 
+}),
+(req, res, err) => {
+  {
+    console.log("hello");
+ 
+    const link = "/clinician/login"
+    res.redirect(link);
+  }
+  
+});
 
 clinicianRouter.get("/signup", utility.unLoggedIn,
     (req, res, next) => {
@@ -55,9 +64,9 @@ clinicianRouter.get("/signup", utility.unLoggedIn,
   }
 );
 //Get all patients' data of a specified clinician
-clinicianRouter.get("/:clinician_id", clinicianController.getAllPatients);
+clinicianRouter.get("/:clinician_id",utility.isLoggedIn, clinicianController.getAllPatients);
 
-clinicianRouter.get("/:clinician_id/register", clinicianController.renderRegister);
+clinicianRouter.get("/:clinician_id/register",utility.isLoggedIn, clinicianController.renderRegister);
 
 
 
@@ -67,59 +76,59 @@ clinicianRouter.get("/:clinician_id/register", clinicianController.renderRegiste
 
 //add a patient
 clinicianRouter.post(
-  "/:clinician_id/register",
+  "/:clinician_id/register",utility.isLoggedIn,
   clinicianController.addOnePatient
 );
 
 //get all of patient's comment (id is clinincian id)
 clinicianRouter.get(
-  "/:clinician_id/comments",
+  "/:clinician_id/comments",utility.isLoggedIn,
   clinicianController.getAllComments
 );
 
 //get all of support sentence
 clinicianRouter.get(
-  "/:clinician_id/support",
+  "/:clinician_id/support",utility.isLoggedIn,
   clinicianController.getSupportSentence
 );
 
 //add support sentence
 clinicianRouter.post(
-  "/:clinician_id/support",
+  "/:clinician_id/support",utility.isLoggedIn,
   clinicianController.addSupportSentence
 );
 //get all of threshold
 clinicianRouter.get(
-  "/:clinician_id/threshold",
+  "/:clinician_id/threshold",utility.isLoggedIn,
   clinicianController.getAllThreshold
 );
 //change threshold of a specified patient
 clinicianRouter.post(
-  "/:clinician_id/threshold/",
+  "/:clinician_id/threshold/",utility.isLoggedIn,
   clinicianController.modifyThreshold
 );
 
 // get all clinical notes for a certain patient once clicked their name
 clinicianRouter.get(
-  "/:clinician_id/:patient_id/notes", 
+  "/:clinician_id/:patient_id/notes", utility.isLoggedIn,
   clinicianController.getOnePatientAllNotes
 );
 
 // get all comments for a certain patient once clicked their name
 clinicianRouter.get(
-  "/:clinician_id/:patient_id/comments",
+  "/:clinician_id/:patient_id/comments",utility.isLoggedIn,
   clinicianController.getOnesComments
 );
 
 // Add a clinical note for a certain patient
 clinicianRouter.post(
-  "/:clinician_id/:patient_id/addnote", 
+  "/:clinician_id/:patient_id/addnote", utility.isLoggedIn,
   clinicianController.addOnePatientNote
 )
 
 //Add fields the patient need to input
 clinicianRouter.post(
-  "/:clinician_id/:patient_id/input",
+  "/:clinician_id/:patient_id/input",utility.isLoggedIn,
   clinicianController.modifyInput
 );
 
@@ -131,13 +140,13 @@ clinicianRouter.post(
 
 //add support sentence
 clinicianRouter.post(
-  "/:clinician_id/:patient_id/support",
+  "/:clinician_id/:patient_id/support",utility.isLoggedIn,
   clinicianController.addSupportSentence
 );
 
 //Get one patient's data of a specified clinician
 clinicianRouter.get(
-  "/:clinician_id/:patient_id",
+  "/:clinician_id/:patient_id",utility.isLoggedIn,
   clinicianController.getOnePatient
 );
 

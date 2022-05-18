@@ -88,7 +88,7 @@ passport.use("clinician-login",
                 }
                 else{
                     //success
-                    patient.role = "clinician";
+                    clinician.role = "clinician";
                     return done(null, clinician, {message: "login sucessful!"})
                 }
                     
@@ -110,7 +110,7 @@ passport.use("clinician-login",
 
     function(req, email, password, done) {
         process.nextTick(function() {
-            console.log(req.body);
+            //console.log(req.body);
             Clinician.findOne({'email': email}, function(err, clinician) {
             // Handling case of invalid registration
             if(err) {
