@@ -4,181 +4,130 @@
   font-family: "Roboto", sans-serif;
 }
 
-html {
-  position: relative;
-}
-
 body {
-  /* Auto layout */
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  padding: 0px;
-
+  background-image: url('/DSC01899.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+}
+form {
+  border: 3px solid #cfe6bd;
+  margin: 10%;
+  background-color:rgb(255, 255, 255)
+}
+.logoname {
+  color: white;
+  float: left;
+  position: absolute;
+  left: 2%;
+  top: 8%;
+  font-size:5px;
+  padding-left: 5px;
+}
+.webname {
+  padding-left: 55px;
+  padding-right: 55px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size:35px;
+  color: rgb(70, 70, 70);
+  text-align: center;
+  background-color: #8fbc88;
+  overflow-wrap:break-word;
+}
+.slogan {
+  padding: 10px;
+  color: rgb(70, 70, 70);
+  font-style: italic;
+  text-align: center;
   background-color: #cfe6bd;
 }
-
-.form-wrapper {
-  position: absolute;
-  width: 30%;
-  height: 80vh;
-  right: 10vh;
-  top: 6rem;
-  background: #e1f0db;
-  border-radius: 53px;
+input[type=text], input[type=password] {
+  color: rgb(70, 70, 70);
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-.form-wrapper .header {
-  text-align: center;
-  font-size: 3em;
-  line-height: 300%;
-}
-
-.form-wrapper .input-wrapper input {
-  font-weight: 500;
-
-  background-color: white;
-  border: 0;
-
-  text-align: center;
-  font-size: 15px;
-  color: #00000080;
-  outline: none;
-}
-
-.form-wrapper .input-wrapper .border-wrapper {
-  /* align-items: flex-start; */
-  background: white;
-  width: 80%;
-  height: 50px;
-  margin-left: 10%;
-  margin-bottom: 8%;
-  border-radius: 30px;
-  display: flex;
-  /*align-items: center;*/
-  justify-content: center;
-}
-
-.form-wrapper .input-wrapper .border-wrapper .border-item {
-  height: calc(100% - 4px);
-  width: calc(100% - 4px);
-  border-radius: 30px;
-}
-.form-wrapper .action {
-  display: flex;
-  justify-content: center;
-}
-.form-wrapper .action .btn {
-  width: 50%;
-  border: 2px solid #8fbc88;
-  background: #8fbc88;
-  line-height: 50px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: 0.2s;
-  text-align: center;
-  color: #00000080;
-}
-
-.form-wrapper .action .btn:hover {
-  background-color: #92c7a8;
-}
-
-.action button {
+button {
   background-color: #8fbc88;
-  font-size: 1.2rem;
-  border-radius: 53px;
-  border-width: 0;
-  width: 110px;
-  height: 40px;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 100%;
+  height: 195px;
+  width: 200px;
+}
+
+.container {
+  padding: 16px;
+  width: 40%;
+  position: relative;
+  left: 30%;
+  border-radius: 30px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
 }
 
 .About {
-  display: flex;
-  margin-inline: 5%;
-  position: absolute;
-  top: 39rem;
-  text-decoration: none;
+  width: 100%;
+  text-align: center;
 }
-
 .About a {
-  text-decoration: none;
-  color: black;
-  display: block;
+  color:darkgray
 }
 
-.About .website_text {
-  width: 20vw;
-  height: 25%;
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 375px) {
 
-  border: 2px solid #8fbc88;
-  background: #8fbc88;
-
-  line-height: 3.125rem;
-  border-radius: 1.875rem;
-  cursor: pointer;
-  transition: 0.2s;
-  text-align: center;
-
-  color: black;
-  font-size: 100%;
-}
-
-.About .website_text:hover {
-  background-color: #92c7a8;
-}
-
-.About .diabetes_text {
-  width: 18vw;
-  height: 25%;
-  margin-left: 10rem;
-  border: 2px solid #8fbc88;
-  background: #8fbc88;
-
-  line-height: 3.125rem;
-  border-radius: 1.875rem;
-  cursor: pointer;
-  transition: 0.2s;
-  text-align: center;
-
-  color: black;
-  font-size: 100%;
-}
-
-.About .diabetes_text:hover {
-  background-color: #92c7a8;
-}
-
-@media screen and (max-width: 960px) {
-  /* page layout for phones */
-  .logo .HouseIcon {
-    display: None;
+  .webname {
+    font-size:19px;
+    color: rgb(70, 70, 70);
   }
-
-  .logo .CompanyName {
-    font-size: 30px !important;
-    left: 30% !important;
-    top: 1.5rem !important;
+  .slogan {
+    color: rgb(70, 70, 70);
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
   }
-
-  .logo .Message {
-    display: None;
+  span.psw {
+     display: block;
+     float: none;
   }
-
-  .form-wrapper {
-    background-color: #cfe6bd;
-    width: 35%;
-    left: 30%;
+  .cancelbtn {
+     width: 100%;
   }
-
-  .About {
-    margin-left: 10%;
-  }
-
-  .btn {
-    font-size: 85%;
+  .container {
+    padding: 16px;
+    width: 75%;
+    left:8%
   }
 }
+
 
 .alert {
   color:rgb(255, 132, 0);
@@ -189,3 +138,15 @@ body {
   width: 100%;
   text-align: center;
 }
+footer {
+  font-size: 15px;
+  color: #818181;
+  background: #e1f0db;
+  text-align: center;
+  position: fixed;  
+  grid-area: footer;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
