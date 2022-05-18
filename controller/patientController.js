@@ -8,7 +8,7 @@ const { deleteOne } = require("../models/patient_input");
 const Patient = Patients.Patients; //patient model
 const Patient_Data_Schema = Patients.patient_data; //schema
 const Data_Schema = Patients.Data;
-const alert = require("alert");
+
 
 const getCurrData = async (req, res) => {
   try {
@@ -53,6 +53,7 @@ const getCurrData = async (req, res) => {
       today: new Date().toLocaleDateString(),
       patient_input: attributes,
       message: patient.message,
+     
     });
   } catch (err) {
     console.log(err);
@@ -65,6 +66,7 @@ const addOneData = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if(!errors.isEmpty()){
+       
         req.flash("failure", errors.array()[0]);
         res.redirect("/patient/" + req.params.patient_id);
     }
@@ -173,11 +175,11 @@ const changePassword = async (req, res) => {
           patient.password = req.body.newPassword;
           patient.save();
           //res.send("saved!");
-          alert("saved !");
+    
           res.redirect("/patient/" + req.params.patient_id);
         } else {
           //res.send("password not match");
-          alert("something went wrong...");
+         
           res.redirect("/patient/" + req.params.patient_id);
         }
       });
