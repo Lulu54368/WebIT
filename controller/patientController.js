@@ -190,23 +190,30 @@ const renderChangePwd = (req, res) => {
 const changePassword = async (req, res) => {
   // req body is {currPassWord, newPassword}
   try {
-    const patient = await Patient.findById(req.params.patient_id);
-    if (patient == null) {
-      res.send("can not find patient");
+    //validate
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/patient/" + req.params.patient_id + "/changePwd");
     } else {
-      console.log(req.body);
+      const patient = await Patient.findById(req.params.patient_id);
+      if (patient == null) {
+        res.send("can not find patient");
+      } else {
+        console.log(req.body);
 
-      await patient.verifyPassword(req.body.currPassword, (err, valid) => {
-        if (valid == true) {
-          patient.password = req.body.newPassword;
-          patient.save();
-          req.logout();
+        await patient.verifyPassword(req.body.currPassword, (err, valid) => {
+          if (valid == true) {
+            patient.password = req.body.newPassword;
+            patient.save();
+            req.logout();
 
-          res.redirect("/patient/login");
-        } else {
-          res.send("Failed to change the password!");
-        }
-      });
+            res.redirect("/patient/login");
+          } else {
+            res.send("Failed to change the password!");
+          }
+        });
+      }
     }
   } catch (err) {
     console.log(err);
