@@ -5,6 +5,7 @@ const utility = require("./clinicianUtility.js");
 const passport = require("passport");
 const registerRule = require("../middleware/registerRule.js");
 const thresholdRule = require("../middleware/thresholdRule.js");
+const supportMsgRule = require("../middleware/supportMsgRule.js");
 
 // Handle login
 clinicianRouter.post(
@@ -128,6 +129,7 @@ clinicianRouter.get(
 //add support sentence
 clinicianRouter.post(
   "/:clinician_id/support",
+  supportMsgRule.form,
   utility.isLoggedIn,
   clinicianController.addSupportSentence
 );

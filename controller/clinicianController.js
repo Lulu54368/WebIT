@@ -478,21 +478,27 @@ const getSupportSentence = async (req, res, next) => {
 //This function add support messages for the specific patient
 const addSupportSentence = async (req, res, next) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/support");
+    } else {
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
 
-    var newPatient = req.body;
-    if (clinician) {
-      if (JSON.stringify(newPatient) == "{}") {
-        res.send("no message sent");
-      } else {
-        const newMessage = req.body.message;
-        var currPatient = await Patient.findById(req.params.patient_id);
-        currPatient.message = newMessage;
-        currPatient.viewed = false;
-
-        currPatient.save();
-
-        res.send(currPatient.message);
+      var newPatient = req.body;
+      if (clinician) {
+        if (JSON.stringify(newPatient) == "{}") {
+          res.send("no message sent");
+        } else {
+          const newMessage = req.body.message;
+          var currPatient = await Patient.findById(req.params.patient_id);
+          currPatient.message = newMessage;
+          currPatient.viewed = false;
+          currPatient.save();
+          res.send(currPatient.message);
+        }
       }
     }
   } catch (err) {
