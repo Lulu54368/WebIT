@@ -3,7 +3,8 @@ const patientController = require("../controller/patientController.js");
 const patientRouter = express.Router();
 const utility = require("./patientUtility.js");
 const passport = require("passport");
-const validationRule = require("../middleware/validationRule")
+const validationRule = require("../middleware/validationRule.js");
+const changePwdRule = require("../middleware/changePwdRule.js");
 
 // Main page which requires login to access
 
@@ -11,6 +12,7 @@ const validationRule = require("../middleware/validationRule")
 patientRouter.get("/login", utility.unLoggedIn, (req, res) =>
   res.render("../views/layouts/login.hbs", { flash: req.flash() })
 );
+
 // Handle login
 patientRouter.post(
   "/login",
@@ -54,12 +56,12 @@ patientRouter.get(
   patientController.getCurrData
 );
 
-
-
-
-patientRouter.post("/:patient_id", validationRule.form,utility.isLoggedIn, patientController.addOneData);
-
-
+patientRouter.post(
+  "/:patient_id",
+  validationRule.form,
+  utility.isLoggedIn,
+  patientController.addOneData
+);
 
 patientRouter.get(
   "/:patient_id/changePwd",
@@ -69,6 +71,7 @@ patientRouter.get(
 
 patientRouter.post(
   "/:patient_id/changePwd",
+  changePwdRule.form,
   utility.isLoggedIn,
   patientController.changePassword
 );

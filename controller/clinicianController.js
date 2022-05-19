@@ -1,7 +1,7 @@
+const { validationResult, matchedData } = require("express-validator");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const { validationResult, matchedData } = require("express-validator");
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; // only use the main patient model/schema
@@ -96,29 +96,37 @@ const getOnePatient = async (req, res) => {
 
 const addOnePatient = async (req, res) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
-    var newPatient = req.body;
-    if (clinician) {
-      if (JSON.stringify(newPatient) == "{}") {
-        res.send("no patient sent");
-      } else {
-        const newemail = req.body.email;
-        const currPatient = await Patient.findOne({ email: newemail }).lean();
-
-        if (currPatient != null) {
-          res.send(currPatient);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/register");
+    } else {
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
+      var newPatient = req.body;
+      if (clinician) {
+        if (JSON.stringify(newPatient) == "{}") {
+          res.send("no patient sent");
         } else {
-          newPatient = await new Patient(newPatient);
-          newPatient.register_date = new Date();
-          clinician.patients.push(newPatient._id);
-          await Clinician.findByIdAndUpdate(req.params.clinician_id, {
-            patients: clinician.patients,
-          });
-          newPatient.save();
-          await Patient_Threshold.create({ id: newPatient._id });
-          await Patient_input.create({ id: newPatient._id });
-          await Clinical_Note.create({ patient_id: newPatient._id });
-          res.redirect("/clinician/" + clinician._id + "/" + newPatient._id);
+          const newemail = req.body.email;
+          const currPatient = await Patient.findOne({ email: newemail }).lean();
+
+          if (currPatient != null) {
+            res.send(currPatient);
+          } else {
+            newPatient = await new Patient(newPatient);
+            newPatient.register_date = new Date();
+            clinician.patients.push(newPatient._id);
+            await Clinician.findByIdAndUpdate(req.params.clinician_id, {
+              patients: clinician.patients,
+            });
+            newPatient.save();
+            await Patient_Threshold.create({ id: newPatient._id });
+            await Patient_input.create({ id: newPatient._id });
+            await Clinical_Note.create({ patient_id: newPatient._id });
+            res.redirect("/clinician/" + clinician._id + "/" + newPatient._id);
+          }
         }
       }
     }
@@ -177,7 +185,7 @@ const addOnePatientNote = async (req, res) => {
         currCNote.save();
 
         res.redirect(
-          "/clinician/" + clinician._id + "/" + req.params.patient_id + "notes"
+          "/clinician/" + clinician._id + "/" + req.params.patient_id + "/notes"
         );
       }
     }
@@ -379,41 +387,49 @@ const getAllThreshold = async (req, res, next) => {
 //This function change the thresholds the clinician set for patients
 const modifyThreshold = async (req, res, next) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
-
-    // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
-    var newThreshold = req.body;
-    console.log(req.body);
-    if (clinician) {
-      if (JSON.stringify(newThreshold) == "{}") {
-        res.send("No threshold was sent");
-      } else {
-        const patient_id = req.body.id; // take the patient_id passed in the http params
-
-        var curr_threshold = await Patient_Threshold.findOne({
-          id: patient_id,
-        }); // find the existing threshold
-        // take the threshold component of the current Threshold Model
-        var update_threshold = curr_threshold.threshold;
-        const modified_attr = newThreshold.key; // the attribute that is being updated
-        // update the specified field
-        var counter = 0;
-
-        for (var entry of Object.keys(newThreshold)) {
-          // update upper bound and lower bound accordingly
-          if (counter > 0) {
-            // filter out the first entry which is a key
-            update_threshold[modified_attr][entry] = newThreshold[entry]; // update bound(s)
-          }
-          counter++;
-        }
-
-        curr_threshold.threshold = update_threshold;
-        curr_threshold.save();
-        res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
-      }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
     } else {
-      res.sendStatus(404);
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
+
+      // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
+      var newThreshold = req.body;
+      console.log(req.body);
+      if (clinician) {
+        if (JSON.stringify(newThreshold) == "{}") {
+          res.send("No threshold was sent");
+        } else {
+          const patient_id = req.body.id; // take the patient_id passed in the http params
+
+          var curr_threshold = await Patient_Threshold.findOne({
+            id: patient_id,
+          }); // find the existing threshold
+          // take the threshold component of the current Threshold Model
+          var update_threshold = curr_threshold.threshold;
+          const modified_attr = newThreshold.key; // the attribute that is being updated
+          // update the specified field
+          var counter = 0;
+
+          for (var entry of Object.keys(newThreshold)) {
+            // update upper bound and lower bound accordingly
+            if (counter > 0) {
+              // filter out the first entry which is a key
+              update_threshold[modified_attr][entry] = newThreshold[entry]; // update bound(s)
+            }
+            counter++;
+          }
+
+          curr_threshold.threshold = update_threshold;
+          curr_threshold.save();
+          res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
+        }
+      } else {
+        res.sendStatus(404);
+      }
     }
   } catch (err) {
     return err;
@@ -462,21 +478,27 @@ const getSupportSentence = async (req, res, next) => {
 //This function add support messages for the specific patient
 const addSupportSentence = async (req, res, next) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/support");
+    } else {
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
 
-    var newPatient = req.body;
-    if (clinician) {
-      if (JSON.stringify(newPatient) == "{}") {
-        res.send("no message sent");
-      } else {
-        const newMessage = req.body.message;
-        var currPatient = await Patient.findById(req.params.patient_id);
-        currPatient.message = newMessage;
-        currPatient.viewed = false;
-
-        currPatient.save();
-
-        res.send(currPatient.message);
+      var newPatient = req.body;
+      if (clinician) {
+        if (JSON.stringify(newPatient) == "{}") {
+          res.send("no message sent");
+        } else {
+          const newMessage = req.body.message;
+          var currPatient = await Patient.findById(req.params.patient_id);
+          currPatient.message = newMessage;
+          currPatient.viewed = false;
+          currPatient.save();
+          res.send(currPatient.message);
+        }
       }
     }
   } catch (err) {
