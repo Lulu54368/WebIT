@@ -1,7 +1,7 @@
+const { validationResult, matchedData } = require("express-validator");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL);
 const patient_medical_list = require("./utils/patient_medical_data");
-const { validationResult, matchedData } = require("express-validator");
 const Clinician = require("../models/clinician.js");
 const Patients = require("../models/patient.js");
 const Patient = Patients.Patients; // only use the main patient model/schema
@@ -96,29 +96,37 @@ const getOnePatient = async (req, res) => {
 
 const addOnePatient = async (req, res) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
-    var newPatient = req.body;
-    if (clinician) {
-      if (JSON.stringify(newPatient) == "{}") {
-        res.send("no patient sent");
-      } else {
-        const newemail = req.body.email;
-        const currPatient = await Patient.findOne({ email: newemail }).lean();
-
-        if (currPatient != null) {
-          res.send(currPatient);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/register");
+    } else {
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
+      var newPatient = req.body;
+      if (clinician) {
+        if (JSON.stringify(newPatient) == "{}") {
+          res.send("no patient sent");
         } else {
-          newPatient = await new Patient(newPatient);
-          newPatient.register_date = new Date();
-          clinician.patients.push(newPatient._id);
-          await Clinician.findByIdAndUpdate(req.params.clinician_id, {
-            patients: clinician.patients,
-          });
-          newPatient.save();
-          await Patient_Threshold.create({ id: newPatient._id });
-          await Patient_input.create({ id: newPatient._id });
-          await Clinical_Note.create({ patient_id: newPatient._id });
-          res.redirect("/clinician/" + clinician._id + "/" + newPatient._id);
+          const newemail = req.body.email;
+          const currPatient = await Patient.findOne({ email: newemail }).lean();
+
+          if (currPatient != null) {
+            res.send(currPatient);
+          } else {
+            newPatient = await new Patient(newPatient);
+            newPatient.register_date = new Date();
+            clinician.patients.push(newPatient._id);
+            await Clinician.findByIdAndUpdate(req.params.clinician_id, {
+              patients: clinician.patients,
+            });
+            newPatient.save();
+            await Patient_Threshold.create({ id: newPatient._id });
+            await Patient_input.create({ id: newPatient._id });
+            await Clinical_Note.create({ patient_id: newPatient._id });
+            res.redirect("/clinician/" + clinician._id + "/" + newPatient._id);
+          }
         }
       }
     }
@@ -177,7 +185,7 @@ const addOnePatientNote = async (req, res) => {
         currCNote.save();
 
         res.redirect(
-          "/clinician/" + clinician._id + "/" + req.params.patient_id + "notes"
+          "/clinician/" + clinician._id + "/" + req.params.patient_id + "/notes"
         );
       }
     }

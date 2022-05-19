@@ -3,6 +3,7 @@ const clinicianRouter = express.Router();
 const clinicianController = require("../controller/clinicianController");
 const utility = require("./clinicianUtility.js");
 const passport = require("passport");
+const registerRule = require("../middleware/registerRule.js");
 
 // Handle login
 clinicianRouter.post(
@@ -104,6 +105,7 @@ clinicianRouter.get(
 //add a patient
 clinicianRouter.post(
   "/:clinician_id/register",
+  registerRule.form,
   utility.isLoggedIn,
   clinicianController.addOnePatient
 );
