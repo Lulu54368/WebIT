@@ -150,6 +150,7 @@ const getOnePatientAllNotes = async (req, res) => {
       clinical_notes = new Clinical_Note({ patient_id: req.params.patient_id }); // temporary assignment for unentered notes
     }
     res.render("../views/layouts/clinician_cli_notes.hbs", {
+      flash: req.flash(),
       view_date: today,
       p_name: patient.name,
       c_id: clinician._id,
@@ -163,30 +164,42 @@ const getOnePatientAllNotes = async (req, res) => {
 
 const addOnePatientNote = async (req, res) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id);
+    } else {
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
 
-    var newNote = req.body;
-    if (clinician) {
-      if (JSON.stringify(newNote) == "{}") {
-        res.send("no clinical notes entered");
-      } else {
-        const newNote = req.body.note;
-        var currCNote = await Clinical_Note.findOne({
-          patient_id: req.params.patient_id,
-        });
+      var newNote = req.body;
+      if (clinician) {
+        if (JSON.stringify(newNote) == "{}") {
+          res.send("no clinical notes entered");
+        } else {
+          const newNote = req.body.note;
+          var currCNote = await Clinical_Note.findOne({
+            patient_id: req.params.patient_id,
+          });
 
-        var note_body = {
-          note_text: newNote,
-          edit_date: new Date().toLocaleDateString(),
-        };
+          var note_body = {
+            note_text: newNote,
+            edit_date: new Date().toLocaleDateString(),
+          };
 
-        currCNote.notes.push(note_body);
+          currCNote.notes.push(note_body);
 
-        currCNote.save();
+          currCNote.save();
 
-        res.redirect(
-          "/clinician/" + clinician._id + "/" + req.params.patient_id + "/notes"
-        );
+          res.redirect(
+            "/clinician/" +
+              clinician._id +
+              "/" +
+              req.params.patient_id +
+              "/notes"
+          );
+        }
       }
     }
   } catch (err) {

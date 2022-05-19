@@ -6,6 +6,7 @@ const passport = require("passport");
 const registerRule = require("../middleware/registerRule.js");
 const thresholdRule = require("../middleware/thresholdRule.js");
 const supportMsgRule = require("../middleware/supportMsgRule.js");
+const noteRule = require("../middleware/noteRule.js");
 
 // Handle login
 clinicianRouter.post(
@@ -164,6 +165,7 @@ clinicianRouter.get(
 // Add a clinical note for a certain patient
 clinicianRouter.post(
   "/:clinician_id/:patient_id/addnote",
+  noteRule.form,
   utility.isLoggedIn,
   clinicianController.addOnePatientNote
 );
