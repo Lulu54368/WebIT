@@ -57,6 +57,7 @@ const getCurrData = async (req, res) => {
     }
     //only show the data of the attribute patient required to input
     res.render("../views/layouts/patienthomepage.hbs", {
+      flash: req.flash(),
       data: today_data,
       patient_name: patient.name,
       today: new Date().toLocaleDateString(),
@@ -183,6 +184,7 @@ const logout = (req, res) => {
 
 const renderChangePwd = (req, res) => {
   res.render("../views/layouts/patient_change_pwd.hbs", {
+    flash: req.flash(),
     p_id: req.params.patient_id,
   });
 };

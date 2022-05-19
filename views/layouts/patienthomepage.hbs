@@ -176,9 +176,13 @@
     
     <nav>
       <div class="sidenav">
-          <img class = "image" src = "/page-logo.png">
+        <img class = "image" src = "/page-logo.png">
       </div>
     </nav>
+
+    {{#each flash}}
+      <p class="alert">{{this}}</p>
+    {{/each}}
   
     <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>

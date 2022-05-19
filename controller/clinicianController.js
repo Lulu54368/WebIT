@@ -232,7 +232,6 @@ const modifyInput = async (req, res) => {
   }
 };
 
-
 //This function get comments for all patients
 const getAllComments = async (req, res, next) => {
   try {
@@ -343,6 +342,7 @@ const getAllThreshold = async (req, res, next) => {
       console.log(patients_threshold);
       // and now passed as an argument specified in /utils/patient_threshold.js
       res.render("../views/layouts/clinician_patientthreshold.hbs", {
+        flash: req.flash(),
         view_date: today,
         patient_threshold: patients_threshold,
         c_id: clinician._id,
@@ -435,6 +435,7 @@ const getSupportSentence = async (req, res, next) => {
         });
       } else {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
+          flash: req.flash(),
           view_date: today,
           patient_message: "",
         });
@@ -469,7 +470,7 @@ const addSupportSentence = async (req, res, next) => {
           currPatient.message = newMessage;
           currPatient.viewed = false;
           currPatient.save();
-          res.redirect("/clinician/"+req.params.clinician_id+"/support");
+          res.redirect("/clinician/" + req.params.clinician_id + "/support");
         }
       }
     }
@@ -483,6 +484,7 @@ const renderRegister = async (req, res) => {
     const clinician = await Clinician.findById(req.params.clinician_id).lean(); // Clinician model taken from /models/clinician
     const today = new Date().toLocaleDateString();
     res.render("../views/layouts/clinician_register_patient.hbs", {
+      flash: req.flash(),
       view_date: today,
       c_id: clinician._id,
       c_name: clinician.lastname,
