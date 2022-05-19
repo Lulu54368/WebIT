@@ -232,34 +232,6 @@ const modifyInput = async (req, res) => {
   }
 };
 
-/*//This function allows the clinician to delete a single input the patient no longer needs to record
-const deleteInput = async (req, res)=>{
-    try{
-        // find the patient of the clinician and check whether they exist 
-        const clinician = await Clinician.findById(req.params.clinician_id).lean();
-        const patient = await Patient.findById(req.params.patient_id).lean();
-        var patient_id_list = clinician.patients;
-        patient_id_list = patient_id_list.map((id)=>id.toString());
-
-        const new_key = req.body.key;
-        // the patient exists and is taken care of by the current clinician
-        if(patient && patient_id_list.includes(patient._id.toString())){
-            var input_body = await Patient_input.findOne({id: patient._id});
-            var the_input = input_body.input; // this is an array of fields
-            the_input = the_input.filter((input) => (input !== new_key)); // filter out the specific input key
-            input_body.input = the_input;
-            input_body.save();
-            res.send(input_body);
-        }
-        else{
-            res.send("patient not found");
-        }
-        
-    }
-    catch(err) {
-        console.log(err);
-    }
-}*/
 
 //This function get comments for all patients
 const getAllComments = async (req, res, next) => {
