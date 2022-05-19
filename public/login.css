@@ -101,6 +101,33 @@ span.psw {
   color:darkgray
 }
 
+.alert {
+  color:indianred;
+  font-size: larger;
+  background-color:rgb(247, 202, 202);
+  padding-top: 20px;
+  height:50px;
+  width: 100%;
+  text-align: center;
+}
+footer {
+  font-size: 15px;
+  color: #818181;
+  background: #e1f0db;
+  text-align: center;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.loginas {
+  position: absolute;
+  left:43%;
+  background-color: #8fbc88;
+  padding:10px;
+  color: white
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 375px) {
 
@@ -126,34 +153,12 @@ span.psw {
     width: 75%;
     left:8%
   }
+  .loginas {
+    position: absolute;
+    left: 100px;
+    background-color: #8fbc88;
+    padding:10px;
+    color: white
+  }
 }
 
-
-.alert {
-  color:white;
-  font-size: larger;
-  font-weight: bold;
-  background-color:darkgray;
-  height:30px;
-  width: 100%;
-  text-align: center;
-}
-footer {
-  font-size: 15px;
-  color: #818181;
-  background: #e1f0db;
-  text-align: center;
-  position: fixed;  
-  grid-area: footer;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.loginas {
-  position: absolute;
-  left:43%;
-  background-color: #8fbc88;
-  padding:10px;
-  color: white
-}

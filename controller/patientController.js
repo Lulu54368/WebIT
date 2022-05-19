@@ -254,7 +254,7 @@ const renderLeaderboard = async (req, res) => {
 
     for (i = 0; i < TOP_LEN; i++) {
       var pat = await Patient.findById(items[i][0]);
-      var pat_name = pat.name;
+      var pat_name = pat.screen_name;
 
       top_five_patients.push({
         pat_name: pat_name,

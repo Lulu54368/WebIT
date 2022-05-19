@@ -1,37 +1,5 @@
-          <table>
-
-         <form name = "data" action="" onsubmit="return validateForm()" method="POST" >
-
-              {{#each flash}}
-                <p class="alert">{{this}}</p>
-              {{/each}}
-
-
-              {{#if this.message}}
-                <input hidden="true" name="id" id="id" value={{this.id}} />
-                <input
-                  placeholder="Edit support message"
-                  name="message"
-                  id="support_msg"
-                />
-                <button type="submit"> Edit </button>
-                <td>{{this.message}}</td>
-
-              {{else}}
-                <input hidden="true" name="id" id="id" value={{this.id}} />
-                <input
-                  placeholder="Enter support message"
-                  name="message"
-                  id="support_msg"
-                />
-                <button type="submit"> Submit </button>
-                <td>No support message yet</td>
-              {{/if}}
-        </form>
-
-
-          <form action="" method="POST" >
-
+        <table>
+          <form action="" method="POST">
             <tr>
               {{#if data.blood_level.required}}
                 <input type="hidden" name="key" value="blood_level" hidden = true>

@@ -76,6 +76,10 @@
     </div>
     
     <form class="form-wrapper" action="" method="POST">
+      {{#each flash}}
+      <p class="alert">{{this}}</p>
+    {{/each}}
+
     <br>
       <div class = "loginas">
         <h3>Log in as clinician</h3>
@@ -109,9 +113,6 @@
   </div>
 
     </form>
-    {{#each flash}}
-      <p class="alert">{{this}}</p>
-    {{/each}}
 
   <footer>
     <br>
