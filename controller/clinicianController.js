@@ -387,41 +387,49 @@ const getAllThreshold = async (req, res, next) => {
 //This function change the thresholds the clinician set for patients
 const modifyThreshold = async (req, res, next) => {
   try {
-    const clinician = await Clinician.findById(req.params.clinician_id).lean();
-
-    // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
-    var newThreshold = req.body;
-    console.log(req.body);
-    if (clinician) {
-      if (JSON.stringify(newThreshold) == "{}") {
-        res.send("No threshold was sent");
-      } else {
-        const patient_id = req.body.id; // take the patient_id passed in the http params
-
-        var curr_threshold = await Patient_Threshold.findOne({
-          id: patient_id,
-        }); // find the existing threshold
-        // take the threshold component of the current Threshold Model
-        var update_threshold = curr_threshold.threshold;
-        const modified_attr = newThreshold.key; // the attribute that is being updated
-        // update the specified field
-        var counter = 0;
-
-        for (var entry of Object.keys(newThreshold)) {
-          // update upper bound and lower bound accordingly
-          if (counter > 0) {
-            // filter out the first entry which is a key
-            update_threshold[modified_attr][entry] = newThreshold[entry]; // update bound(s)
-          }
-          counter++;
-        }
-
-        curr_threshold.threshold = update_threshold;
-        curr_threshold.save();
-        res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
-      }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash("failure", errors.array()[0]);
+      res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
     } else {
-      res.sendStatus(404);
+      const clinician = await Clinician.findById(
+        req.params.clinician_id
+      ).lean();
+
+      // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
+      var newThreshold = req.body;
+      console.log(req.body);
+      if (clinician) {
+        if (JSON.stringify(newThreshold) == "{}") {
+          res.send("No threshold was sent");
+        } else {
+          const patient_id = req.body.id; // take the patient_id passed in the http params
+
+          var curr_threshold = await Patient_Threshold.findOne({
+            id: patient_id,
+          }); // find the existing threshold
+          // take the threshold component of the current Threshold Model
+          var update_threshold = curr_threshold.threshold;
+          const modified_attr = newThreshold.key; // the attribute that is being updated
+          // update the specified field
+          var counter = 0;
+
+          for (var entry of Object.keys(newThreshold)) {
+            // update upper bound and lower bound accordingly
+            if (counter > 0) {
+              // filter out the first entry which is a key
+              update_threshold[modified_attr][entry] = newThreshold[entry]; // update bound(s)
+            }
+            counter++;
+          }
+
+          curr_threshold.threshold = update_threshold;
+          curr_threshold.save();
+          res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
+        }
+      } else {
+        res.sendStatus(404);
+      }
     }
   } catch (err) {
     return err;

@@ -4,6 +4,7 @@ const clinicianController = require("../controller/clinicianController");
 const utility = require("./clinicianUtility.js");
 const passport = require("passport");
 const registerRule = require("../middleware/registerRule.js");
+const thresholdRule = require("../middleware/thresholdRule.js");
 
 // Handle login
 clinicianRouter.post(
@@ -139,6 +140,7 @@ clinicianRouter.get(
 //change threshold of a specified patient
 clinicianRouter.post(
   "/:clinician_id/threshold/",
+  thresholdRule.form,
   utility.isLoggedIn,
   clinicianController.modifyThreshold
 );
