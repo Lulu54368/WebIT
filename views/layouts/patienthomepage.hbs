@@ -78,13 +78,20 @@
       <section>
         <div class = "sectionborder">
           <h3>Today's support message</h3>
-          <div id="welcomeDiv"  style="display:none;" class="answer_list" > {{message}}</div>
-          <input type="button" class = "button viewbutton" name="answer" value="View" onclick="showDiv()" />
-          <script>
-            function showDiv() {
-            document.getElementById('welcomeDiv').style.display = "block";
-          }
-          </script>
+          <div class = "box" id="box">
+            {{message}}
+            </div>
+            <button class = "button viewbutton" id="btn">View</button>
+            <script>
+              const btn = document.getElementById('btn');
+
+                btn.addEventListener('click', () => {
+                  btn.style.visibility = 'hidden';
+                  const box = document.getElementById('box');
+                  box.style.visibility = 'visible';
+                });
+            </script>
+
           
 
           </div>

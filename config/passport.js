@@ -47,7 +47,7 @@ passport.use("patient-login",
                     //password not match
                     console.log("unmatch");
                   
-                    return done(null, false, {message: "Oops! Incorrect password!"})
+                    return done(null, false, {message: "You've entered invalid password. Please Try agian."})
              
                 }
                 else{
@@ -84,12 +84,12 @@ passport.use("clinician-login",
                 else if(!await bcrypt.compare(password, clinician.password)){ //should be replaced with method in db
                     //password not match
                     console.log("unmatch");
-                    return done(null, false, {message: "oops! Not correct password!"})
+                    return done(null, false, {message: "You've entered invalid password. Please Try agian."})
                 }
                 else{
                     //success
                     clinician.role = "clinician";
-                    return done(null, clinician, {message: "login sucessful!"})
+                    return done(null, clinician, {message: "Login sucessful!"})
                 }
                     
 
