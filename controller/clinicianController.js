@@ -465,11 +465,11 @@ const addSupportSentence = async (req, res, next) => {
           res.send("no message sent");
         } else {
           const newMessage = req.body.message;
-          var currPatient = await Patient.findById(req.params.patient_id);
+          var currPatient = await Patient.findById(req.body.id);
           currPatient.message = newMessage;
           currPatient.viewed = false;
           currPatient.save();
-          res.send(currPatient.message);
+          res.redirect("/clinician/"+req.params.clinician_id+"/support");
         }
       }
     }
