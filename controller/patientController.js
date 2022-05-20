@@ -146,7 +146,7 @@ const getPatientHistory = async (req, res) => {
         issueBadge = false;
       }
       patient.data.map((data)=>{
-        data.date = date.toLocaleDateString();
+        data.date = data.date.toLocaleDateString();
       })
       res.render("../views/layouts/patient_historyData.hbs", {
         today: new Date().toLocaleDateString(),
