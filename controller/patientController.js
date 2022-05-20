@@ -38,13 +38,6 @@ const getCurrData = async (req, res) => {
       .forEach((input) => {
         today_data[input] = { required: false };
       });
-    console.log({
-      data: today_data,
-      patient_name: patient.name,
-      today: new Date().toLocaleDateString(),
-      patient_input: attributes,
-      message: patient.message,
-    });
 
     // calculate current patient's engagement rate
     const currEngagement = getEngagement(patient);
@@ -93,12 +86,12 @@ const addOneData = async (req, res) => {
         // find today's data
         const key_attr = req.body.key;
         var data = patient.data.find(
-          (data) => data.date == new Date().toLocaleDateString()
+          (data) => data.date.toLocaleDateString() == new Date().toLocaleDateString()
         );
 
         if (!data) {
           data = {};
-          data.date = new Date().toLocaleDateString(); //timeStamp
+          data.date = new Date(); //timeStamp
           attributes.forEach((attr) => {
             data[attr] = {
               data: "",
@@ -155,7 +148,9 @@ const getPatientHistory = async (req, res) => {
       } else {
         issueBadge = false;
       }
-
+      patient.data.map((data)=>{
+        data.date = date.toLocaleDateString();
+      })
       res.render("../views/layouts/patient_historyData.hbs", {
         today: new Date().toLocaleDateString(),
         patient_name: patient.name,

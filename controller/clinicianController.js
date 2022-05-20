@@ -145,7 +145,8 @@ const getOnePatientAllNotes = async (req, res) => {
     let clinical_notes = await Clinical_Note.findOne({
       patient_id: req.params.patient_id,
     }).lean(); // clinical note collection for a specific patient from database
-    console.log(clinical_notes);
+    clinical_notes
+    .map((note)=>note.edit_date = note.edit_date.toLocaleDateString())
     // not stored in database
     if (!clinical_notes) {
       clinical_notes = new Clinical_Note({ patient_id: req.params.patient_id }); // temporary assignment for unentered notes
@@ -187,7 +188,7 @@ const addOnePatientNote = async (req, res) => {
 
           var note_body = {
             note_text: newNote,
-            edit_date: new Date().toLocaleDateString(),
+            edit_date: new Date(),
           };
 
           currCNote.notes.push(note_body);

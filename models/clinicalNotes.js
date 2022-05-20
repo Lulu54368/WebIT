@@ -10,7 +10,7 @@ const one_note = new Schema ({
     },
 
     edit_date: {
-        type: String,
+        type: Date,
         required: false,
         default: new Date()
     }
