@@ -5,10 +5,10 @@ exports.form = [
     .trim()
     .notEmpty()
     .isNumeric()
-    .withMessage("numbers required!"),
+    .withMessage("Please enter numbers"),
   check("lower_bound")
     .trim()
     .notEmpty()
     .isNumeric()
-    .withMessage("numbers required!"),
+    .withMessage("Please enter numbers"),
 ];

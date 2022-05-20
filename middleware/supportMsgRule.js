@@ -4,5 +4,5 @@ exports.form = [
   check("message")
     .trim()
     .notEmpty()
-    .withMessage("support message should not be empty"),
+    .withMessage("Support message cannot be empty"),
 ];
