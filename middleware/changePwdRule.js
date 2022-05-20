@@ -8,5 +8,7 @@ exports.form = [
   check("newPassword")
     .trim()
     .notEmpty()
-    .withMessage("New password cannot be empty"),
+    .withMessage("New password cannot be empty")
+    .isLength({ min: 5 })
+    .withMessage("Password must be at least 5 characters"),
 ];

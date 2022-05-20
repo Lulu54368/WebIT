@@ -8,7 +8,12 @@ exports.form = [
     .isEmail()
     .withMessage("Please enter valid email"),
 
-  check("password").trim().notEmpty().withMessage("Password cannot be empty"),
+  check("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password cannot be empty")
+    .isLength({ min: 5 })
+    .withMessage("Password must be at least 5 characters"),
 
   check("name").trim().notEmpty().withMessage("First name cannot be empty"),
 
