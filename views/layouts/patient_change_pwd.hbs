@@ -49,8 +49,8 @@
 
     <main>
       {{#each flash}}
-        <p class="alert">Please enter valid data type!</p>
-      {{/each}}
+      <p class="alert">{{this}}</p>
+    {{/each}}
       <div class="whole">
         <h1 id="changePwd">Change Password Page</h1>
         <form method="post" action="" id="changePwd">
@@ -67,9 +67,10 @@
           <input type="submit" value="Submit" />
         </form>
       </div>
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br
-      /><br /><br /><br /><br /><br /><br />
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </main>
+
+    
 
     <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>

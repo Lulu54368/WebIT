@@ -65,9 +65,6 @@
     </nav>
 
     <main>
-      {{#each flash}}
-        <p class="alert">Please enter valid data type!</p>
-      {{/each}}
       <div class = "clinician_header">
         <h1>Thresholds Board</h1>
       </div>      
@@ -76,6 +73,10 @@
       <br><br>
     </main>
   </body>
+
+  {{#each flash}}
+    <p class="alert">{{this}}</p>
+  {{/each}}
 
   <footer>
     <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>

@@ -75,9 +75,6 @@
     </aside>
 
     <main>
-      {{#each flash}}
-        <p class="alert">Please enter valid data type!</p>
-      {{/each}}
       <section>
         <div class = "sectionborder">
           <h3>Today's support message</h3>
@@ -183,7 +180,9 @@
       </div>
     </nav>
 
-   
+    {{#each flash}}
+      <p class="alert">{{this}}</p>
+    {{/each}}
   
     <footer>
       <p>Copyright 2022 by Diabetes@Home. All Rights Reserved.</p>
