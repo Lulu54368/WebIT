@@ -51,6 +51,7 @@ const getAllPatients = async (req, res) => {
       ); // the argument patients was filtered on the last line
       // and now pass as an argument specified in /utils/patient_medical_data.js
       res.render("../views/layouts/clinician_dashboard.hbs", {
+        flash: req.flash(),
         patients: patient_medical_data,
         view_date: today,
         c_id: clinician._id,
@@ -441,6 +442,7 @@ const getSupportSentence = async (req, res, next) => {
       // the patient hasn't viewed the message
       if (!patients_message.viewed) {
         res.render("../views/layouts/clinician_patientmessage.hbs", {
+          flash: req.flash(),
           view_date: today,
           patient_message: patients_message,
           c_id: clinician._id,

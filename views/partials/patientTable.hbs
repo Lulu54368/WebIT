@@ -1,31 +1,31 @@
 <table style="width:100%">
-            {{#with data}}
-            <tr>
-              <td>Blood glucose level(mmol/L)</td>
-              <td>{{this.blood_level.data}}</td>
-              <td><button class = "button ">Enter</button></td>
-              <td><button class = "button ">Comment</button></td>
-            </tr>
+  {{#with data}}
+    <tr>
+      <td>Blood glucose level(mmol/L)</td>
+      <td>{{this.blood_level.data}}</td>
+      <td><button class="button">Enter</button></td>
+      <td><button class="button">Comment</button></td>
+    </tr>
 
-            <tr>
-              <td>Your weight(kg)</td>
-              <td>{{this.weight.data}}</td>
-              <td><button class = "button ">Enter</button></td>
-              <td><button class = "button ">Comment</button></td>
-            </tr>
+    <tr>
+      <td>Your weight(kg)</td>
+      <td>{{this.weight.data}}</td>
+      <td><button class="button">Enter</button></td>
+      <td><button class="button">Comment</button></td>
+    </tr>
 
-            <tr>
-              <td>Doses of insulin taken(doses)</td>
-              <td>{{this.insulin_intake.data}}</td>
-              <td><button class = "button ">Enter</button></td>
-              <td><button class = "button ">Comment</button></td>
-            </tr>
+    <tr>
+      <td>Doses of insulin taken(doses)</td>
+      <td>{{this.insulin_intake.data}}</td>
+      <td><button class="button">Enter</button></td>
+      <td><button class="button">Comment</button></td>
+    </tr>
 
-            <tr>
-              <td>Exercise(step count)</td>
-              <td>{{this.exercise.data}}</td>
-              <td><button class = "button ">Enter</button></td>
-              <td><button class = "button ">Comment</button></td>
-            </tr>
-            {{/with}}
-          </table>
+    <tr>
+      <td>Exercise(step count)</td>
+      <td>{{this.exercise.data}}</td>
+      <td><button class="button">Enter</button></td>
+      <td><button class="button">Comment</button></td>
+    </tr>
+  {{/with}}
+</table>
