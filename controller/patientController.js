@@ -38,18 +38,9 @@ const getCurrData = async (req, res) => {
       .forEach((input) => {
         today_data[input] = { required: false };
       });
-    console.log({
-      data: today_data,
-      patient_name: patient.name,
-      today: new Date().toLocaleDateString(),
-      patient_input: attributes,
-      message: patient.message,
-    });
-
     // calculate current patient's engagement rate
     const currEngagement = getEngagement(patient);
     var issueBadge;
-    console.log(currEngagement);
     if (currEngagement >= 0.8) {
       issueBadge = true;
     } else {
@@ -144,12 +135,10 @@ const getPatientHistory = async (req, res) => {
   try {
     const today = new Date().toLocaleDateString();
     const patient = await Patient.findById(req.params.patient_id).lean();
-    console.log("patientController line 114");
     if (patient) {
       // calculate current patient's engagement rate
       const currEngagement = getEngagement(patient);
       var issueBadge;
-      console.log(currEngagement);
       if (currEngagement >= 0.8) {
         issueBadge = true;
       } else {
@@ -203,8 +192,6 @@ const changePassword = async (req, res) => {
       if (patient == null) {
         res.send("can not find patient");
       } else {
-        console.log(req.body);
-
         await patient.verifyPassword(req.body.currPassword, (err, valid) => {
           if (valid == true) {
             patient.password = req.body.newPassword;
@@ -274,7 +261,6 @@ const renderLeaderboard = async (req, res) => {
     // calculate current patient's engagement rate
     const currEngagement = getEngagement(patient);
     var issueBadge;
-    console.log(currEngagement);
     if (currEngagement >= 0.8) {
       issueBadge = true;
     } else {

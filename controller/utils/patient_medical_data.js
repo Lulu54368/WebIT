@@ -3,7 +3,6 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
     try {
         var patient_medical_list = []
         // each element is a patient object
-        console.log("executing utils patient_medical_data.js")
         patient_data.forEach((element) => {
             const data = element.data;
             var component = {"name": element.name, "id": element._id};
@@ -78,8 +77,6 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
             if ( (component.insulin_intake < component.insulin_lb || component.insulin_intake > component.insulin_ub) && (component.insulin_intake!='') ){
                 component["insulin_highlight"] = true;
             }
-            //console.log("utils line 65 check highlight, patient_component = ");
-            //console.log(component);
             patient_medical_list.push(component);
         });
         return patient_medical_list;

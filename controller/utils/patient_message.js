@@ -2,7 +2,6 @@
 const patient_message_list = (patient_data) => {
     var patient_message_ls = []
     patient_data.forEach((element) => {
-        //const today = new Date().toLocaleDateString();
         const component = {
             "id": element._id.toString(),
             "name": element.name,
