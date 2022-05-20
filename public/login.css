@@ -70,7 +70,10 @@ button:hover {
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
-
+  
+}
+.imgcontainer .loginas {
+  color:#818181
 }
 
 img.avatar {
@@ -120,13 +123,6 @@ footer {
   width: 100%;
 }
 
-.loginas {
-  position: absolute;
-  background-color: #8fbc88;
-  padding:10px;
-  width:auto;
-  color: white
-}
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 375px) {
@@ -153,12 +149,6 @@ footer {
     width: 75%;
     left:8%
   }
-  .loginas {
-    position: absolute;
-    left: 100px;
-    background-color: #8fbc88;
-    padding:10px;
-    color: white
-  }
+
 }
 
