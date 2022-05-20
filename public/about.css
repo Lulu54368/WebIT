@@ -452,6 +452,7 @@ th {
 .whole {
   text-align: center;
   margin-bottom: 2em;
+  color:#333;
 }
 
 .each {
@@ -495,4 +496,13 @@ progress {
   width: 250px;
   height: 20px;
   color:rgb(70, 70, 70);
+}
+.alert {
+  color:indianred;
+  font-size: larger;
+  background-color:rgb(247, 202, 202);
+  padding-top: 20px;
+  height:50px;
+  width: 100%;
+  text-align: center;
 }
