@@ -76,9 +76,11 @@
     </div>
     
     <form class="form-wrapper" action="" method="POST">
-    <br>
+    {{#each flash}}
+      <p class="alert">{{this}}</p>
+    {{/each}}
       <div class = "loginas">
-        <h3>Log in as patient</h3>
+        <h3>Log in as <br>patient</h3>
       </div>
         <br><br>
       <div class="imgcontainer">
@@ -106,9 +108,7 @@
         </div>
       </div>
   </div>
-    {{#each flash}}
-      <p class="alert">{{this}}</p>
-    {{/each}}
+
     </form>
 
 
