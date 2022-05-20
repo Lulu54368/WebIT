@@ -82,8 +82,8 @@ const getOnePatient = async (req, res) => {
         c_name: clinician.lastname,
         p_id: patient._id,
         patient_data: patient.data.sort((a, b) =>
-          Date.parse(a.date) > Date.parse(b.date) ? 1 : -1
-        ),
+        a.date > b.date ? -1 : 1
+      )
       });
     } else {
       res.send("patient not found");
@@ -278,7 +278,8 @@ const getAllComments = async (req, res, next) => {
       // patient_comment is each from the partial, patients_comment is the filtered comment
       res.render("../views/layouts/clinician_patientcomment.hbs", {
         view_date: today,
-        patient_comment: patients_comment,
+        patient_comment: patients_comment.sort((a, b) =>
+        a.date > b.date ? -1 : 1),
         c_id: clinician._id,
         c_name: clinician.lastname,
       });
@@ -306,8 +307,7 @@ const getOnesComments = async (req, res) => {
         p_name: patient.name,
         c_id: clinician._id,
         c_name: clinician.lastname,
-        p_comment: patient.data.sort((a, b) =>
-          Date.parse(a.date) > Date.parse(b.date) ? 1 : -1
+        p_comment: patient.data.sort((a, b) => a.date > b.date ? -1 : 1
         ),
       }); // each data comment is also stored under data, within each datafield
     } else {
@@ -349,13 +349,14 @@ const getAllThreshold = async (req, res, next) => {
         return filtered_id_list.includes(patient._id.toString());
       });
 
-      const patient_input = patient_inputs.filter((input) =>
-        patient_id_list.includes(input.id.toString())
+      var filtered_input = patient_inputs.filter((p_input) =>
+        patient_id_list.includes(p_input.id.toString())
       );
+
       const patients_threshold = patient_threshold_list(
         filtered_thresholds,
         filtered_patients,
-        patient_input
+        filtered_input
       ); // the argument patient_thresholds was filtered on the above line
       console.log(patients_threshold);
       // and now passed as an argument specified in /utils/patient_threshold.js
