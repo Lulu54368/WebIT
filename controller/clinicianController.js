@@ -113,7 +113,9 @@ const addOnePatient = async (req, res) => {
           const currPatient = await Patient.findOne({ email: newemail }).lean();
 
           if (currPatient != null) {
-            res.send(currPatient);
+            //res.send(currPatient);
+            req.flash("Create user failed", "User already exit");
+            res.redirect("/clinician/" + req.params.clinician_id + "/register");
           } else {
             newPatient = await new Patient(newPatient);
             newPatient.register_date = new Date();
@@ -265,7 +267,7 @@ const getAllComments = async (req, res, next) => {
       });
 
       var filtered_inputs = patient_inputs.filter((p_input) => {
-        return patient_id_list.includes(p_input.id.toString())
+        return patient_id_list.includes(p_input.id.toString());
       });
 
       const patients_comment = patient_comment_list(
