@@ -27,9 +27,7 @@ const getAllPatients = async (req, res) => {
     const clinician = await Clinician.findById(req.params.clinician_id).lean();
     const patients = await Patient.find().lean(); // taken from /model/patient.js
     const patient_thresholds = await Patient_Threshold.find().lean();
-    console.log("executing getAllPatient line 35");
     const today = new Date().toLocaleDateString();
-    console.log("executing gatAllPatients line 38");
     if (clinician) {
       // list of patient id stored in a certain clinician
       var patient_id_list = clinician.patients;
@@ -139,7 +137,6 @@ const addOnePatient = async (req, res) => {
 
 const getOnePatientAllNotes = async (req, res) => {
   try {
-    console.log("getOnePatientAllNotes executing");
     const today = new Date().toLocaleDateString();
     const clinician = await Clinician.findById(req.params.clinician_id).lean();
     const patient = await Patient.findById(req.params.patient_id).lean();
@@ -267,9 +264,13 @@ const getAllComments = async (req, res, next) => {
         return patient_id_list.includes(patient._id.toString());
       });
 
+      var filtered_inputs = patient_inputs.filter((p_input) => {
+        return patient_id_list.includes(p_input.id.toString())
+      });
+
       const patients_comment = patient_comment_list(
         filtered_patients,
-        patient_inputs
+        filtered_inputs
       ); // the argument patients was filtered on the above line
 
       // patient_comment is each from the partial, patients_comment is the filtered comment
@@ -290,7 +291,6 @@ const getAllComments = async (req, res, next) => {
 // This function gets all comments for one patient
 const getOnesComments = async (req, res) => {
   try {
-    console.log("getOnesComments executing");
     const today = new Date().toLocaleDateString();
     const clinician = await Clinician.findById(req.params.clinician_id).lean();
     var patient_id_list = clinician.patients;
