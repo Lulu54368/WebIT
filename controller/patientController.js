@@ -18,7 +18,7 @@ const getCurrData = async (req, res) => {
     const patient = await Patient.findById(req.params.patient_id);
     const today = new Date().toLocaleDateString();
     const all_input = ["blood_level", "weight", "insulin_intake", "exercise"];
-    var today_data = patient.data.find((one) => one.date == today);
+    var today_data = patient.data.find((one) => one.date.toLocaleDateString() == today);
 
     // If today's data is not available, manipulate an empty object
     if (!today_data) {
