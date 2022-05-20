@@ -73,6 +73,7 @@ const getOnePatient = async (req, res) => {
     const patient = await Patient.findById(req.params.patient_id).lean();
 
     if (patient && patient_id_list.includes(patient._id.toString())) {
+      patient.data.map((data)=> data.date = data.date.toLocaleDateString())
       res.render("../views/layouts/clinician_patientdata.hbs", {
         view_date: today,
         p_name: patient.name,
@@ -144,13 +145,13 @@ const getOnePatientAllNotes = async (req, res) => {
       patient_id: req.params.patient_id,
     }).lean(); // clinical note collection for a specific patient from database
 
-    clinical_notes
-    .map((note)=>note.edit_date = note.edit_date.toLocaleDateString())
+    
 
     // not stored in database
     if (!clinical_notes) {
       clinical_notes = new Clinical_Note({ patient_id: req.params.patient_id }); // temporary assignment for unentered notes
     }
+    clinical_notes.notes.map((note)=>note.edit_date = note.edit_date.toLocaleDateString())
     res.render("../views/layouts/clinician_cli_notes.hbs", {
       flash: req.flash(),
       view_date: today,
@@ -273,7 +274,7 @@ const getAllComments = async (req, res, next) => {
         filtered_patients,
         filtered_inputs
       ); // the argument patients was filtered on the above line
-
+      patients_comment.map((comment)=>comment.date = comment.date.toLocaleDateString())
       // patient_comment is each from the partial, patients_comment is the filtered comment
       res.render("../views/layouts/clinician_patientcomment.hbs", {
         view_date: today,
