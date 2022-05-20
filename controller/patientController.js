@@ -79,7 +79,7 @@ const addOneData = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      req.flash("failure", errors.array()[0].msg);
       res.redirect("/patient/" + req.params.patient_id);
     } else {
       var attributes = await Patient_input.findOne({
@@ -195,7 +195,7 @@ const changePassword = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      req.flash("failure", errors.array()[0].msg);
       res.redirect("/patient/" + req.params.patient_id + "/changePwd");
     } else {
       const patient = await Patient.findById(req.params.patient_id);
