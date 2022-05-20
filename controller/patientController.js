@@ -79,7 +79,7 @@ const addOneData = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0].msg);
+      req.flash("failure", errors.array()[0]);
       res.redirect("/patient/" + req.params.patient_id);
     } else {
       var attributes = await Patient_input.findOne({
@@ -195,7 +195,7 @@ const changePassword = async (req, res) => {
     //validate
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0].msg);
+      req.flash("failure", errors.array()[0]);
       res.redirect("/patient/" + req.params.patient_id + "/changePwd");
     } else {
       const patient = await Patient.findById(req.params.patient_id);
@@ -212,7 +212,8 @@ const changePassword = async (req, res) => {
 
             res.redirect("/patient/login");
           } else {
-            res.send("Failed to change the password!");
+            req.flash("change password failed", "current password incorrect");
+            res.redirect("/patient/"+patient._id.toString()+"/changePwd")
           }
         });
       }
