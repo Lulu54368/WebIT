@@ -2,10 +2,7 @@
 
 ## Team Members
 
-_AnZhe Cai_
-_JiaHe Liu_
-_YunTao Lu_
-_Qi Zhu_
+AnZhe Cai, JiaHe Liu, YunTao Lu, Qi Zhu
 
 ## Running app by commanding:
 
