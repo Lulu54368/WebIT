@@ -33,14 +33,36 @@ const patient_data_list=(patient_threshold_data, patient_data)=>{
                 if (component.id.equals(threshold_id)) {
                     component["blood_ub"] = each_threshold.threshold.blood_level.upper_bound
                     component["blood_lb"] = each_threshold.threshold.blood_level.lower_bound
+                    component["blood_validate"] = true
                     component["weight_ub"] = each_threshold.threshold.weight.upper_bound
                     component["weight_lb"] = each_threshold.threshold.weight.lower_bound
+                    component["weight_validate"] = true
                     component["exercise_ub"] = each_threshold.threshold.exercise.upper_bound
                     component["exercise_lb"] = each_threshold.threshold.exercise.lower_bound
+                    component["exercise_validate"] = true
                     component["insulin_ub"] = each_threshold.threshold.insulin_intake.upper_bound
                     component["insulin_lb"] = each_threshold.threshold.insulin_intake.lower_bound
+                    component["insulin_validate"] = true
                 }
             })
+
+            // Validate upper bounds must be greater than lower bound
+            if ( (component.blood_ub < component.blood_lb) ) {
+                component.blood_validate = false
+            }
+
+            if ( (component.weight_ub < component.weight_lb) ) {
+                component.weight_validate = false
+            }
+
+            if ( (component.exercise_ub < component.exercise_lb) ) {
+                component.exercise_validate = false
+            }
+
+            if ( (component.insulin_ub < component.insulin_lb) ) {
+                component.insulin_validate = false
+            }
+
             // now compare patient data with their threshold bounds, ready for highlights if data lies beyond safety levels
             // make sure only highlight if there exists data
             if ( (component.blood_level < component.blood_lb || component.blood_level > component.blood_ub) && (component.blood_level!='') ) {
