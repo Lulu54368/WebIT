@@ -1,18 +1,15 @@
-
-    <div class="cli_sectionborder" >
-        <table class = "parent" frame="BOX">
-            <tr class = "catagory">
-                <th>Edit Date<br>(DD/MM/YYYY)</th>
-                <th>Clinical Notes</tr>
-            </tr>
-            {{#each c_note}}
-            <tr>
-            <td>{{this.edit_date}}</td>
-            <td>{{this.note_text}}</td>
-            </tr>
-            {{/each}}  
-       
-        
-        </table>
-    </div> 
+<div class="cli_sectionborder" >
+    <table class = "parent" frame="BOX">
+        <tr class = "catagory">
+            <th>Edit Date<br>(DD/MM/YYYY)</th>
+            <th>Clinical Notes</tr>
+        </tr>
+        {{#each c_note}}
+        <tr>
+        <td>{{this.edit_date}}</td>
+        <td>{{this.note_text}}</td>
+        </tr>
+        {{/each}}  
+    </table>
+</div> 
         
