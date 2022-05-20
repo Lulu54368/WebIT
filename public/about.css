@@ -508,17 +508,17 @@ progress {
 }
 button {
   margin:5px;
-  padding: 5px;
+  padding: 8px;
   background-color:#8fbc88;
-  border-radius:12px;
+  border-radius:15px;
   border: #cfe6bd;
   color:white
 }
 .re-edit button {
   margin:5px;
-  padding: 5px;
+  padding: 8px;
   background-color:grey;
-  border-radius:12px;
+  border-radius:15px;
   border: #cfe6bd;
   color:white
 }
@@ -531,5 +531,11 @@ button {
 :placeholder-shown {
   border-radius:15px;
   border:#fff;
+  padding: 8px;
+}
+input {
+  background-color:#e1f0db;
+  border-radius:15px;
+  border:5px;
   padding: 8px;
 }
