@@ -30,10 +30,18 @@
                         <button type="submit"> submit </button>
                       </form>
                       {{else}}
-                      <label for="ut_bgl">upper threshold:</label><br>
-                      {{this.blood_level_u}}<br><br>
-                      <label for="lt_bgl">lower threshold:</label><br>
-                      {{this.blood_level_l}}<br><br>
+                    <form action="" method="POST" >
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
+                        <label for="ut_bgl">upper threshold:</label><br>
+                        <input  hidden = true type="text" name="key" value="blood_level"><br>
+                        <input type="number" step = "0.1" name="upper_bound" value={{this.blood_level_u}}><br><br>
+                        <label for="lt_bgl">lower threshold:</label><br>
+                        <input type="number" step = "0.1" name="lower_bound" value={{this.blood_level_l}}><br><br>
+                        <div class = re-edit>
+                            <button type="submit"> re-edit </button>
+                        </div>
+                        
+                      </form>
                       {{/unless}}
 
                 </td>
@@ -54,10 +62,15 @@
                         <button type="submit"> submit </button>
                       </form>
                       {{else}}
-                      <label for="ut_weigh">upper threshold:</label><br>
-                      {{this.weight_u}}<br><br>
-                      <label for="lt_weight">lower threshold:</label><br>
-                      {{this.weight_l}}<br><br>
+                    <form action="" method="POST" >
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
+                        <label for="ut_weight">upper threshold:</label><br>
+                        <input  hidden = true type="text" name="key" value="weight"><br>
+                        <input type="number" step = "0.1" name="upper_bound" value={{this.weight_u}}><br><br>
+                        <label for="lt_weight">lower threshold:</label><br>
+                        <input type="number" step = "0.1" name="lower_bound" value={{this.weight_l}}><br><br>
+                        <button type="submit"> re-edit </button>
+                      </form>
                       {{/unless}}
                 </td>
                 
@@ -78,10 +91,15 @@
                         <button type="submit"> submit </button>
                       </form>
                       {{else}}
-                      <label for="ut_insulin">upper threshold:</label><br>
-                      {{this.insulin_intake_u}}<br><br>
-                      <label for="lt_insulin">lower threshold:</label><br>
-                      {{this.insulin_intake_l}}<br><br>
+                    <form action="" method="POST" >
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
+                        <label for="ut_insulin">upper threshold:</label><br>
+                        <input  hidden = true type="text" name="key" value="insulin_intake"><br>
+                       <input type="number" step = "0.1" name="upper_bound" value={{this.insulin_intake_u}}><br><br>
+                        <label for="lt_insulin">lower threshold:</label><br>
+                        <input type="number" step = "0.1" name="lower_bound" value={{this.insulin_intake_l}}><br><br>
+                        <button type="submit"> re-edit </button>
+                      </form>
                       {{/unless}}                      
                 </td>
             
@@ -95,7 +113,6 @@
                     {{#unless this.exercise_l}}
                     <form action="" method="POST" >
                         <input hidden = true name = "id" id = "id" value = {{this.id}} />
-
                         <label for="ut_step">upper threshold:</label><br>
                         <input  hidden = true type="text" name="key" value="exercise"><br>
                         <input type="number" step = "0.1" name="upper_bound" value={{this.exercise_u}}><br><br>
@@ -104,10 +121,15 @@
                         <button type="submit"> submit </button>
                       </form>
                       {{else}}
-                      <label for="ut_step">upper threshold:</label><br>
-                      {{this.exercise_u}}<br><br>
-                      <label for="lt_step">lower threshold:</label><br>
-                      {{this.exercise_l}}<br><br>
+                    <form action="" method="POST" >
+                        <input hidden = true name = "id" id = "id" value = {{this.id}} />
+                        <label for="ut_step">upper threshold:</label><br>
+                        <input  hidden = true type="text" name="key" value="exercise"><br>
+                        <input type="number" step = "0.1" name="upper_bound" value={{this.exercise_u}}><br><br>
+                        <label for="lt_step">lower threshold:</label><br>
+                        <input type="number" step = "0.1" name="lower_bound" value={{this.exercise_l}}><br><br>
+                        <button type="submit"> re-edit </button>
+                      </form>
                       {{/unless}}         
                 </td>
             </tr>

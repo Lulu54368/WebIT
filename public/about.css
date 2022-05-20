@@ -506,3 +506,30 @@ progress {
   width: 100%;
   text-align: center;
 }
+button {
+  margin:5px;
+  padding: 5px;
+  background-color:#8fbc88;
+  border-radius:12px;
+  border: #cfe6bd;
+  color:white
+}
+.re-edit button {
+  margin:5px;
+  padding: 5px;
+  background-color:grey;
+  border-radius:12px;
+  border: #cfe6bd;
+  color:white
+}
+
+::placeholder {
+  background-color:#e1f0db;
+  border-radius:15px;
+  padding: 8px;
+}
+:placeholder-shown {
+  border-radius:15px;
+  border:#fff;
+  padding: 8px;
+}

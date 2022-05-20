@@ -18,8 +18,10 @@
                   placeholder="Edit support message"
                   name="message"
                   id="support_msg"
-                />
-                <button type="submit"> Edit </button>
+                /><br>
+                <div class = "re-edit">
+                    <button type="submit"> re-edit </button>
+                </div>
                 <td>{{this.message}}</td>
 
               {{else}}
@@ -28,7 +30,7 @@
                   placeholder="Enter support message"
                   name="message"
                   id="support_msg"
-                />
+                /><br>
                 <button type="submit"> Submit </button>
                 <td>No support message yet</td>
               {{/if}}
