@@ -231,7 +231,11 @@ const getEngagement = function (patient) {
     Math.abs((today - patient.register_date) / oneDay)
   ); // calculate the days patients have been registered
   const engageDays = patient.data.length;
-  return engageDays / regisDays;
+  if ((engageDays / regisDays) <= 1) {
+    return engageDays / regisDays;
+  } else {
+    return 1;
+  }  
 };
 
 const renderLeaderboard = async (req, res) => {
