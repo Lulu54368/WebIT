@@ -2,10 +2,6 @@
 const patient_threshold_list = (patient_threshold_data, patient_data, patient_inputs) => {
     var patient_threshold_ls = []
     const all_input = ["blood_level", "weight", "insulin_intake", "exercise"]
-    console.log(patient_threshold_data)
-    console.log("All patient data collection from start")
-    console.log(patient_data)
-    //console.log(patient_inputs)
     
     // element is each patient's threshold
     patient_threshold_data.forEach((element) => {

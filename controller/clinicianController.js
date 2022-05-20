@@ -32,12 +32,10 @@ const getAllPatients = async (req, res) => {
       // list of patient id stored in a certain clinician
       var patient_id_list = clinician.patients;
       patient_id_list = patient_id_list.map((id) => id.toString());
-      //console.log(patient_id_list);
       // filter to include only patients whose id are stored under a certain clinician
       var filtered_patients = patients.filter((patient) => {
         return patient_id_list.includes(patient._id.toString());
       });
-      //console.log(filtered_patients);
       // filter to include only patients' thresholds with id (patient id) contained in a certain clinician
       var filtered_thresholds = patient_thresholds.filter((threshold) => {
         return patient_id_list.includes(threshold.id.toString());
@@ -145,8 +143,10 @@ const getOnePatientAllNotes = async (req, res) => {
     let clinical_notes = await Clinical_Note.findOne({
       patient_id: req.params.patient_id,
     }).lean(); // clinical note collection for a specific patient from database
+
     clinical_notes
     .map((note)=>note.edit_date = note.edit_date.toLocaleDateString())
+
     // not stored in database
     if (!clinical_notes) {
       clinical_notes = new Clinical_Note({ patient_id: req.params.patient_id }); // temporary assignment for unentered notes
@@ -218,7 +218,6 @@ const modifyInput = async (req, res) => {
     const patient = await Patient.findById(req.params.patient_id).lean();
     var patient_id_list = clinician.patients;
     patient_id_list = patient_id_list.map((id) => id.toString());
-    console.log(req.body);
     const new_key = req.body.key;
     // the patient exists and is taken care of by the current clinician
     if (patient && patient_id_list.includes(patient._id.toString())) {
@@ -234,7 +233,6 @@ const modifyInput = async (req, res) => {
         the_input.push(new_key);
       } else if (req.body.checked == "false") {
         the_input = the_input.filter((input) => input !== new_key); // filter out the specific input key
-        console.log(the_input);
       }
       input_body.input = the_input;
 
@@ -334,8 +332,6 @@ const getAllThreshold = async (req, res, next) => {
       // copy the patient's id list stored in the clinician
       var patient_id_list = clinician.patients;
       patient_id_list = patient_id_list.map((id) => id.toString());
-      console.log(patient_id_list);
-
       // include patients only if their _id are included in the patient_id_list (which was originally queried from clinician.patients)
       var filtered_id_list = [];
       var filtered_thresholds = patient_thresholds.filter((threshold) => {
@@ -359,7 +355,6 @@ const getAllThreshold = async (req, res, next) => {
         filtered_patients,
         filtered_input
       ); // the argument patient_thresholds was filtered on the above line
-      console.log(patients_threshold);
       // and now passed as an argument specified in /utils/patient_threshold.js
       res.render("../views/layouts/clinician_patientthreshold.hbs", {
         flash: req.flash(),
@@ -390,7 +385,6 @@ const modifyThreshold = async (req, res, next) => {
 
       // define the single Threshold object for adding, consiting of "id":{} and "threshold": {}
       var newThreshold = req.body;
-      console.log(req.body);
       if (clinician) {
         if (JSON.stringify(newThreshold) == "{}") {
           res.send("No threshold was sent");

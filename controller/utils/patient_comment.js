@@ -1,7 +1,6 @@
 //This is transformation of data structure for futher use
 const patient_comment_list = (patient_data, patient_input) => {
     var patient_comment_ls = []
-    //console.log(patient_input)
     patient_data.forEach((element) => {
     const data = element.data;
     // data is the collection of all data, attr is each daily data
