@@ -37,7 +37,7 @@
                         <input type="number" step = "0.1" name="upper_bound" value={{this.blood_level_u}}><br><br>
                         <label for="lt_bgl">lower threshold:</label><br>
                         <input type="number" step = "0.1" name="lower_bound" value={{this.blood_level_l}}><br><br>
-                        <div class = re-edit>
+                        <div class = "re-edit">
                             <button type="submit"> re-edit </button>
                         </div>
                         
@@ -69,7 +69,10 @@
                         <input type="number" step = "0.1" name="upper_bound" value={{this.weight_u}}><br><br>
                         <label for="lt_weight">lower threshold:</label><br>
                         <input type="number" step = "0.1" name="lower_bound" value={{this.weight_l}}><br><br>
-                        <button type="submit"> re-edit </button>
+                        <div class = "re-edit">
+                            <button type="submit"> re-edit </button>
+                        </div>
+                    
                       </form>
                       {{/unless}}
                 </td>
@@ -98,7 +101,10 @@
                        <input type="number" step = "0.1" name="upper_bound" value={{this.insulin_intake_u}}><br><br>
                         <label for="lt_insulin">lower threshold:</label><br>
                         <input type="number" step = "0.1" name="lower_bound" value={{this.insulin_intake_l}}><br><br>
-                        <button type="submit"> re-edit </button>
+                        <div class = "re-edit">
+                            <button type="submit"> re-edit </button>
+                        </div>
+                        
                       </form>
                       {{/unless}}                      
                 </td>
@@ -128,7 +134,10 @@
                         <input type="number" step = "0.1" name="upper_bound" value={{this.exercise_u}}><br><br>
                         <label for="lt_step">lower threshold:</label><br>
                         <input type="number" step = "0.1" name="lower_bound" value={{this.exercise_l}}><br><br>
-                        <button type="submit"> re-edit </button>
+                        <div class = "re-edit">
+                            <button type="submit"> re-edit </button>
+                        </div>
+                        
                       </form>
                       {{/unless}}         
                 </td>
