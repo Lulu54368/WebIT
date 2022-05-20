@@ -4,9 +4,9 @@ exports.form = [
   check("currPassword")
     .trim()
     .notEmpty()
-    .withMessage("current password should not be empty"),
+    .withMessage("Current password cannot be empty"),
   check("newPassword")
     .trim()
     .notEmpty()
-    .withMessage("new password should not be empty"),
+    .withMessage("New password cannot be empty"),
 ];

@@ -99,7 +99,7 @@ const addOnePatient = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors.array()[0])
+      console.log(errors.array()[0]);
       req.flash("failure", errors.array()[0].msg);
       res.redirect("/clinician/" + req.params.clinician_id + "/register");
     } else {
@@ -168,7 +168,7 @@ const addOnePatientNote = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      req.flash("failure", errors.array()[0].msg);
       console.log(errors.array()[0]);
       res.redirect("/clinician/" + req.params.clinician_id);
     } else {
@@ -377,7 +377,7 @@ const modifyThreshold = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      req.flash("failure", errors.array()[0].msg);
       res.redirect("/clinician/" + req.params.clinician_id + "/threshold");
     } else {
       const clinician = await Clinician.findById(
@@ -444,7 +444,6 @@ const getSupportSentence = async (req, res, next) => {
       // the patient hasn't viewed the message
 
       if (!patients_message.viewed) {
-      
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           flash: req.flash(),
           view_date: today,
@@ -472,7 +471,7 @@ const addSupportSentence = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      req.flash("failure", errors.array()[0].msg);
       res.redirect("/clinician/" + req.params.clinician_id + "/support");
     } else {
       const clinician = await Clinician.findById(
