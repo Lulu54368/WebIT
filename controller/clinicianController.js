@@ -99,7 +99,8 @@ const addOnePatient = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("failure", errors.array()[0]);
+      console.log(errors.array()[0])
+      req.flash("failure", errors.array()[0].msg);
       res.redirect("/clinician/" + req.params.clinician_id + "/register");
     } else {
       const clinician = await Clinician.findById(
@@ -168,6 +169,7 @@ const addOnePatientNote = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       req.flash("failure", errors.array()[0]);
+      console.log(errors.array()[0]);
       res.redirect("/clinician/" + req.params.clinician_id);
     } else {
       const clinician = await Clinician.findById(
@@ -440,7 +442,9 @@ const getSupportSentence = async (req, res, next) => {
       });
       const patients_message = patient_message_list(filtered_patients); // the argument patients was filtered on the above line
       // the patient hasn't viewed the message
+
       if (!patients_message.viewed) {
+      
         res.render("../views/layouts/clinician_patientmessage.hbs", {
           flash: req.flash(),
           view_date: today,
