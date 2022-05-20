@@ -159,7 +159,8 @@ const getPatientHistory = async (req, res) => {
       res.render("../views/layouts/patient_historyData.hbs", {
         today: new Date().toLocaleDateString(),
         patient_name: patient.name,
-        history: patient.data,
+        history: patient.data.sort((a, b) =>
+        a.date > b.date ? -1 : 1),
         p_id: req.params.patient_id,
         engagement: parseFloat(currEngagement * 100).toFixed(2),
         badge: issueBadge,
