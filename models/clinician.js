@@ -20,11 +20,11 @@ const clinician_schema = Schema({
     },
     email:{
         type: String,
-        required: false //should be true
+        required: true
     },
     password:{
         type: String,
-        required: false // should be true
+        required: true
     }
 })
 

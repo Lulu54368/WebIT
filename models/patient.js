@@ -53,7 +53,7 @@ const Patient = new Schema({
   },
   password: {
     type: String,
-    required: false, //need to change
+    required: true,
   },
   register_date: {
     type: Date,
@@ -75,8 +75,9 @@ const Patient = new Schema({
     default: false,
   },
   data: {
-    type: Array, //should be patient_data here, change it at last
+    type: Array, 
     required: false,
+    default: []
   },
   last_name: {
     type: String,
