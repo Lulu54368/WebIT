@@ -36,5 +36,8 @@
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "session": "^0.1.0"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1"
   }
 }
