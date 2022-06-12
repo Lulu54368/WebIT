@@ -119,6 +119,7 @@ app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
 //app.use("/", aboutRouter);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("server is running... ");
 });
+module.exports = server;

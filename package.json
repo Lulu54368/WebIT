@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
+    "test": "jest",
     "prettier": "prettier --single-quote --no-semi --tab-width 4 --write**/*.js *.js"
   },
   "repository": {
@@ -38,6 +39,7 @@
     "session": "^0.1.0"
   },
   "devDependencies": {
-    "jest": "^28.1.1"
+    "jest": "^28.1.1",
+    "supertest": "^6.2.3"
   }
 }
