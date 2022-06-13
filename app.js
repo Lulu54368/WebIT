@@ -105,7 +105,7 @@ const db = mongoose.connection.on("error", (err) => {
   process.exit(1);
 });
 // Log to console once the database is open
-db.once("open", async () => {
+db.once("open", () => {
   console.log(`Mongo connection started on ${db.host}:${db.port}`);
 });
 
@@ -119,6 +119,14 @@ app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
 //app.use("/", aboutRouter);
 
+
+//configure i18n
+var i18n = require('i18n');
+const path = require("path");
+i18n.configure({
+  locales:['au', 'us', 'fr', 'cn'],
+  directory: path.join(__dirname, 'locales')
+})
 const server = app.listen(port, () => {
   console.log("server is running... ");
 });
