@@ -51,7 +51,7 @@ app.use(
     cookie: {
       sameSite: "strict",
       httpOnly: true,
-      secure: process.env.NODE_ENV == "production",
+      secure: process.env.NODE_ENV === "production",
       maxAge: 3000000,
     },
   })

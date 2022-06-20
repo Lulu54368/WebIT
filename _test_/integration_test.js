@@ -17,7 +17,7 @@ describe("patient integration test(after login)", ()=>{
     let cookie = null;
     beforeAll(()=> agent
     .post('/patient/login')
-    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .set('Contxent-Type', 'application/x-www-form-urlencoded')
     .send({
         email: 'pat@student.unimelb.edu.au',
         password: '123456'

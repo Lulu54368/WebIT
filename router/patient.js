@@ -14,23 +14,11 @@ patientRouter.get("/login", utility.unLoggedIn, (req, res) =>
 );
 
 // Handle login
-patientRouter.post(
-  "/login",
-  utility.unLoggedIn,
-  passport.authenticate("patient-login", {
-    //id should be here
-    failureReqirect: "/patient/login",
-    failureFlash: true,
-  }),
-  (req, res, err) => {
-    {
-      console.log(req);
-      const user = req.user;
-      const link = "/patient/" + user._id.toString();
-      res.redirect(link);
-    }
-  }
-);
+patientRouter.post('/signup',utility.unLoggedIn, passport.authenticate('patient-login', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/patient/login',
+  failureFlash : true
+}));
 // Handle logout
 patientRouter.get("/logout", utility.isLoggedIn, patientController.logout);
 patientRouter.get("/aboutDiabetes", (req, res) => {
