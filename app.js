@@ -127,6 +127,10 @@ i18n.configure({
   locales:['au', 'us', 'fr', 'cn'],
   directory: path.join(__dirname, 'locales')
 })
+
+//redis
+const Redis = require("redis")
+const redisClient = Redis.createClient()
 const server = app.listen(port, () => {
   console.log("server is running... ");
 });
